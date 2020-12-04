@@ -1,5 +1,0 @@
-HERRAMIENTAS
-
-- Python
-- Docker
-- Flask
