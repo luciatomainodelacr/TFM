@@ -1,0 +1,5 @@
+HERRAMIENTAS
+
+- Python
+- Docker
+- Flask
