@@ -1,0 +1,2 @@
+Esta carpeta contiene scripts y otro tipo de ficheros (.json para configuración por ejemplo) relacionados con el desarrollo de la aplicación.
+A medida que se avance se pueden añadir distintas subcarpetas.
