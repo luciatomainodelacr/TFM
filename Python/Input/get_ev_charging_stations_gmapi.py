@@ -8,12 +8,12 @@ import os
 gmaps = googlemaps.Client(key='Your API Key')
 
 #Request place text search
-#comunidades = ["Andalucia", "Extremadura", "Murcia"]
-#comunidades = ["Aragon","Asturias","Islas Baleares","Canarias",
-#               "Cantabria","Castilla-La Mancha","Castilla y Leon",
-#                "Cataluña","Comunidad Valenciana","Galicia","Comunidad de Madrid",
-#                "Navarra","Pais Vasco"]
-comunidades = ["La Rioja"]
+comunidades = ["Aragon","Andalucia","Asturias","Islas Baleares","Canarias",
+               "Cantabria","Castilla-La Mancha","Castilla y Leon",
+                "Cataluña","Comunidad Valenciana","Extremadura",
+                "Galicia","Comunidad de Madrid",
+                "La Rioja","Murcia","Navarra","Pais Vasco"]
+
 for comunidad in comunidades:
     SerchString = "estaciones de carga " + comunidad
     filename = "puntos_carga_" + comunidad + ".csv"
@@ -48,5 +48,5 @@ for comunidad in comunidades:
     result = pd.concat(frames)
 
     filename = "puntos_carga_" + comunidad + ".csv"
-    path = "/home/tfm/Documentos/TFM/Datasets/GoogleMapsAPI/" + filename
+    path = "/home/tfm/Documentos/TFM/Datasets/PuntosRecarga/GoogleMapsAPI/" + filename
     result.to_csv(path, index=False)  
