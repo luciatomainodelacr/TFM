@@ -7,8 +7,11 @@ services:
       - 3000:3000
     volumes:
       - grafana-data:/var/lib/grafana
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
     networks:
       - monitoring
+    environment:
+      plugins: "grafana-worldmap-panel"
     restart: always
   db:
     image: mysql:latest
@@ -21,7 +24,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: tfm
-      MYSQL: Tfmmaster1
+      MYSQL_PASSWORD: Tfmmaster1
 networks:
   monitoring:
     external: true
