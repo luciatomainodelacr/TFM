@@ -6,4 +6,5 @@ Esta carpeta contiene:
 - grafana: contiene la información provisionada del grafana
 - db: contiene el dump de la base de datos que queremos representar
 - requirements: contiene los distintos ficheros de requirements de cada una de las integrantes de equipo para facilitar la creación
- del Dockerfile de la aplicación en sí. 
+ del Dockerfile de la aplicación en sí.
+- GoogleCloudPlatform: incluye información sobre cómo desplegar nuestro proyecto con docker en GCP 
