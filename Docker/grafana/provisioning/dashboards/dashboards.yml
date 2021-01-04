@@ -1,0 +1,12 @@
+apiVersion: 1
+
+providers:
+- name: TFM
+  folder: 'TFM'
+  type: file
+  disableDeletion: true
+  editable: true
+  updateIntervalSeconds: 10
+  allowUiUpdates: false
+  options:
+    path: /etc/grafana/provisioning/dashboards/TFM/

@@ -3,7 +3,7 @@ apiVersion: 1
 datasources:
   - name: TFM
     type: mysql
-    url: localhost:3306
+    url: db:3306
     database: tfm
     user: root
     password: root
