@@ -84,3 +84,6 @@ docker-compose --version
 sudo apt-get install -y python3-seaborn
 pip3 install seaborn
 
+- Scikit-Learn
+sudo pip3 install scikit-learn
+
