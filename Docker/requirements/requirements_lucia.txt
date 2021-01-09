@@ -85,5 +85,10 @@ sudo apt-get install -y python3-seaborn
 pip3 install seaborn
 
 - Scikit-Learn
+sudo pip3 install Cython
 sudo pip3 install scikit-learn
+
+- Geopy and Shapely
+sudo pip3 install geopy
+sudo pip3 install shapely
 
