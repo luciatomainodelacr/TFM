@@ -15,12 +15,17 @@ plt.style.use("ggplot")
 from matplotlib.pyplot import figure
 
 matplotlib.rcParams["figure.figsize"] = (12,8)
+import unidecode
 
 from sklearn.cluster import DBSCAN
 from geopy.distance import great_circle
 from shapely.geometry import MultiPoint
 
 #FUNCTIONS
+def remove_accents(a):
+    #return unidecode.unidecode(a.decode('utf-8'))
+    return unidecode.unidecode(a)
+
 def plot_multiple_histograms(df, cols):
     num_plots = len(cols)
     num_cols = math.ceil(np.sqrt(num_plots))
@@ -63,10 +68,14 @@ def exploratory_data_analysis(df):
     df.head()
     df.info()
 
+    #Remove accents and other special characters
+    for column in ["provincia","municipio","localidad","direccion","rotulo"]:
+        df[column] = df[column].apply(remove_accents)
+
     #Numeric variables
     df_numeric = df.select_dtypes(include="number")
     df_numeric.info()
-    plot_multiple_histograms(df_numeric, ["X","Y","FID","objectid","código_po","longitud","latitud","precio_g_1","precio_g_2"])
+    plot_multiple_histograms(df_numeric, ["X","Y","FID","objectid","codigo_po","longitud","latitud","precio_g_1","precio_g_2"])
     plt.show()
     time.sleep(15)
     plt.close("all")

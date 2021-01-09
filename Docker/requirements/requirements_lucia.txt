@@ -92,3 +92,5 @@ sudo pip3 install scikit-learn
 sudo pip3 install geopy
 sudo pip3 install shapely
 
+- Unicode
+sudo pip3 install unidecode
