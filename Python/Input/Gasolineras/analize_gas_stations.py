@@ -123,6 +123,9 @@ def exploratory_data_analysis(df):
     df_filt.drop("horario00",axis="columns", inplace=True)
     df_filt.drop("z",axis="columns", inplace=True)
     df_filt.drop("fecha",axis="columns", inplace=True)
+    df_filt.drop(df.filter(regex="f_").columns, axis="columns", inplace=True)
+    df_filt.drop("objectid",axis="columns", inplace=True)
+    df_filt.drop("FID",axis="columns", inplace=True)
     df_filt.info()
     return df_filt
 
