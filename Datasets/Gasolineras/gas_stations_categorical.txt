@@ -1,0 +1,244 @@
+BARCELONA               764
+MADRID                  729
+VALENCIA / VALENCIA     590
+ALICANTE                415
+MURCIA                  410
+SEVILLA                 398
+MALAGA                  286
+CORUNA (A)              260
+GRANADA                 253
+GIRONA                  250
+BADAJOZ                 246
+CADIZ                   245
+NAVARRA                 244
+ZARAGOZA                238
+TOLEDO                  225
+TARRAGONA               221
+ASTURIAS                210
+ALMERIA                 191
+CIUDAD REAL             189
+JAEN                    188
+PONTEVEDRA              184
+CORDOBA                 180
+LLEIDA                  180
+CASTELLON / CASTELLO    173
+LEON                    157
+ALBACETE                143
+CANTABRIA               141
+CACERES                 140
+VALLADOLID              133
+BURGOS                  130
+HUELVA                  125
+GUIPUZCOA               121
+VIZCAYA                 119
+HUESCA                  116
+LUGO                    113
+CUENCA                  110
+SALAMANCA                99
+OURENSE                  88
+GUADALAJARA              86
+RIOJA (LA)               82
+ZAMORA                   77
+SEGOVIA                  68
+TERUEL                   66
+ALAVA                    65
+PALENCIA                 64
+AVILA                    64
+SORIA                    37
+Name: provincia, dtype: int64
+MADRID           214
+MURCIA           101
+BARCELONA         93
+ZARAGOZA          69
+SEVILLA           67
+                ... 
+CARBONERAS         1
+GARCILLAN          1
+ALGODONALES        1
+SOLIVELLA          1
+NAVAS DEL REY      1
+Name: municipio, Length: 3054, dtype: int64
+MADRID                                     214
+BARCELONA                                   93
+SEVILLA                                     64
+VALENCIA                                    57
+ZARAGOZA                                    56
+                                          ... 
+CASILLAS (LUGAR DE) O ERMITA DE BUENDIA      1
+CECEBRE (SAN SALVADOR)                       1
+TEULADA                                      1
+CORVERA DE ASTURIAS                          1
+CAMBEO                                       1
+Name: localidad, Length: 3639, dtype: int64
+AVENIDA ANDALUCIA, S/N               11
+AVENIDA JUAN CARLOS I, S/N            5
+AVENIDA DEL MEDITERRANEO, S/N         4
+AVENIDA DE GRANADA, S,N               3
+AVENIDA MEDITERRANEO, S/N             3
+                                     ..
+AVENIDA DE GALICIA, S/N               1
+CALLE RIO ARAGON, 1                   1
+CARRETERA UTRERA SEVILLA KM. 1        1
+CALLE FORTUNY, S/N                    1
+ZIOBI,6. POL. INDUSTRIAL ALKAIAGA     1
+Name: direccion, Length: 9349, dtype: int64
+D    4820
+I    2545
+N    2248
+Name: margen, dtype: int64
+1.399000    548
+1.389000    504
+            481
+1.389       435
+1.379       431
+           ... 
+1.442         1
+1.465000      1
+1.312000      1
+1.454         1
+1.426000      1
+Name: precio_gas, Length: 403, dtype: int64
+            9605
+1.351000       1
+1.376000       1
+1.487000       1
+1.579000       1
+1.528000       1
+1.499000       1
+1.518000       1
+1.399000       1
+Name: precio_bio, dtype: int64
+            2859
+1.379000     552
+1.359000     525
+1.349000     519
+1.369000     506
+            ... 
+1.185000       1
+1.284000       1
+1.454000       1
+1.383000       1
+1.432000       1
+Name: precio_nue, Length: 289, dtype: int64
+            9564
+1.199000       6
+1.169000       3
+1.329000       3
+1.099000       2
+1.228000       2
+1.269000       2
+1.249000       2
+1.369000       2
+1.219000       2
+1.299000       2
+1.159000       2
+1.579000       1
+1.353000       1
+1.259000       1
+1.209000       1
+1.389000       1
+1.339000       1
+1.349000       1
+1.289000       1
+1.328000       1
+1.149000       1
+1.319000       1
+1.334000       1
+1.549000       1
+1.266000       1
+1.257000       1
+1.179000       1
+1.239000       1
+1.109000       1
+1.359000       1
+1.384000       1
+1.229000       1
+Name: precio_b_1, dtype: int64
+     9613
+Name: f__ester_, dtype: int64
+     9613
+Name: f__bioalco, dtype: int64
+            3874
+1.529000     398
+1.519000     383
+1.499000     379
+1.509000     362
+            ... 
+1.424000       1
+1.517          1
+1.309000       1
+1.447000       1
+1.669000       1
+Name: precio_g_3, Length: 290, dtype: int64
+            9550
+0.926000      28
+0.810000      18
+0.948000       4
+0.919000       2
+0.980000       2
+0.830000       2
+0.829000       2
+0.970000       1
+0.900000       1
+0.895000       1
+0.995000       1
+0.935000       1
+Name: precio_g_4, dtype: int64
+            9579
+0.810000      18
+0.858000       7
+0.919000       2
+0.830000       2
+0.829000       2
+0.980000       1
+0.899000       1
+0.935000       1
+Name: precio_g_5, dtype: int64
+     9613
+Name: precio_g_6, dtype: int64
+REPSOL                   2547
+CEPSA                    1259
+GALP                      519
+SHELL                     361
+BP                        199
+                         ... 
+BPOIL                       1
+GC                          1
+ANYMORE TRANSPORT, SL       1
+MEROIL,S.A.                 1
+CORIDU                      1
+Name: rotulo, Length: 2686, dtype: int64
+P    9605
+p       8
+Name: tipo_venta, dtype: int64
+dm    6165
+OM    3448
+Name: rem_, dtype: int64
+L-D: 24H                                                          4002
+L-D: 06:00-22:00                                                  1237
+L-D: 07:00-23:00                                                   833
+L-D: 07:00-22:00                                                   261
+L-D: 06:00-00:00                                                   260
+                                                                  ... 
+L-V: 07:00-23:00; S: 08:00-22:00; D: 09:00-15:00                     1
+L-V: 07:30-14:00 y 15:00-18:00; S-D: 09:00-14:00 y 15:00-17:00       1
+L-S: 06:00-22:00; D: 09:00-17:00                                     1
+L: 7:30-23:00                                                        1
+L-V: 06:00-22:30; S: 06:00-22:00; D: 08:00-22:00                     1
+Name: horario, Length: 985, dtype: int64
+L-D: 24H                                                          4002
+L-D: 06:00-22:00                                                  1237
+L-D: 07:00-23:00                                                   833
+L-D: 07:00-22:00                                                   261
+L-D: 06:00-00:00                                                   260
+                                                                  ... 
+L-V: 07:00-23:00; S: 08:00-22:00; D: 09:00-15:00                     1
+L-V: 07:30-14:00 y 15:00-18:00; S-D: 09:00-14:00 y 15:00-17:00       1
+L-S: 06:00-22:00; D: 09:00-17:00                                     1
+L: 7:30-23:00                                                        1
+L-V: 06:00-22:30; S: 06:00-22:00; D: 08:00-22:00                     1
+Name: horario00, Length: 985, dtype: int64
+     9613
+Name: z, dtype: int64
+2019/04/29 00:00:00+00    9613
+Name: fecha, dtype: int64
