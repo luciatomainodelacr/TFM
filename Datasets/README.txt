@@ -4,6 +4,9 @@ Se subdivide en tres carpetas, cada una con un tipo de dato:
   Contiene:
     - coches electricos.zip: fichero comprimido con la información original
     - Creacion_nuevas_variables: fichero txt donde aparecerán (posibles)variables nuevas interesantes para nuestro objetivo
+    - Datos_usuario: fichero txt donde se establecen los datos solicitados al usuario de la aplicación
+    - Info_var_coches: fichero txt que contiene una lista de páginas web con información útil acerca de las variables input y de los coches eléctricos en general
+    - Pasos_limpieza_coches: fichero txt que contiene una breve descripción de cada variable input de la BBDD de los coches, así como los pasos seguidos para su limpieza
 - Gasolineras:
   Contiene:
     - Gasolineras_de_España.csv: fichero original (sin acentos en el nombre de los campos)
@@ -15,3 +18,6 @@ Se subdivide en tres carpetas, cada una con un tipo de dato:
     - GoogleMapsAPI: carpeta con ficheros csv con puntos de recarga obtenidos con Google Maps Places API (generado con script TFM/Python/Input/PuntosRecarga/get_ev_charging_stations_gmapi.py y TFM/Python/Input/PuntosRecarga/merge_ev_charging_stations.py) por CCAA y mergeados para toda España. 
     - OtrasFuentes: carpeta con ficheros csv con puntos de recarga de distintas CCAA (de momento no se usan).
     - puntos_carga_filt_Espana.csv: fichero con dataset tras limpieza y mergeo de los datos de GoogleMapsAPI por CCAA (generado con script TFM/Python/Input/PuntosRecarga/merge_ev_charging_stations.py).
+- PuntosO_D:
+  Contiene:
+    - GeocodingAPI: carpeta con el fichero csv de los puntos de origen y destino (expresados en coordenadas geográficas). Se trata de las coordendas de las estaciones de tren y autobús de todas las capitales de provincia españolas.
