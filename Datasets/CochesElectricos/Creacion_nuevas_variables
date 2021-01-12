@@ -1,0 +1,24 @@
+#####################       VARIABLES NUEVAS CALCULADAS A PARTIR DE LAS VARIABLES EXISTENTES EN LA BBDD          ################################
+
+1) Tiempo estimado de carga de la bateria
+
+
+
+
+
+
+
+######################      VARIABLES NUEVAS A ESTIMAR EN FUNCIÓN DE LOS DATOS INPUT APORTADOS POR EL USUARIO    ################################
+
+
+1) Rango Real o Autonomía Real:
+
+
+	- DEPENDE DE:
+	  velocidad, estilo de conducción, clima, condiciones de la ruta/ tipo de vía, carga del vehículo (pasajeros adultos/niños + maletero)
+	
+	
+
+PÁGINA QUE EXPLICA LA REALIDAD SOBRE LA NORMATIVA EUROPEA Y CÓMO SE ESTABLECE LA AUTONOMÍA PARA TODO TIPO DE COCHES
+https://www.xataka.com/automovil/cuanta-autonomia-real-tiene-un-coche-electrico
+
