@@ -11,8 +11,11 @@ Se añaden tres carpetas correspondientes a cada uno de los módulos:
       Los scripts son: 
       1) get_ev_charging_stations_gmapi.py -> Descargar datos de Google Maps Places API para estaciones de recarga en las distintas CCAA.
       2) merge_ev_charging_stations.py -> Mergear los datos de CCAA en 1 solo y filtrar campos/registros innecesarios/erróneos.
-    - CochesElectricos: carpeta con scripts de limpieza BBDD coches electricos
+    - CochesElectricos: carpeta con scripts referentes a la limpieza de la BBDD de los coches eléctricos
       Los scripts son:
-      1) limpiezaDatos.py 
+      1) limpieza_datos.py 
+     - PuntosO_D: carpeta con scripts referentes a los puntos de origen y destino obtenidos a través de GoogleMapsAPI
+       Los scripts son:
+       1) API_Geocoding.py -> descarga de las coordenadas de las estaciones de tren y autobús de todas las capitales de provincia españolas mediante Geocoding API
 - Modelo
 - Output
