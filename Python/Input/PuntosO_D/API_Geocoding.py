@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import requests
 
-API_KEY = 'AIzaSyAG4kPDViNYp_XpCI93bDHQOoQXx451ecU'
+API_KEY = '#####################################'
 
 # Importo el csv con los puntos de cada ciudad de provincia
 df= pd.read_csv('/home/tfm/Escritorio/TFM/Datasets/direcciones_ciudades.csv', sep=';', encoding='unicode_escape', header=0)
