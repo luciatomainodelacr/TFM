@@ -3,6 +3,7 @@ Se subdivide en tres carpetas, cada una con un tipo de dato:
 - CochesElectricos: 
   Contiene:
     - coches electricos.zip: fichero comprimido con la información original
+    - Creacion_nuevas_variables: fichero txt donde aparecerán (posibles)variables nuevas interesantes para nuestro objetivo
 - Gasolineras:
   Contiene:
     - Gasolineras_de_España.csv: fichero original (sin acentos en el nombre de los campos)
