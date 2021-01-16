@@ -1,0 +1,41 @@
+
+# sudo python3 -m pip install -U pip 
+
+import math
+import pandas as pd
+import matplotlib.pyplot as plt
+import os
+import googlemaps
+from itertools import tee
+
+ ===================
+    Cálculo rutas        
+ ===================
+
+-- Librerías utilizadas para pruebas cálculo de rutas:
+
+import networkx as nx
+import osmnx as ox
+from shapely.geometry import LineString, mapping
+import geopandas as gpd
+from ipyleaflet import *
+
+--> Tarda mucho en crear los mapas, poco óptimo, creo q es mejor Flask con leaflet
+
+
+----------------------------------------------------------------------------------------------------
+
+ ===================
+    Pyomo 5.7.2     
+ ===================
+
+Pyomo es un lenguaje de modelado de optimización de código abierto basado en Python con un conjunto
+diverso de capacidades de optimización.
+
+ 
+ 1.1.- Instalación
+ ===================
+
+>> pip3 install Pyomo
+
+- Dependencias: numpy, scipy, sympy, networkx, openpxl, pyodbc, xlrd, pandas, matplotlib , pymysql, pyro4 y pint.
