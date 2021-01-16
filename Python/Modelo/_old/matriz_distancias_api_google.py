@@ -28,7 +28,6 @@ df_ciudades = pd.read_csv(os.path.join(os.getcwd(),'ciudades.csv'), sep = ',', e
 
 # Backup 
 df = df_ciudades
-df_aux = df_ciudades
 df
 
 
@@ -72,38 +71,30 @@ def pairwise(iterable):
     return zip(a, b)
 
 
-
 # Se inicializa una lista vacia para calcular las distancias
 list = [0]
-list_ciudades = []
 
 
 # Bucle que recorre cada par de filas y calcula la distancia
+for (i1, row1), (i2, row2) in pairwise(df.iterrows()):
+    
+    # Se asigna la latitud y longitud del punto de origen
+    LatOrigin = row1['Latitude'] 
+    LongOrigin = row1['Longitude']
+    origins = (LatOrigin,LongOrigin)
+    
+    # Se asigna la latitud y longitud de la fila siguiente
+    LatDest = row2['Latitude']
+    LongDest = row2['Longitude']
+    destination = (LatDest,LongDest)
 
-for (i1_aux, row1_aux), (i2_aux, row2_aux) in pairwise(df_aux.iterrows()):
+
+    # Se llama a la funcion distance_matrix de google
+      result = gmaps.distance_matrix(origins, destination, mode='driving')["rows"][0]["elements"][0]["distance"]["value"]
       
-      # Se asigna la latitud y longitud del punto de origen
-      LatOrigin = row1_aux['Latitude'] 
-      LongOrigin = row1_aux['Longitude']
-      ciudad_ori = row1_aux['CAPITAL DE PROVINCIA']
-      origins = (LatOrigin,LongOrigin)
-      
-      for (i1, row1), (i2, row2) in pairwise(df.iterrows()):
-                      
-            # Se asigna la latitud y longitud de la fila siguiente
-            LatDest = row1['Latitude']
-            LongDest = row1['Longitude']
-            ciudad_dest = row1['CAPITAL DE PROVINCIA']
-            destination = (LatDest,LongDest)
-            
-            
-            # Se llama a la funcion distance_matrix de google
-            result = gmaps.distance_matrix(origins, destination, mode='driving')["rows"][0]["elements"][0]["distance"]["value"]
-            ciudades = ciudad_ori + ciudad_dest
-      
-            # Se apendiza el resultado a la lista de distancias
-            list.append(result)
-            list_ciudades.append(ciudades)
+
+    # Se apendiza el resultado a la lista de distancias
+      list.append(result)
 
 
 # Se crea una columna con las distancias
