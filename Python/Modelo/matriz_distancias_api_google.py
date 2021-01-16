@@ -53,7 +53,7 @@ ax.imshow(espana, zorder = 0, extent = BBox, aspect = 'equal')
 #------------------------------------------------------------------
 
 # La clave se introduce para la ejecucion pero luego se omitira para no compartirla en el repo
-API_key = 'AIzaSyDdOfLJPc0SZC0PoYzw4iukI6pnNv2L2_k'
+API_key = '###################################'
 gmaps = googlemaps.Client(key=API_key)
 
 
