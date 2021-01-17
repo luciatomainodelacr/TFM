@@ -1,0 +1,34 @@
+############################ VARIABLES  ##############################
+
+BRAND: marca del coche
+MODEL: modelo del coche
+ACCELSEC: tiempo (en segundos) que tarda el coche en acelerar de 0 a 100 (km/h)
+TOPSPEED: velocidad (km/h) máxima
+RANGE: autonomía del coche en km
+EFFICIENCY: (Wh/km) consumo del coche por cada 100 km
+FASTCHARGE: (Km/h) velocidad de carga rápida --> se mide en km/h imagino que para que resulte más intuitivo para el usuario, los km que va a poder recorrer por cada
+	     hora de carga
+RAPIDCHARGE (se refiere a carga ULTRARÁPIDA): YES/NO --> 
+Los rapid charger son aún más rápidos que los fast charger y hay dos tipos. La carga rápida de CA solo usa más energía (43 kW), mientras que los cargadores rápidos de
+CC suministran corriente CC directamente al automóvil, lo que permite que el automóvil se cargue a 50 kW. 
+
+Recarga rápida: es un punto de carga de alta potencia.
+Se pueden encontrar en la vía pública, estaciones de servicio o las denominadas “electrolineras”. Se trata de estaciones de carga con una potencia eléctrica de 
+hasta 50 kW, lo que nos permitirá cargar el 80% de la capacidad de la batería de nuestro vehículo eléctrico en apenas 30 minutos.
+ 
+LOW-FAST-RAPID CHARGE (de menor a mayor)
+
+POWERTRAIN: si tiene tracción a las 4 ruedas (AWD) o solo tracción delantera (RWD) --> NO IMPORTANTE 
+PLUGTYPE: conectores para coches eléctricos (Puerto de carga)--> Tipo2/Tipo3... + CCS,CHadeMo (si es puerto de carga rápida). Ver en la info de conectores.
+BODYSTYLE: tipo de carrocería
+SEGEMENT: tipo de segmento del coche (A,B,C,D,E,F,SUV) de menor a mayor longitud, espacio, calidad de carrocería...
+SEATS: número de asientos --> VA IMPLÍCITO EN EL TIPO DE SEGMENTO
+PRICE: precio --> NO IMPORTANTE PARA NUESTRO OBJETIVO
+
+######################################################################################################################################################################
+- VALORES MISSING
+- VARIABLES IMPORTANTES DE CARA AL TRABAJO EN CUESTIÓN
+- VALORES REPETIDOS
+- CREAR NUEVAS VARIABLES QUE PUEDAN SER ÚTILES
+- MOSTRAR EN LAS VARIABLES CATEGÓRICAS --> todas las distintas categorías // EN LAS VARIABLES NUMÉRICAS --> el rango. 
+- VISUALIZAR CON GRÁFICOS LOS COCHES CON MÁS AUTONOMÍA, MÁS VELOCIDAD DE CARGA...
