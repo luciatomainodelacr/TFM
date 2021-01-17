@@ -10,6 +10,12 @@ Se añaden tres carpetas correspondientes a cada uno de los módulos:
     - PuntosRecarga: carpeta con scripts referentes a los datos de los puntos de recarga obtenidos con GoogleMapsAPI. 
       Los scripts son: 
       1) get_ev_charging_stations_gmapi.py -> Descargar datos de Google Maps Places API para estaciones de recarga en las distintas CCAA.
-      2) merge_ev_charging_stations.py -> Mergear los datos de CCAA en 1 solo y filtrar campos/registros innecesarios/erróneos.
-- Modelo
+      2) merge_ev_charging_stations.py -> Mergear los datos de CCAA en 1 solo y filtrar campos/registros innecesarios/erróneos. Eliminar duplicados y obtención a partir de la dirección la provincia y el código postal de cada punto de recarga
+
+- Modelo: Contiene los scripts que obtienen los datos mediante csv y/o API, los filtran y analizan y luego los vuelcan a otros ficheros csv. 
+  Contiene:
+    - Script matriz_distancias_api_google.py -> Importa el fichero de ciudades.csv y calcula mediande la API Google Distance Matrix las distancias entre todas las ciudades. Devuelve un archivo con cuatro columnas Origen, Destino, Distancia en metros, Distancia en km: ciudades_distancia.csv
+    - _old:  carpeta que contiene script y dataset que se han utilizado como pruebas para construir procesos pero se han descartado por no ser óptimos.
+    - Pruebas_Blanca: contiene script y dataset que se están utilizando para construir procesos pero todavía no están finalizados.
+
 - Output

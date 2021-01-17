@@ -17,7 +17,7 @@ from itertools import tee
 
 
 # Se establece el diretorio base
-os.chdir('/home/tfm/Documentos/TFM/Datasets/')
+os.chdir('/home/tfm/Documentos/TFM/Datasets/Ciudades')
 
 
 
@@ -33,32 +33,16 @@ df
 
 
 
-# 2.- Grafico mapa España -----------------------------------------
-#------------------------------------------------------------------
-
-espana = plt.imread("/home/tfm/Documentos/TFM/Datasets/PuntosRecarga/GoogleMapsAPI/espana.png")
-fig, ax = plt.subplots(figsize = (8,7))
-ax.scatter(df.LONGITUD, df.LATITUD, zorder = 1, alpha = 0.2, c = 'b', s = 10)
-ax.set_title('Plotting Spatial Data on Spain Map')
-ax.set_xlim(BBox[0], BBox[1])
-ax.set_ylim(BBox[2], BBox[3])
-ax.imshow(espana, zorder = 0, extent = BBox, aspect = 'equal')
-# plt.show()
-
-# --> Corregimos sobre el propio csv las estaciones de Guadalaja y Cordoba situadas en Mexico
-
-
-
-# 3.- Configuracion API Google ------------------------------------
+# 2.- Configuracion API Google ------------------------------------
 #------------------------------------------------------------------
 
 # La clave se introduce para la ejecucion pero luego se omitira para no compartirla en el repo
-API_key = '###################################'
+API_key = 'AIzaSyDdOfLJPc0SZC0PoYzw4iukI6pnNv2L2_k'
 gmaps = googlemaps.Client(key=API_key)
 
 
 
-# 4.- Calculo Distancias -----------------------------------------
+# 3.- Calculo Distancias -----------------------------------------
 #------------------------------------------------------------------
 
 # Funcion Pairwise
@@ -75,7 +59,8 @@ def pairwise(iterable):
 
 # Se inicializa una lista vacia para calcular las distancias
 list = [0]
-list_ciudades = []
+list_origen = []
+list_destino = []
 
 
 # Bucle que recorre cada par de filas y calcula la distancia
@@ -95,28 +80,38 @@ for (i1_aux, row1_aux), (i2_aux, row2_aux) in pairwise(df_aux.iterrows()):
             LongDest = row1['Longitude']
             ciudad_dest = row1['CAPITAL DE PROVINCIA']
             destination = (LatDest,LongDest)
-            
-
+                        
             # Se llama a la funcion distance_matrix de google
             result = gmaps.distance_matrix(origins, destination, mode='driving')["rows"][0]["elements"][0]["distance"]["value"]
-            ciudades = ciudad_ori + ciudad_dest
       
             # Se apendiza el resultado a la lista de distancias
             list.append(result)
-            list_ciudades.append(ciudades)
+            list_origen.append(ciudad_ori)
+            list_destino.append(ciudad_dest)
 
+
+
+# 4.- Dataframe Distancias ----------------------------------------
+#------------------------------------------------------------------
+
+# Se elimina el primer elemento de la lista de distancias (inicializada con 0)
+list.remove(0)
 
 # Se crea el dataframe con las distancias
 df_distancias = pd.DataFrame()
 
-df_distancias['Ciudades'] = list_ciudades
-df_distancias['Distance'] = list
+df_distancias['Origen'] = list_origen
+df_distancias['Destino'] = list_destino
+df_distancias['Distance_m'] = list
+
+
+df_distancias['Distance_km'] = df_distancias['Distance_m']/1000
 
 
 
-# 6.- Output ------------------------------------------------------
+# 5.- Output ------------------------------------------------------
 #------------------------------------------------------------------
 
-df_distancias.to_csv('/home/tfm/Documentos/TFM/Datasets/ciudades_distancia.csv', sep = ";", index = False)
+df_distancias.to_csv('/home/tfm/Documentos/TFM/Datasets/Ciudades/ciudades_distancia.csv', sep = ";", index = False)
 
 
