@@ -1,5 +1,5 @@
 # =============================================================================
-#  MODELO DE OPTIMIZACION - CALCULA RUTA ENTRE DOS PUNTOS
+#  CALCULA RUTA POTIMA ENTRE DOS PUNTOS
 # =============================================================================
 
 """
