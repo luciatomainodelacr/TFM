@@ -42,14 +42,32 @@ for row in df.iterrows():
 # Ver los nodos
 DG.nodes(data = True)
 
-# Graficamente
-nx.draw_circular(DG,
-                 node_color = 'lightblue',
-                 edge_color = 'grey',
-                 font_size = 24,
-                 width = 2, with_labels = True, node_size = 3500)
+# Encuentra todas las rutas entre dos puntos
+list(nx.all_shortest_paths(DG, source = "Zaragoza Tren", target = "Zamora Bus", weight = None))
+
+# Dijkstra - Encuentra la ruta con menor distancia
+list(nx.dijkstra_path(DG, source = "Zaragoza Tren", target = "Zamora Bus", weight = "distance"))
+
+# A* - Encuentra la ruta con menor distancia
+list(nx.astar_path(DG, ("Zaragoza Tren"), ("Zamora Bus"), weight = "distance"))
 
 
-list(nx.all_shortest_paths(DG, source = "Zaragoza Tren", target="Zamora Bus", weight=None))
+# Funcion que devuelve la duracion completa del trayecto 
+def show_path(ruta):
+    total_distancia = 0
+    
+    for i in range(len(ruta)-1):
+        origen = ruta[i]
+        destino = ruta[i+1]
+        distancia = DG[origen][destino]["distance"]
+                
+        total_distancia = total_distancia + distancia
+        
+        print(distancia)
+        
+    
+    print("\n     Total Distancia: %s \n" % (
+            total_distancia)
+    )
 
-list(nx.dijkstra_path(DG, source="Zaragoza Tren", target="Zamora Bus", weight=None))
+show_path(['Zaragoza Tren', 'Soria Bus', 'Zamora Bus'])
