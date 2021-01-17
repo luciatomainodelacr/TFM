@@ -8,6 +8,11 @@ import os
 import googlemaps
 from itertools import tee
 
+
+
+
+------------------------------------------ PRUEBAS ------------------------------------------
+
  ===================
     Cálculo rutas        
  ===================

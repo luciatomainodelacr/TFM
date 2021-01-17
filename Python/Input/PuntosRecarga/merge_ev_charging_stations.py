@@ -49,13 +49,6 @@ BBox = ((df_coord_filt.longitude.min(), df_coord_filt.longitude.max(),
          df_coord_filt.latitude.min(), df_coord_filt.latitude.max()))
 
 
-# Dataframe resultante
-path_filt = "/home/tfm/Documentos/TFM/Datasets/PuntosRecarga/puntos_carga_filt_Espana.csv"
-
-# Comentamos las lineas de exportar ficheros (ya hecho)
-# df_coord_filt.to_csv(path_filt, index=False)  
-
-
 
 # 3.- Grafico mapa España -----------------------------------------
 #------------------------------------------------------------------
@@ -223,5 +216,8 @@ df["cp"] = df.apply(lambda a: extrer_cp(a['formatted_address']), axis = 1)
 # 6.- Output ------------------------------------------------------
 #------------------------------------------------------------------
 
-df.to_csv('/home/tfm/Documentos/TFM/Datasets/PuntosRecarga/df_ptos_limpio.csv', sep = ";", index = False)
+# Dataframe resultante
+path_filt = "/home/tfm/Documentos/TFM/Datasets/PuntosRecarga/puntos_carga_filt_Espana.csv"
+
+df.to_csv(path_filt, sep = ";", index = False)
 
