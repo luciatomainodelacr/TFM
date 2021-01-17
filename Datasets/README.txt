@@ -20,7 +20,6 @@ Se subdivide en cuatro carpetas, cada una con un tipo de dato:
   Contiene: 
     - GoogleMapsAPI: carpeta con ficheros csv con puntos de recarga obtenidos con Google Maps Places API (generado con script TFM/Python/Input/PuntosRecarga/get_ev_charging_stations_gmapi.py y TFM/Python/Input/PuntosRecarga/merge_ev_charging_stations.py) por CCAA y mergeados para toda España. 
     - OtrasFuentes: carpeta con ficheros csv con puntos de recarga de distintas CCAA (de momento no se usan).
-<<<<<<< HEAD
     - puntos_carga_filt_Espana.csv: fichero con dataset tras limpieza y mergeo de los datos de GoogleMapsAPI por CCAA (generado con script TFM/Python/Input/PuntosRecarga/merge_ev_charging_stations.py). Se eliminan duplicados y se obtiene la provincia y el código postal para cada uno de los puntos de recarga.
 
 - PuntosO_D:
