@@ -17,7 +17,7 @@ from itertools import tee
 
 
 # Se establece el diretorio base
-os.chdir('/home/tfm/Documentos/TFM/Datasets/Ciudades')
+os.chdir('/home/tfm/Documentos/TFM/Datasets/PuntosO_D/GeocodingAPI')
 
 
 
@@ -37,7 +37,7 @@ df
 #------------------------------------------------------------------
 
 # La clave se introduce para la ejecucion pero luego se omitira para no compartirla en el repo
-API_key = 'AIzaSyDdOfLJPc0SZC0PoYzw4iukI6pnNv2L2_k'
+API_key = '#################################'
 gmaps = googlemaps.Client(key=API_key)
 
 
@@ -112,6 +112,6 @@ df_distancias['Distance_km'] = df_distancias['Distance_m']/1000
 # 5.- Output ------------------------------------------------------
 #------------------------------------------------------------------
 
-df_distancias.to_csv('/home/tfm/Documentos/TFM/Datasets/Ciudades/ciudades_distancia.csv', sep = ";", index = False)
+df_distancias.to_csv('/home/tfm/Documentos/TFM/Datasets/PuntosO_D/GeocodingAPI/ciudades_distancia.csv', sep = ";", index = False)
 
 
