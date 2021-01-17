@@ -4,14 +4,13 @@ En el caso de los Smart ( o coches con velocidad máxima por debajo de los 130) 
 
 
 
-1) Velocidad media
-2) Estilo de conducción:
 
-	- Económica
-	- Alto rendimiento
-	- Prestacional
+1) Velocidad media: (va a depender de la vía elegida por el usuario para realizar su viaje)
 
-Aquí se explican las diferencias: https://www.tecnologia-automovil.com/articulos/actualidad/estilos-de-conduccion/
+	- En autopista--> 100 km/h
+	- En carreteras--> 75 km/h 
+
+
 
 3) Clima: (obviando condiciones climatológicas adversas tales como lluvia, niebla, nieve, tormenta...?????)
 
@@ -28,12 +27,9 @@ Aquí se explican las diferencias: https://www.tecnologia-automovil.com/articulo
 
 5) Carga del vehículo:
 
-	- Número de pasajeros adultos
-	- Número de pasajeros niños 
-	- Ocupación del maletero: 
-		* mínima
-		* parcial
-		* total
+	- Vacío
+	- Media carga
+	- Carga entera
 
 6) Carga inicial de batería del vehículo
 7) Carga deseada al final del trayecto
