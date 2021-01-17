@@ -2,11 +2,6 @@
 #  MATRIZ DE DISTANCIAS ENTRE LOS PUNTOS DE RECARGAS
 # =============================================================================
 
-""" 
-EL CALCULO SE HACE SOLO PARA FILAS ITERATIVAS
---> HACE FALTA CREAR LA MATRIZ PARA TODOS LOS PUNTOS
-"""
-
 
 # Se cargan las librerias
 import pandas as pd
@@ -113,5 +108,4 @@ df_distancias['Distance_km'] = df_distancias['Distance_m']/1000
 #------------------------------------------------------------------
 
 df_distancias.to_csv('/home/tfm/Documentos/TFM/Datasets/PuntosO_D/GeocodingAPI/ciudades_distancia.csv', sep = ";", index = False)
-
 

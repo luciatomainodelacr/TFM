@@ -7,7 +7,7 @@
 CODIGO SIN REVISAR
 """
 
-import pandas
+import pandas as pd
 import pyomo
 import pyomo.opt
 import pyomo.environ as pe
@@ -27,11 +27,11 @@ class SPInterdiction:
         Every arc must appear in the arcfile.  The data also describes the arc's cost and whether we can attack this arc.
         """
         # Read in the node_data
-        self.node_data = pandas.read_csv(nodefile)
+        self.node_data = pd.read_csv(nodefile)
         self.node_data.set_index(['Node'], inplace=True)
         self.node_data.sort_index(inplace=True)
         # Read in the arc_data
-        self.arc_data = pandas.read_csv(arcfile)
+        self.arc_data = pd.read_csv(arcfile)
         self.arc_data['xbar'] = 0
         self.arc_data.set_index(['StartNode','EndNode'], inplace=True)
         self.arc_data.sort_index(inplace=True)
@@ -224,3 +224,4 @@ if __name__ == '__main__':
     m.attacks = 2
     m.solve()
     m.printSolution()
+
