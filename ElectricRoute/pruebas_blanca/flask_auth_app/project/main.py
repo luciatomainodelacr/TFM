@@ -19,7 +19,7 @@ def index():
     return render_template('index.html')
 
 # Página de Perfil
-@main.route('/profile')
+@main.route('/Route')
 def profile():
-    return render_template('profile.html')
+    return render_template('ruta_2_puntos_v1.html')
 

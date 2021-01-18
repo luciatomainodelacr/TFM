@@ -1,19 +1,28 @@
 <!DOCTYPE html>
+
+{% block html %}
 <html>
 
+{% block head %}
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Flask Auth Example</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+    
 </head>
+{% endblock %}
 
+
+{% block body %}
 <body>
     <section class="hero is-primary is-fullheight">
 
         <div class="hero-head">
-            <nav class="navbar">
+
+        {% block nav %}
+        <nav class="navbar">
                 <div class="container">
 
                     <div id="navbarMenuHeroA" class="navbar-menu">
@@ -21,12 +30,12 @@
                             <a href="{{ url_for('main.index') }}" class="navbar-item">
                                 Home
                             </a>
-                            <a href="{{ url_for('main.profile') }}" class="navbar-item">
-                                Profile
-                            </a>
                             <a href="{{ url_for('auth.login') }}" class="navbar-item">
                                 Login
                             </a>
+                            <a href="{{ url_for('main.profile') }}" class="navbar-item">
+                                Route
+                            </a>                            
                             <a href="{{ url_for('auth.signup') }}" class="navbar-item">
                                 Sign Up
                             </a>
@@ -37,15 +46,28 @@
                     </div>
                 </div>
             </nav>
+            {% endblock %}
         </div>
 
         <div class="hero-body">
-            <div class="container has-text-centered">
+            <div class="container">
                {% block content %}
                {% endblock %}
             </div>
         </div>
+
+        <div class="hero-body">
+  
+                {% block body_content %}               
+                {% endblock %}
+
+        </div>
+
+
     </section>
 </body>
+{% endblock %}
+
 
 </html>
+{% endblock %}
