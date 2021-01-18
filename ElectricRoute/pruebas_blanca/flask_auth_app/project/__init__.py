@@ -1,9 +1,21 @@
+# =============================================================================
+#  Inicialización de la aplicación: __init__.py
+# =============================================================================
+
+"""
+Este archivo tendrá la función de crear la aplicación, que iniciará la base de 
+datos y registrará los molodelos.
+"""
+
+# Se cargan las librerias
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 
-# init SQLAlchemy so we can use it later in our models
+
+# Se inicializa SQLAlchemy (se utilizará más adelante)
 db = SQLAlchemy()
 
+# Se crea la app
 def create_app():
     app = Flask(__name__)
 

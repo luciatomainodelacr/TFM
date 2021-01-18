@@ -1,3 +1,15 @@
+# =============================================================================
+#  Modelo de autenticación: auth.py
+# =============================================================================
+
+"""
+Dos páginas:
+- login: página de inicio de sesión (/login)
+- sign-up: página de registro (/sign-up)
+- logout: ruta para cerrar la sesión de un usuario activo
+"""
+
+# Se cargan las librerias
 from flask import Blueprint, render_template
 from . import db
 
@@ -10,7 +22,7 @@ def login():
 
 @auth.route('/signup')
 def signup():
-    return render_template('signup.html')
+    return 'Signup'
 
 @auth.route('/logout')
 def logout():
