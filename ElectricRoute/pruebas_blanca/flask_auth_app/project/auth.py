@@ -10,20 +10,34 @@ Dos páginas:
 """
 
 # Se cargan las librerias
-from flask import Blueprint, render_template
+from flask import Blueprint, Flask, render_template, request, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
 from . import db
 
 auth = Blueprint('auth', __name__)
 
-
-@auth.route('/login')
+# Página para logearse
+@auth.route('/login', methods = ["GET", "POST"])
 def login():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+
+        next = request.args.get('next', None)
+        if next:
+            return redirect(next)
+        return redirect(url_for('main.index'))
     return render_template('login.html')
 
+
+
+# Página para registrarse
 @auth.route('/signup')
 def signup():
     return 'Signup'
 
+
+# Pagína logout
 @auth.route('/logout')
 def logout():
     return 'Logout'
