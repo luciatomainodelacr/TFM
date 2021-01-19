@@ -15,7 +15,13 @@ Para ejecutar:
 >> export FLASK_DEBUG=1
 >> flask run
 
-2º) Abrir el navegador e ir a la ruta http://localhost:5000/
+2º) Abrir el navegador e ir a la ruta http://localhost:5000/login
+
+3") Insertar un mail y una contraseña (cualquier)
+Ejemplo: 
+    User: blanca@hotmail.com
+    Password: blanca
+
 """
 
 # Se cargan las librerias
