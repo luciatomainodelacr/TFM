@@ -1,6 +1,9 @@
 version: "3.4"
 services:
   flask_app:
+    build:
+      context: .
+      dockerfile: ./app/Dockerfile
     image: flask-tutorial:latest
     container_name: flask_app
     ports:
