@@ -60,7 +60,7 @@ def index():
 #------------------------------------------------------------------
 
 @main.route('/Route')
-def profile():
+def route():
     return render_template('ruta_2_puntos_v1.html')
 
 
@@ -68,9 +68,9 @@ def profile():
 # 5.- Página signup -----------------------------------------------
 #------------------------------------------------------------------
 
-@main.route('/signup')
-def signup():
-    return 'Signup'
+@main.route('/profile')
+def profile():
+    return render_template('profile.html')
 
 
 

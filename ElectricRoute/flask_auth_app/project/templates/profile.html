@@ -1,13 +1,36 @@
-{% extends "base_template.html" %}
-{% block title %}Registro de usuarios{% endblock %}
+{% extends "base.html" %}
+
 {% block content %}
-    <form action="" method="post">
-        <label for="name">Nombre: </label>
-        <input type="text" id="name" name="name" /><br>
-        <label for="email">Email: </label>
-        <input type="text" id="email" name="email" /><br>
-        <label for="password">Contraseña: </label>
-        <input type="password" id="password" name="password" /><br>
-        <input type="submit" id="send-signup" name="signup" value="Registrar" />
-    </form>
+<div class="column is-4 is-offset-4">
+    <h3 class="title">Profile</h3>
+    <div class="box">
+
+        <!-- Formulario perfil usuario -->
+        <form method="POST" action="/signup">
+
+            <!-- User name -->
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="text" name="name" placeholder="Name" autofocus="">
+                </div>
+            </div>
+
+            <!-- Email Adress -->
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="email" name="email" placeholder="Email" autofocus="">
+                </div>
+            </div>
+
+            <!-- Coche -->
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="text" name="marcacoche" placeholder="Marca Coche">
+                </div>
+            </div>
+
+            <button class="button is-block is-info is-large is-fullwidth">Sign Up</button>
+        </form>
+    </div>
+</div>
 {% endblock %}
