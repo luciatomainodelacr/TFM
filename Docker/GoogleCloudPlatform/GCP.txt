@@ -29,7 +29,10 @@ Opción 2) PREFERIDA
 1) Crear instancia VM en GCP Compute Engine con Ubuntu 18.04
 
 2) Crear reglas de firewall en GCP VPC Network/Firewall que permita el acceso desde fuera a
-los puertos que necesitamos (por ejemplo grafana necesita el puerto 3000 desde 0.0.0.0/0)
+los puertos que necesitamos:
+- Grafana: 3000 desde 0.0.0.0/0
+- Mysql: 3306 desde 0.0.0.0/0
+- Flask-app: 5000 desde 0.0.0.0/0
 
 3) Instalar docker y docker-compose
 ####DOCKER###
@@ -66,15 +69,21 @@ docker-compose --version
 git clone https://github.com/luciatomainodelacr/TFM.git
 cd TFM/Docker/
 
-5) Levantar los dockers con docker-compose
+5) Copiar la carpeta de ElectricRoute dentro de la de Docker
+cp -r ../ElectricRoute/flask_auth_app/project app/.
+
+6) Levantar los dockers con docker-compose
 docker network create monitoring
 docker volume create --name=grafana-data
 docker-compose -f docker-compose.yml up -d
 
-6) Comprobar que los dockers se han levantado
+7) Comprobar que los dockers se han levantado
 docker ps
 
-Intentar acceder a través del navegador a grafna (por ejemplo):
-http://ip_externa:3000
+Intentar acceder a través del navegador:
+- Flask-web: http://ip_externa:5000/login
+- Grafana: http://ip_externa:3000
+
+Para acceder a la db, se puede abrir desde MySQL Workbench con conexión a ip_externa y puerto 3306
 
 (ip_externa es la External IP de la instancia VM del Compute Engine de GCP)
