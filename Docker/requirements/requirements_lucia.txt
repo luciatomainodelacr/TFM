@@ -94,3 +94,18 @@ sudo pip3 install shapely
 
 - Unicode
 sudo pip3 install unidecode
+
+- Flask y varias de Flask (Blanca)
+sudo pip3 install flask
+sudo pip3 install -U Flask-SQLAlchemy
+supo pip3 install flask-login
+sudo pip3 install flask-mail
+
+- Plotly 
+sudo pip3 install plotly
+
+- Pulp
+sudo pip3 install pulp
+
+- Boto3
+sudo pip3 install boto3
