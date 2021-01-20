@@ -2,6 +2,21 @@
 #  MATRIZ DE DISTANCIAS ENTRE LOS PUNTOS DE RECARGAS
 # =============================================================================
 
+"""
+Fuente: https://medium.com/how-to-use-google-distance-matrix-api-in-python/how-to-use-google-distance-matrix-api-in-python-ef9cd895303c
+
+
+Input: lista de ciudades,
+
+Proceso: Mediande la API Google Distance Matrix se calculan las distancias entre 
+todas las ciudades. 
+* Es necesario crear una API Key en Google Cloud para ejecutarlo
+
+Output: Devuelve un dataframe con cuatro columnas Origen, Destino, Distancia en
+metros, Distancia en km: ciudades_distancia.csv
+ 
+"""
+
 
 # Se cargan las librerias
 import pandas as pd

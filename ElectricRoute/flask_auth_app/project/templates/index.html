@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="title">
+  Welcome to Electric Route Tool!
+</h1>
+<h2 class="subtitle">
+  TFM Big Data & Business Analytics
+</h2>
+
+<!-- Imagen -->
+	<div class="col-lg-6 d-none d-lg-block bg-login-image">
+		<img src="{{url_for('static', filename='rutas_image.jpg')}}"  class="img-fluid" alt="" style = "height: 90%; margin-top: 4%; margin-left: 5%; object-fit: cover; border-radius: 15px">
+	</div>
+
+{% endblock %}

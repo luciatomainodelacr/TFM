@@ -2,14 +2,14 @@
 
 <html>
 <head>
-  <meta charset="utf-8" />
+ <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  
-  
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
-  <link rel="stylesheet" href="leaflet-routing-machine.css" />
+  <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
      
+   
   
   <style>
 	 html, body, #map {
@@ -18,17 +18,17 @@
     	height: 100%;
     	width: 100%;
     }
-  </style>
-  
-  <title>Ruta entre dos puntos</title>
-
-  
+	</style>
 </head>
 
 
 <body>
 
-<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+    integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+   crossorigin="">
+</script>
+
 
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
@@ -47,17 +47,9 @@
 var firstLatLng,
     secondLatLng;
 
-var marcador = L.icon({
-        iconUrl:'images/marker_blue.png',
-        iconSize: [30, 45]
-});
-
 // Se crea la variable del mapa e indicamos las coordenadas q deseamos q se vea al principio
 var map = L.map('map').setView([39.981712, -2.8310256,7], 7);
 
-var marker2 = L.marker([37.1699, -3.968], {icon: marcador}).addTo(map);
-
-// Llamada a la librería MapBox para dibujar el mapa
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
@@ -79,7 +71,8 @@ map.on('click', function(e) {
       L.Routing.control({
         waypoints: [firstLatLng, secondLatLng]
       }).addTo(map);
-       
+      
+  
 
     }
   })

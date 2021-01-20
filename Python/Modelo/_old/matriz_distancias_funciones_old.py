@@ -9,7 +9,17 @@ ESTA TRABAJANDO
 --> SE UTILIZA MEJOR LA API DE GOOGLE PARA MATRIZ DE DISTANCIAS
 matriz_distancias_api_google.py
 
+
+Input: nodes.csv - muestra del fichero de las ciudades.csv
+
+Proceso: Mediante funciones se calculan todas las combinaciones entre los distintos 
+puntos del dataframe nodes y se calcula la distancia de Haversine entre ellos. 
+
+
+Output: Devuelve un dataframe con las distancias para todas las combinaciones.
+ 
 """
+
 
 # Se cargan las librerias
 import math
@@ -42,8 +52,7 @@ def haversine(lat1, lon1, lat2, lon2):
 # Función Potencia
 def potencia(c):
     """
-        Calcula y devuelve el conjunto potencia del 
-        conjunto c.
+        Calcula y devuelve el conjunto potencia del conjunto c.
     """
     if len(c) == 0:
         return [[]]
@@ -53,37 +62,31 @@ def potencia(c):
 
 # Función Combinaciones
 def combinaciones(c, n):
-    """Calcula y devuelve una lista con todas las
-       combinaciones posibles que se pueden hacer
-       con los elementos contenidos en c tomando n
-       elementos a la vez.
+    """
+        Calcula y devuelve una lista con todas las combinaciones posibles que se 
+        pueden hacer con los elementos contenidos en c tomando n elementos a la vez.
     """
     return [s for s in potencia(c) if len(s) == n]
 
 
 # Función imprime_ordenado
 def imprime_ordenado(c):
-    """Imprime en la salida estándar todos los
-       subconjuntos del conjunto c (una lista de
-       listas) ordenados primero por tamaño y
-       luego lexicográficamente. Cada subconjunto
-       se imprime en su propia línea. Los
-       elementos de los subconjuntos deben ser
-       comparables entre sí, de otra forma puede
-       ocurrir un TypeError.
+    """
+        Imprime en la salida estándar todos los subconjuntos del conjunto c (una lista
+        de listas) ordenados primero por tamaño y luego lexicográficamente. Cada subconjunto
+        se imprime en su propia línea. Los elementos de los subconjuntos deben ser comparables
+        entre sí, de otra forma puede ocurrir un TypeError.
     """
     for e in sorted(c, key=lambda s: (len(s), s)):
         print(e)
 
 
+
 # 2.- Carga de datos inputs ---------------------------------------
 #------------------------------------------------------------------
 
-
 # Se lee el fichero con los puntos de carga electrica
 df_ptos = pd.read_csv(os.path.join(os.getcwd(),'nodes.csv'), sep=',', encoding='iso-8859-1', decimal='.')
-
-
 
 
 

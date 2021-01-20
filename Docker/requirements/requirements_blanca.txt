@@ -1,17 +1,45 @@
 
 # sudo python3 -m pip install -U pip 
 
-import math
-import pandas as pd
-import matplotlib.pyplot as plt
-import os
-import googlemaps
-from itertools import tee
+
+========================
+        Generales        
+========================
+
+pip3 install math
+pip3 install pandas
+pip3 install matplotlib.pyplot
+pip3 install os
+
+
+========================
+    Matriz Distancias         
+========================
+
+pip3 install googlemaps
+from itertools import tee # No hace falta instalar nada
+
+
+========================
+    Cálculo rutas        
+========================
+
+pip3 install networkx
+
+
+========================
+    Herramienta web
+========================
+
+pip3 install flask 
+pip3 install flask_sqlalchemy
+pip3 install flask_login
 
 
 
-
+---------------------------------------------------------------------------------------------
 ------------------------------------------ PRUEBAS ------------------------------------------
+---------------------------------------------------------------------------------------------
 
  ===================
     Cálculo rutas        
