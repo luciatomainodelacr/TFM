@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+
+    {% block extra_js %}  
+
+    <script type="text/javascript">
+
+        // Se definen las variables de los puntos origen y destino
+        var firstLatLng,
+            secondLatLng;
+
+        // Se crea la variable del mapa e indicamos las coordenadas q deseamos q se vea al principio
+        var map = L.map('map').setView([39.981712, -2.8310256,7], 7);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+
+        // Se crea un evento que captura dos puntos seleccionados en el mapa
+        map.on('click', function(e) {
+            if (!firstLatLng) {
+              firstLatLng = e.latlng;
+                L.marker(firstLatLng).addTo(map).bindPopup('Punto de Origen<br/>' + e.latlng).openPopup();
+            } else {
+              secondLatLng = e.latlng;
+                L.marker(secondLatLng).addTo(map).bindPopup('Punto de Destino<br/>' + e.latlng).openPopup();
+            }
+
+            if (firstLatLng && secondLatLng) {
+
+              // Se dibuja la ruta entre los dos puntos
+              L.Routing.control({
+                waypoints: [firstLatLng, secondLatLng]
+              }).addTo(map);      
+
+            }
+          })
+
+    </script>
+
+{% endblock %}
+
+
+{% block body %}
+
+  <div id ="map"> </div>
+  
+{% endblock %}
+
