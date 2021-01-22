@@ -24,11 +24,7 @@
         <link href="{{url_for("static", filename='css/sb-admin-2.min.css')}}" rel="stylesheet">
 
 
-        <!-- Mapa -->
-        <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
-        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
-  
+
 
         {% block extra_css %}
         {% endblock %}
@@ -37,25 +33,11 @@
     {% endblock %}
 
 
-
     {% block body %}
 
     <!-- Cuerpo -->
     <body id="page-top">
     
-        <!-- Mapa -->
-        <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
-            integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
-        crossorigin="">
-        </script>
-
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
-        <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
-
-        <script src="leaflet-routing-machine-3.2.12/dist/leaflet-routing-machine.js"></script>
-        <link rel="stylesheet" href="leaflet-routing-machine-3.2.12/dist/leaflet-routing-machine.css" /> 
-
-
         <!-- Page Wrapper -->
         <div id="wrapper">
 
@@ -63,7 +45,7 @@
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Título -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="Route.html">
                 <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -75,7 +57,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="ruta_2_puntos_v1.html">
                     <i class="fa fa-map"></i>
                     <span>Map</span>
                 </a>
@@ -229,10 +211,12 @@
                 <div class="container-fluid">
 
                 
-                <!-- Content Row -->
-                <div class="row"> 
-
-                </div>
+                    <!-- Content Row -->
+                    <div class="row"> 
+                    {% block map %}
+                    {% endblock %}
+                   
+                    </div>
 
                 </div>
                 <!-- /.container-fluid -->
