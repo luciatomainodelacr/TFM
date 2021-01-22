@@ -68,7 +68,8 @@ def pairwise(iterable):
 
 
 # Se inicializa una lista vacia para calcular las distancias
-list = [0]
+list_distancia = [0]
+list_duracion = [0]
 list_origen = []
 list_destino = []
 
@@ -92,10 +93,12 @@ for (i1_aux, row1_aux), (i2_aux, row2_aux) in pairwise(df_aux.iterrows()):
             destination = (LatDest,LongDest)
                         
             # Se llama a la funcion distance_matrix de google
-            result = gmaps.distance_matrix(origins, destination, mode='driving')["rows"][0]["elements"][0]["distance"]["value"]
+            result_distance = gmaps.distance_matrix(origins, destination, mode='driving')["rows"][0]["elements"][0]["distance"]["value"]
+            result_time_s = gmaps.distance_matrix(origins, destination, mode='driving')["rows"][0]["elements"][0]["duration"]["value"]
       
             # Se apendiza el resultado a la lista de distancias
-            list.append(result)
+            list_distancia.append(result_distance)
+            list_duracion.append(result_time_s)
             list_origen.append(ciudad_ori)
             list_destino.append(ciudad_dest)
 
@@ -105,17 +108,17 @@ for (i1_aux, row1_aux), (i2_aux, row2_aux) in pairwise(df_aux.iterrows()):
 #------------------------------------------------------------------
 
 # Se elimina el primer elemento de la lista de distancias (inicializada con 0)
-list.remove(0)
+list_distancia.remove(0)
 
 # Se crea el dataframe con las distancias
 df_distancias = pd.DataFrame()
 
 df_distancias['Origen'] = list_origen
 df_distancias['Destino'] = list_destino
-df_distancias['Distance_m'] = list
-
-
+df_distancias['Distance_m'] = list_distancia
 df_distancias['Distance_km'] = df_distancias['Distance_m']/1000
+df_distancias['Duracion_seg'] = list_duracion
+df_distancias['Duracion_min'] = df_distancias['Duracion_seg']/60
 
 
 

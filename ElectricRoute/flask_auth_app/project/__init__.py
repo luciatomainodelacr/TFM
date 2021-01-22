@@ -9,7 +9,7 @@ datos y registrará los molodelos.
 Para ejecutar: 
 
 1º) En un terminal de linux ir a la ruta:
->> cd Documentos/TFM/ElectricRoute/pruebas_blanca/flask_auth_app
+>> cd Documentos/TFM/ElectricRoute/flask_auth_app
 
 >> export FLASK_APP=project
 >> export FLASK_DEBUG=1
