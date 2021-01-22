@@ -71,20 +71,13 @@ def rutasFrecuentes():
 
 
 
-# 6.- Página signup -----------------------------------------------
+# 6.- Página profile -----------------------------------------------
 #------------------------------------------------------------------
 
 @main.route('/profile', methods = ['POST', 'GET'])
 def profile():
-    return render_template('ruta_2_puntos_v1_bkp.html')
+    return render_template('profile.html')
 
 
-
-# 7.- Página logout -----------------------------------------------
-#------------------------------------------------------------------
-
-@main.route('/logout')
-def logout():
-    return 'Logout'
 
 

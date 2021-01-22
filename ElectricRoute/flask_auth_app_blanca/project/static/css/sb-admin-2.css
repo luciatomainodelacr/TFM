@@ -9673,13 +9673,6 @@ a:focus {
 }
 
 
-.bg-gradient-primary2 {
-  background-color: #1F2041;
-  background-image: linear-gradient(180deg, #4e73df 10%, #224abe 100%);
-  background-size: cover;
-}
-
-
 
 .bg-gradient-secondary {
   background-color: #858796;
@@ -11044,7 +11037,4 @@ body.sidebar-toggled footer.sticky-footer {
 }
 
 
-.bg-img-cover{
-  style='background-image: url("rutas_image.jpg")'
-}
   
