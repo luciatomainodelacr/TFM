@@ -40,45 +40,44 @@ def login():
         next = request.args.get('next', None)
         if next:
             return redirect(url_for('next'))
-        return redirect(url_for('main.index'))
+        return redirect(url_for('index'))
 
     return render_template('login.html')
 
 
-
-
-# 3- Página principal --------------------------------------------
+# 3.- Página index ------------------------------------------------
 #------------------------------------------------------------------
 
-@main.route('/index')
+@main.route('/index', methods = ["GET", "POST"])
 def index():
     return render_template('index.html')
 
 
 
-# 4.- Página prruta (mapa) ----------------------------------------
+# 4.- Página ruta (mapa) ----------------------------------------
 #------------------------------------------------------------------
 
-@main.route('/Route')
+@main.route('/Route', methods = ["GET", "POST"])
 def route():
-    return render_template('ruta_2_puntos_v1.html')
+    return render_template('route.html')
 
 
-
-# 5.- Página signup -----------------------------------------------
+# 5.- Página Rutas Frecuentes -------------------------------------
 #------------------------------------------------------------------
 
-@main.route('/profile')
+@main.route('/rutasFrecuentes')
+def rutasFrecuentes():
+    return 'Rutas Frecuentes'
+
+
+
+# 6.- Página profile -----------------------------------------------
+#------------------------------------------------------------------
+
+@main.route('/profile', methods = ['POST', 'GET'])
 def profile():
     return render_template('profile.html')
 
 
-
-# 5.- Página logout -----------------------------------------------
-#------------------------------------------------------------------
-
-@main.route('/logout')
-def logout():
-    return 'Logout'
 
 
