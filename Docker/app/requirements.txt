@@ -1,0 +1,8 @@
+# This file is used by pip3 to install required python packages
+# Usage: pip3 install -r requirements.txt
+
+# Flask Framework
+Flask==1.1.2
+
+# Flask-SQLAlchemy
+Flask-SQLAlchemy==2.4.4

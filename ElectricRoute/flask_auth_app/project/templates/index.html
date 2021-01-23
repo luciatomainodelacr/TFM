@@ -1,0 +1,57 @@
+{% extends "base_login.html" %}
+
+
+{% block body %}
+
+    
+    <body class="bg-img-cover" style="background-image: url('static/rutas_image_fondo.jpg'); background-size: contain; height: 0px;">
+
+        <div class="container">
+
+          <!-- Outer Row -->
+          <div class="row justify-content-center" >
+
+            <div class="col-xl-6 col-lg-9 col-md-9">
+
+              <div class="card o-hidden border-0 shadow-lg my-5 ">
+
+
+                <div class="card-body p-0">
+                  <!-- Nested Row within Card Body -->
+                  <div class="row justify-content-center" >
+                      <div class="col-lg-9">
+                          <div class="p-5">
+
+                              <!-- Título --> 
+                              <div class="text-center" style = "font-size: 40px; color:#4e73df; margin-botton: 20%;">
+                                <span>Electric Route</span>
+                              </div>
+
+                              <form class="user">
+                                  <!-- Botón Nueva Ruta -->                          
+                                  <a href="Route" class="btn btn-primary btn-user btn-block" style = "font-size: 26px;  margin-top: 15%;">
+                                  <i class="fa fa-map" aria-hidden="true" style = "font-size: 30px; margin-right: 12%"></i>
+                                    Nueva Ruta
+                                  </a>
+
+                                  <!-- Botón Rutas Frecuentes --> 
+                                  <a href="rutasFrecuentes" class="btn btn-primary btn-user btn-block" style = "font-size: 26px;  margin-top: 15%;">
+                                  <i class="fa fa-star" aria-hidden="true" style = "font-size: 30px"></i>
+                                    Rutas Frecuentes
+                                  </a>                     
+                              </form>     
+                            
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+    </body>
+{% endblock %}
+

@@ -22,6 +22,8 @@ Se añaden tres carpetas correspondientes a cada uno de los módulos:
 - Modelo: Contiene los scripts que obtienen los datos mediante csv y/o API, los filtran y analizan y luego los vuelcan a otros ficheros csv. 
   Contiene:
     - Script matriz_distancias_api_google.py -> Importa el fichero de ciudades.csv y calcula mediande la API Google Distance Matrix las distancias entre todas las ciudades. Devuelve un archivo con cuatro columnas Origen, Destino, Distancia en metros, Distancia en km: ciudades_distancia.csv
+    - Script calcular_caminos_entre_puntos.py -> Dadas dos ciudades origen-destino calcula la ruta optima entre ellas, o bien por el numero de nodos minimos necesarios para llegar o bien por el target que se le indique, en este caso, minimizar la distancia total.
+
     - _old:  carpeta que contiene script y dataset que se han utilizado como pruebas para construir procesos pero se han descartado por no ser óptimos.
     - Pruebas_Blanca: contiene script y dataset que se están utilizando para construir procesos pero todavía no están finalizados.
     - Modelo Avanzado: carpeta con scripts sobre la definición de la función objetivo y restricciones
