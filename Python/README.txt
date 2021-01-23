@@ -6,11 +6,13 @@ Se añaden tres carpetas correspondientes a cada uno de los módulos:
   Contiene:
     - Gasolineras: carpeta con scripts referentes a los datos de Gasolineras_de_España.csv. 
       Los scripts son: 
-      1) analize_gas_stations.py -> Importar, limpiar, filtrar y reducir la dimensión (Clustering DBSCAN) de los datos de gasolineras.
+      1) analizar_gasolineras.py -> Importar, limpiar, filtrar y reducir la dimensión (Clustering DBSCAN) de los datos de gasolineras.
     - PuntosRecarga: carpeta con scripts referentes a los datos de los puntos de recarga obtenidos con GoogleMapsAPI. 
       Los scripts son: 
-      1) get_ev_charging_stations_gmapi.py -> Descargar datos de Google Maps Places API para estaciones de recarga en las distintas CCAA.
-      2) merge_ev_charging_stations.py -> Mergear los datos de CCAA en 1 solo y filtrar campos/registros innecesarios/erróneos. Eliminar duplicados y obtención a partir de la dirección la provincia y el código postal de cada punto de recarga
+      1) obtener_puntos_recarga_gmapi.py -> Descargar datos de Google Maps Places API para estaciones de recarga en las distintas CCAA.
+      2) analizar_puntos_recarga.py -> Mergear los datos de CCAA en 1 solo y filtrar campos/registros innecesarios/erróneos;
+                                       Eliminar duplicados y obtención a partir de la dirección la provincia y el código postal de cada punto de recarga;
+                                       Reducir la dimensión (Clustering DBSCAN).
 
     - CochesElectricos: carpeta con scripts referentes a la limpieza de la BBDD de los coches eléctricos
       Los scripts son:

@@ -15,7 +15,6 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 2,
   "links": [],
   "panels": [
     {
@@ -257,15 +256,15 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 11,
-        "w": 24,
+        "h": 15,
+        "w": 12,
         "x": 0,
         "y": 15
       },
       "hideEmpty": false,
       "hideZero": false,
       "id": 4,
-      "initialZoom": "5",
+      "initialZoom": "6",
       "locationData": "table",
       "mapCenter": "custom",
       "mapCenterLatitude": "40",
@@ -273,11 +272,11 @@
       "maxDataPoints": 1,
       "mouseWheelZoom": false,
       "pluginVersion": "7.3.6",
-      "showLegend": true,
+      "showLegend": false,
       "stickyLabels": false,
       "tableQueryOptions": {
         "geohashField": "geohash",
-        "labelField": "",
+        "labelField": "indice",
         "latitudeField": "latitude",
         "longitudeField": "longitude",
         "metricField": "status",
@@ -290,7 +289,7 @@
           "metricColumn": "none",
           "queryType": "randomWalk",
           "rawQuery": true,
-          "rawSql": "SELECT\n  latitude AS latitude,\n  longitude AS longitude,\n  status AS status\nFROM PuntosCarga\nunion\nSELECT\n  latitud AS latitude,\n  longitud AS longitude,\n  status AS status\nFROM GasolinerasPropuesta",
+          "rawSql": "SELECT\n  indice AS indice,\n  latitude AS latitude,\n  longitude AS longitude,\n  status AS status\nFROM PuntosCarga\nunion\nSELECT\n  indice AS indice,\n  latitud AS latitude,\n  longitud AS longitude,\n  status AS status\nFROM GasolinerasPropuesta",
           "refId": "A",
           "select": [
             [
@@ -317,7 +316,7 @@
       "thresholds": "0.9",
       "timeFrom": null,
       "timeShift": null,
-      "title": "Mapa combinado",
+      "title": "Mapa Combinado",
       "transparent": true,
       "type": "grafana-worldmap-panel",
       "unitPlural": "",
@@ -339,5 +338,5 @@
   "timezone": "",
   "title": "Puntos de Recarga",
   "uid": "k5-wBv-Mz",
-  "version": 7
+  "version": 8
 }

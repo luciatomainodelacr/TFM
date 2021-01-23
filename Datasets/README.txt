@@ -12,15 +12,16 @@ Se subdivide en cuatro carpetas, cada una con un tipo de dato:
 - Gasolineras:
   Contiene:
     - Gasolineras_de_España.csv: fichero original (sin acentos en el nombre de los campos)
-    - gas_stations_categorical.txt: fichero txt con información de las variables categóricas del dataset (generado con script TFM/Python/Input/Gasolineras/analize_gas_stations.py)
-    - gasolineras_filt_Espana.csv: fichero con dataset tras limpieza de variables y registros (generado con script TFM/Python/Input/Gasolineras/analize_gas_stations.py).
-    - gasolineras_reduced_Espana.csv: fichero con dataset tras limpieza y reducción de dimensión con clustering DBSCAN (generado con script TFM/Python/Input/Gasolineras/analize_gas_stations.py) -> Este es el fichero que se tiene que utilizar para Gasolineras Propuestas con Puntos de Recarga (820 registros).
+    - gas_stations_categorical.txt: fichero txt con información de las variables categóricas del dataset (generado con script TFM/Python/Input/Gasolineras/analizar_gasolineras.py)
+    - gasolineras_filt_Espana.csv: fichero con dataset tras limpieza de variables y registros (generado con script TFM/Python/Input/Gasolineras/analizar_gasolineras.py).
+    - gasolineras_reduced_Espana.csv: fichero con dataset tras limpieza y reducción de dimensión con clustering DBSCAN (generado con script TFM/Python/Input/Gasolineras/analizar_gasolineras.py) -> Este es el fichero que se tiene que utilizar para Gasolineras Propuestas con Puntos de Recarga (341 registros).
 
 - PuntosRecarga:
   Contiene: 
-    - GoogleMapsAPI: carpeta con ficheros csv con puntos de recarga obtenidos con Google Maps Places API (generado con script TFM/Python/Input/PuntosRecarga/get_ev_charging_stations_gmapi.py y TFM/Python/Input/PuntosRecarga/merge_ev_charging_stations.py) por CCAA y mergeados para toda España. 
+    - GoogleMapsAPI: carpeta con ficheros csv con puntos de recarga obtenidos con Google Maps Places API (generado con script TFM/Python/Input/PuntosRecarga/obtener_puntos_recarga_gmapi.py y TFM/Python/Input/PuntosRecarga/analizar_puntos_recarga.py) por CCAA y mergeados para toda España. 
     - OtrasFuentes: carpeta con ficheros csv con puntos de recarga de distintas CCAA (de momento no se usan).
-    - puntos_carga_filt_Espana.csv: fichero con dataset tras limpieza y mergeo de los datos de GoogleMapsAPI por CCAA (generado con script TFM/Python/Input/PuntosRecarga/merge_ev_charging_stations.py). Se eliminan duplicados y se obtiene la provincia y el código postal para cada uno de los puntos de recarga.
+    - puntos_carga_filt_Espana.csv: fichero con dataset tras limpieza y mergeo de los datos de GoogleMapsAPI por CCAA (generado con script TFM/Python/Input/PuntosRecarga/analizar_puntos_recarga.py). Se eliminan duplicados y se obtiene la provincia y el código postal para cada uno de los puntos de recarga.
+    - puntos_carga_reduced_Espana.csv: fichero con dataset tras limpieza y reducción de dimensión con clustering DBSCAN por CCAA (generado con script TFM/Python/Input/PuntosRecarga/analizar_puntos_recarga.py) -> Este es el fichero que se tiene que utilizar para Puntos de Recarga (353 registros).
 
 - PuntosO_D:
   Contiene:
