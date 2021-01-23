@@ -26,5 +26,8 @@ Se añaden tres carpetas correspondientes a cada uno de los módulos:
 
     - _old:  carpeta que contiene script y dataset que se han utilizado como pruebas para construir procesos pero se han descartado por no ser óptimos.
     - Pruebas_Blanca: contiene script y dataset que se están utilizando para construir procesos pero todavía no están finalizados.
-
+    - Modelo Avanzado: carpeta con scripts sobre la definición de la función objetivo y restricciones
+      Los scripts son: 
+      1) funcion_aux.py: conjuntos de funciones auxiliares
+      2) main.py: prueba de uso de las funciones auxiliares de funcion_aux.py
 - Output
