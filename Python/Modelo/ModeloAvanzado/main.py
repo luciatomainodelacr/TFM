@@ -19,7 +19,7 @@ if __name__ == "__main__":
         # program_type = sys.argv[1]
         # print("The program run is: ",program_name, program_type)
 
-    
+
     d_distancias = {"origen": ["Albacete Tren", "Caceres Tren","Alicante Tren"], "destino": ["Caceres Tren", "Alicante Tren", "Zaragoza Tren"], "distancia": [510.915, 674.844, 490.975]}
     df_distancias = pd.DataFrame(data=d_distancias)
     distancias = df_distancias["distancia"]
