@@ -16,6 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `Ciudades`
+--
+
+DROP TABLE IF EXISTS `Ciudades`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Ciudades` (
+  `indice` int NOT NULL AUTO_INCREMENT,
+  `CAPITAL DE PROVINCIA` text,
+  `ADDRESS` text,
+  `Latitude` double DEFAULT NULL,
+  `Longitude` double DEFAULT NULL,
+  `status` int NOT NULL DEFAULT '1',
+  PRIMARY KEY (`indice`)
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Ciudades`
+--
+
+LOCK TABLES `Ciudades` WRITE;
+/*!40000 ALTER TABLE `Ciudades` DISABLE KEYS */;
+INSERT INTO `Ciudades` VALUES (1,'A Corunia Tren','Estacion de Corunia',43.3525485,-8.4099873,2),(2,'A Corunia Bus','Estacion de Autobuses de Corunia',43.3532682,-8.405151199999999,2),(3,'Albacete Tren','Estacion de Albacete',38.99983020000001,-1.8483506,2),(4,'Albacete Bus','Estacion de Autobuses de Albacete',38.99863970000001,-1.8473699,2),(5,'Alicante Tren','Estacion de Alicante',38.3445234,-0.4949254,2),(6,'Alicante Bus','Estacion de Autobuses de Alicante',38.3375356,-0.4915114,2),(7,'Almeria Tren','Estacion de Almeria',36.8351367,-2.4553867,2),(8,'Avila Tren','Estacion de Avila',40.657255,-4.683312,2),(9,'Avila Bus','Estacion de Autobuses de Avila',40.6591144,-4.682449699999999,2),(10,'Badajoz Tren','Estacion de Badajoz',38.8906934,-6.981752999999999,2),(11,'Badajoz Bus','Estacion de Autobuses de Badajoz',38.8668702,-6.9745487,2),(12,'Barcelona Tren','Estacion de Barcelona',41.3792034,2.1400062,2),(13,'Barcelona Bus','Estacion de Autobuses de Barcelona',41.3947292,2.1826047,2),(14,'Bilbao Tren','Estacion de Bilbao',43.26022409999999,-2.9282161,2),(15,'Bilbao Bus','Estacion de Autobuses de Bilbao',43.260356,-2.9491704,2),(16,'Burgos Tren','Estacion de Burgos',42.371197,-3.666308,2),(17,'Burgos Bus','Estacion de Autobuses de Burgos',42.33827,-3.70127,2),(18,'Caceres Tren','Estacion de Caceres',39.461131,-6.385679,2),(19,'Caceres Bus','Estacion de Autobuses de Caceres',39.45671,-6.3835,2),(20,'Cadiz Tren','Estacion de Cadiz',36.52839549999999,-6.2876058,2),(21,'Cadiz Bus','Estacion de Autobuses de Cadiz',36.5269719,-6.2862034,2),(22,'Castellon Tren','Estacion de Castellon',39.9883311,-0.0522753,2),(23,'Castellon Bus','Estacion de Autobuses de Castellon',39.9893464,-0.0513273,2),(24,'Ciudad Real Tren','Estacion de Ciudad Real',38.9848451,-3.913199499999999,2),(25,'Ciudad Real Bus','Estacion de Autobuses de Ciudad Real',38.979321,-3.929913,2),(26,'Cordoba Tren','Estacion de Cordoba',37.8884888,-4.7895246,2),(27,'Cordoba Bus','Estacion de Autobuses de Cordoba',37.8892024,-4.7895843,2),(28,'Cuenca Tren','Estacion de Cuenca',40.06734,-2.136471,2),(29,'Cuenca Bus','Estacion de Autobuses de Cuenca',40.0668853,-2.1350481,2),(30,'Girona Tren','Estacion de Girona',41.9793477,2.8169214,2),(31,'Girona Bus','Estacion de Autobuses de Girona',41.9790295,2.8154452,2),(32,'Granada Tren','Estacion de Granada',37.184038,-3.609154,2),(33,'Granada Bus','Estacion de Autobuses de Granada',37.199694,-3.613654,2),(34,'Guadalajara Tren','Estacion de Guadalajara',40.6440624,-3.1821188,2),(35,'Guadalajara Bus','Estacion de Autobuses de Guadalajara',40.63636839999999,-3.1732084,2),(36,'Huelva Tren','Estacion de Huelva',37.2530782,-6.9509813,2),(37,'Huelva Bus','Estacion de Autobuses de Huelva',37.2574668,-6.9575692,2),(38,'Huesca Tren','Estacion de Huesca',42.1327339,-0.409677,2),(39,'Huesca Bus','Estacion de Autobuses de Huesca',42.1334312,-0.4094981,2),(40,'Jaen Tren','Estacion de Jaen',37.779827,-3.790798,2),(41,'Jaen Bus','Estacion de Autobuses Jaen',37.771601,-3.786711699999999,2),(42,'Leon Tren','Estacion de Leon',42.5952996,-5.5815331,2),(43,'Leon Bus','Estacion de Autobuses de Leon',42.5933612,-5.5791496,2),(44,'Lerida Tren','Estacion de Lerida',41.6208134,0.6328032,2),(45,'Lerida Bus','Estacion de Autobuses de Lerida',41.6117589,0.6232932999999999,2),(46,'Logrono Tren','Estacion de Logronio',42.4576183,-2.4407417,2),(47,'Logrono Bus','Estacion de Autobuses de Logronio',42.4599594,-2.4446677,2),(48,'Lugo Tren','Estacion de Lugo',43.0150924,-7.5521118,2),(49,'Lugo Bus','Estacion de Autobuses de Lugo',43.0082343,-7.553815200000001,2),(50,'Madrid Tren','Estacion de Madrid',40.4067477,-3.691094,2),(51,'Madrid Bus','Estacion de Autobuses de Madrid',40.3945629,-3.6788053,2),(52,'Malaga Tren','Estacion de Malaga',36.7119472,-4.4319088,2),(53,'Malaga Bus','Estacion de Autobuses de Malaga',36.71293,-4.43405,2),(54,'Murcia Tren','Estacion de Murcia',37.9862619,-1.131522,2),(55,'Murcia Bus','Estacion de Autobuses de Murcia',37.97479,-1.1395042,2),(56,'Ourense Tren','Estacion de Ourense',42.3503961,-7.8728186,2),(57,'Ourense Bus','Estacion de Autobuses de Ourense',42.35241,-7.879200999999998,2),(58,'Oviedo Tren','Estacion de Oviedo',43.366323,-5.854871,2),(59,'Oviedo Bus','Estacion de Autobuses de Oviedo',43.3694984,-5.8507299,2),(60,'Palencia Tren','Estacion de Palencia',42.0156961,-4.5339163,2),(61,'Palencia Bus','Estacion de Autobuses de Palencia',42.016319,-4.5361749,2),(62,'Pamplona Tren','Estacion de Pamplona',42.8249816,-1.6614326,2),(63,'Pamplona Bus','Estacion de Autobuses de Pamplona',42.8120111,-1.6456075,2),(64,'Pontevedra Tren','Estacion de Pontevedra',42.4217656,-8.6358269,2),(65,'Pontevedra Bus','Estacion de Autobuses de Pontevedra',42.4211083,-8.637262999999999,2),(66,'Salamanca Tren','Estacion de Salamanca',40.9721256,-5.648571599999999,2),(67,'Salamanca Bus','Estacion de Autobuses de Salamanca',40.9703117,-5.674898499999999,2),(68,'San Sebastian Tren','Estacion de San Sebastian',43.3175199,-1.9774054,2),(69,'Santander Tren','Estacion de Santander',43.459149,-3.811547,2),(70,'Santander Bus','Estacion de Autobuses de Santander',43.459518,-3.80968,2),(71,'Segovia Tren','Estacion de Segovia',40.9342339,-4.1135259,2),(72,'Segovia Bus','Estacion de Autobuses de Segovia',40.9451164,-4.1219838,2),(73,'Sevilla Tren','Estacion de Sevilla',37.391863,-5.975339,2),(74,'Sevilla Bus','Estacion de Autobuses de Sevilla',37.3918712,-6.003953099999999,2),(75,'Soria Tren','Estacion de Soria',41.754754,-2.476537,2),(76,'Soria Bus','Estacion de Autobuses de Soria',41.7670715,-2.4793088,2),(77,'Tarragona Tren','Estacion de Tarragona',41.1115805,1.2531168,2),(78,'Tarragona Bus','Estacion de Autobuses de Tarragona',41.1182497,1.2442946,2),(79,'Teruel Tren','Estacion de Teruel',40.341817,-1.1044234,2),(80,'Teruel Bus','Estacion de Autobuses de Teruel',40.341817,-1.1044234,2),(81,'Toledo Tren','Estacion de Toledo',39.8623634,-4.011188499999999,2),(82,'Toledo Bus','Estacion de Autobuses de Toledo',39.8658304,-4.020387599999999,2),(83,'Valencia Tren','Estacion de Valencia',39.4594932,-0.3824848,2),(84,'Valencia Bus','Estacion de Autobuses de Valencia',39.480658,-0.3872928,2),(85,'Valladolid Tren','Estacion de Valladolid',41.642055,-4.7269042,2),(86,'Valladolid Bus','Estacion de Autobuses de Valladolid',41.6414043,-4.7321896,2),(87,'Vitoria Tren','Estacion de Vitoria',42.8415153,-2.6726526,2),(88,'Vitoria Bus','Estacion de Autobuses de Vitoria',42.85911,-2.68441,2),(89,'Zamora Tren','Estacion de Zamora',41.5018964,-5.7511788,2),(90,'Zamora Bus','Estacion de Autobuses de Zamora',41.5139361,-5.739047800000001,2),(91,'Zaragoza Tren','Estacion de Zaragoza',41.65869379999999,-0.9112260000000001,2),(92,'Zaragoza Bus','Estacion de Autobuses de Zaragoza',41.65940579999999,-0.9112306,2);
+/*!40000 ALTER TABLE `Ciudades` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `GasolinerasPropuesta`
 --
 
@@ -89,4 +117,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-01-23 16:41:05
+-- Dump completed on 2021-01-23 19:08:52
