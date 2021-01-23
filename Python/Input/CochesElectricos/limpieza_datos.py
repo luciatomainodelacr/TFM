@@ -4,7 +4,7 @@ import os # para acceder a la consola de python
 # Importo el csv que contiene los datos de coches electricos mas limpios
 import numpy as np
 import pandas as pd
-df= pd.read_csv('/home/tfm/Documentos/TFM/Datasets/ElectricCarData_Clean.csv', sep=',', encoding='unicode_escape', header=0)
+df= pd.read_csv('/home/tfm/Documentos/TFM/Datasets/CochesElectricos/coches electricos/ElectricCarData_Clean.csv', sep=',', encoding='unicode_escape', header=0)
 type(df) # compruebo que sea dataFrame
 
 # Comprobamos columnas y valores
