@@ -27,14 +27,33 @@ from itertools import tee
 
 
 # Se establece el diretorio base
-os.chdir('/home/tfm/Documentos/TFM/Datasets/PuntosO_D/GeocodingAPI')
+os.chdir('/home/tfm/Documentos/TFM/Datasets/')
 
 
 
 # 1.- Carga de inputs ---------------------------------------------
 #------------------------------------------------------------------
 
-df_ciudades = pd.read_csv(os.path.join(os.getcwd(),'ciudades.csv'), sep = ',', encoding = 'iso-8859-1', decimal = '.')
+# Ciudades
+df_ciudades = pd.read_csv(os.path.join(os.getcwd(),'PuntosO_D/GeocodingAPI/ciudades.csv'), sep = ',', encoding = 'iso-8859-1', decimal = '.')
+
+# Puntos de recarga
+df_ptos_recarga = pd.read_csv(os.path.join(os.getcwd(),'PuntosRecarga/puntos_carga_reduced_Espana.csv'), sep = ',', encoding = 'iso-8859-1', decimal = '.')
+
+# Gasolineras
+df_gasolineras = pd.read_csv(os.path.join(os.getcwd(),'Gasolineras/gasolineras_reduced_Espana.csv'), sep = ',', encoding = 'iso-8859-1', decimal = '.')
+
+
+
+# 2.- Apendizar los tres dataframes -------------------------------
+#------------------------------------------------------------------
+
+# Selección de columnas
+df_ciudades.columns
+df_ptos_recarga.columns
+df_gasolineras.columns
+
+
 
 # Backup 
 df = df_ciudades
