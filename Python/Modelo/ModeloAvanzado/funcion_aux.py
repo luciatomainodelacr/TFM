@@ -1,4 +1,5 @@
 #Importar librerias
+import pandas as pd
 
 #FUNCIONES
 
@@ -81,7 +82,10 @@ def restriccion_autonomia(distancias, autonomia_coche):
             restriccion_autonomia.append(True)
         else:
             restriccion_autonomia.append(False)
-    return restriccion_autonomia
+    column_names = ["Restr_aut"]
+    restriccion_autonomia_df = pd.DataFrame(columns = column_names)
+    restriccion_autonomia_df["Restr_aut"] = restriccion_autonomia
+    return restriccion_autonomia_df
 
 
 
@@ -92,6 +96,9 @@ def restriccion_primera_parada(distancias, carga_inicial, autonomia_coche):
         restriccion_primera_parada.append(True)
     else:
         restriccion_primera_parada.append(False)
+    column_names = ["Restr_prim_par"]
+    restriccion_autonomia_df = pd.DataFrame(columns = column_names)
+    restriccion_autonomia_df["Restr_prim_par"] = restriccion_autonomia
     return restriccion_primera_parada
 
 
@@ -102,6 +109,9 @@ def restriccion_ultima_parada(distancias, carga_final, autonomia_coche):
         restriccion_ultima_parada.append(True)
     else:
         restriccion_ultima_parada.append(False)
+    column_names = ["Restr_ult_par"]
+    restriccion_autonomia_df = pd.DataFrame(columns = column_names)
+    restriccion_autonomia_df["Restr_ult_par"] = restriccion_autonomia
     return restriccion_ultima_parada
 
 
