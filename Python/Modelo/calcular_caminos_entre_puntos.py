@@ -99,108 +99,151 @@ def get_shortest_path(DiGraph, origen, destino):
 
 #MAIN
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("ERROR: This program needs at least 2 parameters: program_name program_type")
+    if len(sys.argv) != 8:
+        print("ERROR: Este programa necesita 8 parametros: nombre_programa tipo_programa marca_coche modelo_coche origen destino carga_inicial carga_final")
         sys.exit(1)
     else:
         print("The number of arguments is ", len(sys.argv))
         program_name = sys.argv[0]
-        # program type can be: "ALL"
+        # program type can be: "DB, CSV"
         program_type = sys.argv[1]
-        print("The program run is: ",program_name, program_type)
+        car_brand = sys.argv[2]
+        car_model = sys.argv[3]
+        origin = sys.argv[4]
+        destination = sys.argv[5]
+        initial_charge = float(sys.argv[6])
+        final_charge = float(sys.argv[7])
+        print("El programa lanzado es: ",program_name, program_type, car_brand, car_model, origin, destination, initial_charge, final_charge)
 
-    # 1.- Carga de inputs ---------------------------------------------
-    #------------------------------------------------------------------
-    #Crear conexión a la base de datos 
-    con = mysql.connector.connect(host="localhost",
-                                  port=3306,            
-                                  user="root",            
-                                  password="root",        
-                                  database="tfm")
-    
-    cur = con.cursor()
-    sql_query = "SELECT * FROM Ciudades_distancia"
-    cur.execute(sql_query)
-    df_distancias_db = pd.DataFrame(cur.fetchall(), columns = ["Origen","Destino","Distance_m"])
-    sql_query = "SELECT * FROM Ciudades"
-    cur.execute(sql_query)
-    df_ciudades_db = pd.DataFrame(cur.fetchall(), columns = ["indice","CAPITAL DE PROVINCIA","ADDRESS","Latitude","Longitude","status"])
+    try:
+        # 1.- Carga de inputs ---------------------------------------------
+        #------------------------------------------------------------------
+        if program_type == "DB":
+            #Crear conexión a la base de datos 
+            con = mysql.connector.connect(host="localhost",
+                                        port=3306,            
+                                        user="root",            
+                                        password="root",        
+                                        database="tfm")
 
-    con.close()
+            cur = con.cursor()
+            sql_query = "SELECT * FROM Ciudades_distancia"
+            cur.execute(sql_query)
+            df_distancias = pd.DataFrame(cur.fetchall(), columns = ["Origen","Destino","Distance_m"])
 
-    df_ciudades_db.drop("indice",axis="columns", inplace=True)
-    df_ciudades_db.drop("CAPITAL DE PROVINCIA",axis="columns", inplace=True)
-    df_ciudades_db.drop("status",axis="columns", inplace=True)
-    df_distancias_db["Distance_km"] = df_distancias_db["Distance_m"]/1000 # Pasar de m a km
+            sql_query = "SELECT * FROM Ciudades"
+            cur.execute(sql_query)
+            df_ciudades = pd.DataFrame(cur.fetchall(), columns = ["indice","CAPITAL DE PROVINCIA","ADDRESS","Latitude","Longitude","status"])
 
-    # Importar desde fichero 
-    # Se establece el diretorio base
-    os.chdir('/home/tfm/Documentos/TFM/Datasets/PuntosO_D/GeocodingAPI')
-    df_ciudades = pd.read_csv(os.path.join(os.getcwd(),'ciudades.csv'), sep = ',', encoding = 'iso-8859-1', decimal = '.')
-    df_ciudades.set_index(["CAPITAL DE PROVINCIA"], inplace=True)
-    df_ciudades.drop("COORDENADAS",axis="columns", inplace=True)
+            sql_query = "SELECT * FROM ElectricCar WHERE BRAND = %s AND MODEL = %s"
+            arg = (car_brand,car_model)
+            cur.execute(sql_query, arg)
+            df_electricar = pd.DataFrame(cur.fetchall(), columns = ["BRAND","MODEL","RANGE_KM","EFFICIENCY_WHKM","FASTCHARGE_KMH","RAPIDCHARGE","PLUGTYPE", "BATTERY_CAPACITY"])
 
-    df_distancias = pd.read_csv(os.path.join(os.getcwd(),'ciudades_distancia.csv'), sep = ';', encoding = 'iso-8859-1', decimal = '.')
+            # sql_query = "SELECT * FROM PuntosCarga"
+            # cur.execute(sql_query, arg)
+            # df_puntoscarga = pd.DataFrame(cur.fetchall(), columns = ["indice","name","formatted_address","latitude","longitude","province","status"])
 
-    # La columna de km no está bien del todo. La borramos y la generamos en funcion de la que está en metros (Distance_m)
-    df_distancias.drop("Distance_km",axis="columns", inplace=True)
-    df_distancias["Distance_km"] = df_distancias["Distance_m"]/1000 # Pasar de m a km
-    
-    print(df_distancias_db.equals(df_ciudades))
-    print(df_ciudades_db.equals(df_distancias))
+            con.close()
 
-    # Filtrar el df_distancias con las restricciones del Modelo Avanzado
-    # a) Restricción de autonomía
-    autonomia_coche = 200 #km
-    restricciones_autonomia = fa.restriccion_autonomia(df_distancias["Distance_km"],autonomia_coche)
-    df_distancias_merged = pd.merge(df_distancias, restricciones_autonomia, left_index=True, right_index=True)
-    # b) Otras restricciones
-    # Se genera el dataframe reducido que cumple con todas las restricciones
-    df_distancias_reduced = df_distancias_merged[df_distancias_merged["Restr_aut"] == True]
+            df_ciudades.set_index(["CAPITAL DE PROVINCIA"], inplace=True)
+            df_ciudades.drop("indice",axis="columns", inplace=True)
+            df_ciudades.drop("status",axis="columns", inplace=True)
 
-    print("df_distancias", df_distancias.shape)
-    print("df_distancias_reduced", df_distancias_reduced.shape)
-    # Backup 
-    df = df_distancias_reduced
-    df
+            df_distancias["Distance_km"] = df_distancias["Distance_m"]/1000 # Pasar de m a km
 
-    # 2.- Grafo -------------------------------------------------------
-    #------------------------------------------------------------------
+        elif program_type == "CSV":
+            # Importar desde fichero 
+            # Se establece el diretorio base
+            os.chdir('/home/tfm/Documentos/TFM/Datasets/PuntosO_D/GeocodingAPI')
+            df_ciudades = pd.read_csv(os.path.join(os.getcwd(),'ciudades.csv'), sep = ',', encoding = 'iso-8859-1', decimal = '.')
+            df_ciudades.set_index(["CAPITAL DE PROVINCIA"], inplace=True)
+            df_ciudades.drop("COORDENADAS",axis="columns", inplace=True)
 
-    # Construir el grafo
-    DG = nx.DiGraph()
+            df_distancias = pd.read_csv(os.path.join(os.getcwd(),'ciudades_distancia.csv'), sep = ';', encoding = 'iso-8859-1', decimal = '.')
+            # La columna de km no está bien del todo. La borramos y la generamos en funcion de la que está en metros (Distance_m)
+            df_distancias.drop("Distance_km",axis="columns", inplace=True)
+            df_distancias["Distance_km"] = df_distancias["Distance_m"]/1000 # Pasar de m a km
 
-    for row in df.iterrows():
-        DG.add_edge(row[1]["Origen"],
-                    row[1]["Destino"],
-                    distance = row[1]["Distance_km"])
+            df_electricar = pd.read_csv('/home/tfm/Documentos/TFM/Datasets/CochesElectricos/coches electricos/electricCar_limpio.csv', sep = ',', encoding = 'iso-8859-1', decimal = '.')
+            df_electricar = df_electricar[(df_electricar["BRAND"]==car_brand)&(df_electricar["MODEL"]==car_model)]
 
-    # Ver los nodos
-    DG.nodes(data = True)
+        # Filtrar el df_distancias con las restricciones del Modelo Avanzado
 
-    # 3.- Calculo rutas optimas ---------------------------------------
-    #------------------------------------------------------------------
+        # a) Restricción de autonomía
+        autonomia_coche = int(df_electricar["RANGE_KM"]) #km
+        restricciones_autonomia = fa.restriccion_autonomia(df_distancias,autonomia_coche)
+        # b) Restricción de primera parada
+        df_distancias_origen = df_distancias[df_distancias["Origen"]==origin]
+        restricciones_prim_par = fa.restriccion_primera_parada(df_distancias_origen,initial_charge,autonomia_coche)
+        # c) Restricción de última parada
+        df_distancias_destino = df_distancias[df_distancias["Destino"]==destination]
+        restricciones_ult_par = fa.restriccion_ultima_parada(df_distancias_destino,final_charge,autonomia_coche)
+        # Se genera el dataframe reducido que cumple con todas las restricciones
+        df_distancias_merged_1 = pd.merge(df_distancias, restricciones_autonomia, on=['Origen', 'Destino'], how='outer')
+        df_distancias_merged_2 = pd.merge(df_distancias_merged_1, restricciones_prim_par, on=['Origen', 'Destino'], how='outer')
+        df_distancias_merged = pd.merge(df_distancias_merged_2, restricciones_ult_par, on=['Origen', 'Destino'], how='outer')
+        #TODO: Hacer esto de manera limpia y no con esta guarreria :)
+        df_distancias_merged = df_distancias_merged.fillna(True)
+        df_distancias_reduced = df_distancias_merged[(df_distancias_merged["Restr_aut"] == True)&(df_distancias_merged["Restr_prim_par"] == True)&
+                                                     (df_distancias_merged["Restr_ult_par"] == True)]
 
-    """
-    weight = None --> Busca el camino mas corto en nº de nodos
-    weight = "distance" --> Busca el camino mas corto segun la distancia
-    """
+        print("df_distancias", df_distancias.shape)
+        print("df_distancias_reduced", df_distancias_reduced.shape)
 
-    # Encuentra todas las rutas entre dos puntos
-    #list(nx.all_shortest_paths(DG, source = "Zaragoza Tren", target = "Zamora Bus", weight = None))
+        # Calcular funcion objetivo
+        # velocidad = 100 #km/h
+        # for index, puntos_carga in df_puntoscarga.iterrows():
+        #     numero_conectores_pc = 1
+        #     carga = 1
+        #     df_distancias_reduced_or = df_distancias_reduced[df_distancias_reduced["Origen"]==puntos_carga["name"]]
+        #     df_distancias_reduced_dest = df_distancias_reduced[df_distancias_reduced["Destino"]==puntos_carga["name"]]
+        #     df_distancias_puntos_carga = pd.concat([df_distancias_reduced_or,df_distancias_reduced_dest])
+        #     for index, distancia_puntos_carga in df_distancias_puntos_carga.iterrows():
+        #         df_tiempos[puntos_carga["name"]] = fa.funcion_objetivo_tiempo(distancia_puntos_carga["Distance_km"],velocidad,carga,numero_conectores_pc)
+        # Backup 
+        df = df_distancias_reduced
+        df
 
-    # Dijkstra - Encuentra la ruta con menor distancia
-    #list(nx.dijkstra_path(DG, source = "Zaragoza Tren", target = "Zamora Bus", weight = "distance"))
+        # 2.- Grafo -------------------------------------------------------
+        #------------------------------------------------------------------
 
-    # A* - Encuentra la ruta con menor distancia (Mas optimo que Dijstra)
-    #list(nx.astar_path(DG, ("Zaragoza Tren"), ("Zamora Bus"), weight = "distance"))
+        # Construir el grafo
+        DG = nx.DiGraph()
 
-    # Se pasa como argumento la ruta obtenida
-    #show_path(['Zaragoza Tren', 'Soria Bus', 'Zamora Bus'])
-    #get_all_shortest_paths(DG, 'Zaragoza Tren', 'Zamora Bus')
+        for row in df.iterrows():
+            DG.add_edge(row[1]["Origen"],
+                        row[1]["Destino"],
+                        distance = row[1]["Distance_km"])
 
-    # Ejemplos
-    get_shortest_path(DG, origen = "Zaragoza Tren", destino = "Zamora Bus")
-    #get_all_shortest_paths(DG, origen = "Alicante Tren", destino = "A Corunia Bus")
-    get_shortest_path(DG, origen = "Alicante Tren", destino = "A Corunia Bus")
+        # Ver los nodos
+        DG.nodes(data = True)
+
+        # 3.- Calculo rutas optimas ---------------------------------------
+        #------------------------------------------------------------------
+
+        """
+        weight = None --> Busca el camino mas corto en nº de nodos
+        weight = "distance" --> Busca el camino mas corto segun la distancia
+        """
+
+        # Encuentra todas las rutas entre dos puntos
+        #list(nx.all_shortest_paths(DG, source = "Zaragoza Tren", target = "Zamora Bus", weight = None))
+
+        # Dijkstra - Encuentra la ruta con menor distancia
+        #list(nx.dijkstra_path(DG, source = "Zaragoza Tren", target = "Zamora Bus", weight = "distance"))
+
+        # A* - Encuentra la ruta con menor distancia (Mas optimo que Dijstra)
+        #list(nx.astar_path(DG, ("Zaragoza Tren"), ("Zamora Bus"), weight = "distance"))
+
+        # Se pasa como argumento la ruta obtenida
+        #show_path(['Zaragoza Tren', 'Soria Bus', 'Zamora Bus'])
+        #get_all_shortest_paths(DG, 'Zaragoza Tren', 'Zamora Bus')
+
+        # Ejemplos
+        #get_shortest_path(DG, origen = "Zaragoza Tren", destino = "Zamora Bus")
+        #get_all_shortest_paths(DG, origen = "Alicante Tren", destino = "A Corunia Bus")
+        get_shortest_path(DG, origen = origin, destino = destination)
+    except:
+        print("El programa no ha podido obtener una ruta")
 
