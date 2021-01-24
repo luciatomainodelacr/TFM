@@ -36,9 +36,6 @@ for i in df.columns.tolist():
         print(f"\n\n LA TABLA DE FRECUENCIA DE {i} es: \n\n {df[i].value_counts()}")
 print()
 
-# Cuando se habla de conector Chademo, no veo que se diferencie entre tipo 1 y tipo 2 (mennekes). La unica diferencia entre
-# Tipo1 y Tipo2 es que el Tipo2 admite una conexion trifasica. Por este motivo, recategorizo en una sola categoria.
-
 
 
 # DISTINTOS VALORES EN CADA VARIABLE (detectar missing)
@@ -53,69 +50,81 @@ df.filter(like='na', axis=0)
 df.filter(like= 'NA', axis=0)
 df.filter(like='nan', axis=0)
 
-# TRATAMIENTO VALORES MISSING
+########################## TRATAMIENTO VALORES MISSING ########################################
+
 df.isnull().sum() #existen 5 valores ausentes en todo el dataframe. Todos estan en "FastCharge"
-
-# EL procedimiento a seguir radica en:
-# 1) comparar la fila que presente NA con el resto de filas del dataframe (2 a 2) y seleccionar 
-# aquellas que tengan mayor numero de elementos en comun con dicha fila.
+# Podemos optar por imputar esos valores o ponerlos a cero, segun la interpretacion
 
 
 
-# BUCLE PARA IR RECORRIENDO TODAS LAS FILAS Y COMPARANDO
+# PROCEDIMIENTO PARA IMPUTAR LOS VALORES AUSENTES DE FASTCHARGE
 
-# EL problema es que los set no siguen un orden y, por tanto, hay valores que son coincidentes
-# pero que corresponden a distintas variables
+'''EL procedimiento a seguir radica en:
+1) comparar la fila que presente NA con el resto de filas del dataframe (2 a 2) y seleccionar 
+aquellas que tengan mayor numero de elementos en comun con dicha fila.
 
-# Sin embargo, nos sirve para comparar de una manera inmediata los rasgos de los 5 coches que
-# presentan la variable FastCharge ausente
+BUCLE PARA IR RECORRIENDO TODAS LAS FILAS Y COMPARANDO
 
-for i in list(range(103)):
-    fila1=set(list(df.iloc[57]))
-    fila2=set(list(df.iloc[i]))
-    final= fila1 & fila2
-    if len(final) > 3 :
-        print(f"Fila {i}")
-        print("hay {} elementos coincidentes".format(len(final)))
-        print(f" Los valores son: {final} \n")
-print()
+EL problema es que los set no siguen un orden y, por tanto, hay valores que son coincidentes
+pero que corresponden a distintas variables
+
+Sin embargo, nos sirve para comparar de una manera inmediata los rasgos de los 5 coches que
+presentan la variable FastCharge ausente'''
+
+# for i in list(range(103)):
+#     fila1=set(list(df.iloc[57]))
+#     fila2=set(list(df.iloc[i]))
+#     final= fila1 & fila2
+#     if len(final) > 3 :
+#         print(f"Fila {i}")
+#         print("hay {} elementos coincidentes".format(len(final)))
+#         print(f" Los valores son: {final} \n")
+# print()
 
 # Filtrar todos los coches entre 130 y 200 de autonomia porque parece que van a ser los mas
 # parecidos al Renault y los Smart (comprobar)
-filtroAutonomia= df[(df.Range_Km >=130) & (df.Range_Km<=200)] 
-filtroAutonomia
-type(filtroAutonomia) # se trata de un dataframe
+# filtroAutonomia= df[(df.Range_Km >=130) & (df.Range_Km<=200)] 
+# filtroAutonomia
+# type(filtroAutonomia) # se trata de un dataframe
 
-# Dentro de "filtroAutonomia" aparecen los 2 Renault con NA. ELiminamos aquellas filas donde
-# la marca sea Renault.
-subfiltroAutonomia= filtroAutonomia[filtroAutonomia.Brand.str.contains("Renault")].index
-filtroAutonomia= filtroAutonomia.drop(subfiltroAutonomia)
-filtroAutonomia
+# # Dentro de "filtroAutonomia" aparecen los 2 Renault con NA. ELiminamos aquellas filas donde
+# # la marca sea Renault.
+# subfiltroAutonomia= filtroAutonomia[filtroAutonomia.Brand.str.contains("Renault")].index
+# filtroAutonomia= filtroAutonomia.drop(subfiltroAutonomia)
+# filtroAutonomia
 
-filtroAutonomia['FastCharge_KmH']= pd.to_numeric(filtroAutonomia['FastCharge_KmH'])
-filtroAutonomia['FastCharge_KmH']= filtroAutonomia['FastCharge_KmH'].astype('Int64') # Convertimos la serie de float a enteros
-filtroAutonomia['FastCharge_KmH'].dtype
+# filtroAutonomia['FastCharge_KmH']= pd.to_numeric(filtroAutonomia['FastCharge_KmH'])
+# filtroAutonomia['FastCharge_KmH']= filtroAutonomia['FastCharge_KmH'].astype('Int64') # Convertimos la serie de float a enteros
+# filtroAutonomia['FastCharge_KmH'].dtype
 
-# 2) elegir de manera aleatoria el FastCharge de entre esas filas similares
-import random
+# # 2) elegir de manera aleatoria el FastCharge de entre esas filas similares
+# import random
 
-# FORMA 1
-x = float("nan")
-df['FastCharge_KmH'] = df['FastCharge_KmH'].apply(lambda x: random.choice(filtroAutonomia["FastCharge_KmH"].tolist()) if pd.isna(x) == True else x)
+# # FORMA 1
+# x = float("nan")
+# df['FastCharge_KmH'] = df['FastCharge_KmH'].apply(lambda x: random.choice(filtroAutonomia["FastCharge_KmH"].tolist()) if pd.isna(x) == True else x)
 
-# FORMA 2
-while(any(df.FastCharge_KmH == 'NA' is True)):
-    df['FastCharge_KmH'] = df['FastCharge_KmH'] .fillna(random.choice(filtroAutonomia["FastCharge_KmH"].tolist())) 
+# # Comprobamos que se han rellenado aleatoriamente los 5 missing presentes en el dataframe 'df'
 
-# Comprobamos que se han rellenado aleatoriamente los 5 missing presentes en el dataframe 'df'
+# for i in [57,68,77,82,91]:
+#     a= df.iloc[i]
+#     print(a)
+# print()
 
+# # En resumen, imputar aleatoriamente el FastCharge ausente tomando como muestra los coches
+# # con caracteristicas similares.
+
+
+
+''' ASIGNAR EL VALOR '0' A LOS 5 VALORES AUSENTES PUESTO QUE QUIERE DECIR QUE ESOS 5 COCHES NO 
+PRESENTAN OPCION A FASTCHARGE'''
+
+df = df.fillna(0)
+df.isnull().sum() # comprobamos que se han asignado correctamente 
 for i in [57,68,77,82,91]:
     a= df.iloc[i]
     print(a)
 print()
-
-# En resumen, imputar aleatoriamente el FastCharge ausente tomando como muestra los coches
-# con caracteristicas similares.
 
 
 
@@ -129,6 +138,10 @@ df.Model = df.Model.str.replace('!', '')
 df.Model = df.Model.str.replace('+', '') 
 df.Model = df.Model.str.replace('.', '') 
 
+string_columns = ["Brand","Model","RapidCharge","PlugType"]
+for column in string_columns:
+    df[column] = df[column].str.strip()
+
 # Convertir todos los campos de variables categoricas a mayusculas
 for i in df.columns.tolist():
     if df[i].dtype == 'object':
@@ -140,11 +153,36 @@ df
 df.columns = df.columns.str.upper()
 
 
+''' *****************Estrucuturas los tipos de conectores en listas********************'''
+
+'''LOS DISTINTOS VALORES DE PLUGTYPE son: ['TYPE 2 CCS' 'TYPE 2 CHADEMO' 'TYPE 2' 'TYPE 1 CHADEMO']'''
+
+df['PLUGTYPE'] = df['PLUGTYPE'].replace({'TYPE 2':'TYPE2'})
+df['PLUGTYPE'] = df['PLUGTYPE'].replace({'TYPE 2 CCS':'TYPE2,CCS'})
+df['PLUGTYPE'] = df['PLUGTYPE'].replace({'TYPE 2 CHADEMO':'TYPE2,CHADEMO'})
+df['PLUGTYPE'] = df['PLUGTYPE'].replace({'TYPE 1 CHADEMO':'TYPE1,CHADEMO'})
+
+df.PLUGTYPE.values[0][1] # acceder a cada elemento de la lista
+
+# Funcion para convertir un string separado por comas en elementos de una lista
+def convertir(string):
+    li = list(string.split(","))
+    return li
+
+# Mapeamos cada elemento de la columna aplicando la funcion convertir
+df.PLUGTYPE = list(map(convertir, df.PLUGTYPE.values.tolist()))
+
+
+
+
 # ELIMINACION VARIABLES NO IMPORTANTES
 df = df.drop(['PRICEEURO'], axis = 1)
 df = df.drop(['SEGMENT'], axis = 1)
 df = df.drop(['POWERTRAIN'], axis = 1)
 df = df.drop(['ACCELSEC'], axis = 1)
+df = df.drop(['TOPSPEED_KMH'], axis = 1)
+df = df.drop(['BODYSTYLE'], axis = 1)
+df = df.drop(['SEATS'], axis = 1)
 
 
 df.columns
@@ -153,4 +191,18 @@ df.columns
 
 ########################## 3.CREACION DE VARIABLES NUEVAS ###################################
 
+''' Creamos la variable CAPACIDAD DE LA BATERIA como producto de la autonomia del coche y el 
+    consumo del mismo. 
+    
+    Las unidades son: (km * Wh) / km --> Wh 
+                      
+    Wh/1000 --> kWH '''
+
+
+df['BATTERY_CAPACITY'] = df['RANGE_KM'] * df['EFFICIENCY_WHKM'] / 1000
+
+
+
+# Finalmente escribimos el dataframe en un csv
+df.to_csv('/home/tfm/Documentos/TFM/Datasets/CochesElectricos/coches electricos/electricCar_limpio.csv', index=False)
 

@@ -109,3 +109,13 @@ sudo pip3 install pulp
 
 - Boto3
 sudo pip3 install boto3
+
+- Networkx
+sudo pip3 install networkx
+
+- PyMySQL
+import pymysql
+
+- MySQL
+sudo pip3 install mysql
+sudo pip3 install mysql-connector-python
