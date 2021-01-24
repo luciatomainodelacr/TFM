@@ -66,9 +66,13 @@ df_ciudades = df_ciudades.append(df_gasolineras)
 
 
 # Backup 
-df = df_ciudades
-df_aux = df_ciudades
+df = df_ptos_recarga.append(df_gasolineras)
+# df_aux = df
 df
+
+
+
+df_aux = pd.read_csv(os.path.join(os.getcwd(),'puntos_kk.csv'), sep = ',', encoding = 'iso-8859-1', decimal = '.')
 
 # Elimamos duplicados (comprobación)
 df.drop_duplicates()
@@ -123,22 +127,23 @@ for (i1_aux, row1_aux), (i2_aux, row2_aux) in pairwise(df_aux.iterrows()):
             LongDest = row1['Longitude']
             ciudad_dest = row1['id']
             destination = (LatDest,LongDest)
-                        
-            # Se llama a la funcion distance_matrix de google
-            result_distance = gmaps.distance_matrix(origins, destination, mode='driving')["rows"][0]["elements"][0]["distance"]["value"]
-            result_time_s = gmaps.distance_matrix(origins, destination, mode='driving')["rows"][0]["elements"][0]["duration"]["value"]
-      
-            # Se apendiza el resultado a la lista de distancias
-            list_distancia.append(result_distance)
-            list_duracion.append(result_time_s)
-            list_origen.append(ciudad_ori)
-            list_destino.append(ciudad_dest)
+            
+            if (ciudad_ori != ciudad_dest):
+                
+                # Se llama a la funcion distance_matrix de google
+                result_distance = gmaps.distance_matrix(origins, destination, mode='driving')["rows"][0]["elements"][0]["distance"]["value"]
+                result_time_s = gmaps.distance_matrix(origins, destination, mode='driving')["rows"][0]["elements"][0]["duration"]["value"]
+                
+                # Se apendiza el resultado a la lista de distancias
+                list_distancia.append(result_distance)
+                list_duracion.append(result_time_s)
+                list_origen.append(ciudad_ori)
+                list_destino.append(ciudad_dest)
 
 
 
 # 4.- Dataframe Distancias ----------------------------------------
 #------------------------------------------------------------------
-
 
 # Se elimina el primer elemento de la lista de distancias (inicializada con 0)
 list_distancia.remove(0)
@@ -159,9 +164,9 @@ df_distancias['Duracion_min'] = df_distancias['Duracion_seg']/60
 # 5.- Output ------------------------------------------------------
 #------------------------------------------------------------------
 
-df_distancias.to_csv('/home/tfm/Documentos/TFM/Datasets/matriz_distancia.csv', sep = ";", index = False)
+df_distancias.to_csv('/home/tfm/Documentos/TFM/Datasets/Matriz_Distancias/matriz_distancia_v2.csv', sep = ";", index = False)
 
 
-df.to_csv('/home/tfm/Documentos/TFM/Datasets/matriz_distancia_input.csv', sep = ";", index = False)
+df.to_csv('/home/tfm/Documentos/TFM/Datasets/Matriz_Distancias/matriz_distancia_input.csv', sep = ";", index = False)
 
 
