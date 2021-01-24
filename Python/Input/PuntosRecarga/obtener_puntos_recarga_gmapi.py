@@ -7,7 +7,6 @@ import os
 
 gmaps = googlemaps.Client(key='Your API Key')
 
-#Request place text search
 comunidades = ["Aragon","Andalucia","Asturias","Islas Baleares","Canarias",
                "Cantabria","Castilla-La Mancha","Castilla y Leon",
                 "Cataluña","Comunidad Valenciana","Extremadura",

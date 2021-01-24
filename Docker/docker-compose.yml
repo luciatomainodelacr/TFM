@@ -10,6 +10,7 @@ services:
       - 5000:5000
     networks:
       - monitoring
+    restart: always
   grafana:
     image: grafana/grafana:latest
     container_name: monitoring_grafana

@@ -147,7 +147,7 @@ def clustering_dbscan(df_filt):
     coords = df_filt[["latitud", "longitud"]].values
     kms_per_radian = 6371.0088
     epsilon = 5 / kms_per_radian
-    db = DBSCAN(eps=epsilon, min_samples=2, algorithm="ball_tree", metric="haversine").fit(np.radians(coords))
+    db = DBSCAN(eps=epsilon, min_samples=4, algorithm="ball_tree", metric="haversine").fit(np.radians(coords))
     cluster_labels = db.labels_
     num_clusters = len(set(cluster_labels))
     clusters = pd.Series([coords[cluster_labels == n] for n in range(num_clusters-1)])
