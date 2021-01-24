@@ -19,7 +19,7 @@ from shapely.geometry import MultiPoint
 # Desactivar warnings
 pd.options.mode.chained_assignment = None  # default='warn'
 
-#FUNCTIONS
+#FUNCIONES
 def extraer_provincia(lugares, formatted_address):
     x = ''
     for j in lugares:

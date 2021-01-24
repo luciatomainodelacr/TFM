@@ -25,7 +25,14 @@ Se añaden tres carpetas correspondientes a cada uno de los módulos:
   Contiene:
     - Script matriz_distancias_api_google.py -> Importa el fichero de ciudades.csv y calcula mediande la API Google Distance Matrix las distancias entre todas las ciudades. Devuelve un archivo con cuatro columnas Origen, Destino, Distancia en metros, Distancia en km: ciudades_distancia.csv
     - Script calcular_caminos_entre_puntos.py -> Dadas dos ciudades origen-destino calcula la ruta optima entre ellas, o bien por el numero de nodos minimos necesarios para llegar o bien por el target que se le indique, en este caso, minimizar la distancia total.
-
+                                                  Para lanzar el script hay que pasarle 3 parámetros obligatorios:
+                                                  1) "DB" o "CSV", dependiendo de si se quiero llamar a la base de datos o importarlos desde los ficheros csv
+                                                  2) Marca del Coche, que tiene que cumplir con lo que hay en el csv "electricCar_limpio.csv"
+                                                  3) Modelo del Coche, que tiene que cumplir con lo que hay en el csv "electricCar_limpio.csv"
+                                                  4) Origen, que tiene que cumplir con lo que hay en el csv "ciudades.csv"
+                                                  5) Destino, que tiene que cumplir con lo que hay en el csv "ciudades.csv"
+                                                  6) Carga Inicial, que tiene que darlo en porcentaje el usuario
+                                                  7) Carga Final, que tiene que darlo en porcentaje el usuario 
     - _old:  carpeta que contiene script y dataset que se han utilizado como pruebas para construir procesos pero se han descartado por no ser óptimos.
     - Pruebas_Blanca: contiene script y dataset que se están utilizando para construir procesos pero todavía no están finalizados.
     - Modelo Avanzado: carpeta con scripts sobre la definición de la función objetivo y restricciones
