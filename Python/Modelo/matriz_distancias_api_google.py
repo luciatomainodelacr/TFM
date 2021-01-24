@@ -20,6 +20,7 @@ metros, Distancia en km: ciudades_distancia.csv
 
 # Se cargan las librerias
 import pandas as pd
+
 import matplotlib.pyplot as plt
 import os
 import googlemaps
@@ -48,11 +49,20 @@ df_gasolineras = pd.read_csv(os.path.join(os.getcwd(),'Gasolineras/gasolineras_r
 # 2.- Apendizar los tres dataframes -------------------------------
 #------------------------------------------------------------------
 
-# Selección de columnas
-df_ciudades.columns
-df_ptos_recarga.columns
-df_gasolineras.columns
+# Se filtran las columnas necesarias
+df_ciudades = df_ciudades[["id", "PROVINCIA", "ADDRESS", "Latitude", "Longitude"]]
+df_ptos_recarga = df_ptos_recarga[["id", "province", "formatted_address", "latitude", "longitude"]]
+df_gasolineras = df_gasolineras[["id", "provincia", "direccion", "latitud", "longitud"]] 
 
+
+# Se renombran las columnas
+df_ptos_recarga.columns = df_ciudades.columns
+df_gasolineras.columns = df_ciudades.columns
+
+
+# Se apendizan los dataframes
+df_ciudades = df_ciudades.append(df_ptos_recarga)
+df_ciudades = df_ciudades.append(df_gasolineras)
 
 
 # Backup 
@@ -60,14 +70,18 @@ df = df_ciudades
 df_aux = df_ciudades
 df
 
+# Elimamos duplicados (comprobación)
+df.drop_duplicates()
+
 
 
 # 2.- Configuracion API Google ------------------------------------
 #------------------------------------------------------------------
 
 # La clave se introduce para la ejecucion pero luego se omitira para no compartirla en el repo
-API_key = '#################################'
+API_key = '####################'
 gmaps = googlemaps.Client(key=API_key)
+
 
 
 
@@ -94,13 +108,12 @@ list_destino = []
 
 
 # Bucle que recorre cada par de filas y calcula la distancia
-
 for (i1_aux, row1_aux), (i2_aux, row2_aux) in pairwise(df_aux.iterrows()):
       
       # Se asigna la latitud y longitud del punto de origen
       LatOrigin = row1_aux['Latitude'] 
       LongOrigin = row1_aux['Longitude']
-      ciudad_ori = row1_aux['CAPITAL DE PROVINCIA']
+      ciudad_ori = row1_aux['id']
       origins = (LatOrigin,LongOrigin)
       
       for (i1, row1), (i2, row2) in pairwise(df.iterrows()):
@@ -108,7 +121,7 @@ for (i1_aux, row1_aux), (i2_aux, row2_aux) in pairwise(df_aux.iterrows()):
             # Se asigna la latitud y longitud de la fila siguiente
             LatDest = row1['Latitude']
             LongDest = row1['Longitude']
-            ciudad_dest = row1['CAPITAL DE PROVINCIA']
+            ciudad_dest = row1['id']
             destination = (LatDest,LongDest)
                         
             # Se llama a la funcion distance_matrix de google
@@ -126,8 +139,10 @@ for (i1_aux, row1_aux), (i2_aux, row2_aux) in pairwise(df_aux.iterrows()):
 # 4.- Dataframe Distancias ----------------------------------------
 #------------------------------------------------------------------
 
+
 # Se elimina el primer elemento de la lista de distancias (inicializada con 0)
 list_distancia.remove(0)
+list_duracion.remove(0)
 
 # Se crea el dataframe con las distancias
 df_distancias = pd.DataFrame()
@@ -144,5 +159,9 @@ df_distancias['Duracion_min'] = df_distancias['Duracion_seg']/60
 # 5.- Output ------------------------------------------------------
 #------------------------------------------------------------------
 
-df_distancias.to_csv('/home/tfm/Documentos/TFM/Datasets/PuntosO_D/GeocodingAPI/ciudades_distancia.csv', sep = ";", index = False)
+df_distancias.to_csv('/home/tfm/Documentos/TFM/Datasets/matriz_distancia.csv', sep = ";", index = False)
+
+
+df.to_csv('/home/tfm/Documentos/TFM/Datasets/matriz_distancia_input.csv', sep = ";", index = False)
+
 
