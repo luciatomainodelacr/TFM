@@ -128,7 +128,7 @@ df_dist_haversine['Distance_km'] = df_dist_haversine['Distance_m']/1000
 # 5.- Output ------------------------------------------------------
 #------------------------------------------------------------------
 
-df_dist_haversine.to_csv('/home/tfm/Documentos/TFM/Datasets/matriz_distancia_haversine.csv', sep = ";", index = False)
+df_dist_haversine.to_csv('/home/tfm/Documentos/TFM/Datasets/Matriz_Distancias/matriz_distancia_haversine.csv', sep = ";", index = False)
 
 
 
