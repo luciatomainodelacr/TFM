@@ -3,14 +3,10 @@
 # =============================================================================
 
 """
-¡! SOLO FUNCIONA PARA POCOS PUNTOS - NO ES OPTIMO PARA EL CASO CON EL QUE SE 
-ESTA TRABAJANDO
-
---> SE UTILIZA MEJOR LA API DE GOOGLE PARA MATRIZ DE DISTANCIAS
-matriz_distancias_api_google.py
 
 
-Input: nodes.csv - muestra del fichero de las ciudades.csv
+Input: matriz_distancia_input.csv - contiene las coordenadas de las ciudades, 
+        puntos de recarga y gasolineras
 
 Proceso: Mediante funciones se calculan todas las combinaciones entre los distintos 
 puntos del dataframe nodes y se calcula la distancia de Haversine entre ellos. 
@@ -20,12 +16,12 @@ Output: Devuelve un dataframe con las distancias para todas las combinaciones.
  
 """
 
-
 # Se cargan las librerias
 from itertools import tee
 import math
 import pandas as pd
 import os
+
 
 # Se establece el diretorio base
 os.chdir('/home/tfm/Documentos/TFM/Datasets/')
