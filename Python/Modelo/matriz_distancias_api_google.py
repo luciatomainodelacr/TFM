@@ -83,7 +83,7 @@ df.drop_duplicates()
 #------------------------------------------------------------------
 
 # La clave se introduce para la ejecucion pero luego se omitira para no compartirla en el repo
-API_key = '####################'
+API_key = '############################'
 gmaps = googlemaps.Client(key=API_key)
 
 
