@@ -13,7 +13,11 @@ import pandas as pd
 os.chdir('/home/tfm/Documentos/TFM/Datasets/')
 
 # API KEY - Tomtom
-api_key = '########################################' 
+api_key = 'vBGAofG9iufITkNwekDkGA9xjAoEmM9o' 
+
+category = 'estaciones de carga de vehículos eléctricos'
+
+
 
 
 # 1.- Carga de inputs ---------------------------------------------
@@ -30,7 +34,7 @@ df = pd.read_csv(os.path.join(os.getcwd(),'PuntosRecarga/puntos_carga_reduced_Es
 def tomtom_category_search_request(api_key, category, lat_pto, long_pto, id_pto):
     
     url = """
-            https://api.tomtom.com/search/2/categorySearch/{category}.json?key={api_key}&countrySet=ES&limit=1&lat={lat_pto}&lon={long_pto}
+            https://api.tomtom.com/search/2/categorySearch/{category}.json?key={api_key}&countrySet=ES&lat={lat_pto}&lon={long_pto}
           """.format(category=category, api_key=api_key, lat_pto= lat_pto, long_pto= long_pto)
     
     response = requests.get(url)
@@ -50,38 +54,56 @@ def tomtom_category_search_request(api_key, category, lat_pto, long_pto, id_pto)
         ccaa = result["address"]["countrySubdivision"] if "countrySubdivision" in result["address"] else None
         postalCode = result["address"]["postalCode"] if "postalCode" in result["address"] else None
         
-        # Campos chargingPark 
-        num_connectors = len(result["chargingPark"]["connectors"]) if "connectors" in result["chargingPark"] else None
+        
+         # Campos chargingPark 
+        if "chargingPark" in result: 
+            num_connectors = len(result["chargingPark"]["connectors"]) if "connectors" in result["chargingPark"]  else None
 
-## ¡! --> Si num_connectors > 1 --> connectorType y ratedPowerKW debería ser una lista 
-        connectorType = [j["connectorType"] for j in result["chargingPark"]["connectors"]][0] 
-        ratedPowerKW = [j["ratedPowerKW"] for j in result["chargingPark"]["connectors"]][0] 
+        
+            if num_connectors > 1:
+                connectorType = []
+                ratedPowerKW = []
+                connectorType1 = [j["connectorType"] for j in result["chargingPark"]["connectors"]] if "connectorType" in result["chargingPark"]["connectors"] else None
+                connectorType.append(connectorType1)
+
+                ratedPowerKW1= [j["ratedPowerKW"] for j in result["chargingPark"]["connectors"]] if "ratedPowerKW" in result["chargingPark"]["connectors"] else None
+                ratedPowerKW.append(ratedPowerKW1)
+                
+            else:
+                connectorType = [j["connectorType"] for j in result["chargingPark"]["connectors"]][0] if "connectorType" in result["chargingPark"]["connectors"] else None
+                ratedPowerKW = [j["ratedPowerKW"] for j in result["chargingPark"]["connectors"]][0] if "ratedPowerKW" in result["chargingPark"]["connectors"] else None
         
 
-        # Se define el json resultado
-        poi_data[id_pto] = {
-            'name': name,
-            'streetName': streetName,
-            'provincia': countrySecondarySubdivision,
-            'ccaa': countrySubdivision,
-            'postalCode': postalCode,
-            'connectorType': connectorType,
-            'ratedPowerKW': ratedPowerKW,
-            'num_connectors': num_connectors            
+            # Se define el json resultado
+            poi_data[id_pto] = {
+                'name': name,
+                'streetName': streetName,
+                'provincia': provincia,
+                'ccaa': ccaa,
+                'postalCode': postalCode,
+                'connectorType': connectorType,
+                'ratedPowerKW': ratedPowerKW,
+                'num_connectors': num_connectors            
+            }
+        else:
+            num_connectors = "no disponible"
+            connectorType = "no disponible"
+            ratedPowerKW = "no disponible"
+            
+
+            poi_data[id_pto] = {
+                'name': name,
+                'streetName': streetName,
+                'provincia': provincia,
+                'ccaa': ccaa,
+                'postalCode': postalCode,
+                'connectorType': connectorType,
+                'ratedPowerKW': ratedPowerKW,
+                'num_connectors': num_connectors
             }
 
     return {"data": poi_data, "number_pois": number_pois}
 
-
-
-# Ejemplo
-latitud = 36.4901
-longitud = -4.95245
-id_pto = 'punto_recarga_1'
-result = tomtom_category_search_request(api_key, 'estaciones de carga de vehículos eléctricos', latitud, longitud, id_ptos)
-print("Number of POIs found: " + str(result['number_pois']))
-
-id_punto_1 = result['data']['punto_recarga_1']['id']
 
 
 
@@ -99,13 +121,15 @@ list_connectorType = []
 list_ratedPowerKW = []
 list_num_connectors = []
 
-# Bucle que guarde en las listas la información
+
+# Bucle que guarde en las listas la información para cada punto de recarga de nuestro dataframe
 for i in df.index:
 
     id_pto = df['id'][i]
     lat_pto = df['latitude'][i]
     long_pto = df['longitude'][i]
 
+    # Llamada a la funcion API busqueda
     result = tomtom_category_search_request(api_key, 'estaciones de carga de vehículos eléctricos', lat_pto, long_pto, id_pto)
 
     # Variables para la información de cada punto
@@ -144,6 +168,7 @@ df_ptos_recarga_final['postalCode'] = list_postalCode
 df_ptos_recarga_final['connectorType'] = list_connectorType
 df_ptos_recarga_final['ratedPowerKW'] = list_ratedPowerKW
 df_ptos_recarga_final['num_connectors'] = list_num_connectors
+
 
 
 
