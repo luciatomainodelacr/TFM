@@ -13,11 +13,9 @@ import pandas as pd
 os.chdir('/home/tfm/Documentos/TFM/Datasets/')
 
 # API KEY - Tomtom
-api_key = '' 
+api_key = 'vBGAofG9iufITkNwekDkGA9xjAoEmM9o' 
 
 category = 'estaciones de carga de vehículos eléctricos'
-
-
 
 
 # 1.- Carga de inputs ---------------------------------------------
@@ -55,52 +53,39 @@ def tomtom_category_search_request(api_key, category, lat_pto, long_pto, id_pto)
         postalCode = result["address"]["postalCode"] if "postalCode" in result["address"] else None
         
         
-         # Campos chargingPark 
-        if "chargingPark" in result: 
-            num_connectors = len(result["chargingPark"]["connectors"]) if "connectors" in result["chargingPark"]  else None
 
-        
+        # Campos chargingPark 
+        if "chargingPark" in result and result["chargingPark"] != {}: 
+            num_connectors = len(result["chargingPark"]["connectors"]) if "connectors" in result["chargingPark"] else None
+
+            
             if num_connectors > 1:
-                connectorType = []
-                ratedPowerKW = []
-                connectorType1 = [j["connectorType"] for j in result["chargingPark"]["connectors"]] if "connectorType" in result["chargingPark"]["connectors"] else None
-                connectorType.append(connectorType1)
-
-                ratedPowerKW1= [j["ratedPowerKW"] for j in result["chargingPark"]["connectors"]] if "ratedPowerKW" in result["chargingPark"]["connectors"] else None
-                ratedPowerKW.append(ratedPowerKW1)
+                connectorType = [j["connectorType"] if "connectorType" in j else None for j in result["chargingPark"]["connectors"]] 
+                ratedPowerKW = [j["ratedPowerKW"] if "ratedPowerKW" in j else None for j in result["chargingPark"]["connectors"]] 
                 
             else:
-                connectorType = [j["connectorType"] for j in result["chargingPark"]["connectors"]][0] if "connectorType" in result["chargingPark"]["connectors"] else None
-                ratedPowerKW = [j["ratedPowerKW"] for j in result["chargingPark"]["connectors"]][0] if "ratedPowerKW" in result["chargingPark"]["connectors"] else None
+                connectorType = [j["connectorType"] for j in result["chargingPark"]["connectors"]][0] if "connectorType" in result["chargingPark"]["connectors"][0] else None
+                ratedPowerKW = [j["ratedPowerKW"] for j in result["chargingPark"]["connectors"]][0] if "ratedPowerKW" in result["chargingPark"]["connectors"][0] else None
         
 
-            # Se define el json resultado
-            poi_data[id_pto] = {
-                'name': name,
-                'streetName': streetName,
-                'provincia': provincia,
-                'ccaa': ccaa,
-                'postalCode': postalCode,
-                'connectorType': connectorType,
-                'ratedPowerKW': ratedPowerKW,
-                'num_connectors': num_connectors            
-            }
         else:
             num_connectors = "no disponible"
             connectorType = "no disponible"
             ratedPowerKW = "no disponible"
             
+            
+            # Se define el json resultado
+    poi_data[id_pto] = {
+        'name': name,
+        'streetName': streetName,
+        'provincia': provincia,
+        'ccaa': ccaa,
+        'postalCode': postalCode,
+        'connectorType': connectorType,
+        'ratedPowerKW': ratedPowerKW,
+        'num_connectors': num_connectors
+    }
 
-            poi_data[id_pto] = {
-                'name': name,
-                'streetName': streetName,
-                'provincia': provincia,
-                'ccaa': ccaa,
-                'postalCode': postalCode,
-                'connectorType': connectorType,
-                'ratedPowerKW': ratedPowerKW,
-                'num_connectors': num_connectors
-            }
 
     return {"data": poi_data, "number_pois": number_pois}
 
@@ -154,6 +139,8 @@ for i in df.index:
     list_connectorType.append(connectorType)
     list_ratedPowerKW.append(ratedPowerKW)
     list_num_connectors.append(num_connectors)
+
+
 
 
 # Se crea un dataframe con la información resultante

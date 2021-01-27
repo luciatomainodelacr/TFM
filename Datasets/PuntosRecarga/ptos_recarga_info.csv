@@ -1,0 +1,353 @@
+id;name;streetName;provincia;ccaa;postalCode;connectorType;ratedPowerKW;num_connectors
+punto_recarga_1;Marbella Calle Marqués del Duero;Calle Marqués del Duero;Málaga;Andalusia;29670;StandardHouseholdCountrySpecific;2.8;1
+punto_recarga_2;Marbella Calle de las Rosas;Calle de las Rosas;Málaga;Andalusia;29670;IEC62196Type2Outlet;7.4;1
+punto_recarga_3;Tesla Marbella Urbanización del Puente Romano;Urbanización del Puente Romano;Málaga;Andalusia;29602;Tesla;;1
+punto_recarga_4;Marbella Avenida de la Ribera;Avenida de la Ribera;Málaga;Andalusia;29660;IEC62196Type2Outlet;22.2;1
+punto_recarga_5;Tesla Marbella Urbanización del Puente Romano;Urbanización del Puente Romano;Málaga;Andalusia;29602;Tesla;;1
+punto_recarga_6;Tesla Marbella Plaza de Cibeles;Plaza de Cibeles;Málaga;Andalusia;29660;Tesla;;1
+punto_recarga_7;Tesla Málaga Calle Hilera;Calle Hilera;Málaga;Andalusia;29007;Tesla;;1
+punto_recarga_8;Tesla Málaga Avenida de Velázquez;Avenida de Velázquez;Málaga;Andalusia;29004;Tesla;;1
+punto_recarga_9;Málaga Calle de Casares;Calle de Casares;Málaga;Andalusia;29004;['IEC60309AC1PhaseBlue', 'StandardHouseholdCountrySpecific', 'IEC62196Type2Outlet'];[2.8, 2.8, 11.1];3
+punto_recarga_10;Benahavís;;Málaga;Andalusia;29678;IEC62196Type2Outlet;22.2;1
+punto_recarga_11;Tesla Málaga Calle Hilera;Calle Hilera;Málaga;Andalusia;29007;Tesla;;1
+punto_recarga_12;Málaga Calle de Casares;Calle de Casares;Málaga;Andalusia;29004;['IEC60309AC1PhaseBlue', 'StandardHouseholdCountrySpecific', 'IEC62196Type2Outlet'];[2.8, 2.8, 11.1];3
+punto_recarga_13;Benahavís;;Málaga;Andalusia;29678;IEC62196Type2Outlet;22.2;1
+punto_recarga_14;Tesla Nerja Calle Almuñécar;Calle Almuñécar;Málaga;Andalusia;29780;Tesla;;1
+punto_recarga_15;Iberdrola Málaga Calle Marisma;Calle Marisma;Málaga;Andalusia;29006;['IEC62196Type2Outlet', 'Chademo', 'IEC62196Type2CCS'];[22.2, 50, 50];3
+punto_recarga_16;Málaga Avenida de la Aurora;Avenida de la Aurora;Málaga;Andalusia;29002;IEC62196Type2Outlet;22.2;1
+punto_recarga_17;Antequera Avenida de la Estación;Avenida de la Estación;Málaga;Andalusia;29200;IEC62196Type2Outlet;22.2;1
+punto_recarga_18;Renault Málaga Avenida de Velázquez;Avenida de Velázquez;Málaga;Andalusia;29004;IEC62196Type2Outlet;22.2;1
+punto_recarga_19;Málaga Calle Mendívil;Calle Mendívil;Málaga;Andalusia;29002;['IEC62196Type2Outlet', 'Chademo', 'IEC62196Type2CCS'];[43.6, 50, 50];3
+punto_recarga_20;Renault Málaga Avenida de Velázquez;Avenida de Velázquez;Málaga;Andalusia;29004;IEC62196Type2Outlet;22.2;1
+punto_recarga_21;Tesla Fuengirola Avenida del Higuerón;Avenida del Higuerón;Málaga;Andalusia;29640;Tesla;120;1
+punto_recarga_22;Tesla Guarromán Avenida Linares;Avenida Linares;Jaen;Andalusia;23210;Tesla;120;1
+punto_recarga_23;Pulianas;;Granada;Andalusia;18197;['IEC60309AC1PhaseBlue', 'StandardHouseholdCountrySpecific', 'IEC60309AC1PhaseBlue'];[None, 3.7, 3.7];3
+punto_recarga_24;Tesla Guarromán Avenida Linares;Avenida Linares;Jaen;Andalusia;23210;Tesla;120;1
+punto_recarga_25;Tesla Guarromán Avenida Linares;Avenida Linares;Jaen;Andalusia;23210;Tesla;120;1
+punto_recarga_26;Granada Calle Profesor García Gómez;Calle Profesor García Gómez;Granada;Andalusia;18004;IEC62196Type2Outlet;22.2;1
+punto_recarga_27;Granada Calle Ribera del Beiro;Calle Ribera del Beiro;Granada;Andalusia;18012;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[7.4, 3.7];2
+punto_recarga_28;Pulianas;;Granada;Andalusia;18197;StandardHouseholdCountrySpecific;3.7;1
+punto_recarga_29;Nissan Peligros;;Granada;Andalusia;18210;Chademo;50;1
+punto_recarga_30;Nissan Peligros;;Granada;Andalusia;18210;Chademo;25;1
+punto_recarga_31;Renault Granada Avenida de Andalucía;Avenida de Andalucía;Granada;Andalusia;18015;IEC62196Type2Outlet;22.2;1
+punto_recarga_32;Granada Paseo del Violón;Paseo del Violón;Granada;Andalusia;18006;IEC62196Type2Outlet;11.1;1
+punto_recarga_33;Iberdrola Sevilla Calle Genil;Calle Genil;Seville;Andalusia;41001;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[11.1, 2.3];2
+punto_recarga_34;Tesla Sevilla Avenida de la República Argentina;Avenida de la República Argentina;Seville;Andalusia;41011;Tesla;;1
+punto_recarga_35;Ronda;;Málaga;Andalusia;29430;IEC62196Type2Outlet;11.1;1
+punto_recarga_36;La Carlota Avenida de Carlos III;Avenida de Carlos III;Cordova;Andalusia;14100;['IEC62196Type2CCS', 'Chademo', 'IEC62196Type2Outlet'];[25, 25, 22.2];3
+punto_recarga_37;Sevill;;Seville;Andalusia;41001;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[3.7, 2.8];2
+punto_recarga_38;Sevilla Avenida de Kansas City;Avenida de Kansas City;Seville;Andalusia;41007;IEC62196Type2Outlet;22.2;1
+punto_recarga_39;Tesla Sevilla;;Seville;Andalusia;41020;Tesla;;1
+punto_recarga_40;La Carlota Avenida de Carlos III;Avenida de Carlos III;Cordova;Andalusia;14100;['IEC62196Type2CCS', 'Chademo', 'IEC62196Type2Outlet'];[25, 25, 22.2];3
+punto_recarga_41;Iberdrola Sevilla Calle Campamento;Calle Campamento;Seville;Andalusia;41018;['IEC62196Type2Outlet', 'IEC62196Type2Outlet'];[22.2, 11.1];2
+punto_recarga_42;Sevilla Avenida de Andalucía;Avenida de Andalucía;Seville;Andalusia;41007;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[3.7, 3.7];2
+punto_recarga_43;Nissan Sevilla Carretera de Su Eminencia;Carretera de Su Eminencia;Seville;Andalusia;41006;Chademo;50;1
+punto_recarga_44;Castro-Urdiales;;Cantabria;Cantabria;39700;IEC62196Type2Outlet;22.2;1
+punto_recarga_45;Getafe Camino Viejo de Toledo;Camino Viejo de Toledo;Madrid;Community of Madrid;28905;IEC62196Type2Outlet;7.4;1
+punto_recarga_46;Iberdrola Rivas-Vaciamadrid Calle de Severo Ochoa;Calle de Severo Ochoa;Madrid;Community of Madrid;28521;['Chademo', 'IEC62196Type2Outlet', 'IEC62196Type2CCS'];[50, 22.2, 50];3
+punto_recarga_47;Madrid Calle Castelló;Calle Castelló;Madrid;Community of Madrid;28006;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[7.4, 3.7];2
+punto_recarga_48;Renault Leganés Avenida de Carlos Sáinz;Avenida de Carlos Sáinz;Madrid;Community of Madrid;28914;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[3.7, 2.8];2
+punto_recarga_49;Alcalá de Henares Avenida Juan Carlos I;Avenida Juan Carlos I;Madrid;Community of Madrid;28806;StandardHouseholdCountrySpecific;3.7;1
+punto_recarga_50;Badajoz Calle de la Bomba;Calle de la Bomba;Badajoz;Extremadura;06004;['StandardHouseholdCountrySpecific', 'IEC62196Type2Outlet'];[2.8, 2.8];2
+punto_recarga_51;Mérida Calle del Calvario;Calle del Calvario;Badajoz;Extremadura;06800;['StandardHouseholdCountrySpecific', 'IEC62196Type2Outlet'];[2.8, 2.8];2
+punto_recarga_52;La Rinconada Calle Miguel Servet;Calle Miguel Servet;Seville;Andalusia;41300;IEC62196Type2Outlet;22.2;1
+punto_recarga_53;Mérida Calle Cabo Verde;Calle Cabo Verde;Badajoz;Extremadura;06800;['StandardHouseholdCountrySpecific', 'IEC62196Type2Outlet'];[2.8, 2.8];2
+punto_recarga_54;Badajoz Avenida de Ramón y Cajal;Avenida de Ramón y Cajal;Badajoz;Extremadura;06001;IEC62196Type2Outlet;2.8;1
+punto_recarga_55;Mérida Avenida de la Libertad;Avenida de la Libertad;Badajoz;Extremadura;06800;['StandardHouseholdCountrySpecific', 'IEC62196Type2Outlet'];[2.8, 2.8];2
+punto_recarga_56;Mérida Calle Cabo Verde;Calle Cabo Verde;Badajoz;Extremadura;06800;['StandardHouseholdCountrySpecific', 'IEC62196Type2Outlet'];[2.8, 2.8];2
+punto_recarga_57;Tesla Córdoba Avenida de la Arruzafa;Avenida de la Arruzafa;Cordova;Andalusia;14012;Tesla;;1
+punto_recarga_58;Mérida Calle Cabo Verde;Calle Cabo Verde;Badajoz;Extremadura;06800;['StandardHouseholdCountrySpecific', 'IEC62196Type2Outlet'];[2.8, 2.8];2
+punto_recarga_59;Mérida Avenida de Rabo de Buey;Avenida de Rabo de Buey;Badajoz;Extremadura;06800;['StandardHouseholdCountrySpecific', 'IEC62196Type2Outlet'];[2.8, 2.8];2
+punto_recarga_60;Badajoz Avenida de Ram��n y Cajal;Avenida de Ramón y Cajal;Badajoz;Extremadura;06001;IEC62196Type2Outlet;2.8;1
+punto_recarga_61;Mérida Avenida de la Libertad;Avenida de la Libertad;Badajoz;Extremadura;06800;['StandardHouseholdCountrySpecific', 'IEC62196Type2Outlet'];[2.8, 2.8];2
+punto_recarga_62;Palencia Calle del Becerro de Bengoa;Calle del Becerro de Bengoa;Palencia;Castille & Leon;34002;IEC62196Type2Outlet;7.4;1
+punto_recarga_63;Palencia;;Palencia;Castille & Leon;34005;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[3.7, 3.7];2
+punto_recarga_64;Palencia Calle del Becerro de Bengoa;Calle del Becerro de Bengoa;Palencia;Castille & Leon;34002;IEC62196Type2Outlet;7.4;1
+punto_recarga_65;Santa Cruz de Mudela Autovía del Sur;Autovía del Sur;Ciudad Real;Castille-La Mancha;13730;['Chademo', 'IEC62196Type2Outlet', 'IEC62196Type2CCS'];[25, 22.2, 25];3
+punto_recarga_66;Pedro Muñoz;;Ciudad Real;Castille-La Mancha;13620;['StandardHouseholdCountrySpecific', 'IEC62196Type2Outlet'];[2.8, 2.8];2
+punto_recarga_67;Valdepeñas Calle Bodegas Megía;Calle Bodegas Megía;Ciudad Real;Castille-La Mancha;13300;IEC62196Type2Outlet;3.7;1
+punto_recarga_68;Tesla Manzanares;;Ciudad Real;Castille-La Mancha;13200;Tesla;120;1
+punto_recarga_69;Iberdrola Murcia Avenida de la Libertad;Avenida de la Libertad;Murcia;Region of Murcia;30009;no disponible;no disponible;no disponible
+punto_recarga_70;Murcia;;Murcia;Region of Murcia;30100;IEC60309AC1PhaseBlue;3.7;1
+punto_recarga_71;Murcia;;Murcia;Region of Murcia;30834;['IEC62196Type2Outlet', 'IEC62196Type2CCS', 'Chademo'];[43.6, 50, 50];3
+punto_recarga_72;Tesla Los Alcázares Avenida del Príncipe Felipe;Avenida del Príncipe Felipe;Murcia;Region of Murcia;30710;Tesla;;1
+punto_recarga_73;Renault Cartagena Avenida de Juan Carlos I;Avenida de Juan Carlos I;Murcia;Region of Murcia;30310;IEC62196Type2Outlet;22.2;1
+punto_recarga_74;Puerto Lumbreras Calle del Orfeón Fernández Caballero;Calle del Orfeón Fernández Caballero;Murcia;Region of Murcia;30890;IEC62196Type2CCS;120;1
+punto_recarga_75;Lorca Calle del Músico Gayón;Calle del Músico Gayón;Murcia;Region of Murcia;30800;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[7.4, 3.7];2
+punto_recarga_76;València Avenida de Pío XII;Avenida de Pío XII;Valencia;Community of Valencia;46015;StandardHouseholdCountrySpecific;3.7;1
+punto_recarga_77;Chiva Calle 9;Calle 9;Valencia;Community of Valencia;46370;['IEC62196Type2Outlet', 'Tesla'];[3.7, 25];2
+punto_recarga_78;Gandia Calle Sant Vicent Ferrer;Calle Sant Vicent Ferrer;Valencia;Community of Valencia;46702;['StandardHouseholdCountrySpecific', 'IEC62196Type2Outlet'];[2.8, 2.8];2
+punto_recarga_79;Tarazona de la Mancha Calle de Luis de Góngora;Calle de Luis de Góngora;Albacete;Castille-La Mancha;02100;IEC62196Type2Outlet;11.1;1
+punto_recarga_80;Etecnic Sagunto Avenida Hornos Altos;Avenida Hornos Altos;Valencia;Community of Valencia;46520;IEC62196Type2Outlet;22.2;1
+punto_recarga_81;Ontinyent Avenida de San Francisco;Avenida de San Francisco;Valencia;Community of Valencia;46870;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[2.3, 2.3];2
+punto_recarga_82;Nissan Cádiz Ronda de Vigilancia de la Zona Franca;Ronda de Vigilancia de la Zona Franca;Cadiz;Andalusia;11011;Chademo;50;1
+punto_recarga_83;Nissan Jerez de la Frontera Plaza Industrial Carretera Sevilla;Plaza Industrial Carretera Sevilla;Cadiz;Andalusia;11407;['Chademo', 'IEC62196Type1'];[50, 2.8];2
+punto_recarga_84;Nissan Cádiz Ronda de Vigilancia de la Zona Franca;Ronda de Vigilancia de la Zona Franca;Cadiz;Andalusia;11011;Chademo;50;1
+punto_recarga_85;Benalup-Casas Viejas Salida Humeruelos;Salida Humeruelos;Cadiz;Andalusia;11190;['IEC62196Type2Outlet', 'Tesla'];[22.2, 25];2
+punto_recarga_86;Tesla El Puerto de Santa María Plaza de los Jazmines;Plaza de los Jazmines;Cadiz;Andalusia;11500;Tesla;;1
+punto_recarga_87;Córdoba Avenida del Brillante;Avenida del Brillante;Cordova;Andalusia;14012;IEC62196Type2Outlet;22.2;1
+punto_recarga_88;Córdoba Avenida de la Libertad;Avenida de la Libertad;Cordova;Andalusia;14006;StandardHouseholdCountrySpecific;3.7;1
+punto_recarga_89;La Taha Paseo Marítimo;Paseo Marítimo;Granada;Andalusia;18414;IEC62196Type2Outlet;3.7;1
+punto_recarga_90;IBIL Almería Rambla de Belén;Rambla de Belén;Almería;Andalusia;04008;['IEC62196Type2Outlet', 'Chademo', 'IEC62196Type2CCS'];[43.6, 50, 50];3
+punto_recarga_91;Almería;;Almería;Andalusia;04006;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[3.7, 3.7];2
+punto_recarga_92;Puerto Lumbreras Calle del Orfeón Fernández Caballero;Calle del Orfeón Fernández Caballero;Murcia;Region of Murcia;30890;IEC62196Type2CCS;120;1
+punto_recarga_93;Huesca Calle del Ingeniero Susín;Calle del Ingeniero Susín;Huesca;Aragon;22004;IEC62196Type2Outlet;22.2;1
+punto_recarga_94;Huesca Calle de Fidel Seral;Calle de Fidel Seral;Huesca;Aragon;22002;IEC62196Type2Outlet;2.8;1
+punto_recarga_95;Fraga Paseo de la Constitución;Paseo de la Constitución;Huesca;Aragon;22520;IEC62196Type2Outlet;11.1;1
+punto_recarga_96;Villanueva de Gállego Calle de la Universidad de San Jorge;Calle de la Universidad de San Jorge;Saragossa;Aragon;50830;IEC62196Type2Outlet;7.4;1
+punto_recarga_97;Huesca Calle del Ingeniero Susín;Calle del Ingeniero Susín;Huesca;Aragon;22004;IEC62196Type2Outlet;22.2;1
+punto_recarga_98;Huesca Paseo de Ramón y Cajal;Paseo de Ramón y Cajal;Huesca;Aragon;22006;IEC62196Type2Outlet;22.2;1
+punto_recarga_99;Sabiñánigo Avenida de las Biescas;Avenida de las Biescas;Huesca;Aragon;22609;['StandardHouseholdCountrySpecific', 'IEC62196Type2Outlet'];[2.3, 11.1];2
+punto_recarga_100;Cargacoches Monreal de Ariza Autovía del Nordeste;Autovía del Nordeste;Saragossa;Aragon;50291;['IEC62196Type2Outlet', 'IEC62196Type2CCS', 'Chademo'];[43.6, 50, 50];3
+punto_recarga_101;Zaragoza Calle de los Hermanos García Mercadal;Calle de los Hermanos García Mercadal;Saragossa;Aragon;50009;IEC62196Type2Outlet;22.2;1
+punto_recarga_102;Zaragoza Avenida de Navarra;Avenida de Navarra;Saragossa;Aragon;50011;StandardHouseholdCountrySpecific;2.3;1
+punto_recarga_103;Zaragoza;;Saragossa;Aragon;50008;StandardHouseholdCountrySpecific;2.8;1
+punto_recarga_104;Zaragoza Calle de los Hermanos García Mercadal;Calle de los Hermanos García Mercadal;Saragossa;Aragon;50009;IEC62196Type2Outlet;22.2;1
+punto_recarga_105;Cargacoches Monreal de Ariza Autovía del Nordeste;Autovía del Nordeste;Saragossa;Aragon;50291;['IEC62196Type2Outlet', 'IEC62196Type2CCS', 'Chademo'];[43.6, 50, 50];3
+punto_recarga_106;Peugeot Zaragoza Avenida Cataluña;Avenida Cataluña;Saragossa;Aragon;50014;IEC62196Type2Outlet;2.8;1
+punto_recarga_107;Cargacoches Monreal de Ariza Autovía del Nordeste;Autovía del Nordeste;Saragossa;Aragon;50291;['IEC62196Type2Outlet', 'IEC62196Type2CCS', 'Chademo'];[43.6, 50, 50];3
+punto_recarga_108;Zaragoza Avenida de Casablanca;Avenida de Casablanca;Saragossa;Aragon;50019;IEC62196Type2Outlet;22.2;1
+punto_recarga_109;Renault Calatayud Polígono Industrial de Mediavega;Polígono Industrial de Mediavega;Saragossa;Aragon;50300;['IEC60309AC1PhaseBlue', 'IEC60309AC1PhaseBlue', 'StandardHouseholdCountrySpecific'];[3.7, None, 2.8];3
+punto_recarga_110;Zaragoza Calle de Ramón Pignatelli;Calle de Ramón Pignatelli;Saragossa;Aragon;50004;IEC62196Type2Outlet;7.4;1
+punto_recarga_111;IBIL Zaragoza Calle de Ramón Pignatelli;Calle de Ramón Pignatelli;Saragossa;Aragon;50004;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[22.2, 3.7];2
+punto_recarga_112;Cargacoches Monreal de Ariza Autovía del Nordeste;Autovía del Nordeste;Saragossa;Aragon;50291;['IEC62196Type2Outlet', 'IEC62196Type2CCS', 'Chademo'];[43.6, 50, 50];3
+punto_recarga_113;Zaragoza Calle de Ramón Pignatelli;Calle de Ramón Pignatelli;Saragossa;Aragon;50004;IEC62196Type2Outlet;7.4;1
+punto_recarga_114;Calanda Calle del Trillo;Calle del Trillo;Teruel;Aragon;44570;['IEC60309AC1PhaseBlue', 'StandardHouseholdCountrySpecific'];[None, 3.7];2
+punto_recarga_115;Tulebras Carretera de Tudela;Carretera de Tudela;Navarre;Chartered Community of Navarre;31522;IEC62196Type2Outlet;11.1;1
+punto_recarga_116;IBIL Zaragoza Avenida de Casablanca;Avenida de Casablanca;Saragossa;Aragon;50019;['IEC62196Type2CCS', 'Chademo', 'IEC62196Type2Outlet'];[25, 25, 11.1];3
+punto_recarga_117;Zaragoza Avenida de San Juan Bosco;Avenida de San Juan Bosco;Saragossa;Aragon;50009;StandardHouseholdCountrySpecific;2.8;1
+punto_recarga_118;IBIL Zaragoza Camino de las Torres;Camino de las Torres;Saragossa;Aragon;50002;IEC62196Type2Outlet;22.2;1
+punto_recarga_119;Zaragoza Avenida de Navarra;Avenida de Navarra;Saragossa;Aragon;50011;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[3.7, 3.7];2
+punto_recarga_120;Zaragoza Calle de los Hermanos García Mercadal;Calle de los Hermanos García Mercadal;Saragossa;Aragon;50009;IEC62196Type2Outlet;22.2;1
+punto_recarga_121;Tudela;;Navarre;Chartered Community of Navarre;31500;IEC62196Type2Outlet;22.2;1
+punto_recarga_122;Renault Galar Carretera de Zaragoza;Carretera de Zaragoza;Navarre;Chartered Community of Navarre;31191;IEC62196Type2Outlet;22.2;1
+punto_recarga_123;Sant Carles De La Ràpita;;Tarragona;Catalonia;43540;['Tesla', 'IEC62196Type2Outlet'];[25, 2.8];2
+punto_recarga_124;Caspe Calle de Isabel 'La Católica';Calle de Isabel 'La Católica';Saragossa;Aragon;50700;IEC62196Type2Outlet;11.1;1
+punto_recarga_125;Etecnic Vandellòs i l'Hospitalet de l'Infant Carrer de Martí i Franquès;Calle de Martí i Franquès;Tarragona;Catalonia;43890;['IEC62196Type2Outlet', 'IEC62196Type2CCS', 'Chademo'];[43.6, 50, 50];3
+punto_recarga_126;Etecnic Vandellòs i l'Hospitalet de l'Infant Carrer de Martí i Franquès;Calle de Martí i Franquès;Tarragona;Catalonia;43890;['IEC62196Type2Outlet', 'IEC62196Type2CCS', 'Chademo'];[43.6, 50, 50];3
+punto_recarga_127;Tarragona;Vía Augusta;Tarragona;Catalonia;43003;StandardHouseholdCountrySpecific;3.7;1
+punto_recarga_128;Reus Raval de Robuster;Arrabal de Robuster;Tarragona;Catalonia;43204;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[7.4, 7.4];2
+punto_recarga_129;Nissan Fontellas Avenida del Conde de Gabarda;Avenida del Conde de Gabarda;Navarre;Chartered Community of Navarre;31512;Chademo;50;1
+punto_recarga_130;Pamplona Avenida de Juan Pablo II;Avenida de Juan Pablo II;Navarre;Chartered Community of Navarre;31006;Chademo;50;1
+punto_recarga_131;Lodosa Carretera de Alcanadre;Carretera de Alcanadre;Navarre;Chartered Community of Navarre;31580;IEC62196Type2Outlet;11.1;1
+punto_recarga_132;IBIL Tudela;;Navarre;Chartered Community of Navarre;31500;['StandardHouseholdCountrySpecific', 'IEC62196Type2Outlet'];[3.7, 11.1];2
+punto_recarga_133;Tesla Logroño Calle de los Portales;Calle de los Portales;Rioja;Rioja;26001;Tesla;;1
+punto_recarga_134;Mendavia Calle de Valero Garralda;Calle de Valero Garralda;Navarre;Chartered Community of Navarre;31587;IEC62196Type2Outlet;22.2;1
+punto_recarga_135;Logroño;;Rioja;Rioja;26008;IEC62196Type2Outlet;11.1;1
+punto_recarga_136;Iberdrola Elciego Calle Torrea;Calle Torrea;Araba/Álava;Basque Country;01340;IEC62196Type2Outlet;22.2;1
+punto_recarga_137;Tesla Logroño Calle de los Portales;Calle de los Portales;Rioja;Rioja;26001;Tesla;;1
+punto_recarga_138;Oyón-Oion Carretera de Logroño;Carretera de Logroño;Araba/Álava;Basque Country;01320;['IEC62196Type2Outlet', 'IEC60309AC1PhaseBlue'];[2.8, None];2
+punto_recarga_139;Briones;;Rioja;Rioja;26330;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[22.2, 3.7];2
+punto_recarga_140;Briones;;Rioja;Rioja;26330;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[22.2, 3.7];2
+punto_recarga_141;Lerín Carretera de Allo;Carretera de Allo;Navarre;Chartered Community of Navarre;31260;StandardHouseholdCountrySpecific;2.8;1
+punto_recarga_142;Renault Logroño Avenida de Burgos;Avenida de Burgos;Rioja;Rioja;26007;IEC62196Type2Outlet;22.2;1
+punto_recarga_143;Nájera Paseo San Julián;Paseo San Julián;Rioja;Rioja;26300;IEC62196Type2Outlet;22.2;1
+punto_recarga_144;Logroño;;Rioja;Rioja;26008;IEC62196Type2Outlet;11.1;1
+punto_recarga_145;Iberdrola Logroño Calle de Entrena;Calle de Entrena;Rioja;Rioja;26007;['IEC62196Type2Outlet', 'IEC62196Type2CCS', 'Chademo'];[43.6, 50, 50];3
+punto_recarga_146;Logroño Calle del Muro de Francisco de la Mata;Calle del Muro de Francisco de la Mata;Rioja;Rioja;26001;['StandardHouseholdCountrySpecific', 'IEC62196Type2Outlet'];[2.8, 7.4];2
+punto_recarga_147;Baños de Ebro Calle Mayor;Calle Mayor;Araba/Álava;Basque Country;01307;IEC62196Type2Outlet;22.2;1
+punto_recarga_148;Ribafrecha Calle del Boticón;Calle del Boticón;Rioja;Rioja;26130;IEC62196Type2Outlet;22.2;1
+punto_recarga_149;Iberdrola Elciego Calle Torrea;Calle Torrea;Araba/Álava;Basque Country;01340;IEC62196Type2Outlet;22.2;1
+punto_recarga_150;BMW Logroño;;Rioja;Rioja;26006;IEC62196Type2Outlet;7.4;1
+punto_recarga_151;Tesla Logroño Calle de los Portales;Calle de los Portales;Rioja;Rioja;26001;Tesla;;1
+punto_recarga_152;Logroño;;Rioja;Rioja;26008;IEC62196Type2Outlet;11.1;1
+punto_recarga_153;Tesla Logroño Calle de los Portales;Calle de los Portales;Rioja;Rioja;26001;Tesla;;1
+punto_recarga_154;Baños de Ebro Calle Mayor;Calle Mayor;Araba/Álava;Basque Country;01307;IEC62196Type2Outlet;22.2;1
+punto_recarga_155;Briones;;Rioja;Rioja;26330;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[22.2, 3.7];2
+punto_recarga_156;Briones;;Rioja;Rioja;26330;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[22.2, 3.7];2
+punto_recarga_157;Tesla Arnedo Paseo de la Constitución;Paseo de la Constitución;Rioja;Rioja;26580;Tesla;;1
+punto_recarga_158;Logroño Calle del Muro de Francisco de la Mata;Calle del Muro de Francisco de la Mata;Rioja;Rioja;26001;['StandardHouseholdCountrySpecific', 'IEC62196Type2Outlet'];[2.8, 7.4];2
+punto_recarga_159;Iberdrola Erriberabeitia Calle Los Almendros;Calle Los Almendros;Araba/Álava;Basque Country;01213;['IEC62196Type2CCS', 'Chademo', 'IEC62196Type2Outlet'];[50, 50, 22.2];3
+punto_recarga_160;Iberdrola Elciego Calle Torrea;Calle Torrea;Araba/Álava;Basque Country;01340;IEC62196Type2Outlet;22.2;1
+punto_recarga_161;Iberdrola Cenicero Calle Arsenio Corral;Calle Arsenio Corral;Rioja;Rioja;26350;IEC62196Type2Outlet;22.2;1
+punto_recarga_162;Tesla Villabuena de Álava Calle de la Herrería;Calle de la Herrería;Araba/Álava;Basque Country;01307;Tesla;;1
+punto_recarga_163;Renault Logroño Avenida de Burgos;Avenida de Burgos;Rioja;Rioja;26007;IEC62196Type2Outlet;22.2;1
+punto_recarga_164;Lerín Carretera de Allo;Carretera de Allo;Navarre;Chartered Community of Navarre;31260;StandardHouseholdCountrySpecific;2.8;1
+punto_recarga_165;Ribafrecha Calle del Boticón;Calle del Boticón;Rioja;Rioja;26130;IEC62196Type2Outlet;22.2;1
+punto_recarga_166;Oyón-Oion Carretera de Logroño;Carretera de Logroño;Araba/Álava;Basque Country;01320;['IEC62196Type2Outlet', 'IEC60309AC1PhaseBlue'];[2.8, None];2
+punto_recarga_167;Logroño;;Rioja;Rioja;26008;IEC62196Type2Outlet;11.1;1
+punto_recarga_168;Briones;;Rioja;Rioja;26330;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[22.2, 3.7];2
+punto_recarga_169;Tesla Logroño Calle de los Portales;Calle de los Portales;Rioja;Rioja;26001;Tesla;;1
+punto_recarga_170;Logroño Calle del Muro de Francisco de la Mata;Calle del Muro de Francisco de la Mata;Rioja;Rioja;26001;StandardHouseholdCountrySpecific;3.7;1
+punto_recarga_171;Oyón-Oion Carretera de Logroño;Carretera de Logroño;Araba/Álava;Basque Country;01320;['IEC62196Type2Outlet', 'IEC60309AC1PhaseBlue'];[2.8, None];2
+punto_recarga_172;Tudela;;Navarre;Chartered Community of Navarre;31500;IEC62196Type2Outlet;22.2;1
+punto_recarga_173;Tesla Logroño Calle de los Portales;Calle de los Portales;Rioja;Rioja;26001;Tesla;;1
+punto_recarga_174;Tesla Logroño Calle de los Portales;Calle de los Portales;Rioja;Rioja;26001;Tesla;;1
+punto_recarga_175;Pastriz Calle Sector 5;Calle Sector 5;Saragossa;Aragon;50195;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[7.4, 3.7];2
+punto_recarga_176;myRecarga Teruel Calle Génova;Calle Génova;Teruel;Aragon;44195;IEC62196Type2Outlet;7.4;1
+punto_recarga_177;Iberdrola La Puebla de Valverde Carretera Vecinal de Camarena a la Estación de P;Carretera Vecinal de Camarena a la Estación de Puebla;Teruel;Aragon;44450;IEC62196Type2Outlet;7.4;1
+punto_recarga_178;Siero;;Asturias;Principality of Asturias;33199;IEC62196Type2Outlet;11.1;1
+punto_recarga_179;Gijón Calle de Carlos Marx;Calle de Carlos Marx;Asturias;Principality of Asturias;33207;IEC62196Type2Outlet;11.1;1
+punto_recarga_180;Renault Avilés Calle de los Estibadores;Calle de los Estibadores;Asturias;Principality of Asturias;33490;IEC62196Type2Outlet;22.2;1
+punto_recarga_181;EDP Oviedo;;Asturias;Principality of Asturias;33001;IEC62196Type2Outlet;11.1;1
+punto_recarga_182;Ribera de Arriba Calle del Llosal;Calle del Llosal;Asturias;Principality of Asturias;33171;StandardHouseholdCountrySpecific;2.8;1
+punto_recarga_183;Allande Avenida América;Avenida América;Asturias;Principality of Asturias;33880;IEC62196Type2Outlet;11.1;1
+punto_recarga_184;Tesla Cangas del Narcea;;Asturias;Principality of Asturias;33816;Tesla;;1
+punto_recarga_185;Aranjuez Calle de San Antonio;Calle de San Antonio;Madrid;Community of Madrid;28300;StandardHouseholdCountrySpecific;3.7;1
+punto_recarga_186;Quintanar del Rey Calle del Príncipe;Calle del Príncipe;Cuenca;Castille-La Mancha;16220;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[22.2, 2.3];2
+punto_recarga_187;Tesla Atalaya del Cañavate;;Cuenca;Castille-La Mancha;16710;Tesla;120;1
+punto_recarga_188;Renault Siero Avenida Oviedo;Avenida Oviedo;Asturias;Principality of Asturias;33420;IEC62196Type2Outlet;22.2;1
+punto_recarga_189;Renault Siero Avenida Oviedo;Avenida Oviedo;Asturias;Principality of Asturias;33420;IEC62196Type2Outlet;22.2;1
+punto_recarga_190;Tesla Siero;;Asturias;Principality of Asturias;33199;Tesla;;1
+punto_recarga_191;IBIL Rendal (Santa María) Carretera Santiago-Guntín;Carretera Santiago-Guntín;A Coruña;Galicia;15819;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[22.2, 3.7];2
+punto_recarga_192;Tesla Conforto (Santa María);;Lugo;Galicia;27728;Tesla;;1
+punto_recarga_193;Galdo (Santa María);;Lugo;Galicia;27867;StandardHouseholdCountrySpecific;2.8;1
+punto_recarga_194;Tesla Conforto (Santa María);;Lugo;Galicia;27728;Tesla;;1
+punto_recarga_195;Santa Cruz da Rabeda (Santa Cruz) Lugar A Zamorana;Lugar A Zamorana;Ourense;Galicia;32901;['Chademo', 'IEC62196Type2Outlet'];[50, 22.2];2
+punto_recarga_196;Santa Cruz da Rabeda (Santa Cruz) Lugar A Zamorana;Lugar A Zamorana;Ourense;Galicia;32901;['Chademo', 'IEC62196Type2Outlet'];[50, 22.2];2
+punto_recarga_197;Taramundi Calle de la J;Calle de la J;Asturias;Principality of Asturias;33775;IEC62196Type2Outlet;11.1;1
+punto_recarga_198;Santa Cruz da Rabeda (Santa Cruz) Lugar A Zamorana;Lugar A Zamorana;Ourense;Galicia;32901;['Chademo', 'IEC62196Type2Outlet'];[50, 22.2];2
+punto_recarga_199;Tesla Conforto (Santa María);;Lugo;Galicia;27728;Tesla;;1
+punto_recarga_200;Suances;;Cantabria;Cantabria;39350;['StandardHouseholdCountrySpecific', 'IEC62196Type2Outlet'];[1.8, 22.2];2
+punto_recarga_201;Santander Calle del Río Deva;Calle del Río Deva;Cantabria;Cantabria;39011;['Chademo', 'IEC62196Type2CCS'];[25, 25];2
+punto_recarga_202;Tesla Ruesga Barrio Valle;Barrio Valle;Cantabria;Cantabria;39815;Tesla;;1
+punto_recarga_203;Limpias;;Cantabria;Cantabria;39820;['IEC60309AC1PhaseBlue', 'Tesla', 'IEC62196Type2Outlet'];[None, 25, 3.7];3
+punto_recarga_204;Santillana del Mar Plaza Ramón Pelayo;Plaza Ramón Pelayo;Cantabria;Cantabria;39330;IEC60309AC1PhaseBlue;;1
+punto_recarga_205;Wenea Reocín Barrio de los Valles;Barrio de los Valles;Cantabria;Cantabria;39590;['Chademo', 'IEC62196Type2Outlet', 'IEC62196Type2CCS'];[50, 43.6, 50];3
+punto_recarga_206;Llanes;;Asturias;Principality of Asturias;33500;StandardHouseholdCountrySpecific;2.8;1
+punto_recarga_207;Aguilar de Campoo Calle Jose Gomez Briz;Calle Jose Gomez Briz;Palencia;Castille & Leon;34800;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[11.1, 2.3];2
+punto_recarga_208;Nissan Santander Avenida Parayas;Avenida Parayas;Cantabria;Cantabria;39011;Chademo;50;1
+punto_recarga_209;Reocín Barrio Helguera;Barrio Helguera;Cantabria;Cantabria;39538;IEC62196Type2Outlet;22.2;1
+punto_recarga_210;Torrelavega Calle Julián Ceballos;Calle Julián Ceballos;Cantabria;Cantabria;39300;StandardHouseholdCountrySpecific;2.3;1
+punto_recarga_211;Sestao;;Biscay;Basque Country;48910;['StandardHouseholdCountrySpecific', 'IEC62196Type2Outlet'];[2.8, 22.2];2
+punto_recarga_212;Iberdrola Barakaldo Avenida de La Ribera;Avenida de La Ribera;Biscay;Basque Country;48902;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[11.1, 2.3];2
+punto_recarga_213;IBIL Barakaldo Avenida de Euskadi;Avenida de Euskadi;Biscay;Basque Country;48903;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[22.2, 3.7];2
+punto_recarga_214;IBIL Bilbao Alameda de Urquijo;Alameda de Urquijo;Biscay;Basque Country;48008;IEC62196Type2Outlet;22.2;1
+punto_recarga_215;Iberdrola Miranda de Ebro;;Burgos;Castille & Leon;09200;['IEC62196Type2CCS', 'IEC62196Type2Outlet', 'Chademo'];[50, 22.2, 50];3
+punto_recarga_216;Iberdrola Barakaldo Avenida de La Ribera;Avenida de La Ribera;Biscay;Basque Country;48902;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[11.1, 2.3];2
+punto_recarga_217;Iberdrola Bilbao Calle Elcano;Calle Elcano;Biscay;Basque Country;48008;['IEC62196Type2CCS', 'Chademo', 'IEC62196Type2Outlet'];[50, 50, 22.2];3
+punto_recarga_218;IBIL Barakaldo Avenida de Euskadi;Avenida de Euskadi;Biscay;Basque Country;48903;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[22.2, 3.7];2
+punto_recarga_219;IBIL Bilbao Alameda de Urquijo;Alameda de Urquijo;Biscay;Basque Country;48008;IEC62196Type2Outlet;22.2;1
+punto_recarga_220;Bilbao Gran Vía Don Diego López de Haro;Gran Vía Don Diego López de Haro;Biscay;Basque Country;48011;IEC62196Type2Outlet;11.1;1
+punto_recarga_221;IBIL Leioa Calle Iturriondo;Calle Iturriondo;Biscay;Basque Country;48940;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[22.2, 3.7];2
+punto_recarga_222;Leioa Avenida de Sabino Arana;Avenida de Sabino Arana;Biscay;Basque Country;48940;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[22.2, 3.7];2
+punto_recarga_223;Iberdrola Bilbao Calle Elcano;Calle Elcano;Biscay;Basque Country;48008;['IEC62196Type2CCS', 'Chademo', 'IEC62196Type2Outlet'];[50, 50, 22.2];3
+punto_recarga_224;Tesla Bilbao Plaza de Federico Moyúa;Plaza de Federico Moyúa;Biscay;Basque Country;48009;Tesla;;1
+punto_recarga_225;Bilbao Calle de Rodríguez Arias;Calle de Rodríguez Arias;Biscay;Basque Country;48013;StandardHouseholdCountrySpecific;3.7;1
+punto_recarga_226;Sestao;;Biscay;Basque Country;48910;['StandardHouseholdCountrySpecific', 'IEC62196Type2Outlet'];[2.8, 22.2];2
+punto_recarga_227;Tesla Bilbao Calle Canciller Ayala;Calle Canciller Ayala;Biscay;Basque Country;48008;Tesla;;1
+punto_recarga_228;Leioa Avenida de Sabino Arana;Avenida de Sabino Arana;Biscay;Basque Country;48940;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[22.2, 3.7];2
+punto_recarga_229;IBIL Bilbao Carretera Bilbao-Galdakao;Carretera Bilbao-Galdakao;Biscay;Basque Country;48004;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[22.2, 3.7];2
+punto_recarga_230;IBIL Bilbao Alameda de Urquijo;Alameda de Urquijo;Biscay;Basque Country;48008;IEC62196Type2Outlet;22.2;1
+punto_recarga_231;IBIL Mondragón Calle de Goiru;Calle de Goiru;Gipuzkoa;Basque Country;20500;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[22.2, 3.7];2
+punto_recarga_232;IBIL Bilbao Calle de la Virgen de Begoña;Calle de la Virgen de Begoña;Biscay;Basque Country;48006;['IEC62196Type2CCS', 'Chademo', 'IEC62196Type2Outlet'];[50, 50, 22.2];3
+punto_recarga_233;Bilbao Avenida de Abandoibarra;Avenida de Abandoibarra;Biscay;Basque Country;48011;StandardHouseholdCountrySpecific;2.8;1
+punto_recarga_234;IBIL Bilbao Calle de Fernández del Campo;Calle de Fernández del Campo;Biscay;Basque Country;48010;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[22.2, 3.7];2
+punto_recarga_235;Sestao;;Biscay;Basque Country;48910;['StandardHouseholdCountrySpecific', 'IEC62196Type2Outlet'];[2.8, 22.2];2
+punto_recarga_236;IBIL Bilbao Plaza del Bombero Echaniz;Plaza del Bombero Echaniz;Biscay;Basque Country;48010;['IEC62196Type2CCS', 'Chademo', 'IEC62196Type2Outlet'];[50, 50, 22.2];3
+punto_recarga_237;IBIL Bilbao Plaza del Ensanche;Plaza del Ensanche;Biscay;Basque Country;48001;IEC62196Type2Outlet;22.2;1
+punto_recarga_238;IBIL Barakaldo Avenida de Euskadi;Avenida de Euskadi;Biscay;Basque Country;48903;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[22.2, 3.7];2
+punto_recarga_239;IBIL Barakaldo Avenida de Euskadi;Avenida de Euskadi;Biscay;Basque Country;48903;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[22.2, 3.7];2
+punto_recarga_240;Renault Albacete Calle de la A;Calle de la A;Albacete;Castille-La Mancha;02007;IEC62196Type2Outlet;22.2;1
+punto_recarga_241;Albacete;;Albacete;Castille-La Mancha;02001;['IEC62196Type2Outlet', 'IEC62196Type2CCS', 'Chademo'];[43.6, 50, 50];3
+punto_recarga_242;Toledo;;Toledo;Castille-La Mancha;45005;StandardHouseholdCountrySpecific;2.8;1
+punto_recarga_243;Fuenlabrada Avenida de la Universidad;Avenida de la Universidad;Madrid;Community of Madrid;28942;IEC62196Type2Outlet;22.2;1
+punto_recarga_244;Nissan Olías del Rey Carretera de Madrid Toledo;Carretera de Madrid Toledo;Toledo;Castille-La Mancha;45280;Chademo;25;1
+punto_recarga_245;Talavera de la Reina Calle de Vicente Leyva;Calle de Vicente Leyva;Toledo;Castille-La Mancha;45600;['Chademo', 'IEC62196Type2Outlet', 'IEC62196Type2CCS'];[25, 22.2, 25];3
+punto_recarga_246;Valdemoro Avenida de Andalucía;Avenida de Andalucía;Madrid;Community of Madrid;28343;['IEC62196Type2CCS', 'IEC62196Type2Outlet', 'Chademo'];[25, 22.2, 25];3
+punto_recarga_247;Arroyomolinos;;Madrid;Community of Madrid;28939;['IEC62196Type2Outlet', 'IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[3.7, 7.4, 2.8];3
+punto_recarga_248;Toledo Paseo de la Rosa;Paseo de la Rosa;Toledo;Castille-La Mancha;45006;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[3.7, 3.7];2
+punto_recarga_249;Tesla Villanueva de la Vera;;Caceres;Extremadura;10470;Tesla;;1
+punto_recarga_250;Belvís de la Jara;;Toledo;Castille-La Mancha;45660;['IEC60309AC1PhaseBlue', 'StandardHouseholdCountrySpecific'];[None, 2.8];2
+punto_recarga_251;Iberdrola Rivas-Vaciamadrid Calle de Severo Ochoa;Calle de Severo Ochoa;Madrid;Community of Madrid;28521;['Chademo', 'IEC62196Type2Outlet', 'IEC62196Type2CCS'];[50, 22.2, 50];3
+punto_recarga_252;Yebes Avenida María Moliner;Avenida María Moliner;Guadalajara;Castille-La Mancha;19139;StandardHouseholdCountrySpecific;3.7;1
+punto_recarga_253;IBIL Alovera;;Guadalajara;Castille-La Mancha;19208;['IEC62196Type2Outlet', 'IEC62196Type2CCS', 'Chademo'];[7.4, 50, 50];3
+punto_recarga_254;Candeleda;;Ávila;Castille & Leon;05489;IEC62196Type2Outlet;11.1;1
+punto_recarga_255;Renault Plasencia Avenida de España;Avenida de España;Caceres;Extremadura;10600;IEC62196Type2Outlet;22.2;1
+punto_recarga_256;Cañamero Pasaje Polígono Industrial;Pasaje Polígono Industrial;Caceres;Extremadura;10136;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[22.2, 3.7];2
+punto_recarga_257;Cañamero Pasaje Polígono Industrial;Pasaje Polígono Industrial;Caceres;Extremadura;10136;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[22.2, 3.7];2
+punto_recarga_258;Wenea Cáceres Avenida de la Universidad;Avenida de la Universidad;Caceres;Extremadura;10004;['IEC62196Type2Outlet', 'Chademo'];[12.7, 50];2
+punto_recarga_259;Tesla Ladrillar Travesia Factoria;Travesia Factoria;Caceres;Extremadura;10624;Tesla;;1
+punto_recarga_260;Candelario Calle de las Eras;Calle de las Eras;Salamanca;Castille & Leon;37710;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[22.2, 2.3];2
+punto_recarga_261;Arroyo de la Encomienda Calle Me Falta un Tornillo;Calle Me Falta un Tornillo;Valladolid;Castille & Leon;47195;StandardHouseholdCountrySpecific;3.7;1
+punto_recarga_262;Iberdrola Valladolid Avenida de Ramón Pradera;Avenida de Ramón Pradera;Valladolid;Castille & Leon;47009;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[11.1, 2.3];2
+punto_recarga_263;Salamanca Arroyo de Santo Domingo;Arroyo de Santo Domingo;Salamanca;Castille & Leon;37008;IEC62196Type2Outlet;22.2;1
+punto_recarga_264;Nissan Burgos Calle del Alcalde Martín Cobos;Calle del Alcalde Martín Cobos;Burgos;Castille & Leon;09007;Chademo;50;1
+punto_recarga_265;Barcelona;;Barcelona;Catalonia;08007;StandardHouseholdCountrySpecific;3.7;1
+punto_recarga_266;Pacs del Penedès;;Barcelona;Catalonia;08796;['Tesla', 'IEC62196Type2Outlet'];[25, 2.8];2
+punto_recarga_267;Sant Andreu de la Barca Carrer de l'Empordà;Calle del Empordà;Barcelona;Catalonia;08740;IEC62196Type2Outlet;3.7;1
+punto_recarga_268;Terrassa Autopista del Vallès;Autopista del Vallès;Barcelona;Catalonia;08228;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[7.4, 3.7];2
+punto_recarga_269;Nissan Fornells de la Selva Carretera N-II;Carretera N-II;Gerona;Catalonia;17458;Chademo;50;1
+punto_recarga_270;Tesla Navata;;Gerona;Catalonia;17744;Tesla;;1
+punto_recarga_271;Iberdrola Girona Carretera de Santa Coloma;Carretera de Santa Coloma;Gerona;Catalonia;17005;IEC62196Type2Outlet;7.4;1
+punto_recarga_272;l'Escala Carrer de Romeu de Corbera;Calle de Romeu de Corbera;Gerona;Catalonia;17130;IEC62196Type2Outlet;22.2;1
+punto_recarga_273;Alicante Plaza de la Puerta del Mar;Plaza de la Puerta del Mar;Alicante;Community of Valencia;03002;IEC62196Type2Outlet;3.7;1
+punto_recarga_274;Alcoy Avenida Hispanitat;Avenida Hispanitat;Alicante;Community of Valencia;03804;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[3.7, 3.7];2
+punto_recarga_275;Avià Avinguda de Pau Casals;Avenida de Pau Casals;Barcelona;Catalonia;08610;IEC62196Type2Outlet;11.1;1
+punto_recarga_276;Lleida Avinguda de Barcelona;Avenida de Barcelona;Lleida;Catalonia;25001;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[7.4, 2.8];2
+punto_recarga_277;Montferrer i Castellbò;;Lleida;Catalonia;25712;StandardHouseholdCountrySpecific;3.7;1
+punto_recarga_278;IBIL Ponferrada Avenida de Compostilla;Avenida de Compostilla;Leon;Castille & Leon;24402;IEC62196Type2Outlet;22.2;1
+punto_recarga_279;Santa Cruz da Rabeda (Santa Cruz) Lugar A Zamorana;Lugar A Zamorana;Ourense;Galicia;32901;['Chademo', 'IEC62196Type2Outlet'];[50, 22.2];2
+punto_recarga_280;Ourense;;Ourense;Galicia;32001;StandardHouseholdCountrySpecific;2.8;1
+punto_recarga_281;Santa Cruz da Rabeda (Santa Cruz) Lugar A Zamorana;Lugar A Zamorana;Ourense;Galicia;32901;['Chademo', 'IEC62196Type2Outlet'];[50, 22.2];2
+punto_recarga_282;Iberdrola Toral de los Vados;;Leon;Castille & Leon;24560;['IEC62196Type2CCS', 'IEC62196Type2Outlet', 'Chademo'];[50, 22.2, 50];3
+punto_recarga_283;Ourense Calle de la Verea Real de Seixalbo;Calle de la Verea Real de Seixalbo;Ourense;Galicia;32970;IEC62196Type1;7.4;1
+punto_recarga_284;Ourense;;Ourense;Galicia;32001;StandardHouseholdCountrySpecific;2.8;1
+punto_recarga_285;Nissan San Lázaro (Santiago);Vía de Isaac Peral;A Coruña;Galicia;15890;Chademo;50;1
+punto_recarga_286;A Coruña;;A Coruña;Galicia;15003;IEC62196Type2Outlet;22.2;1
+punto_recarga_287;Tesla Santiago de Compostela;Praza do Obradoiro;A Coruña;Galicia;15705;Tesla;;1
+punto_recarga_288;San Cristovo das Viñas (San Cristovo);;A Coruña;Galicia;15008;['Tesla', 'IEC62196Type2Outlet'];[25, 2.8];2
+punto_recarga_289;San Lázaro (Santiago);Rúa de Amio;A Coruña;Galicia;15898;IEC62196Type2Outlet;3.7;1
+punto_recarga_290;Volkswagen San Cristovo das Viñas (San Cristovo) Carretera Baños de Arteixo;Carretera Baños de Arteixo;A Coruña;Galicia;15008;IEC62196Type2Outlet;2.8;1
+punto_recarga_291;Volkswagen San Cristovo das Viñas (San Cristovo) Carretera Baños de Arteixo;Carretera Baños de Arteixo;A Coruña;Galicia;15008;IEC62196Type2Outlet;2.8;1
+punto_recarga_292;San Lázaro (Santiago);Rúa de Amio;A Coruña;Galicia;15898;IEC62196Type2Outlet;3.7;1
+punto_recarga_293;Santiago de Compostela;Avenida do Camiño Francés;A Coruña;Galicia;15703;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[7.4, 2.8];2
+punto_recarga_294;Tesla Santiago de Compostela;Praza do Obradoiro;A Coruña;Galicia;15705;Tesla;;1
+punto_recarga_295;A Coruña Plaza de Pontevedra;Plaza de Pontevedra;A Coruña;Galicia;15003;['StandardHouseholdCountrySpecific', 'IEC62196Type2Outlet'];[2.8, 2.8];2
+punto_recarga_296;Tesla Arganza Calle Iglesia;Calle Iglesia;Leon;Castille & Leon;24546;Tesla;;1
+punto_recarga_297;Vigo;;Pontevedra;Galicia;36208;IEC62196Type2Outlet;2.8;1
+punto_recarga_298;Vigo;;Pontevedra;Galicia;36209;['IEC60309AC1PhaseBlue', 'IEC60309AC1PhaseBlue'];[None, 3.7];2
+punto_recarga_299;Vigo Calle del Príncipe;Calle del Príncipe;Pontevedra;Galicia;36201;StandardHouseholdCountrySpecific;3.7;1
+punto_recarga_300;Vigo Calle de Lepanto;Calle de Lepanto;Pontevedra;Galicia;36201;StandardHouseholdCountrySpecific;2.8;1
+punto_recarga_301;Vigo Calle de Lepanto;Calle de Lepanto;Pontevedra;Galicia;36201;StandardHouseholdCountrySpecific;2.8;1
+punto_recarga_302;Renault Salcedo (San Martiño);;Pontevedra;Galicia;36143;IEC62196Type2Outlet;22.2;1
+punto_recarga_303;Nissan Santa Comba de Bértola (Santa Comba);;Pontevedra;Galicia;36140;Chademo;50;1
+punto_recarga_304;Tesla Padriñán (San Xenxo) Paseo de la Praia de Silgar;Paseo de la Praia de Silgar;Pontevedra;Galicia;36960;Tesla;;1
+punto_recarga_305;Vigo Calle de Beiramar;Calle de Beiramar;Pontevedra;Galicia;36202;IEC62196Type2Outlet;3.7;1
+punto_recarga_306;Vigo Calle del Príncipe;Calle del Príncipe;Pontevedra;Galicia;36201;StandardHouseholdCountrySpecific;3.7;1
+punto_recarga_307;Renault Lavadores (Santa Cristina);Avenida de Madrid;Pontevedra;Galicia;36214;IEC62196Type2Outlet;22.2;1
+punto_recarga_308;Ourense Calle de Juan XXIII;Calle de Juan XXIII;Ourense;Galicia;32003;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[22.2, 3.7];2
+punto_recarga_309;Vigo Calle del Príncipe;Calle del Príncipe;Pontevedra;Galicia;36201;StandardHouseholdCountrySpecific;3.7;1
+punto_recarga_310;Santiago de Compostela Calle del Restollal;Calle del Restollal;A Coruña;Galicia;15702;StandardHouseholdCountrySpecific;2.8;1
+punto_recarga_311;San Caetano (Santiago) Calle del Cruceiro de la Coruña;Calle del Cruceiro de la Coruña;A Coruña;Galicia;15898;StandardHouseholdCountrySpecific;2.8;1
+punto_recarga_312;Iberdrola Sárdoma (San Pedro);Avenida de Madrid;Pontevedra;Galicia;36214;['IEC62196Type2CCS', 'Chademo', 'IEC62196Type2Outlet'];[50, 50, 22.2];3
+punto_recarga_313;Teis (San Salvador) Travesía de Vigo;Travesía de Vigo;Pontevedra;Galicia;36207;StandardHouseholdCountrySpecific;2.8;1
+punto_recarga_314;Vigo Calle del Príncipe;Calle del Príncipe;Pontevedra;Galicia;36201;StandardHouseholdCountrySpecific;3.7;1
+punto_recarga_315;Vigo Calle del Pintor Colmeiro;Calle del Pintor Colmeiro;Pontevedra;Galicia;36203;['StandardHouseholdCountrySpecific', 'IEC62196Type2Outlet'];[2.8, 2.8];2
+punto_recarga_316;San Cristovo das Viñas (San Cristovo);;A Coruña;Galicia;15008;StandardHouseholdCountrySpecific;2.8;1
+punto_recarga_317;Vigo Calle del Arenal;Calle del Arenal;Pontevedra;Galicia;36201;['StandardHouseholdCountrySpecific', 'IEC62196Type2Outlet'];[2.8, 22.2];2
+punto_recarga_318;Vigo Plaza de la Independencia;Plaza de la Independencia;Pontevedra;Galicia;36211;['StandardHouseholdCountrySpecific', 'IEC62196Type2Outlet'];[2.8, 2.8];2
+punto_recarga_319;Tesla Ponferrada Avenida de la Constitución;Avenida de la Constitución;Leon;Castille & Leon;24404;Tesla;;1
+punto_recarga_320;Zamora Avenida del Príncipe de Asturias;Avenida del Príncipe de Asturias;Zamora;Castille & Leon;49029;StandardHouseholdCountrySpecific;3.7;1
+punto_recarga_321;Madrid Calle del Arroyo de Valdebebas;Calle del Arroyo de Valdebebas;Madrid;Community of Madrid;28050;StandardHouseholdCountrySpecific;3.7;1
+punto_recarga_322;Tesla Madrid;;Madrid;Community of Madrid;28050;Tesla;;1
+punto_recarga_323;Renault Vitoria-Gasteiz Portal de Gamarra;Portal de Gamarra;Araba/Álava;Basque Country;01013;StandardHouseholdCountrySpecific;2.8;1
+punto_recarga_324;EVBox Vitoria-Gasteiz Portal de Zurbano;Portal de Zurbano;Araba/Álava;Basque Country;01013;IEC62196Type2Outlet;3.7;1
+punto_recarga_325;EVBox Vitoria-Gasteiz Portal de Zurbano;Portal de Zurbano;Araba/Álava;Basque Country;01013;IEC62196Type2Outlet;3.7;1
+punto_recarga_326;Logroño Calle del Muro de Francisco de la Mata;Calle del Muro de Francisco de la Mata;Rioja;Rioja;26001;['StandardHouseholdCountrySpecific', 'IEC62196Type2Outlet'];[2.8, 7.4];2
+punto_recarga_327;Vitoria-Gasteiz Calle de Prudencio María Verástegui;Calle de Prudencio María Verástegui;Araba/Álava;Basque Country;01002;['StandardHouseholdCountrySpecific', 'IEC62196Type2Outlet'];[3.7, 7.4];2
+punto_recarga_328;Iberdrola Campezo;;Araba/Álava;Basque Country;01128;['IEC62196Type2CCS', 'Chademo', 'IEC62196Type2Outlet'];[50, 50, 22.2];3
+punto_recarga_329;EnelX Vitoria-Gasteiz Calle Vitorialanda;Calle Vitorialanda;Araba/Álava;Basque Country;01010;['IEC62196Type2CCS', 'Chademo', 'IEC62196Type2Outlet'];[25, 25, 11.1];3
+punto_recarga_330;Labastida Calle de Solagüen;Calle de Solagüen;Araba/Álava;Basque Country;01330;IEC62196Type2Outlet;11.1;1
+punto_recarga_331;Vitoria-Gasteiz Calle del Puerto de Barazar;Calle del Puerto de Barazar;Araba/Álava;Basque Country;01013;['StandardHouseholdCountrySpecific', 'IEC62196Type2Outlet'];[3.7, 7.4];2
+punto_recarga_332;IBIL San Sebastián Plaza de Nafarroa Beherea;Plaza de Nafarroa Beherea;Gipuzkoa;Basque Country;20001;IEC62196Type2Outlet;22.2;1
+punto_recarga_333;IBIL Azpeitia;Salbe Auzoa;Gipuzkoa;Basque Country;20730;IEC62196Type2Outlet;22.2;1
+punto_recarga_334;Azkoitia;Xabier Munibe Zuhaiztia;Gipuzkoa;Basque Country;20720;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[22.2, 3.7];2
+punto_recarga_335;IBIL San Sebastián Calle de Gregorio Ordóñez;Calle de Gregorio Ordóñez;Gipuzkoa;Basque Country;20011;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[11.1, 3.7];2
+punto_recarga_336;IBIL San Sebastián Plaza de Irún;Plaza de Irún;Gipuzkoa;Basque Country;20011;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[22.2, 3.7];2
+punto_recarga_337;San Sebastián Paseo de Mikeletegi;Paseo de Mikeletegi;Gipuzkoa;Basque Country;20009;['StandardHouseholdCountrySpecific', 'IEC62196Type2Outlet'];[3.7, 7.4];2
+punto_recarga_338;Oiartzun Polígono Lintzirin;Polígono Lintzirin;Gipuzkoa;Basque Country;20180;['StandardHouseholdCountrySpecific', 'IEC62196Type2Outlet'];[3.7, 7.4];2
+punto_recarga_339;Iberdrola Azkoitia Calle de Nagusia;Calle de Nagusia;Gipuzkoa;Basque Country;20720;IEC62196Type2Outlet;22.2;1
+punto_recarga_340;IBIL Elorrio Calle de Nizeto Urkizu;Calle de Nizeto Urkizu;Biscay;Basque Country;48230;IEC62196Type2Outlet;22.2;1
+punto_recarga_341;San Sebastián Calle de Fernando Múgica;Calle de Fernando Múgica;Gipuzkoa;Basque Country;20018;IEC62196Type2Outlet;22.2;1
+punto_recarga_342;IBIL Abadiño Barrio de Murueta;Barrio de Murueta;Biscay;Basque Country;48220;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[22.2, 3.7];2
+punto_recarga_343;EnelX Bergara Calle de Urteaga;Calle de Urteaga;Gipuzkoa;Basque Country;20569;['IEC62196Type2CCS', 'Chademo', 'IEC62196Type2Outlet'];[25, 25, 11.1];3
+punto_recarga_344;Iberdrola Eibar Calle de Barrena;Calle de Barrena;Gipuzkoa;Basque Country;20600;['IEC62196Type2CCS', 'Chademo', 'IEC62196Type2Outlet'];[50, 50, 22.2];3
+punto_recarga_345;IBIL San Sebastián Calle de Eustasio Amilibia;Calle de Eustasio Amilibia;Gipuzkoa;Basque Country;20011;IEC62196Type2Outlet;22.2;1
+punto_recarga_346;IBIL Azkoitia Barrio Bazterretxe;Barrio Bazterretxe;Gipuzkoa;Basque Country;20720;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[22.2, 3.7];2
+punto_recarga_347;EnelX Bergara Calle de Urteaga;Calle de Urteaga;Gipuzkoa;Basque Country;20569;['IEC62196Type2CCS', 'Chademo', 'IEC62196Type2Outlet'];[25, 25, 11.1];3
+punto_recarga_348;EnelX Bergara Calle de Urteaga;Calle de Urteaga;Gipuzkoa;Basque Country;20569;['IEC62196Type2CCS', 'Chademo', 'IEC62196Type2Outlet'];[25, 25, 11.1];3
+punto_recarga_349;IBIL San Sebastián Paseo de Mikeletegi;Paseo de Mikeletegi;Gipuzkoa;Basque Country;20009;['IEC62196Type2Outlet', 'StandardHouseholdCountrySpecific'];[22.2, 3.7];2
+punto_recarga_350;Iberdrola Azkoitia Calle de Xabier Munibe;Calle de Xabier Munibe;Gipuzkoa;Basque Country;20720;IEC62196Type2Outlet;22.2;1
+punto_recarga_351;Tesla San Sebastián;;Gipuzkoa;Basque Country;20010;Tesla;;1
+punto_recarga_352;Labastida Calle de Solagüen;Calle de Solagüen;Araba/Álava;Basque Country;01330;IEC62196Type2Outlet;11.1;1
