@@ -29,3 +29,6 @@ Se añaden dos carpetas:
 	  - script de python: __init__.py (crea la app que iniciará la base de datos y registrará los molodelos) y main.py (se construyen los modelos que llaman a los ficheros .html)
 	  - templates: contiene los ficheros .html. Se crean dos plantillas para el formato del resto de páginas: base.html y base_login.html
  	  - static: elementos estáticos como imágenes o ficheros .css para el estilo de los objetos.
+
+
+- flask_auth_app_blanca: carpeta que contiene una copia de la app en la que Blanca hace pruebas (en un futuro se borrará)
