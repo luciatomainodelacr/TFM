@@ -7,6 +7,15 @@
 
         <div class="container">
 
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="notification is-danger">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+            {% endwith %}
+
+
           <!-- Outer Row -->
           <div class="row justify-content-center" >
 
@@ -25,9 +34,10 @@
                         <div class="text-center">
                           <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                         </div>
-                        <form class="user">
+
+                        <form class="user" method= "POST" action='/login'>
                           <div class="form-group">
-                            <input type="email" class="form-control form-control-user" id="email" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                            <input type="email" class="form-control form-control-user" id="email" aria-describedby="emailHelp" placeholder="Enter Email Address..." autofocus="">
                           </div>
                           <div class="form-group">
                             <input type="password" class="form-control form-control-user" id="password" placeholder="Password">
@@ -38,10 +48,9 @@
                               <label class="custom-control-label" for="customCheck">Remember Me</label>
                             </div>
                           </div>
-                          <a href="index" class="btn btn-primary btn-user btn-block">
-                            Login
-                          </a>
-                          
+
+                          <p style="color:red; font-size: 2vh !important"> {{msg}}</p>
+                          <input type="submit" id="send-signup" name="signup" value="Login" class="btn btn-primary btn-user btn-block is-fullwidth">                        
                           
                         </form>
                         <hr>

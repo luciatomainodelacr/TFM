@@ -17,6 +17,7 @@ Modelo de autenticación. Tres páginas:
 
 # Se cargan las librerias
 from flask import Blueprint, Flask, render_template, request, redirect, url_for
+from flask_login import UserMixin, login_required, LoginManager, login_user, logout_user, current_user
 from flask_sqlalchemy import SQLAlchemy
 from . import db
 
@@ -53,7 +54,21 @@ def register():
     return render_template('register.html')
 
 
-# 4.- Página index ------------------------------------------------
+# 4.- Página forgot-password --------------------------------------
+#------------------------------------------------------------------
+
+@main.route('/password', methods = ["GET", "POST"])
+def password():
+    return render_template('password.html')
+
+
+
+@main.route('/password1', methods = ["GET", "POST"])
+def password1():
+    return render_template('password1.html')
+
+
+# 5.- Página index ------------------------------------------------
 #------------------------------------------------------------------
 
 @main.route('/index', methods = ["GET", "POST"])
