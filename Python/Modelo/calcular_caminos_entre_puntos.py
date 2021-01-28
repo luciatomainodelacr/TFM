@@ -28,9 +28,6 @@ Camino óptimo: ['Zaragoza Tren', 'Soria Bus', 'Zamora Bus']
 """
 
 
-# Se establece el diretorio base
-os.chdir('/home/tfm/Documentos/TFM/Python/Modelo/')
-
 # Se cargan las librerias
 import networkx as nx
 import os
@@ -38,13 +35,17 @@ import pandas as pd
 import sys
 import mysql.connector
 
+
+# Se establece el diretorio base
+os.chdir('/home/tfm/Documentos/TFM/Python/Modelo/')
+
+
 import ModeloAvanzado.funcion_aux as fa
 
 
 
 # 1.- Se definen las funciones ------------------------------------
 #------------------------------------------------------------------
-
 
 # Funcion que devuelve la duracion completa del trayecto 
 def show_path(path):
@@ -68,6 +69,8 @@ def show_path(path):
         print("\n     Total Distancia: %s km \n" % (total_distancia))
     except:
         print("No hay ruta válida para ", path)
+
+
 
 # Funcion que calcule todos los caminos posible y muestre los que tienen menor distancia
 def get_all_shortest_paths(DiGraph, origen, destino):
@@ -106,11 +109,15 @@ def get_shortest_path(DiGraph, origen, destino):
             print("No hay ruta válida desde ", origen," hasta ", destino)
 
 
+# 2.- Main --------------------------------------------------------
+#------------------------------------------------------------------
 
-# MAIN
 if __name__ == "__main__":
+    
     if len(sys.argv) != 8:
-        print("ERROR: Este programa necesita 8 parametros: nombre_programa tipo_programa marca_coche modelo_coche origen destino carga_inicial carga_final")
+        print("""ERROR: Este programa necesita 8 parametros: nombre_programa
+            tipo_programa marca_coche modelo_coche origen destino carga_inicial 
+            carga_final""")
         sys.exit(1)
     else:
         print("The number of arguments is ", len(sys.argv))
