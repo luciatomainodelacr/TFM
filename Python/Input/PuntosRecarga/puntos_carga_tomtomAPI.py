@@ -13,7 +13,7 @@ import pandas as pd
 os.chdir('/home/tfm/Documentos/TFM/Datasets/')
 
 # API KEY - Tomtom
-api_key = 'vBGAofG9iufITkNwekDkGA9xjAoEmM9o' 
+api_key = '#################################' 
 
 
 # 1.- Carga de inputs ---------------------------------------------
