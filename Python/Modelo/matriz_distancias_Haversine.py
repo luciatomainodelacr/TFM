@@ -116,8 +116,8 @@ df_dist_haversine = pd.DataFrame()
 
 df_dist_haversine['Origen'] = list_origen
 df_dist_haversine['Destino'] = list_destino
-df_dist_haversine['Distance_m'] = list_distancia
-df_dist_haversine['Distance_km'] = df_dist_haversine['Distance_m']/1000
+df_dist_haversine['Distance_km'] = list_distancia
+
 
 
 

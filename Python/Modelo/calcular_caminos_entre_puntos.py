@@ -25,6 +25,9 @@ Camino óptimo: ['Zaragoza Tren', 'Soria Bus', 'Zamora Bus']
 303.507
 
      Total Distancia: 460.619 km 
+
+Ejecutar desde el terminal: python3 calcular_caminos_entre_puntos.py DB VOLKSWAGEN "ID3 PURE" "Alicante Tren" "A Corunia Bus" 65 70
+
 """
 
 
