@@ -21,12 +21,22 @@ from flask_login import UserMixin, login_required, LoginManager, login_user, log
 from flask_sqlalchemy import SQLAlchemy
 from . import db
 
-
+# from forms import SignupForm
 
 main = Blueprint('main', __name__)
 auth = Blueprint('auth', __name__)
 
 
+
+# Se cargan las librerias
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField, PasswordField
+from wtforms.validators import DataRequired, Email, Length
+
+class SignupForm(FlaskForm):
+    email    = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])    
+    submit   = SubmitField('Registrar')
 
 
 # 2.- Página para logearse ----------------------------------------
@@ -34,16 +44,18 @@ auth = Blueprint('auth', __name__)
 
 @main.route('/login', methods = ["GET", "POST"])
 def login():
-    if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
+    form = SignupForm()
+    if form.validate_on_submit():
+        email = form.email.data
+        password = form.password.data
 
         next = request.args.get('next', None)
         if next:
-            return redirect(url_for('next'))
+            return redirect(next)
         return redirect(url_for('index'))
 
-    return render_template('login.html')
+    return render_template('login.html', form=form)
+
 
 
 # 3.- Página register ---------------------------------------------
