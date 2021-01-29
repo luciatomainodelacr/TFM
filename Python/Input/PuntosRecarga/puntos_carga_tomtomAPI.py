@@ -15,15 +15,12 @@ os.chdir('/home/tfm/Documentos/TFM/Datasets/')
 # API KEY - Tomtom
 api_key = 'vBGAofG9iufITkNwekDkGA9xjAoEmM9o' 
 
-category = 'estaciones de carga de vehículos eléctricos'
-
 
 # 1.- Carga de inputs ---------------------------------------------
 #------------------------------------------------------------------
 
 # Puntos de recarga
 df = pd.read_csv(os.path.join(os.getcwd(),'PuntosRecarga/puntos_carga_reduced_Espana.csv'), sep = ',', encoding = 'iso-8859-1', decimal = '.')
-
 
 
 # 2.- Función API Búsqueda ----------------------------------------
@@ -97,6 +94,8 @@ def tomtom_category_search_request(api_key, category, lat_pto, long_pto, id_pto)
 
 # Se inicializa una lista vacia para calcular las distancias
 list_id_pto = []
+list_latitude = []
+list_longitude = []
 list_name = []
 list_streetName = []
 list_provincia = []
@@ -131,6 +130,8 @@ for i in df.index:
 
     # Se apendiza a las listas creadas
     list_id_pto.append(id_pto)
+    list_latitude.append(lat_pto)
+    list_longitude.append(long_pto)
     list_name.append(name)
     list_streetName.append(streetName)
     list_provincia.append(provincia)
@@ -147,6 +148,8 @@ for i in df.index:
 df_ptos_recarga_final = pd.DataFrame()
 
 df_ptos_recarga_final['id'] = list_id_pto
+df_ptos_recarga_final['latitude'] = list_latitude
+df_ptos_recarga_final['longitude'] = list_longitude
 df_ptos_recarga_final['name'] = list_name
 df_ptos_recarga_final['streetName'] = list_streetName
 df_ptos_recarga_final['provincia'] = list_provincia
