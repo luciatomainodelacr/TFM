@@ -1,7 +1,20 @@
 # =============================================================================
-#  PUNTOS DE RECARGA ESPAÑA
+#  ANALIZAR PUNTOS DE RECARGA ESPAÑA
 # =============================================================================
 
+"""
+    Proceso: 
+
+    Input: 
+        - /home/tfm/Documentos/TFM/Datasets/PuntosRecarga/puntos_carga_filt_Espana.csv
+    
+    Output:
+        - /home/tfm/Documentos/TFM/Datasets/PuntosRecarga/GoogleMapsAPI/puntos_carga_Espana.csv
+        - /home/tfm/Documentos/TFM/Datasets/PuntosRecarga/puntos_carga_reduced_Espana.csv
+
+
+
+"""
 
 # Se cargan las librerias
 import sys
@@ -18,6 +31,7 @@ from shapely.geometry import MultiPoint
 
 # Desactivar warnings (por defecto 'warn')
 pd.options.mode.chained_assignment = None
+
 
 
 # 1.- Definición de funciones -------------------------------------
@@ -99,31 +113,11 @@ def extraer_provincia(lugares, formatted_address):
     return x
 
 
-# Función para extraer el código postal
-def extraer_cp(formatted_address):
-    result = ''
-    x = [int(s) for s in formatted_address.split() if s.isdigit()]
-
-    if len(x) == 0:
-        result = 'No_infor'
-
-    if len(x) == 1 and len(str(x[0])) == 5:
-        result = x[0]
-
-    if len(x) == 2 and len(str(x[0])) == 5:
-        result = x[0]
-        
-    if len(x) == 2 and len(str(x[1])) == 5:
-        result = x[1]
-
-    return result
-
-
 # Función get_centermost_point
 def get_centermost_point(cluster):
-        centroid = (MultiPoint(cluster).centroid.x, MultiPoint(cluster).centroid.y)
-        centermost_point = min(cluster, key=lambda point: great_circle(point, centroid).m)
-        return tuple(centermost_point)
+    centroid = (MultiPoint(cluster).centroid.x, MultiPoint(cluster).centroid.y)
+    centermost_point = min(cluster, key=lambda point: great_circle(point, centroid).m)
+    return tuple(centermost_point)
 
 
 # Función clustering_dbscan
@@ -233,13 +227,9 @@ if __name__ == "__main__":
         df = df[df['province'] != 'Baleares']
 
 
-        # 2.4.- Extraer codigo postal -------------------------------------
-        #------------------------------------------------------------------
-
-        df["cp"] = df.apply(lambda a: extraer_cp(a['formatted_address']), axis = 1)
 
 
-        # 2.5.- Output ----------------------------------------------------
+        # 2.4.- Output ----------------------------------------------------
         #------------------------------------------------------------------
 
         df.to_csv(path_filt, sep = ";", index = False)
@@ -293,7 +283,6 @@ if __name__ == "__main__":
         result = pd.concat(frames)
 
         # Export reduced dataframe to csv
-        result.drop("cp",axis="columns", inplace=True)
         result.to_csv(path_reduced, index=False) 
         print("Exported reduced dataframe with ",result.shape," to ",path_reduced)
         

@@ -52,13 +52,13 @@ gmaps = googlemaps.Client(key=API_key)
 #------------------------------------------------------------------
 
 # Ciudades
-df_ciudades = pd.read_csv(os.path.join(os.getcwd(),'PuntosO_D/GeocodingAPI/ciudades.csv'), sep = ',', encoding = 'iso-8859-1', decimal = '.')
+df_ciudades     = pd.read_csv(os.path.join(os.getcwd(),'PuntosO_D/GeocodingAPI/ciudades.csv'), sep = ',', encoding = 'iso-8859-1', decimal = '.')
 
 # Puntos de recarga
 df_ptos_recarga = pd.read_csv(os.path.join(os.getcwd(),'PuntosRecarga/puntos_carga_reduced_Espana.csv'), sep = ',', encoding = 'iso-8859-1', decimal = '.')
 
 # Gasolineras
-df_gasolineras = pd.read_csv(os.path.join(os.getcwd(),'Gasolineras/gasolineras_reduced_Espana.csv'), sep = ',', encoding = 'iso-8859-1', decimal = '.')
+df_gasolineras  = pd.read_csv(os.path.join(os.getcwd(),'Gasolineras/gasolineras_reduced_Espana.csv'), sep = ',', encoding = 'iso-8859-1', decimal = '.')
 
 
 
@@ -127,17 +127,17 @@ list_destino = []
 for (i1_aux, row1_aux), (i2_aux, row2_aux) in pairwise(df_aux.iterrows()):
       
       # Se asigna la latitud y longitud del punto de origen
-      LatOrigin = row1_aux['Latitude'] 
-      LongOrigin = row1_aux['Longitude']
-      ciudad_ori = row1_aux['id']
+      LatOrigin = row1_aux["Latitude"] 
+      LongOrigin = row1_aux["Longitude"]
+      ciudad_ori = row1_aux["id"]
       origins = (LatOrigin,LongOrigin)
       
       for (i1, row1), (i2, row2) in pairwise(df.iterrows()):
                       
             # Se asigna la latitud y longitud de la fila siguiente
-            LatDest = row1['Latitude']
-            LongDest = row1['Longitude']
-            ciudad_dest = row1['id']
+            LatDest = row1["Latitude"]
+            LongDest = row1["Longitude"]
+            ciudad_dest = row1["id"]
             destination = (LatDest,LongDest)
             
             if (ciudad_ori != ciudad_dest):
@@ -164,12 +164,12 @@ list_duracion.remove(0)
 # Se crea el dataframe con las distancias
 df_distancias = pd.DataFrame()
 
-df_distancias['Origen'] = list_origen
-df_distancias['Destino'] = list_destino
-df_distancias['Distance_m'] = list_distancia
-df_distancias['Distance_km'] = df_distancias['Distance_m']/1000
-df_distancias['Duracion_seg'] = list_duracion
-df_distancias['Duracion_min'] = df_distancias['Duracion_seg']/60
+df_distancias["Origen"] = list_origen
+df_distancias["Destino"] = list_destino
+df_distancias["Distance_m"] = list_distancia
+df_distancias["Distance_km"] = df_distancias["Distance_m"]/1000
+df_distancias["Duracion_seg"] = list_duracion
+df_distancias["Duracion_min"] = df_distancias["Duracion_seg"]/60
 
 
 

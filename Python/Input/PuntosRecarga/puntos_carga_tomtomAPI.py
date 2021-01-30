@@ -103,13 +103,13 @@ def tomtom_category_search_request(api_key, category, id_pto, lat_pto, long_pto)
             
     # Se define el json resultado
     poi_data = {
-        "name": name,
-        "streetName": streetName,
-        "provincia": provincia,
-        "ccaa": ccaa,
-        "postalCode": postalCode,
-        "connectorType": connectorType,
-        "ratedPowerKW": ratedPowerKW,
+        "name"          : name,
+        "streetName"    : streetName,
+        "provincia"     : provincia,
+        "ccaa"          : ccaa,
+        "postalCode"    : postalCode,
+        "connectorType" : connectorType,
+        "ratedPowerKW"  : ratedPowerKW,
         "num_connectors": num_connectors
     }
 
