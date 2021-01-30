@@ -25,6 +25,9 @@ Camino óptimo: ['Zaragoza Tren', 'Soria Bus', 'Zamora Bus']
 303.507
 
      Total Distancia: 460.619 km 
+
+Ejecutar desde el terminal: python3 calcular_caminos_entre_puntos.py DB VOLKSWAGEN "ID3 PURE" "Alicante Tren" "A Corunia Bus" 65 70
+
 """
 
 
@@ -35,9 +38,17 @@ import pandas as pd
 import sys
 import mysql.connector
 
+
+# Se establece el diretorio base
+os.chdir('/home/tfm/Documentos/TFM/Python/Modelo/')
+
+
 import ModeloAvanzado.funcion_aux as fa
 
-#FUNCIONES
+
+
+# 1.- Se definen las funciones ------------------------------------
+#------------------------------------------------------------------
 
 # Funcion que devuelve la duracion completa del trayecto 
 def show_path(path):
@@ -62,6 +73,8 @@ def show_path(path):
     except:
         print("No hay ruta válida para ", path)
 
+
+
 # Funcion que calcule todos los caminos posible y muestre los que tienen menor distancia
 def get_all_shortest_paths(DiGraph, origen, destino):
     try:
@@ -80,6 +93,7 @@ def get_all_shortest_paths(DiGraph, origen, destino):
     except:
         print("No hay ruta válida desde ", origen," hasta ", destino)
 
+
 # Camino mas corto
 def get_shortest_path(DiGraph, origen, destino):
     try:
@@ -97,10 +111,16 @@ def get_shortest_path(DiGraph, origen, destino):
     except:
             print("No hay ruta válida desde ", origen," hasta ", destino)
 
-#MAIN
+
+# 2.- Main --------------------------------------------------------
+#------------------------------------------------------------------
+
 if __name__ == "__main__":
+    
     if len(sys.argv) != 8:
-        print("ERROR: Este programa necesita 8 parametros: nombre_programa tipo_programa marca_coche modelo_coche origen destino carga_inicial carga_final")
+        print("""ERROR: Este programa necesita 8 parametros: nombre_programa
+            tipo_programa marca_coche modelo_coche origen destino carga_inicial 
+            carga_final""")
         sys.exit(1)
     else:
         print("The number of arguments is ", len(sys.argv))
@@ -113,13 +133,17 @@ if __name__ == "__main__":
         destination = sys.argv[5]
         initial_charge = float(sys.argv[6])
         final_charge = float(sys.argv[7])
-        print("El programa lanzado es: ",program_name, program_type, car_brand, car_model, origin, destination, initial_charge, final_charge)
+        print("El programa lanzado es: ",program_name, program_type,
+        car_brand, car_model, origin, destination, initial_charge, final_charge)
 
     try:
+
         # 1.- Carga de inputs ---------------------------------------------
         #------------------------------------------------------------------
+
         if program_type == "DB":
-            #Crear conexión a la base de datos 
+
+            # Crear conexión a la base de datos 
             con = mysql.connector.connect(host="localhost",
                                         port=3306,            
                                         user="root",            

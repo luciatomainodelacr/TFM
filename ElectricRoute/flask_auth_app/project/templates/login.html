@@ -7,6 +7,15 @@
 
         <div class="container">
 
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="notification is-danger">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+            {% endwith %}
+
+
           <!-- Outer Row -->
           <div class="row justify-content-center" >
 
@@ -25,23 +34,40 @@
                         <div class="text-center">
                           <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                         </div>
-                        <form class="user">
-                          <div class="form-group">
-                            <input type="email" class="form-control form-control-user" id="email" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+
+                        <form class="user" action="" method= "POST" novalidate>
+                          {{ form.hidden_tag() }}
+
+                          <!-- Email -->
+                          <div>
+                              {{ form.email.label }}
+                              {{ form.email }}<br>
+                              {% for error in form.email.errors %}
+                              <span style="color: red;">{{ error }}</span>
+                              {% endfor %}                    
                           </div>
-                          <div class="form-group">
-                            <input type="password" class="form-control form-control-user" id="password" placeholder="Password">
+                         
+                          <!-- Password -->
+                          <div>
+                              {{ form.password.label }}
+                              {{ form.password }}<br>
+                              {% for error in form.password.errors %}
+                              <span style="color: red;">{{ error }}</span> 
+                              {% endfor %}                          
                           </div>
+
+                          <!-- Remember me -->
                           <div class="form-group">
                             <div class="custom-control custom-checkbox small">
                               <input type="checkbox" class="custom-control-input" id="customCheck">
                               <label class="custom-control-label" for="customCheck">Remember Me</label>
                             </div>
                           </div>
-                          <a href="index" class="btn btn-primary btn-user btn-block">
-                            Login
-                          </a>
-                          
+
+                          <!-- Login -->
+                          <div>
+                          {{ form.submit() }}
+                          </div>
                           
                         </form>
                         <hr>

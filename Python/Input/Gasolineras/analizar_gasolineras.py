@@ -1,6 +1,21 @@
-###############MACHINE LEARNING ALGORITHM FOR GAS STATIONS IN SPAIN###############
+# =============================================================================
+#  MACHINE LEARNING ALGORITHM FOR GAS STATIONS IN SPAIN
+# =============================================================================
 
-#Import libraries
+"""
+    Proceso: 
+
+    Input: 
+        - /home/tfm/Documentos/TFM/Datasets/Gasolineras/Gasolineras_de_España.csv
+        - /home/tfm/Documentos/TFM/Datasets/Gasolineras/gas_stations_categorical.txt
+        
+    Output: 
+        - /home/tfm/Documentos/TFM/Datasets/Gasolineras/gasolineras_filt_Espana.csv
+        - /home/tfm/Documentos/TFM/Datasets/Gasolineras/gasolineras_reduced_Espana.csv
+"""
+
+
+# Se cargan las librerías
 import sys
 import datetime
 import time
@@ -21,7 +36,11 @@ from sklearn.cluster import DBSCAN
 from geopy.distance import great_circle
 from shapely.geometry import MultiPoint
 
-#FUNCTIONS
+
+# 1.- Definición de funciones -------------------------------------
+#------------------------------------------------------------------
+
+
 def remove_accents(a):
     #return unidecode.unidecode(a.decode('utf-8'))
     return unidecode.unidecode(a)
@@ -44,6 +63,7 @@ def plot_multiple_histograms(df, cols):
                 sns.histplot(df[col], kde=True, ax=axs[j])
         else:
             sns.histplot(df[col], kde=True, ax=axs[i, j])
+
 
 def plot_multiple_countplots(df, cols):
     num_plots = len(cols)
@@ -159,6 +179,12 @@ def clustering_dbscan(df_filt):
     rs = rep_points.apply(lambda row: df_filt[(df_filt["latitud"]==row["latitud"]) & (df_filt["longitud"]==row["longitud"])].iloc[0], axis=1)
     return rs
 
+
+
+
+# 2.- Main --------------------------------------------------------
+#------------------------------------------------------------------
+
 if __name__ == "__main__":
 
     if len(sys.argv) != 2:
@@ -174,6 +200,7 @@ if __name__ == "__main__":
     path = "/home/tfm/Documentos/TFM/Datasets/Gasolineras/Gasolineras_de_España.csv"
     path_filt = "/home/tfm/Documentos/TFM/Datasets/Gasolineras/gasolineras_filt_Espana.csv"
     path_reduced = "/home/tfm/Documentos/TFM/Datasets/Gasolineras/gasolineras_reduced_Espana.csv"
+
     if program_type != "CLUSTER":
         #Import data into dataframe from csv
         df = pd.read_csv(path)

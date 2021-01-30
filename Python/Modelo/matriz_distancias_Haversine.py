@@ -4,7 +4,6 @@
 
 """
 
-
 Input: matriz_distancia_input.csv - contiene las coordenadas de las ciudades, 
         puntos de recarga y gasolineras
 
@@ -15,6 +14,7 @@ puntos del dataframe nodes y se calcula la distancia de Haversine entre ellos.
 Output: Devuelve un dataframe con las distancias para todas las combinaciones.
  
 """
+
 
 # Se cargan las librerias
 from itertools import tee
@@ -37,12 +37,13 @@ def haversine(lat1, lon1, lat2, lon2):
         Calcula la distancia Haversine de dos puntos
         dados
     """
-    rad = math.pi/180
-    dlat = lat2 - lat1
-    dlon = lon2 - lon1
-    R = 6372.795477598
-    a = (math.sin(rad*dlat/2))**2 + math.cos(rad*lat1)*math.cos(rad*lat2)*(math.sin(rad*dlon/2))**2
-    distancia = 2*R*math.asin(math.sqrt(a))
+    rad         = math.pi/180
+    dlat        = lat2 - lat1
+    dlon        = lon2 - lon1
+    R           = 6372.795477598
+    a           = (math.sin(rad*dlat/2))**2 + math.cos(rad*lat1)*math.cos(rad*lat2)*(math.sin(rad*dlon/2))**2
+    distancia   = 2*R*math.asin(math.sqrt(a))
+
     return distancia
 
 
@@ -62,45 +63,45 @@ def pairwise(iterable):
 #------------------------------------------------------------------
 
 # Se lee el fichero con los puntos de carga electrica
-df = pd.read_csv(os.path.join(os.getcwd(),'Matriz_Distancias/matriz_distancia_input.csv'), sep=';', encoding='iso-8859-1', decimal='.')
-df_aux = df
+df      = pd.read_csv(os.path.join(os.getcwd(),'Matriz_Distancias/matriz_distancia_input.csv'), sep=';', encoding='iso-8859-1', decimal='.')
+df_aux  = df
+
 
 
 # 3.- Construcción de la matriz -----------------------------------
 #------------------------------------------------------------------
 
 # Se inicializa una lista vacia para calcular las distancias
-list_distancia = [0]
-list_origen = []
-list_destino = []
-
+list_origen     = []
+list_destino    = []
+list_distancia  = [0]
 
 # Bucle que recorre cada par de filas y calcula la distancia
 for (i1_aux, row1_aux), (i2_aux, row2_aux) in pairwise(df_aux.iterrows()):
       
       # Se asigna la latitud y longitud del punto de origen
-      LatOrigin = row1_aux['Latitude'] 
-      LongOrigin = row1_aux['Longitude']
-      ciudad_ori = row1_aux['id']
-      origins = (LatOrigin,LongOrigin)
+      LatOrigin  = row1_aux["atitude"] 
+      LongOrigin = row1_aux["Longitude"]
+      ciudad_ori = row1_aux["id"]
+      origins    = (LatOrigin,LongOrigin)
       
       for (i1, row1), (i2, row2) in pairwise(df.iterrows()):
                       
             # Se asigna la latitud y longitud de la fila siguiente
-            LatDest = row1['Latitude']
-            LongDest = row1['Longitude']
-            ciudad_dest = row1['id']
-            destination = (LatDest,LongDest)
+            LatDest     = row1["Latitude"]
+            LongDest    = row1["Longitude"]
+            ciudad_dest = row1["id"]
+            destination = (LatDest, LongDest)
             
             if (ciudad_ori != ciudad_dest):
                 
                 # Se llama a la funcion distance_matrix de google
                 result_distance = haversine(LatOrigin, LongOrigin, LatDest, LongDest)
                 
-                # Se apendiza el resultado a la lista de distancias
-                list_distancia.append(result_distance)                
+                # Se apendiza el resultado a la lista de distancias               
                 list_origen.append(ciudad_ori)
                 list_destino.append(ciudad_dest)
+                list_distancia.append(result_distance) 
 
 
 
@@ -114,10 +115,9 @@ list_distancia.remove(0)
 # Se crea el dataframe con las distancias
 df_dist_haversine = pd.DataFrame()
 
-df_dist_haversine['Origen'] = list_origen
-df_dist_haversine['Destino'] = list_destino
-df_dist_haversine['Distance_m'] = list_distancia
-df_dist_haversine['Distance_km'] = df_dist_haversine['Distance_m']/1000
+df_dist_haversine["Origen"]      = list_origen
+df_dist_haversine["Destino"]     = list_destino
+df_dist_haversine["Distance_km"] = list_distancia
 
 
 
