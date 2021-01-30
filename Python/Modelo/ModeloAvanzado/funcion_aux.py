@@ -1,5 +1,6 @@
 #Importar librerias
 import pandas as pd
+import networkx as nx
 
 #FUNCIONES
 
@@ -114,5 +115,68 @@ def restriccion_ultima_parada(distancias_destino, carga_final, autonomia_coche):
     return restriccion_ultima_parada_df
 
 
+
+# 1.- Se definen las funciones ------------------------------------
+#------------------------------------------------------------------
+
+
+# Funcion que devuelve la duracion completa del trayecto 
+def show_path(DG,path):
+    try:
+        total_distancia = 0
+
+        for i in range(len(path)-1):
+            origen = path[i]
+            destino = path[i+1]
+            distancia = DG[origen][destino]["distance"]
+
+            total_distancia = total_distancia + distancia
+
+            #print("    %s -> %s\n    - Distancia: %s kilometros" % (
+                #df_ciudades.loc[origen]["ADDRESS"],
+                #df_ciudades.loc[destino]["ADDRESS"],
+                #distancia)
+            #)
+            print(distancia)        
+    
+        print("\n     Total Distancia: %s km \n" % (total_distancia))
+    except:
+        print("No hay ruta valida para ", path)
+
+# Funcion que calcule todos los caminos posible y muestre los que tienen menor distancia
+def get_all_shortest_paths(DiGraph, origen, destino):
+    try:
+        print("*** All shortest paths - Origen: %s Destino: %s" % (
+            origen, destino
+        ))
+        for weight in [None, "distance"]:
+            print("* Ordenando por: %s" % weight)
+            paths = list(nx.all_shortest_paths(DiGraph,
+                                              source = origen,
+                                              target = destino,
+                                              weight = weight))
+            for path in paths:
+                print("   Camino optimo: %s" % path)
+                show_path(DiGraph,path)
+    except:
+        print("No hay ruta valida desde ", origen," hasta ", destino)
+
+
+# Camino mas corto
+def get_shortest_path(DiGraph, origen, destino):
+    try:
+        print("*** Origen: %s Destino: %s" % (origen, destino))
+
+        for weight in ["distancia"]:
+            print(" Ordenado por: %s" % weight)
+            path = list(nx.astar_path(DiGraph,
+                                    (origen),
+                                    (destino),
+                                    weight = weight
+                                    ))
+            print("   Camino optimo: %s " % path)
+            show_path(DiGraph,path)
+    except:
+            print("No hay ruta valida desde ", origen," hasta ", destino)
 
 

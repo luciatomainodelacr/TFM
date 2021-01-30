@@ -3,39 +3,10 @@
 #  CALCULA RUTA OPTIMA ENTRE DOS PUNTOS
 # =============================================================================
 
-"""
-Fuente: http://sukiweb.net/archivos/2018/05/30/encontrando-caminos-optimos-con-grafos-en-python/
-
-Input: lista de ciudades, matriz de distancias entre las ciudades
-
-Proceso: Dadas dos ciudades origen-destino calcula la ruta optima entre ellas,
-o bien por el numero de nodos minimos necesarios para llegar o bien por el 
-target que se le indique, en este caso, minimizar la distancia total.
-
-Output: Ruta optima entre el origen y destino
-
-Ej:
->> get_all_shortest_paths(DG, 'Zaragoza Tren', 'Zamora Bus')
-
-Camino óptimo: ['Zaragoza Tren', 'Soria Bus', 'Zamora Bus']
-    Estacion de Zaragoza -> Estacion de Autobuses de Soria
-    - Distancia: 157.112 kilometros
-157.112
-    Estacion de Autobuses de Soria -> Estacion de Autobuses de Zamora
-    - Distancia: 303.507 kilometros
-303.507
-
-     Total Distancia: 460.619 km 
-
-Ejecutar desde el terminal: python3 calcular_caminos_entre_puntos.py DB VOLKSWAGEN "ID3 PURE" "Alicante Tren" "A Corunia Bus" 65 70
-
-"""
-
-
-# Se cargan las librerias
+# 1.- Se cargan las librerias -------------------------------------
+#------------------------------------------------------------------
 
 import os, sys
-print (sys.getdefaultencoding())
 import networkx as nx
 import pandas as pd
 import mysql.connector
@@ -45,73 +16,8 @@ os.chdir('/home/tfm/Documentos/TFM/Python/Modelo/')
 import ModeloAvanzado.funcion_aux as fa
 
 
-
-# 1.- Se definen las funciones ------------------------------------
+# 2.- Funcion main ------------------------------------------------
 #------------------------------------------------------------------
-
-# Funcion que devuelve la duracion completa del trayecto 
-def show_path(path):
-    try:
-        total_distancia = 0
-
-        for i in range(len(path)-1):
-            origen = path[i]
-            destino = path[i+1]
-            distancia = DG[origen][destino]["distance"]
-
-            total_distancia = total_distancia + distancia
-
-            #print("    %s -> %s\n    - Distancia: %s kilometros" % (
-                #df_ciudades.loc[origen]["ADDRESS"],
-                #df_ciudades.loc[destino]["ADDRESS"],
-                #distancia)
-            #)
-            print(distancia)        
-    
-        print("\n     Total Distancia: %s km \n" % (total_distancia))
-    except:
-        print("No hay ruta valida para ", path)
-
-# Funcion que calcule todos los caminos posible y muestre los que tienen menor distancia
-def get_all_shortest_paths(DiGraph, origen, destino):
-    try:
-        print("*** All shortest paths - Origen: %s Destino: %s" % (
-            origen, destino
-        ))
-        for weight in [None, "distance"]:
-            print("* Ordenando por: %s" % weight)
-            paths = list(nx.all_shortest_paths(DiGraph,
-                                              source = origen,
-                                              target = destino,
-                                              weight = weight))
-            for path in paths:
-                print("   Camino optimo: %s" % path)
-                show_path(path)
-    except:
-        print("No hay ruta valida desde ", origen," hasta ", destino)
-
-
-# Camino mas corto
-def get_shortest_path(DiGraph, origen, destino):
-    try:
-        print("*** Origen: %s Destino: %s" % (origen, destino))
-
-        for weight in ["distancia"]:
-            print(" Ordenado por: %s" % weight)
-            path = list(nx.astar_path(DiGraph,
-                                    (origen),
-                                    (destino),
-                                    weight = weight
-                                    ))
-            print("   Camino optimo: %s " % path)
-            show_path(path)
-    except:
-            print("No hay ruta valida desde ", origen," hasta ", destino)
-
-
-# 2.- Main --------------------------------------------------------
-#------------------------------------------------------------------
-
 if __name__ == "__main__":
     if len(sys.argv) != 8:
         print("""ERROR: Este programa necesita 8 parametros: nombre_programa
@@ -149,9 +55,9 @@ if __name__ == "__main__":
         #cur.execute(sql_query)
         #df_distancias = pd.DataFrame(cur.fetchall(), columns = ["Origen","Destino","Distance_m"])
 
-        # sql_query = "SELECT * FROM PuntosCarga"
-        # cur.execute(sql_query, arg)
-        # df_puntoscarga = pd.DataFrame(cur.fetchall(), columns = ["indice","name","formatted_address","latitude","longitude","province","status"])
+        sql_query = "SELECT * FROM PuntosCargaInfo"
+        cur.execute(sql_query)
+        df_puntoscarga = pd.DataFrame(cur.fetchall(), columns = ["id","name","streetName","provincia","ccaa","postalCode","connectorType","ratedPowerKW","num_connectors"])
 
         sql_query = "SELECT * FROM Ciudades"
         cur.execute(sql_query)
@@ -263,7 +169,7 @@ if __name__ == "__main__":
         # Ejemplos
         #get_shortest_path(DG, origen = "Zaragoza Tren", destino = "Zamora Bus")
         #get_all_shortest_paths(DG, origen = "Alicante Tren", destino = "A Corunia Bus")
-        get_shortest_path(DG, origen = origin, destino = destination)
+        fa.get_shortest_path(DG, origen = origin, destino = destination)
     except:
         print("El programa no ha podido obtener una ruta")
 
