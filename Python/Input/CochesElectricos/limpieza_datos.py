@@ -1,33 +1,67 @@
+# =============================================================================
+#  LIMPIEZA BASE DE DATOS COCHES ELÉCTRICOS
+# =============================================================================
 
-import os # para acceder a la consola de python
 
-# Importo el csv que contiene los datos de coches electricos mas limpios
+"""
+    Proceso: 
+
+    Input: 
+        - /home/tfm/Documentos/TFM/Datasets/CochesElectricos/coches electricos/ElectricCarData_Clean.csv
+    
+    Output: 
+        - /home/tfm/Documentos/TFM/Datasets/CochesElectricos/coches electricos/electricCar_limpio.csv
+ 
+"""
+
+# Se cargan las librerias
 import numpy as np
 import pandas as pd
-df= pd.read_csv('/home/tfm/Documentos/TFM/Datasets/CochesElectricos/coches electricos/ElectricCarData_Clean.csv', sep=',', encoding='unicode_escape', header=0)
+import os
+
+
+
+# 1.- Carga de Inputs ---------------------------------------------
+#------------------------------------------------------------------
+
+# Se importa el csv que contiene los datos de coches electricos mas limpios
+df = pd.read_csv('/home/tfm/Documentos/TFM/Datasets/CochesElectricos/coches electricos/ElectricCarData_Clean.csv', sep=',', encoding='unicode_escape', header=0)
 type(df) # compruebo que sea dataFrame
 
-# Comprobamos columnas y valores
+
+# Se comprueba columnas y valores
 df.columns 
 df.values
 type(df.values)
 
-################################# 1. COMPROBAR CORRECTA TIPOLOGÍA Y ROL DE LAS VARIABLES #################################
+
+
+# 2.- Correcta tipología y rol de las variables -------------------
+#------------------------------------------------------------------
+
 df.dtypes # FastCharge no es una variable categorica sino numerica (entero)
-type(df['FastCharge_KmH'])# se trata de una serie
+type(df["FastCharge_KmH"])# se trata de una serie
+
 
 # Convertimos FastCharge en variable de tipo numerico e indicando que queremos que convierta los valores erroneos en NA
 # (errors='coerce') para que la conversion sea posible. De lo contrario, da error
-df['FastCharge_KmH']= pd.to_numeric(df['FastCharge_KmH'],errors='coerce')
-df['FastCharge_KmH'].values # Comprobamos que la fila donde habia un ('-') ha sido convertida a NA 
-df['FastCharge_KmH']= df['FastCharge_KmH'].astype('Int64') # Convertimos la serie de float a enteros
+df["FastCharge_KmH"] = pd.to_numeric(df["FastCharge_KmH"], errors='coerce')
+df["FastCharge_KmH"].values # Comprobamos que la fila donde habia un ('-') ha sido convertida a NA 
+df["FastCharge_KmH"] = df["FastCharge_KmH"].astype('Int64') # Convertimos la serie de float a enteros
 
 
-#################################################### 2. EDA ###############################################################
 
-# Analisis descriptivo basico de las variables numericas: comprobamos que todas toman valores coherentes. En principio,
-# todos los valores parecen factibles sin sospechas de datos erroneos o valores perdidos.
+# 3.- EDA ---------------------------------------------------------
+#------------------------------------------------------------------
+
+"""
+    Analisis descriptivo basico de las variables numericas: comprobamos que 
+    todas toman valores coherentes. En principio, todos los valores parecen 
+    factibles sin sospechas de datos erroneos o valores perdidos.
+"""
+
 df.describe()
+
 
 # REPARTO DE FRECUENCIAS DE LAS VARIABLES CATEGORICAS
 
@@ -50,9 +84,12 @@ df.filter(like='na', axis=0)
 df.filter(like= 'NA', axis=0)
 df.filter(like='nan', axis=0)
 
-########################## TRATAMIENTO VALORES MISSING ########################################
 
-df.isnull().sum() #existen 5 valores ausentes en todo el dataframe. Todos estan en "FastCharge"
+
+# 3.1.- Tratamiento valores missing -------------------------------
+
+
+df.isnull().sum() # existen 5 valores ausentes en todo el dataframe. Todos estan en "FastCharge"
 # Podemos optar por imputar esos valores o ponerlos a cero, segun la interpretacion
 
 
@@ -138,7 +175,7 @@ df.Model = df.Model.str.replace('!', '')
 df.Model = df.Model.str.replace('+', '') 
 df.Model = df.Model.str.replace('.', '') 
 
-string_columns = ["Brand","Model","RapidCharge","PlugType"]
+string_columns = ["Brand", "Model", "RapidCharge", "PlugType"]
 for column in string_columns:
     df[column] = df[column].str.strip()
 
@@ -157,10 +194,10 @@ df.columns = df.columns.str.upper()
 
 '''LOS DISTINTOS VALORES DE PLUGTYPE son: ['TYPE 2 CCS' 'TYPE 2 CHADEMO' 'TYPE 2' 'TYPE 1 CHADEMO']'''
 
-df['PLUGTYPE'] = df['PLUGTYPE'].replace({'TYPE 2':'TYPE2'})
-df['PLUGTYPE'] = df['PLUGTYPE'].replace({'TYPE 2 CCS':'TYPE2,CCS'})
-df['PLUGTYPE'] = df['PLUGTYPE'].replace({'TYPE 2 CHADEMO':'TYPE2,CHADEMO'})
-df['PLUGTYPE'] = df['PLUGTYPE'].replace({'TYPE 1 CHADEMO':'TYPE1,CHADEMO'})
+df["PLUGTYPE"] = df["PLUGTYPE"].replace({'TYPE 2':'TYPE2'})
+df["PLUGTYPE"] = df["PLUGTYPE"].replace({'TYPE 2 CCS':'TYPE2,CCS'})
+df["PLUGTYPE"] = df["PLUGTYPE"].replace({'TYPE 2 CHADEMO':'TYPE2,CHADEMO'})
+df["PLUGTYPE"] = df["PLUGTYPE"].replace({'TYPE 1 CHADEMO':'TYPE1,CHADEMO'})
 
 df.PLUGTYPE.values[0][1] # acceder a cada elemento de la lista
 
@@ -176,32 +213,38 @@ df.PLUGTYPE = list(map(convertir, df.PLUGTYPE.values.tolist()))
 
 
 # ELIMINACION VARIABLES NO IMPORTANTES
-df = df.drop(['PRICEEURO'], axis = 1)
-df = df.drop(['SEGMENT'], axis = 1)
-df = df.drop(['POWERTRAIN'], axis = 1)
-df = df.drop(['ACCELSEC'], axis = 1)
-df = df.drop(['TOPSPEED_KMH'], axis = 1)
-df = df.drop(['BODYSTYLE'], axis = 1)
-df = df.drop(['SEATS'], axis = 1)
+df = df.drop(["PRICEEURO"], axis = 1)
+df = df.drop(["SEGMENT"], axis = 1)
+df = df.drop(["POWERTRAIN"], axis = 1)
+df = df.drop(["ACCELSEC"], axis = 1)
+df = df.drop(["TOPSPEED_KMH"], axis = 1)
+df = df.drop(["BODYSTYLE"], axis = 1)
+df = df.drop(["SEATS"], axis = 1)
 
 
 df.columns
 
 
 
-########################## 3.CREACION DE VARIABLES NUEVAS ###################################
+# 4.- Creación de variables nuevas --------------------------------
+#------------------------------------------------------------------
 
-''' Creamos la variable CAPACIDAD DE LA BATERIA como producto de la autonomia del coche y el 
-    consumo del mismo. 
+"""
+    Se crea la variable CAPACIDAD DE LA BATERIA como producto de la 
+    autonomia del coche y el consumo del mismo. 
     
     Las unidades son: (km * Wh) / km --> Wh 
                       
-    Wh/1000 --> kWH '''
+    Wh/1000 --> kWH
+"""
+
+df["BATTERY_CAPACITY"] = df["RANGE_KM"] * df["EFFICIENCY_WHKM"] / 1000
 
 
-df['BATTERY_CAPACITY'] = df['RANGE_KM'] * df['EFFICIENCY_WHKM'] / 1000
 
 
+# 5.- Output ------------------------------------------------------
+#------------------------------------------------------------------
 
 # Finalmente escribimos el dataframe en un csv
 df.to_csv('/home/tfm/Documentos/TFM/Datasets/CochesElectricos/coches electricos/electricCar_limpio.csv', index=False)

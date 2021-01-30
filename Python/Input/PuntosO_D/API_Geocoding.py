@@ -1,14 +1,38 @@
+# =============================================================================
+# DESCARGA DATOS CIUDADES (ORIGEN - DESTINO) - GOOGLE MAPS PLACES API
+# =============================================================================
 
+
+"""
+    Proceso: 
+
+    Input: 
+        - /home/tfm/Documentos/TFM/Datasets/PuntosO_D/direcciones_ciudades.csv
+    
+    Output:
+        - /home/tfm/Documentos/TFM/Datasets/PuntosO_D/GeocodingAPI/ciudades.csv
+ 
+"""
+
+# Se cargan las librerias
 import os
 import numpy as np
 import pandas as pd
 import requests
 
+# API Google
 API_KEY = '#####################################'
 
+
+
+# 1.- Carga de datos inputs ---------------------------------------
+#------------------------------------------------------------------
+
 # Importo el csv con los puntos de cada ciudad de provincia
-df= pd.read_csv('/home/tfm/Escritorio/TFM/Datasets/direcciones_ciudades.csv', sep=';', encoding='unicode_escape', header=0)
-lista = df.ADDRESS.tolist()
+df = pd.read_csv('/home/tfm/Documentos/TFM/Datasets/PuntosO_D/direcciones_ciudades.csv', sep=',', encoding='unicode_escape', header=0)
+
+# Lista con las direcciones de las distintas ciudades
+lista = df.Direccion.tolist()
 
 
 direccion = []
@@ -55,18 +79,18 @@ print(coordenadas_lat, coordenadas_long)
 
 
 # Incorporamos una columna latitud y una longitud al dataframe original
-df['LATITUD'] = coordenadas_lat
-df['LONGITUD'] = coordenadas_long
+df["Latitud"]   = coordenadas_lat
+df["Longitud"]  = coordenadas_long
 df
 
 # Concatenamos la latitud y longitud en una sola columna nombrada como 'COORDENADAS'
-df['COORDENADAS'] = df ['LATITUD']. map (str) + ',' + df ['LONGITUD']. map (str) 
+df["Coordenadas"] = df["Latitud"].map(str) + ',' + df["Longitud"].map(str) 
 df
 
-# Renombro la columna PROVINCIA (etiquetada erroneamente)
-df= df.rename(columns={'PROVINCIA': 'CAPITAL DE PROVINCIA'})
 
 
-# Escribimos el dataframe final en un csv
-df.to_csv('ciudades.csv', index=False)
+# 3.- Output ------------------------------------------------------
+#------------------------------------------------------------------
+
+df.to_csv('/home/tfm/Documentos/TFM/Datasets/PuntosO_D/GeocodingAPI/ciudades.csv', index = False)
 
