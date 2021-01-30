@@ -2,19 +2,30 @@
 #  MATRIZ DE DISTANCIAS ENTRE LOS PUNTOS DE RECARGAS
 # =============================================================================
 
+
 """
-Fuente: https://medium.com/how-to-use-google-distance-matrix-api-in-python/how-to-use-google-distance-matrix-api-in-python-ef9cd895303c
+    Fuente: https://medium.com/how-to-use-google-distance-matrix-api-in-python/how-to-use-google-distance-matrix-api-in-python-ef9cd895303c
 
+    Proceso: Mediande la API Google Distance Matrix se calculan las distancias entre 
+    las ciudades y todos los puntos del conjunto: ciudades, puntos de recarga y
+    gasolineras.
 
-Input: lista de ciudades,
+    1- Clave API en google cloud
+    2- Carga de inputs y se apendizan los 3 dataframes
+    3- Mediante un bucle que recorre todas las combinaciones existentes entre las 
+    variables origen y destino, se hacen llamadas a la api de google para calcular
+    las distancias.
+    4- Se crea el dataframe final
+    5- Se exporta el dataframe a un fichero .csv
 
-Proceso: Mediande la API Google Distance Matrix se calculan las distancias entre 
-todas las ciudades. 
-* Es necesario crear una API Key en Google Cloud para ejecutarlo
+    Notas: Es necesario crear una API Key en Google Cloud para ejecutarlo
 
-Output: Devuelve un dataframe con cuatro columnas Origen, Destino, Distancia en
-metros, Distancia en km: ciudades_distancia.csv
- 
+    Inputs:
+        - /home/tfm/Documentos/TFM/Datasets/PuntosO_D/GeocodingAPI/ciudades.csv
+        - /home/tfm/Documentos/TFM/Datasets/PuntosRecarga/puntos_carga_reduced_Espana.csv
+        - /home/tfm/Documentos/TFM/Datasets/Gasolineras/gasolineras_reduced_Espana.csv
+
+    Output: ciudades_distancia.csv
 """
 
 
@@ -29,6 +40,11 @@ from itertools import tee
 
 # Se establece el diretorio base
 os.chdir('/home/tfm/Documentos/TFM/Datasets/')
+
+
+# API Google
+API_key = '############################'
+gmaps = googlemaps.Client(key=API_key)
 
 
 
@@ -71,20 +87,16 @@ df = df_ptos_recarga.append(df_gasolineras)
 df
 
 
+"""
+    PRUEBAS
+"""
+
 
 df_aux = pd.read_csv(os.path.join(os.getcwd(),'puntos_kk.csv'), sep = ',', encoding = 'iso-8859-1', decimal = '.')
 
 # Elimamos duplicados (comprobación)
 df.drop_duplicates()
 
-
-
-# 2.- Configuracion API Google ------------------------------------
-#------------------------------------------------------------------
-
-# La clave se introduce para la ejecucion pero luego se omitira para no compartirla en el repo
-API_key = '############################'
-gmaps = googlemaps.Client(key=API_key)
 
 
 
@@ -164,9 +176,22 @@ df_distancias['Duracion_min'] = df_distancias['Duracion_seg']/60
 # 5.- Output ------------------------------------------------------
 #------------------------------------------------------------------
 
-df_distancias.to_csv('/home/tfm/Documentos/TFM/Datasets/Matriz_Distancias/matriz_distancia_v2.csv', sep = ";", index = False)
+df_distancias.to_csv('/home/tfm/Documentos/TFM/Datasets/Matriz_Distancias/_bu/matriz_distancia_v2.csv', sep = ";", index = False)
 
 
 df.to_csv('/home/tfm/Documentos/TFM/Datasets/Matriz_Distancias/matriz_distancia_input.csv', sep = ";", index = False)
 
+
+"""
+    PRUEBAS
+"""
+
+df1 = pd.read_csv(os.path.join(os.getcwd(),'Matriz_Distancias/pruebas_google_api/_bu/matriz_distancia_v1.csv'), sep = ';', encoding = 'iso-8859-1', decimal = '.')
+df2 = pd.read_csv(os.path.join(os.getcwd(),'Matriz_Distancias/pruebas_google_api/_bu/matriz_distancia_v2.csv'), sep = ';', encoding = 'iso-8859-1', decimal = '.')
+
+df1 = df1.append(df2) 
+
+del(d2)
+
+len(df1)
 

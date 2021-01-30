@@ -4,7 +4,6 @@
 
 """
 
-
 Input: matriz_distancia_input.csv - contiene las coordenadas de las ciudades, 
         puntos de recarga y gasolineras
 
@@ -66,6 +65,7 @@ df = pd.read_csv(os.path.join(os.getcwd(),'Matriz_Distancias/matriz_distancia_in
 df_aux = df
 
 
+
 # 3.- Construcción de la matriz -----------------------------------
 #------------------------------------------------------------------
 
@@ -73,7 +73,6 @@ df_aux = df
 list_distancia = [0]
 list_origen = []
 list_destino = []
-
 
 # Bucle que recorre cada par de filas y calcula la distancia
 for (i1_aux, row1_aux), (i2_aux, row2_aux) in pairwise(df_aux.iterrows()):
@@ -117,7 +116,6 @@ df_dist_haversine = pd.DataFrame()
 df_dist_haversine['Origen'] = list_origen
 df_dist_haversine['Destino'] = list_destino
 df_dist_haversine['Distance_km'] = list_distancia
-
 
 
 
