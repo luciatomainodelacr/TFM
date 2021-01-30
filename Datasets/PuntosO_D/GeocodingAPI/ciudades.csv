@@ -1,4 +1,4 @@
-id,PROVINCIA,ADDRESS,Latitude,Longitude,COORDENADAS
+id,Provincia,Direccion,Latitud,Longitud,Coordenadas
 A Corunia Tren,A Corunia,Estacion de Corunia,43.3525485,-8.4099873,"43.3525485,-8.4099873"
 A Corunia Bus,A Corunia,Estacion de Autobuses de Corunia,43.3532682,-8.405151199999999,"43.3532682,-8.405151199999999"
 Albacete Tren,Albacete,Estacion de Albacete,38.99983020000001,-1.8483506,"38.99983020000001,-1.8483506"

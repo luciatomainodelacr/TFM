@@ -41,7 +41,17 @@ https://docs.docker.com/engine/install/ubuntu/
 
 
 sudo apt-get remove docker docker-engine docker.io containerd runc
+
+***Eliminar firma***
+sudo vi /etc/apt/sources.list
+buscar clout r (ultimas líneas)
+>> i#
+>> w:q
+
+
 sudo apt-get update
+
+
 sudo apt-get install \
     apt-transport-https \
     ca-certificates \
@@ -52,6 +62,7 @@ sudo apt-get install \
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo apt-key fingerprint 0EBFCD88
 
+/* SALTAR - NO EJECUTAR
 #Para eliminar el error de la firma no válida
 sudo apt-get clean
 sudo mv /var/lib/apt/lists /tmp 
@@ -64,6 +75,7 @@ sudo apt-get update
 sudo apt-get install y-ppa-manager
 
 Una vez instalado, tenemos que entrar en Advanced, y una vez dentro tenemos que hacer clic en Try to import all GPG keys, y esperar a que el proceso termine. 
+*/
 
 sudo add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
@@ -72,13 +84,22 @@ sudo add-apt-repository \
 
 sudo chmod 666 /var/run/docker.sock
 sudo groupadd docker
+ /* en el siguiente comando cambiar $user por tfm*/
 sudo usermod -aG docker $user
+
+
+/* PRUEBA:
+docker ps
+sudo apt install docker.io
+*/
+
 
 ####DOCKER-COMPOSE####
 sudo apt-get update
 sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 docker-compose --version
+
 
 - Seaborn
 sudo apt-get install -y python3-seaborn
