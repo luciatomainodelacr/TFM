@@ -111,27 +111,22 @@ def restriccion_ultima_parada(distancias_destino, carga_final, autonomia_coche):
 # Funcion que devuelve la duracion completa del trayecto 
 def show_path(DG,path):
     try:
-        total_distancia = 0
+        total_tiempo = 0
 
         for i in range(len(path)-1):
             origen = path[i]
             destino = path[i+1]
-            distancia = DG[origen][destino]["distance"]
+            tiempo = DG[origen][destino]["time"]
 
-            total_distancia = total_distancia + distancia
+            total_tiempo = total_tiempo + tiempo
 
-            #print("    %s -> %s\n    - Distancia: %s kilometros" % (
-                #df_ciudades.loc[origen]["ADDRESS"],
-                #df_ciudades.loc[destino]["ADDRESS"],
-                #distancia)
-            #)
-            print(distancia)        
+            print(tiempo)        
     
-        print("\n     Total Distancia: %s km \n" % (total_distancia))
+        print("\n     Total Tiempo: %s h \n" % (total_tiempo))
     except:
         print("No hay ruta valida para ", path)
 
-# Funcion que calcule todos los caminos posible y muestre los que tienen menor distancia
+# Funcion que calcule todos los caminos posible y muestre los que tienen menor tiempo
 def get_all_shortest_paths(DiGraph, origen, destino):
     try:
         print("*** All shortest paths - Origen: %s Destino: %s" % (
@@ -155,7 +150,7 @@ def get_shortest_path(DiGraph, origen, destino):
     try:
         print("*** Origen: %s Destino: %s" % (origen, destino))
 
-        for weight in ["distancia"]:
+        for weight in ["tiempo"]:
             print(" Ordenado por: %s" % weight)
             path = list(nx.astar_path(DiGraph,
                                     (origen),

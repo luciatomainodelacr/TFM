@@ -3,6 +3,26 @@
 #  CALCULA RUTA OPTIMA ENTRE DOS PUNTOS
 # =============================================================================
 
+"""
+    Escenario de validaciÃ³on:
+    {
+            "name": "Python: Camino entre 2 puntos",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "args": ["PUNTO_RECARGA","VOLKSWAGEN","ID3 PURE","Alicante Tren","A Corunia Bus", "65", "70","IEC62196Type2Outlet"],
+            "console": "integratedTerminal"
+    }
+
+    Ejecutar desde visual studio code: Debug
+
+    Ejecutar en terminal
+    >> cd /Python/Modelo
+    >> python3 calcular_caminos_entre_puntos.py PUNTO_RECARGA VOLKSWAGEN "ID3 PURE" "Alicante Tren" "A Corunia Bus" 65 70 IEC62196Type2Outlet
+
+"""
+
+
 # 1.- Se cargan las librerias -------------------------------------
 #------------------------------------------------------------------
 
@@ -41,7 +61,7 @@ if __name__ == "__main__":
         car_brand, car_model, origin, destination, initial_charge, 
         final_charge, connector_type)
 
-    #try:
+    try:
 
         # 1.- Carga de inputs ---------------------------------------------
         #------------------------------------------------------------------
@@ -72,7 +92,7 @@ if __name__ == "__main__":
         df_electricar = pd.DataFrame(cur.fetchall(), columns = ["BRAND","MODEL","RANGE_KM","EFFICIENCY_WHKM","FASTCHARGE_KMH","RAPIDCHARGE","PLUGTYPE", "BATTERY_CAPACITY"])
         autonomia_coche = 0.9*float(df_electricar["RANGE_KM"])
 
-        #La restriccion de autonomi­a se aplica directamente en la llamada a la query
+        #La restriccion de autonomiï¿½a se aplica directamente en la llamada a la query
         if program_type == "GASOLINERA":
             sql_query = "SELECT * FROM Matriz_distancia_haversine WHERE Distance_km <= %s AND ((Origen LIKE 'gasolinera%' AND Destino LIKE 'gasolinera%') OR (Origen LIKE %s AND Destino LIKE 'gasolinera%') OR (Origen LIKE 'gasolinera%' AND Destino LIKE %s));"
             arg = (autonomia_coche,origin,destination)
@@ -147,8 +167,14 @@ if __name__ == "__main__":
                 potencia_pc = 0.9*float(potencias_limpio[indice])*1000 #W
             tiempos_puntos_parada.append((punto_carga["id"],fa.calcular_tiempo_parada(capacidad_coche,potencia_pc,numero_conectores_pc)))
         
-        column_names = ["id","Time_h"]
+        column_names = ["id","Parada_h"]
         df_tiempos_puntos_parada = pd.DataFrame(data = tiempos_puntos_parada, columns = column_names)
+
+        df_distancias_reduced = df_distancias_reduced.merge(df_tiempos_puntos_parada, how = "left", left_on = "Origen", right_on = "id")
+
+        df_distancias_reduced["Parada_h"]           = df_distancias_reduced["Parada_h"].fillna(value = 0)
+        df_distancias_reduced["Suma_time_parada_h"] = df_distancias_reduced["Time_h"] + df_distancias_reduced["Parada_h"]
+
 
         # Backup 
         df = df_distancias_reduced
@@ -163,7 +189,7 @@ if __name__ == "__main__":
         for row in df.iterrows():
             DG.add_edge(row[1]["Origen"],
                         row[1]["Destino"],
-                        distance = row[1]["Distance_km"])
+                        time = row[1]["Suma_time_parada_h"])
 
         # Ver los nodos
         DG.nodes(data = True)
@@ -192,7 +218,8 @@ if __name__ == "__main__":
         # Ejemplos
         #get_shortest_path(DG, origen = "Zaragoza Tren", destino = "Zamora Bus")
         #get_all_shortest_paths(DG, origen = "Alicante Tren", destino = "A Corunia Bus")
+
         fa.get_shortest_path(DG, origen = origin, destino = destination)
-    #except:
+    except:
         print("El programa no ha podido obtener una ruta")
 
