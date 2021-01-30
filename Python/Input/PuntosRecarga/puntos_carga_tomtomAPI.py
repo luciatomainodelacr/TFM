@@ -38,7 +38,7 @@ import pandas as pd
 os.chdir('/home/tfm/Documentos/TFM/Datasets/')
 
 # API KEY - Tomtom
-api_key = 'vBGAofG9iufITkNwekDkGA9xjAoEmM9o' 
+api_key = '#################################' 
 category = 'estaciones de carga de vehículos eléctricos'
 
 
@@ -132,4 +132,8 @@ df = pd.concat([df.drop(["poi_data"], axis = 1), df["poi_data"].apply(pd.Series)
 # 4.- Output ------------------------------------------------------
 #------------------------------------------------------------------
 
+<<<<<<< HEAD
 df.to_csv('/home/tfm/Documentos/TFM/Datasets/PuntosRecarga/ptos_recarga_info.csv', sep = ";", index = False)
+=======
+df_ptos_recarga_final.to_csv('/home/tfm/Documentos/TFM/Datasets/PuntosRecarga/ptos_recarga_info.csv', sep = ";", index = False)
+>>>>>>> ae718855e0fb7643c26b8e65deda9706b0a55a8f
