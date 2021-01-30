@@ -29,6 +29,9 @@
         {% block extra_css %}
         {% endblock %}
 
+   
+
+
     </head>
     {% endblock %}
 
@@ -45,7 +48,7 @@
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Título -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="Route.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index">
                 <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -57,11 +60,15 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="ruta_2_puntos_v1.html">
-                    <i class="fa fa-map"></i>
-                    <span>Map</span>
+                <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
+                <a class="dropdown-item" href="login" data-toggle="modal" data-target="#logoutModal">
+                     <i class="fa fa-map fa-sm fa-fw mr-2 text-gray-400"></i>
+                    <span>New Route</span>
                 </a>
             </li>
+
+            
+            
 
         
             <!-- Nav Item - Pages Collapse Menu -->
@@ -76,12 +83,12 @@
                     <h6 class="collapse-header">Custom Components:</h6>
                         <a class="collapse-item" href="buttons.html">
                             <i class="fa fa-user" aria-hidden="true"></i>
-                            <span>User</span>
+                            <span>User??</span>
                         </a>
 
                         <a class="collapse-item" href="cards.html">
                             <i class="fa fa-car" aria-hidden="true"></i>
-                            <span>Cars</span>
+                            <span>Cars??</span>
                         </a>
                 </div>
                 </div>
@@ -93,6 +100,7 @@
             <i class="fas fa-fw fa-wrench"></i>
             <span>Utilities</span></a>
             </li>
+
 
 
             <!-- Línea divisora -->
@@ -123,26 +131,13 @@
                     <i class="fa fa-bars"></i>
                 </button>
 
-                <!-- Topbar Search -->
-                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                    <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                        </button>
-                    </div>
-                    </div>
-                </form>
 
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
 
                     <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                     <li class="nav-item dropdown no-arrow d-sm-none">
-                    <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-search fa-fw"></i>
-                    </a>
+                   
                     <!-- Dropdown - Messages -->
                     <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
                         <form class="form-inline mr-auto w-100 navbar-search">
@@ -182,7 +177,7 @@
                     <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="mr-2 d-none d-lg-inline text-gray-600 small">Blanca Alonso</span>
-                        <img class="img-profile rounded-circle" src="{{url_for('static', filename='avatar_login.jpg')}}">
+                        <img class="img-profile rounded-circle" src="{{url_for('static', filename='img/avatar_login.jpg')}}">
                     </a>
                     <!-- Dropdown - User Information -->
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -208,17 +203,17 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
-
                 
-                    <!-- Content Row -->
-                    <div class="row"> 
-                    {% block map %}
-                    {% endblock %}
-                   
+                <div class='col-12' style="height:180%;">
+                    <div class = 'row' style='height:100%;'>                          
+                        <div class = 'col-12' style = 'width: 120%'>
+                            {% block map %}
+                            {% endblock %}
+                        </div>
                     </div>
-
-                </div>
+                </div>   
+                 
+                        
                 <!-- /.container-fluid -->
 
             </div>

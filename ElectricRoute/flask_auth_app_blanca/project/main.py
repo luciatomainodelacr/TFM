@@ -39,10 +39,11 @@ def login():
 
         next = request.args.get('next', None)
         if next:
-            return redirect(url_for('next'))
+            return redirect(next)
         return redirect(url_for('index'))
 
     return render_template('login.html')
+
 
 
 # 3.- Página register ---------------------------------------------
