@@ -38,7 +38,7 @@ def create_app():
     app = Flask(__name__)
 
     app.config['SECRET_KEY'] = '123456789'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@127.0.0.1:3306/tfm'
     
 
     db.init_app(app)
