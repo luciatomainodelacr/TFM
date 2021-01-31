@@ -1,6 +1,9 @@
+# -*- coding: utf-8 -*-
 import networkx as nx
 
-# TODO Funcion que devuelve la duracion completa del trayecto 
+# TODO: Para todas las funciones de este fichero hay que repasar cuales son necesarias y 
+# cuales no y , en casa de dejarlas, documentarlas
+# Funcion que devuelve la duracion completa del trayecto 
 def show_path(DG,path):
     try:
         total_tiempo = 0
@@ -18,7 +21,7 @@ def show_path(DG,path):
     except:
         print("No hay ruta valida para ", path)
 
-# TODO Funcion que calcule todos los caminos posible y muestre los que tienen menor tiempo
+# Funcion que calcule todos los caminos posible y muestre los que tienen menor tiempo
 def get_all_shortest_paths(DiGraph, origen, destino):
     try:
         print("*** All shortest paths - Origen: %s Destino: %s" % (
@@ -37,7 +40,7 @@ def get_all_shortest_paths(DiGraph, origen, destino):
         print("No hay ruta valida desde ", origen," hasta ", destino)
 
 
-# TODO Camino mas corto
+# Camino mas corto
 def get_shortest_path(DiGraph, origen, destino):
     try:
         print("*** Origen: %s Destino: %s" % (origen, destino))

@@ -1,10 +1,11 @@
 #!/usr/bin/python3.6
+# -*- coding: utf-8 -*-
 # =============================================================================
 #  CALCULA RUTA OPTIMA ENTRE DOS PUNTOS
 # =============================================================================
 
 """
-    Escenario de validaciÃ³on:
+    Escenario de validacion:
     {
             "name": "Python: Camino entre 2 puntos",
             "type": "python",
@@ -21,6 +22,22 @@
     Ejecutar en terminal
     >> cd /home/tfm/Documentos/TFM/Python/Modelo
     >> python3 calcular_caminos_entre_puntos.py --tipo_programa 'PUNTO_RECARGA' --marca_coche 'VOLKSWAGEN' --modelo_coche 'ID3 PURE' --origen 'Alicante Tren' --destino 'A Corunia Bus' --carga_inicial 65 --carga_final 70 --tipo_conector 'IEC62196Type2Outlet'
+
+    Output esperado en log:
+    [2021-01-31 21:25:19,833] [INFO    ]La ruta optima es: ['Alicante Tren', 'punto_recarga_241', 'punto_recarga_46', 'punto_recarga_262', 'punto_recarga_282', 'punto_recarga_293', 'A Corunia Bus']
+    [2021-01-31 21:25:19,847] [INFO    ]Tiempo de parada en Alicante Tren es 0.0 h
+    [2021-01-31 21:25:19,847] [INFO    ]Tiempo total del tramo Alicante Tren - punto_recarga_241 es 1.4135107859234253 h
+    [2021-01-31 21:25:19,858] [INFO    ]Tiempo de parada en punto_recarga_241 es 0.27490825688073395 h
+    [2021-01-31 21:25:19,858] [INFO    ]Tiempo total del tramo punto_recarga_241 - punto_recarga_46 es 1.9223443757129164 h
+    [2021-01-31 21:25:19,869] [INFO    ]Tiempo de parada en punto_recarga_46 es 0.3856756756756757 h
+    [2021-01-31 21:25:19,869] [INFO    ]Tiempo total del tramo punto_recarga_46 - punto_recarga_262 es 2.542525921501569 h
+    [2021-01-31 21:25:19,880] [INFO    ]Tiempo de parada en punto_recarga_262 es 0.6113513513513513 h
+    [2021-01-31 21:25:19,881] [INFO    ]Tiempo total del tramo punto_recarga_262 - punto_recarga_282 es 2.65368426054334 h
+    [2021-01-31 21:25:19,892] [INFO    ]Tiempo de parada en punto_recarga_282 es 0.3856756756756757 h
+    [2021-01-31 21:25:19,892] [INFO    ]Tiempo total del tramo punto_recarga_282 - punto_recarga_293 es 1.8773805206251493 h
+    [2021-01-31 21:25:19,903] [INFO    ]Tiempo de parada en punto_recarga_293 es 0.8370270270270269 h
+    [2021-01-31 21:25:19,904] [INFO    ]Tiempo total del tramo punto_recarga_293 - A Corunia Bus es 1.4841193792814318 h
+    [2021-01-31 21:25:19,904] [INFO    ]El tiempo total tardado es: 11.89356524358783 h
 
 """
 
@@ -167,7 +184,8 @@ if __name__ == "__main__":
                                              sql_query = sql_query_coche,
                                              columnas = columnas_coche,
                                              argumentos = argumentos_coche)
-        autonomia_coche = 0.9*float(df_electricar["RANGE_KM"]) # TODO: llamar a la funcion de autonomia real del coche
+        autonomia_coche = 0.9*float(df_electricar["RANGE_KM"]) 
+        # TODO: llamar a la funcion de autonomia real del coche (que deberia ir en el modulo Tiempos.py)
 
         #Query a Matriz_distancia_haversine
         logger.info("Query a Matriz_distancia_haversine")
@@ -249,28 +267,36 @@ if __name__ == "__main__":
 
         #a) Tiempo de parada
         logger.info("b) Tiempo de parada")
-        capacidad_coche = float(df_electricar["BATTERY_CAPACITY"])*1000 #Wh
-        df_puntoscarga_reduced[df_puntoscarga_reduced["ratedPowerKW"]== ''] = 10 #KW
         tiempos_puntos_parada = []
-        for index, punto_carga in df_puntoscarga_reduced.iterrows():
-            numero_conectores_pc = int(punto_carga["num_connectors"])
-            if numero_conectores_pc == 1:
-                potencia_pc = 0.9*float(punto_carga["ratedPowerKW"])*1000 #W
-            else:
-                conectores = punto_carga["connectorType"].split(",")
-                conectores_limpio = []
-                for elem in conectores:
-                    conectores_limpio.append(re.sub('[^A-Za-z0-9]+', '', elem))
-                indice = conectores_limpio.index(args.tipo_conector)
-                potencias = punto_carga["ratedPowerKW"].split(",")
-                potencias_limpio = []
-                for elem in potencias:
-                    potencias_limpio.append(re.sub('[^A-Za-z0-9]+', '', elem))
-                potencia_pc = 0.9*float(potencias_limpio[indice])*1000 #W
-            tiempos_puntos_parada.append((punto_carga["id"],Tiempos.calcular_tiempo_parada(capacidad_coche,potencia_pc,numero_conectores_pc)))
 
-        column_names = ["id","Parada_h"]
-        df_tiempos_puntos_parada = pd.DataFrame(data = tiempos_puntos_parada, columns = column_names)
+        if args.tipo_programa != "GASOLINERA":
+            #Para los puntos de recarga, hay datos disponibles para el cálculo
+            logger.info("Calculo tiempo de parada para puntos de recarga")
+            capacidad_coche = float(df_electricar["BATTERY_CAPACITY"])*1000 #Wh
+            df_puntoscarga_reduced[df_puntoscarga_reduced["ratedPowerKW"]== ''] = 10 #KW
+            for index, punto_carga in df_puntoscarga_reduced.iterrows():
+                numero_conectores_pc = int(punto_carga["num_connectors"])
+                if numero_conectores_pc == 1:
+                    potencia_pc = 0.9*float(punto_carga["ratedPowerKW"])*1000 #W
+                else:
+                    conectores = punto_carga["connectorType"].split(",")
+                    conectores_limpio = []
+                    for elem in conectores:
+                        conectores_limpio.append(re.sub('[^A-Za-z0-9]+', '', elem))
+                    indice = conectores_limpio.index(args.tipo_conector)
+                    potencias = punto_carga["ratedPowerKW"].split(",")
+                    potencias_limpio = []
+                    for elem in potencias:
+                        potencias_limpio.append(re.sub('[^A-Za-z0-9]+', '', elem))
+                    potencia_pc = 0.9*float(potencias_limpio[indice])*1000 #W
+                tiempos_puntos_parada.append((punto_carga["id"],Tiempos.calcular_tiempo_parada(capacidad_coche,potencia_pc,numero_conectores_pc)))
+
+            column_names = ["id","Parada_h"]
+            df_tiempos_puntos_parada = pd.DataFrame(data = tiempos_puntos_parada, columns = column_names)
+        else:
+            #TODO: Para los gasolineras, hay que ver como se calculan los datos (nos lo inventamos?)
+            column_names = ["id","Parada_h"]
+            df_tiempos_puntos_parada = pd.DataFrame(data = tiempos_puntos_parada, columns = column_names)
 
         # Se genera el dataframe reducido con columna basada en Suma_time_parada_h
         logger.info("Se genera el dataframe reducido con columna basada en Suma_time_parada_h")
@@ -310,11 +336,13 @@ if __name__ == "__main__":
             if index > 0:
                 lugar_anterior = path[index-1]
                 df_distancias_lugar = df_distancias_reduced[(df_distancias_reduced["Destino"]==lugar)&(df_distancias_reduced["Origen"]==lugar_anterior)]
-                logger.info("Tiempo de parada en %s es %s ",lugar,float(df_distancias_lugar["Parada_h"]))
-                logger.info("Tiempo total en %s es %s ",lugar,float(df_distancias_lugar["Suma_time_parada_h"]))
+                logger.info("Tiempo de parada en %s es %s h",lugar_anterior,float(df_distancias_lugar["Parada_h"]))
+                logger.info("Tiempo total del tramo %s - %s es %s h",lugar_anterior,lugar,float(df_distancias_lugar["Suma_time_parada_h"]))
                 total_tiempo = total_tiempo + float(df_distancias_lugar["Suma_time_parada_h"])
         logger.info("El tiempo total tardado es: %s h", total_tiempo)
 
         Network.get_shortest_path(DG, origen = args.origen, destino = args.destino)
+
+        logger.info("[OK] Final del script calcular_caminos_entre_puntos.py [OK]")
     except:
         logger.error("El programa no ha podido obtener una ruta")
