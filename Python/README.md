@@ -4,6 +4,7 @@ Esta carpeta contiene scripts y otro tipo de ficheros (.json para configuración
 A medida que se avance se pueden añadir distintas subcarpetas.
 
 Se añaden tres carpetas correspondientes a cada uno de los módulos:
+
 	- Input 
 	  Contiene los scripts que obtienen los datos mediante csv y/o API, los filtran y analizan y luego los vuelcan a otros ficheros csv. 
 
