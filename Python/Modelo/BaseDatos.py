@@ -182,8 +182,8 @@ class BaseDatos(object):
             columnas_coche = ["BRAND","MODEL","RANGE_KM","EFFICIENCY_WHKM","FASTCHARGE_KMH","RAPIDCHARGE","PLUGTYPE", "BATTERY_CAPACITY"]
             argumentos_coche= (args.marca_coche, args.modelo_coche)
             df_electricar =  bd.ejecutar_queries(con = con,
-                                                 sql_query = sql_query_pc,
-                                                 columnas = columnas_pc,
+                                                 sql_query = sql_query_coche,
+                                                 columnas = columnas_coche,
                                                  argumentos = argumentos_coche)
         """
 

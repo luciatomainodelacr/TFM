@@ -31,109 +31,189 @@ import networkx as nx
 import pandas as pd
 import mysql.connector
 import re
+import argparse
+import logging
+import datetime
 
 # Se establece el diretorio base
 os.chdir('/home/tfm/Documentos/TFM/Python/Modelo/')
-import ModeloAvanzado.funcion_aux as fa
+import TFM.Python.Modelo.BaseDatos as BaseDatos
+import TFM.Python.Modelo.Restricciones as Restricciones
+import TFM.Python.Modelo.funcion_aux as fa 
 
 
 # 2.- Funcion main ------------------------------------------------
 #------------------------------------------------------------------
 if __name__ == "__main__":
-    if len(sys.argv) != 9:
-        print("""ERROR: Este programa necesita 9 parametros: nombre_programa
-            tipo_programa marca_coche modelo_coche origen destino carga_inicial 
-            carga_final  tipo_conector""")
-        sys.exit(1)
+    parser = argparse.ArgumentParser(description="Calcular caminos entre puntos")
+    parser.add_argument("--tipo_programa",
+                        Required = False,
+                        type = str,
+                        choices = ["GASOLINERA","PUNTO_RECARGA","ALL"],
+                        default = "ALL",
+                        help = "Tipo de programa en base a los puntos que se quieren usar "
+                               "Default: ALL")
+    parser.add_argument("--marca_coche",
+                        Required = True,
+                        type = str,
+                        help = "Marca de coche (tiene que estar en la tabla ElectricCar)")
+    parser.add_argument("--modelo_coche",
+                        Required = True,
+                        type = str,
+                        help = "Modelo de coche (tiene que estar en la tabla ElectricCar)")
+    parser.add_argument("--origen",
+                        Required = True,
+                        type = str,
+                        help = "Lugar de Origen (tiene que estar en la tabla Ciudades)")
+    parser.add_argument("--destino",
+                        Required = True,
+                        type = str,
+                        help = "Lugar de Destino (tiene que estar en la tabla Ciudades)")
+    parser.add_argument("--carga_inicial",
+                        Required = False,
+                        type = str,
+                        default = "90",
+                        help = "Porcentaje de carga inicial del coche en lugar de origen "
+                               "Default: 90")
+    parser.add_argument("--carga_final",
+                        Required = False,
+                        type = str,
+                        default = "10",
+                        help = "Porcentaje de carga final del coche en lugar de destino "
+                               "Default: 10")
+    parser.add_argument("--tipo_conector",
+                        Required = True,
+                        type = str,
+                        help = "Tipo de conector que necesita el coche (tiene que estar en la tabla PuntosCarga)")
+    parser.add_argument("--log_level",
+                        Required = False,
+                        default = "INFO",
+                        choices = ["DEBUG","INFO","WARNING","ERROR"],
+                        help = "Nivel de logging "
+                               "Default: INFO")
+    parser.add_argument("--log_path",
+                        Required = False,
+                        type = str,
+                        help = "Path del logging "
+                               "Default: path actual")
+    args = parser.parse_args()
+
+    if args.log_path:
+        log_path = args.log_path
+        # Si el log_path no existe, se crea
+        if not os.path.exists(log_path):
+            os.makedirs(log_path)
     else:
-        print("The number of arguments is ", len(sys.argv))
-        program_name = sys.argv[0]
-        # program type can be: "GASOLINERA, PUNTO_RECARGA, ALL"
-        program_type = sys.argv[1]
-        car_brand = sys.argv[2]
-        car_model = sys.argv[3]
-        origin = sys.argv[4]
-        destination = sys.argv[5]
-        initial_charge = float(sys.argv[6])
-        final_charge = float(sys.argv[7])
-        connector_type = sys.argv[8]
-        print("El programa lanzado es: ",program_name, program_type,
-        car_brand, car_model, origin, destination, initial_charge, 
-        final_charge, connector_type)
+        log_path = os.getcwd() + "/"
+    
+    logging.basicConfig(filename = (str(log_path) + "calcular_caminos_entre_puntos_" 
+                                    + str(datetime.datetime.now().strftime("%04Y%02m%02d"))),
+                        level = args.log_level)
+    
+    logger = logging.getLogger(__name__)
+    logger.info("[OK] Llamada al script calcular_caminos_entre_puntos.py [OK]")
+    logger.info("El programa lanzado es: ",
+                 args.tipo_programa, " ",
+                 args.marca_coche, " ",
+                 args.modelo_coche, " ",
+                 args.origen, " ",
+                 args.destino, " ",
+                 args.carga_inicial, " ",
+                 args.carga_final, " ",
+                 args.tipo_conector)
 
     try:
 
-        # 1.- Carga de inputs ---------------------------------------------
+        # 1.- Carga de inputs desde Base de Datos -------------------------
         #------------------------------------------------------------------
-        #
-        # Crear conexion a la base de datos 
-        con = mysql.connector.connect(host="localhost",
+        
+        bd = BaseDatos.BaseDatos(host="localhost",
                                     port=3306,            
                                     user="root",            
                                     password="root",        
-                                    database="tfm")
+                                    database="tfm") 
+        con = bd.crear_conexion()
 
-        cur = con.cursor()
+        # Query a PuntosCarga
+        sql_query_pc = "SELECT * FROM PuntosCarga"
+        columnas_pc = ["id","latitude","longitude","name","streetName","provincia","ccaa","postalCode","connectorType","ratedPowerKW","num_connectors","status"]
+        df_puntoscarga = bd.ejecutar_queries(con = con,
+                                             sql_query = sql_query_pc,
+                                             columnas = columnas_pc)
 
-        sql_query = "SELECT * FROM PuntosCarga"
-        cur.execute(sql_query)
-        df_puntoscarga = pd.DataFrame(cur.fetchall(), columns = ["id","latitude","longitude","name","streetName","provincia","ccaa","postalCode","connectorType","ratedPowerKW","num_connectors","status"])
-
-        sql_query = "SELECT * FROM Ciudades"
-        cur.execute(sql_query)
-        df_ciudades = pd.DataFrame(cur.fetchall(), columns = ["id","PROVINCIA","ADDRESS","Latitude","Longitude","COORDENADAS","status"])
+        #Query a Ciudades
+        sql_query_ciudades = "SELECT * FROM Ciudades"
+        columnas_ciudades = ["id","PROVINCIA","ADDRESS","Latitude","Longitude","COORDENADAS","status"]
+        df_ciudades = bd.ejecutar_queries(con = con,
+                                          sql_query = sql_query_ciudades,
+                                          columnas = columnas_ciudades)
 
         df_ciudades.set_index(["id"], inplace=True)
         df_ciudades.drop("status",axis="columns", inplace=True)
 
-        sql_query = "SELECT * FROM ElectricCar WHERE BRAND = %s AND MODEL = %s"
-        arg = (car_brand,car_model)
-        cur.execute(sql_query, arg)
-        df_electricar = pd.DataFrame(cur.fetchall(), columns = ["BRAND","MODEL","RANGE_KM","EFFICIENCY_WHKM","FASTCHARGE_KMH","RAPIDCHARGE","PLUGTYPE", "BATTERY_CAPACITY"])
-        autonomia_coche = 0.9*float(df_electricar["RANGE_KM"])
+        #Query a ElectriCar
+        sql_query_coche = "SELECT * FROM ElectricCar WHERE BRAND = %s AND MODEL = %s"
+        columnas_coche = ["BRAND","MODEL","RANGE_KM","EFFICIENCY_WHKM","FASTCHARGE_KMH","RAPIDCHARGE","PLUGTYPE", "BATTERY_CAPACITY"]
+        argumentos_coche= (args.marca_coche, args.modelo_coche)
+        df_electricar =  bd.ejecutar_queries(con = con,
+                                             sql_query = sql_query_coche,
+                                             columnas = columnas_coche,
+                                             argumentos = argumentos_coche)
+        autonomia_coche = 0.9*float(df_electricar["RANGE_KM"]) # TODO: llamar a la funcion de autonomia real del coche
 
-        #La restriccion de autonomi�a se aplica directamente en la llamada a la query
-        if program_type == "GASOLINERA":
-            sql_query = "SELECT * FROM Matriz_distancia_haversine WHERE Distance_km <= %s AND ((Origen LIKE 'gasolinera%' AND Destino LIKE 'gasolinera%') OR (Origen LIKE %s AND Destino LIKE 'gasolinera%') OR (Origen LIKE 'gasolinera%' AND Destino LIKE %s));"
-            arg = (autonomia_coche,origin,destination)
-            cur.execute(sql_query, arg)
-            df_distancias = pd.DataFrame(cur.fetchall(), columns = ["Origen","Destino","Distance_km"])
-        elif program_type == "PUNTO_RECARGA":
-            sql_query = "SELECT * FROM Matriz_distancia_haversine WHERE Distance_km <= %s AND ((Origen LIKE 'punto_recarga%' AND  Destino LIKE 'punto_recarga%') OR (Origen LIKE %s AND Destino LIKE 'punto_recarga%') OR (Origen LIKE 'punto_recarga%' AND Destino LIKE %s));"
-            arg = (autonomia_coche,origin,destination)
-            cur.execute(sql_query, arg)
-            df_distancias = pd.DataFrame(cur.fetchall(), columns = ["Origen","Destino","Distance_km"])
+        #La restriccion de autonomia se aplica directamente en la llamada a la query
+        if args.tipo_programa == "GASOLINERA":
+            sql_query_distancia = "SELECT * FROM Matriz_distancia_haversine WHERE Distance_km <= %s AND ((Origen LIKE 'gasolinera%' AND Destino LIKE 'gasolinera%') OR (Origen LIKE %s AND Destino LIKE 'gasolinera%') OR (Origen LIKE 'gasolinera%' AND Destino LIKE %s));"
+            columnas_distancia = ["Origen","Destino","Distance_km"]
+            argumentos_distancia = (autonomia_coche,args.origen,args.destino)
+            df_distancias =  bd.ejecutar_queries(con = con,
+                                                 sql_query = sql_query_coche,
+                                                 columnas = columnas_coche,
+                                                 argumentos = argumentos_distancia)
+        elif args.tipo_programa == "PUNTO_RECARGA":
+            sql_query_distancia = "SELECT * FROM Matriz_distancia_haversine WHERE Distance_km <= %s AND ((Origen LIKE 'punto_recarga%' AND  Destino LIKE 'punto_recarga%') OR (Origen LIKE %s AND Destino LIKE 'punto_recarga%') OR (Origen LIKE 'punto_recarga%' AND Destino LIKE %s));"
+            columnas_distancia = ["Origen","Destino","Distance_km"]
+            argumentos_distancia = (autonomia_coche,args.origen,args.destino)
+            df_distancias =  bd.ejecutar_queries(con = con,
+                                                 sql_query = sql_query_coche,
+                                                 columnas = columnas_coche,
+                                                 argumentos = argumentos_distancia)
         else:
-            sql_query = "SELECT * FROM Matriz_distancia_haversine WHERE Distance_km <= %s AND ((Origen LIKE 'gasolinera%' AND Destino LIKE 'gasolinera%') OR (Origen LIKE 'punto_recarga%' AND  Destino LIKE 'gasolinera%') OR (Origen LIKE 'gasolinera%' AND  Destino LIKE 'punto_recarga%') OR (Origen LIKE 'punto_recarga%' AND  Destino LIKE 'punto_recarga%') OR (Origen LIKE %s AND Destino LIKE 'punto_recarga%') OR (Origen LIKE %s AND Destino LIKE 'gasolinera%') OR (Origen LIKE 'punto_recarga%' AND Destino LIKE %s) OR (Origen LIKE 'gasolinera%' AND Destino LIKE %s));"
-            arg = (autonomia_coche,origin,origin,destination,destination)
-            cur.execute(sql_query, arg)
-            df_distancias = pd.DataFrame(cur.fetchall(), columns = ["Origen","Destino","Distance_km"])
+            sql_query_distancia = "SELECT * FROM Matriz_distancia_haversine WHERE Distance_km <= %s AND ((Origen LIKE 'gasolinera%' AND Destino LIKE 'gasolinera%') OR (Origen LIKE 'punto_recarga%' AND  Destino LIKE 'gasolinera%') OR (Origen LIKE 'gasolinera%' AND  Destino LIKE 'punto_recarga%') OR (Origen LIKE 'punto_recarga%' AND  Destino LIKE 'punto_recarga%') OR (Origen LIKE %s AND Destino LIKE 'punto_recarga%') OR (Origen LIKE %s AND Destino LIKE 'gasolinera%') OR (Origen LIKE 'punto_recarga%' AND Destino LIKE %s) OR (Origen LIKE 'gasolinera%' AND Destino LIKE %s));"
+            columnas_distancia = ["Origen","Destino","Distance_km"]
+            argumentos_distancia = (autonomia_coche,args.origen,args.origen,args.destino,args.destino)
+            df_distancias =  bd.ejecutar_queries(con = con,
+                                                 sql_query = sql_query_coche,
+                                                 columnas = columnas_coche,
+                                                 argumentos = argumentos_distancia)
         con.close()
 
-        # Filtrar el df_distancias con las restricciones del Modelo Avanzado
+        # 2.- Aplicar las restricciones -----------------------------------
+        #------------------------------------------------------------------
 
+        restriccion = Restricciones.Restricciones()
         # a) Restriccion de tipo de conector
         puntoscarga_reduced = []
         for index, punto_carga in df_puntoscarga.iterrows():
-            if connector_type in punto_carga["connectorType"]:
+            if args.tipo_conector in punto_carga["connectorType"]:
                 puntoscarga_reduced.append(str(punto_carga["id"]))
         df_puntoscarga_reduced = df_puntoscarga[df_puntoscarga["id"].isin(puntoscarga_reduced)]
 
         df_distancias_pc = df_distancias[(df_distancias["Origen"].str.contains("punto_recarga"))|(df_distancias["Destino"].str.contains("punto_recarga"))]
-        restriccion_tipo_conector = fa.restriccion_tipo_conector(df_distancias_pc,puntoscarga_reduced)
+        restriccion.restriccion_tipo_conector(df_distancias_pc,puntoscarga_reduced)
 
         # b) Restriccion de primera parada
-        df_distancias_origen = df_distancias[df_distancias["Origen"]==origin]
-        restricciones_prim_par = fa.restriccion_primera_parada(df_distancias_origen,initial_charge,autonomia_coche)
+        df_distancias_origen = df_distancias[df_distancias["Origen"]==args.origen]
+        restriccion.restriccion_primera_parada(df_distancias_origen,float(args.carga_inicial),autonomia_coche)
 
         # c) Restriccion de ultima parada
-        df_distancias_destino = df_distancias[df_distancias["Destino"]==destination]
-        restricciones_ult_par = fa.restriccion_ultima_parada(df_distancias_destino,final_charge,autonomia_coche)
+        df_distancias_destino = df_distancias[df_distancias["Destino"]==args.destino]
+        restriccion.restriccion_ultima_parada(df_distancias_destino,float(args.carga_final),autonomia_coche)
 
         # Se genera el dataframe reducido que cumple con todas las restricciones
-        df_distancias_merged_1 = pd.merge(df_distancias, restriccion_tipo_conector, on=['Origen', 'Destino'], how='outer')
-        df_distancias_merged_2 = pd.merge(df_distancias_merged_1, restricciones_prim_par, on=['Origen', 'Destino'], how='outer')
-        df_distancias_merged = pd.merge(df_distancias_merged_2, restricciones_ult_par, on=['Origen', 'Destino'], how='outer')
+        df_distancias_merged_1 = pd.merge(df_distancias, restriccion.restriccion_tipo_conector, on=['Origen', 'Destino'], how='outer')
+        df_distancias_merged_2 = pd.merge(df_distancias_merged_1, restriccion.restricciones_prim_par, on=['Origen', 'Destino'], how='outer')
+        df_distancias_merged = pd.merge(df_distancias_merged_2, restriccion.restricciones_ult_par, on=['Origen', 'Destino'], how='outer')
         #TODO: Hacer esto de manera limpia y no con esta guarreria :)
         df_distancias_merged = df_distancias_merged.fillna(True)
         df_distancias_reduced = df_distancias_merged[(df_distancias_merged["Restr_con"] == True)&
