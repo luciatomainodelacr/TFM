@@ -39,7 +39,7 @@
     {% block body %}
 
     <!-- Cuerpo -->
-    <body id="page-top">
+    <body id="page-top" >
     
         <!-- Page Wrapper -->
         <div id="wrapper">
@@ -58,20 +58,16 @@
             <!-- Línea divisora -->
             <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
+            <!-- Nav Item - New Route -->
             <li class="nav-item">
-                <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
-                <a class="dropdown-item" href="login" data-toggle="modal" data-target="#logoutModal">
+                <a class="nav-link" href="#" data-toggle="modal" data-target="#newRoute">
                      <i class="fa fa-map fa-sm fa-fw mr-2 text-gray-400"></i>
                     <span>New Route</span>
                 </a>
             </li>
 
-            
-            
-
         
-            <!-- Nav Item - Pages Collapse Menu -->
+            <!-- Nav Item - Settings -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-cog"></i>
@@ -94,7 +90,7 @@
                 </div>
             </li>
 
-            <!-- Nav Item - Utilities Collapse Menu -->
+            <!-- Nav Item - Utilities -->
             <li class="nav-item">
             <a class="nav-link" href="charts.html">
             <i class="fas fa-fw fa-wrench"></i>
@@ -165,8 +161,7 @@
                     <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
                         <h6 class="dropdown-header">
                         Message Center
-                        </h6>
-                        
+                        </h6>                        
                         <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
                     </div>
                     </li>
@@ -196,24 +191,21 @@
                         </a>
                     </div>
                     </li>
-
                 </ul>
 
                 </nav>
                 <!-- End of Topbar -->
 
-                <!-- Begin Page Content -->
+                <!-- Map -->
                 
-                <div class='col-12' style="height:180%;">
-                    <div class = 'row' style='height:100%;'>                          
-                        <div class = 'col-12' style = 'width: 120%'>
+                <div class='col-12 bg-white'>
+                    <div class = 'row'>
                             {% block map %}
                             {% endblock %}
-                        </div>
                     </div>
                 </div>   
                  
-                        
+                                         
                 <!-- /.container-fluid -->
 
             </div>
@@ -256,6 +248,39 @@
                 <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                 <a class="btn btn-primary" href="login">Logout</a>
+                </div>
+            </div>
+            </div>
+        </div>
+
+
+        <!-- New Route Modal-->
+        <div class="modal fade" id="newRoute" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New Route</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <form class="user">
+                        <div class="form-group" style= "margin-botton: 20%;">
+                            <input type="Type Car" class="form-control form-control-user" id="type_Car" aria-describedby="emailHelp" placeholder="Select your car"> 
+                        </div>
+                        <div class="form-group">
+                                <input type="From" class="form-control form-control-user" id="From" placeholder="From">
+                        </div>
+                        <div class="form-group">
+                            <input type="To" class="form-control form-control-user" id="To" placeholder="To">
+                        </div>
+                        </a>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="Route">Go!</a>
                 </div>
             </div>
             </div>

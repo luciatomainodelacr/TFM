@@ -24,13 +24,30 @@
             $(document).ready(function() {
                 
                 // Se crea la variable del mapa e indicamos las coordenadas q deseamos q se vea al principio
-                var map = L.map('my_map').setView([39.981712, -2.8310256,7], 6);
+                var map = L.map('my_map').setView([39.8046503, -2.9391801], 6);
                 
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 }).addTo(map);
-      
+
+                 
+                     
+                L.Routing.control({
+                    waypoints: [
+                        L.latLng(40.18727, -4.40552),
+                        L.latLng(42.38289, -3.69141)
+                    ]
+                }).addTo(map);
+                
+                L.marker([40.436166, -3.716840]).addTo(map)
+                    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+                    .openPopup();
+
+                return map
             })
+
+           
+
 
             // Se crea un evento que captura dos puntos seleccionados en el mapa
             map.on('click', function(e) {
@@ -49,6 +66,7 @@
                     waypoints: [firstLatLng, secondLatLng]
                 }).addTo(map);
                 
+                return firstLatLng, secondLatLng
             
 
                 }
@@ -62,7 +80,7 @@
  
     {% block map %}
 
-        <div id="my_map" style= 'margin: 5px; padding: 30px; height: 50%; width: 100%;' size: 'contain'></div>
+        <div id="my_map" style= 'height: 699px; width: 2000px;'></div>
     
     {% endblock %}
 
