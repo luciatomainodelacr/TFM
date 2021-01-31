@@ -10,15 +10,17 @@
             "type": "python",
             "request": "launch",
             "program": "${file}",
-            "args": ["PUNTO_RECARGA","VOLKSWAGEN","ID3 PURE","Alicante Tren","A Corunia Bus", "65", "70","IEC62196Type2Outlet"],
+            "args": ["--tipo_programa","PUNTO_RECARGA","--marca_coche","VOLKSWAGEN","--modelo_coche","ID3 PURE",
+                     "--origen","Alicante Tren","--destino","A Corunia Bus","--carga_inicial","65",
+                     "--carga_final","70","--tipo_conector","IEC62196Type2Outlet"],
             "console": "integratedTerminal"
     }
 
     Ejecutar desde visual studio code: Debug
 
     Ejecutar en terminal
-    >> cd /Python/Modelo
-    >> python3 calcular_caminos_entre_puntos.py PUNTO_RECARGA VOLKSWAGEN "ID3 PURE" "Alicante Tren" "A Corunia Bus" 65 70 IEC62196Type2Outlet
+    >> cd /home/tfm/Documentos/TFM/Python/Modelo
+    >> python3 calcular_caminos_entre_puntos.py --tipo_programa 'PUNTO_RECARGA' --marca_coche 'VOLKSWAGEN' --modelo_coche 'ID3 PURE' --origen 'Alicante Tren' --destino 'A Corunia Bus' --carga_inicial 65 --carga_final 70 --tipo_conector 'IEC62196Type2Outlet'
 
 """
 
@@ -39,7 +41,8 @@ import datetime
 os.chdir('/home/tfm/Documentos/TFM/Python/Modelo/')
 import BaseDatos
 import Restricciones
-import funcion_aux as fa 
+import Tiempos
+import Network
 
 
 # 2.- Funcion main ------------------------------------------------
@@ -115,29 +118,30 @@ if __name__ == "__main__":
     
     logger = logging.getLogger(__name__)
     logger.info("[OK] Llamada al script calcular_caminos_entre_puntos.py [OK]")
-    logger.info("El programa lanzado es: ",
-                 args.tipo_programa, " ",
-                 args.marca_coche, " ",
-                 args.modelo_coche, " ",
-                 args.origen, " ",
-                 args.destino, " ",
-                 args.carga_inicial, " ",
-                 args.carga_final, " ",
-                 args.tipo_conector)
+    logger.info("El programa lanzado es: %s %s %s %s %s %s %s %s",
+                 args.tipo_programa,
+                 args.marca_coche,
+                 args.modelo_coche,
+                 args.origen,
+                     args.destino,
+                     args.carga_inicial,
+                     args.carga_final,
+                     args.tipo_conector)
 
     try:
-
         # 1.- Carga de inputs desde Base de Datos -------------------------
         #------------------------------------------------------------------
-        
+        logger.info("1.- Carga de inputs desde Base de Datos")
         bd = BaseDatos.BaseDatos(host="localhost",
                                  puerto=3306,            
                                  usuario="root",            
                                  password="root",        
                                  basedatos="tfm") 
+        logger.info("Crear conexion a DB")
         con = bd.crear_conexion()
 
         # Query a PuntosCarga
+        logger.info("Query a PuntosCarga")
         sql_query_pc = "SELECT * FROM PuntosCarga"
         columnas_pc = ["id","latitude","longitude","name","streetName","provincia","ccaa","postalCode","connectorType","ratedPowerKW","num_connectors","status"]
         df_puntoscarga = bd.ejecutar_queries(con = con,
@@ -145,16 +149,17 @@ if __name__ == "__main__":
                                              columnas = columnas_pc)
 
         #Query a Ciudades
+        logger.info("Query a Ciudades")
         sql_query_ciudades = "SELECT * FROM Ciudades"
         columnas_ciudades = ["id","PROVINCIA","ADDRESS","Latitude","Longitude","COORDENADAS","status"]
         df_ciudades = bd.ejecutar_queries(con = con,
                                           sql_query = sql_query_ciudades,
                                           columnas = columnas_ciudades)
-
         df_ciudades.set_index(["id"], inplace=True)
         df_ciudades.drop("status",axis="columns", inplace=True)
 
         #Query a ElectriCar
+        logger.info("Query a ElectriCar")
         sql_query_coche = "SELECT * FROM ElectricCar WHERE BRAND = %s AND MODEL = %s"
         columnas_coche = ["BRAND","MODEL","RANGE_KM","EFFICIENCY_WHKM","FASTCHARGE_KMH","RAPIDCHARGE","PLUGTYPE", "BATTERY_CAPACITY"]
         argumentos_coche= (args.marca_coche, args.modelo_coche)
@@ -164,6 +169,8 @@ if __name__ == "__main__":
                                              argumentos = argumentos_coche)
         autonomia_coche = 0.9*float(df_electricar["RANGE_KM"]) # TODO: llamar a la funcion de autonomia real del coche
 
+        #Query a Matriz_distancia_haversine
+        logger.info("Query a Matriz_distancia_haversine")
         #La restriccion de autonomia se aplica directamente en la llamada a la query
         if args.tipo_programa == "GASOLINERA":
             sql_query_distancia = "SELECT * FROM Matriz_distancia_haversine WHERE Distance_km <= %s AND ((Origen LIKE 'gasolinera%' AND Destino LIKE 'gasolinera%') OR (Origen LIKE %s AND Destino LIKE 'gasolinera%') OR (Origen LIKE 'gasolinera%' AND Destino LIKE %s));"
@@ -189,50 +196,61 @@ if __name__ == "__main__":
                                                  sql_query = sql_query_distancia,
                                                  columnas = columnas_distancia,
                                                  argumentos = argumentos_distancia)
+        logger.info("Cerrar conexion con DB")
         con.close()
-
         # 2.- Aplicar las restricciones -----------------------------------
         #------------------------------------------------------------------
+        logger.info("2.- Aplicar las restricciones")
 
-        restriccion = Restricciones.Restricciones()
         # a) Restriccion de tipo de conector
+        logger.info("a) Restriccion de tipo de conector")
         puntoscarga_reduced = []
         for index, punto_carga in df_puntoscarga.iterrows():
             if args.tipo_conector in punto_carga["connectorType"]:
                 puntoscarga_reduced.append(str(punto_carga["id"]))
         df_puntoscarga_reduced = df_puntoscarga[df_puntoscarga["id"].isin(puntoscarga_reduced)]
-
         df_distancias_pc = df_distancias[(df_distancias["Origen"].str.contains("punto_recarga"))|(df_distancias["Destino"].str.contains("punto_recarga"))]
-        restriccion.restriccion_tipo_conector(distancias = df_distancias_pc,
-                                              puntoscarga_reduced = puntoscarga_reduced)
-
+        restriccion_tipo_conector = Restricciones.restriccion_tipo_conector(distancias = df_distancias_pc,
+                                                                            puntoscarga_reduced = puntoscarga_reduced)
         # b) Restriccion de primera parada
+        logger.info("b) Restriccion de primera parada")
         df_distancias_origen = df_distancias[df_distancias["Origen"]==args.origen]
-        restriccion.restriccion_primera_parada(df_distancias_origen,float(args.carga_inicial),autonomia_coche)
-
+        restricciones_prim_par = Restricciones.restriccion_primera_parada(distancias_origen = df_distancias_origen,
+                                                                          carga_inicial = float(args.carga_inicial),
+                                                                          autonomia_coche = autonomia_coche)
         # c) Restriccion de ultima parada
+        logger.info("c) Restriccion de ultima parada")
         df_distancias_destino = df_distancias[df_distancias["Destino"]==args.destino]
-        restriccion.restriccion_ultima_parada(df_distancias_destino,float(args.carga_final),autonomia_coche)
-
+        restricciones_ult_par = Restricciones.restriccion_ultima_parada(distancias_destino = df_distancias_destino,
+                                                                        carga_final = float(args.carga_final),
+                                                                        autonomia_coche = autonomia_coche)
         # Se genera el dataframe reducido que cumple con todas las restricciones
-        df_distancias_merged_1 = pd.merge(df_distancias, restriccion.restriccion_tipo_conector, on=['Origen', 'Destino'], how='outer')
-        df_distancias_merged_2 = pd.merge(df_distancias_merged_1, restriccion.restricciones_prim_par, on=['Origen', 'Destino'], how='outer')
-        df_distancias_merged = pd.merge(df_distancias_merged_2, restriccion.restricciones_ult_par, on=['Origen', 'Destino'], how='outer')
+        logger.info("Se genera el dataframe reducido que cumple con todas las restricciones")
+        df_distancias_merged_1 = pd.merge(df_distancias, restriccion_tipo_conector, on=['Origen', 'Destino'], how='outer')
+        df_distancias_merged_2 = pd.merge(df_distancias_merged_1, restricciones_prim_par, on=['Origen', 'Destino'], how='outer')
+        df_distancias_merged = pd.merge(df_distancias_merged_2, restricciones_ult_par, on=['Origen', 'Destino'], how='outer')
         #TODO: Hacer esto de manera limpia y no con esta guarreria :)
         df_distancias_merged = df_distancias_merged.fillna(True)
         df_distancias_reduced = df_distancias_merged[(df_distancias_merged["Restr_con"] == True)&
                                                      (df_distancias_merged["Restr_prim_par"] == True)&
                                                      (df_distancias_merged["Restr_ult_par"] == True)]
 
-        print("df_distancias", df_distancias.shape)
-        print("df_distancias_reduced", df_distancias_reduced.shape)
+        logger.info("df_distancias %s", df_distancias.shape)
+        logger.info("df_distancias_reduced %s", df_distancias_reduced.shape)
 
-        # Calcular tiempo de recorrido y tiempo de parada
+        # 3.- Calcular tiempos (de recorrido y parada) --------------------
+        #------------------------------------------------------------------
+        logger.info("3.- Calcular tiempos (de recorrido y parada)")
+
+        #a) Tiempo de recorrido
+        logger.info("a) Tiempo de recorrido")
         velocidad_coche = 100 #km/h
-        capacidad_coche = float(df_electricar["BATTERY_CAPACITY"])*1000 #Wh
-        df_distancias_reduced["Time_h"] = fa.calcular_tiempo_recorrido(df_distancias_reduced["Distance_km"],velocidad_coche) #h
-        df_puntoscarga_reduced[df_puntoscarga_reduced["ratedPowerKW"]== ''] = 10 #KW
+        df_distancias_reduced["Time_h"] = Tiempos.calcular_tiempo_recorrido(df_distancias_reduced["Distance_km"],velocidad_coche) #h
 
+        #a) Tiempo de parada
+        logger.info("b) Tiempo de parada")
+        capacidad_coche = float(df_electricar["BATTERY_CAPACITY"])*1000 #Wh
+        df_puntoscarga_reduced[df_puntoscarga_reduced["ratedPowerKW"]== ''] = 10 #KW
         tiempos_puntos_parada = []
         for index, punto_carga in df_puntoscarga_reduced.iterrows():
             numero_conectores_pc = int(punto_carga["num_connectors"])
@@ -243,67 +261,60 @@ if __name__ == "__main__":
                 conectores_limpio = []
                 for elem in conectores:
                     conectores_limpio.append(re.sub('[^A-Za-z0-9]+', '', elem))
-                indice = conectores_limpio.index(connector_type)
+                indice = conectores_limpio.index(args.tipo_conector)
                 potencias = punto_carga["ratedPowerKW"].split(",")
                 potencias_limpio = []
                 for elem in potencias:
                     potencias_limpio.append(re.sub('[^A-Za-z0-9]+', '', elem))
                 potencia_pc = 0.9*float(potencias_limpio[indice])*1000 #W
-            tiempos_puntos_parada.append((punto_carga["id"],fa.calcular_tiempo_parada(capacidad_coche,potencia_pc,numero_conectores_pc)))
-        
+            tiempos_puntos_parada.append((punto_carga["id"],Tiempos.calcular_tiempo_parada(capacidad_coche,potencia_pc,numero_conectores_pc)))
+
         column_names = ["id","Parada_h"]
         df_tiempos_puntos_parada = pd.DataFrame(data = tiempos_puntos_parada, columns = column_names)
 
+        # Se genera el dataframe reducido con columna basada en Suma_time_parada_h
+        logger.info("Se genera el dataframe reducido con columna basada en Suma_time_parada_h")
         df_distancias_reduced = df_distancias_reduced.merge(df_tiempos_puntos_parada, how = "left", left_on = "Origen", right_on = "id")
-
         df_distancias_reduced["Parada_h"]           = df_distancias_reduced["Parada_h"].fillna(value = 0)
         df_distancias_reduced["Suma_time_parada_h"] = df_distancias_reduced["Time_h"] + df_distancias_reduced["Parada_h"]
-
 
         # Backup 
         df = df_distancias_reduced
         df
 
-        # 2.- Grafo -------------------------------------------------------
+        # 4.- Construir el grafo ------------------------------------------
         #------------------------------------------------------------------
 
-        # Construir el grafo
+        logger.info("4.- Construir el grafo")
         DG = nx.DiGraph()
-
         for row in df.iterrows():
             DG.add_edge(row[1]["Origen"],
                         row[1]["Destino"],
                         time = row[1]["Suma_time_parada_h"])
-
         # Ver los nodos
         DG.nodes(data = True)
 
-        # 3.- Calculo rutas optimas ---------------------------------------
+        # 5.- Calculo rutas optimas ---------------------------------------
         #------------------------------------------------------------------
-
+        logger.info("5.- Calculo rutas optimas")
         """
-        weight = None --> Busca el camino mas corto en nº de nodos
+        weight = None --> Busca el camino mas corto en numero de nodos
         weight = "distance" --> Busca el camino mas corto segun la distancia
+        weight = "time" --> Busca el camino mas corto segun el tiempo
         """
 
-        # Encuentra todas las rutas entre dos puntos
-        #list(nx.all_shortest_paths(DG, source = "Zaragoza Tren", target = "Zamora Bus", weight = None))
+        path = list(nx.astar_path(DG, source = args.origen, target = args.destino, weight = "time"))
+        logger.info("La ruta optima es: %s", path)
+        total_tiempo = 0
+        for index, lugar  in enumerate(path):
+            if index > 0:
+                lugar_anterior = path[index-1]
+                df_distancias_lugar = df_distancias_reduced[(df_distancias_reduced["Destino"]==lugar)&(df_distancias_reduced["Origen"]==lugar_anterior)]
+                logger.info("Tiempo de parada en %s es %s ",lugar,float(df_distancias_lugar["Parada_h"]))
+                logger.info("Tiempo total en %s es %s ",lugar,float(df_distancias_lugar["Suma_time_parada_h"]))
+                total_tiempo = total_tiempo + float(df_distancias_lugar["Suma_time_parada_h"])
+        logger.info("El tiempo total tardado es: %s h", total_tiempo)
 
-        # Dijkstra - Encuentra la ruta con menor distancia
-        #list(nx.dijkstra_path(DG, source = "Zaragoza Tren", target = "Zamora Bus", weight = "distance"))
-
-        # A* - Encuentra la ruta con menor distancia (Mas optimo que Dijstra)
-        #list(nx.astar_path(DG, ("Zaragoza Tren"), ("Zamora Bus"), weight = "distance"))
-
-        # Se pasa como argumento la ruta obtenida
-        #show_path(['Zaragoza Tren', 'Soria Bus', 'Zamora Bus'])
-        #get_all_shortest_paths(DG, 'Zaragoza Tren', 'Zamora Bus')
-
-        # Ejemplos
-        #get_shortest_path(DG, origen = "Zaragoza Tren", destino = "Zamora Bus")
-        #get_all_shortest_paths(DG, origen = "Alicante Tren", destino = "A Corunia Bus")
-
-        fa.get_shortest_path(DG, origen = origin, destino = destination)
+        Network.get_shortest_path(DG, origen = args.origen, destino = args.destino)
     except:
-        print("El programa no ha podido obtener una ruta")
-
+        logger.error("El programa no ha podido obtener una ruta")
