@@ -2,11 +2,15 @@
 
 Esta carpeta contiene ficheros con información relevante tanto para el planteamiento del problema, fuentes de datos como de la planificacion.
 
-	- MaterialPython
-	  Esta carpeta contiene documentación útil para el uso de Python
+- __MaterialPython__
 
-	- Planificacion
-	  Esta carpeta contiene el excel con el Calendario del desarrollo del TFM 
+	Esta carpeta contiene documentación útil para el uso de Python
 
-	- PlanteamientoProblema
-  	  Esta carpeta contiene documentación variada sobre el problema y las fuentes de datos
+- __Planificacion__
+
+	Esta carpeta contiene el excel con el Calendario del desarrollo del TFM 
+
+- __PlanteamientoProblema__
+	
+  	Esta carpeta contiene documentación variada sobre el problema y las fuentes de datos
+	
