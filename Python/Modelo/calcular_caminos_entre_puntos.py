@@ -37,9 +37,9 @@ import datetime
 
 # Se establece el diretorio base
 os.chdir('/home/tfm/Documentos/TFM/Python/Modelo/')
-import TFM.Python.Modelo.BaseDatos as BaseDatos
-import TFM.Python.Modelo.Restricciones as Restricciones
-import TFM.Python.Modelo.funcion_aux as fa 
+import BaseDatos
+import Restricciones
+import funcion_aux as fa 
 
 
 # 2.- Funcion main ------------------------------------------------
@@ -47,52 +47,52 @@ import TFM.Python.Modelo.funcion_aux as fa
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Calcular caminos entre puntos")
     parser.add_argument("--tipo_programa",
-                        Required = False,
+                        required = False,
                         type = str,
                         choices = ["GASOLINERA","PUNTO_RECARGA","ALL"],
                         default = "ALL",
                         help = "Tipo de programa en base a los puntos que se quieren usar "
                                "Default: ALL")
     parser.add_argument("--marca_coche",
-                        Required = True,
+                        required = True,
                         type = str,
                         help = "Marca de coche (tiene que estar en la tabla ElectricCar)")
     parser.add_argument("--modelo_coche",
-                        Required = True,
+                        required = True,
                         type = str,
                         help = "Modelo de coche (tiene que estar en la tabla ElectricCar)")
     parser.add_argument("--origen",
-                        Required = True,
+                        required = True,
                         type = str,
                         help = "Lugar de Origen (tiene que estar en la tabla Ciudades)")
     parser.add_argument("--destino",
-                        Required = True,
+                        required = True,
                         type = str,
                         help = "Lugar de Destino (tiene que estar en la tabla Ciudades)")
     parser.add_argument("--carga_inicial",
-                        Required = False,
+                        required = False,
                         type = str,
                         default = "90",
                         help = "Porcentaje de carga inicial del coche en lugar de origen "
                                "Default: 90")
     parser.add_argument("--carga_final",
-                        Required = False,
+                        required = False,
                         type = str,
                         default = "10",
                         help = "Porcentaje de carga final del coche en lugar de destino "
                                "Default: 10")
     parser.add_argument("--tipo_conector",
-                        Required = True,
+                        required = True,
                         type = str,
                         help = "Tipo de conector que necesita el coche (tiene que estar en la tabla PuntosCarga)")
     parser.add_argument("--log_level",
-                        Required = False,
+                        required = False,
                         default = "INFO",
                         choices = ["DEBUG","INFO","WARNING","ERROR"],
                         help = "Nivel de logging "
                                "Default: INFO")
     parser.add_argument("--log_path",
-                        Required = False,
+                        required = False,
                         type = str,
                         help = "Path del logging "
                                "Default: path actual")
@@ -106,8 +106,11 @@ if __name__ == "__main__":
     else:
         log_path = os.getcwd() + "/"
     
-    logging.basicConfig(filename = (str(log_path) + "calcular_caminos_entre_puntos_" 
-                                    + str(datetime.datetime.now().strftime("%04Y%02m%02d"))),
+    logging.basicConfig(format = "[%(asctime)s] [%(levelname)-8s]"
+                                 "%(message)s",
+                        filename = (str(log_path) + "calcular_caminos_entre_puntos_" 
+                                    + str(datetime.datetime.now().strftime("%04Y%02m%02d")
+                                    + ".log")),
                         level = args.log_level)
     
     logger = logging.getLogger(__name__)
@@ -128,10 +131,10 @@ if __name__ == "__main__":
         #------------------------------------------------------------------
         
         bd = BaseDatos.BaseDatos(host="localhost",
-                                    port=3306,            
-                                    user="root",            
-                                    password="root",        
-                                    database="tfm") 
+                                 puerto=3306,            
+                                 usuario="root",            
+                                 password="root",        
+                                 basedatos="tfm") 
         con = bd.crear_conexion()
 
         # Query a PuntosCarga
@@ -167,24 +170,24 @@ if __name__ == "__main__":
             columnas_distancia = ["Origen","Destino","Distance_km"]
             argumentos_distancia = (autonomia_coche,args.origen,args.destino)
             df_distancias =  bd.ejecutar_queries(con = con,
-                                                 sql_query = sql_query_coche,
-                                                 columnas = columnas_coche,
+                                                 sql_query = sql_query_distancia,
+                                                 columnas = columnas_distancia,
                                                  argumentos = argumentos_distancia)
         elif args.tipo_programa == "PUNTO_RECARGA":
             sql_query_distancia = "SELECT * FROM Matriz_distancia_haversine WHERE Distance_km <= %s AND ((Origen LIKE 'punto_recarga%' AND  Destino LIKE 'punto_recarga%') OR (Origen LIKE %s AND Destino LIKE 'punto_recarga%') OR (Origen LIKE 'punto_recarga%' AND Destino LIKE %s));"
             columnas_distancia = ["Origen","Destino","Distance_km"]
             argumentos_distancia = (autonomia_coche,args.origen,args.destino)
             df_distancias =  bd.ejecutar_queries(con = con,
-                                                 sql_query = sql_query_coche,
-                                                 columnas = columnas_coche,
+                                                 sql_query = sql_query_distancia,
+                                                 columnas = columnas_distancia,
                                                  argumentos = argumentos_distancia)
         else:
             sql_query_distancia = "SELECT * FROM Matriz_distancia_haversine WHERE Distance_km <= %s AND ((Origen LIKE 'gasolinera%' AND Destino LIKE 'gasolinera%') OR (Origen LIKE 'punto_recarga%' AND  Destino LIKE 'gasolinera%') OR (Origen LIKE 'gasolinera%' AND  Destino LIKE 'punto_recarga%') OR (Origen LIKE 'punto_recarga%' AND  Destino LIKE 'punto_recarga%') OR (Origen LIKE %s AND Destino LIKE 'punto_recarga%') OR (Origen LIKE %s AND Destino LIKE 'gasolinera%') OR (Origen LIKE 'punto_recarga%' AND Destino LIKE %s) OR (Origen LIKE 'gasolinera%' AND Destino LIKE %s));"
             columnas_distancia = ["Origen","Destino","Distance_km"]
             argumentos_distancia = (autonomia_coche,args.origen,args.origen,args.destino,args.destino)
             df_distancias =  bd.ejecutar_queries(con = con,
-                                                 sql_query = sql_query_coche,
-                                                 columnas = columnas_coche,
+                                                 sql_query = sql_query_distancia,
+                                                 columnas = columnas_distancia,
                                                  argumentos = argumentos_distancia)
         con.close()
 
@@ -200,7 +203,8 @@ if __name__ == "__main__":
         df_puntoscarga_reduced = df_puntoscarga[df_puntoscarga["id"].isin(puntoscarga_reduced)]
 
         df_distancias_pc = df_distancias[(df_distancias["Origen"].str.contains("punto_recarga"))|(df_distancias["Destino"].str.contains("punto_recarga"))]
-        restriccion.restriccion_tipo_conector(df_distancias_pc,puntoscarga_reduced)
+        restriccion.restriccion_tipo_conector(distancias = df_distancias_pc,
+                                              puntoscarga_reduced = puntoscarga_reduced)
 
         # b) Restriccion de primera parada
         df_distancias_origen = df_distancias[df_distancias["Origen"]==args.origen]
