@@ -27,6 +27,7 @@ Ejemplo:
 # Se cargan las librerias
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+from flask_mysqldb import MySQL
 
 
 # Se inicializa SQLAlchemy (se utilizará más adelante)
@@ -37,7 +38,7 @@ def create_app():
     app = Flask(__name__)
 
     app.config['SECRET_KEY'] = '123456'
-    # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://username:password@localhost/dbname'
 
     db.init_app(app)
 
