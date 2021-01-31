@@ -3,10 +3,10 @@ Esta carpeta contiene la aplicación web desarrollada con Flask y otro tipo de f
 
 Se añaden dos carpetas:
 
-	- ***ruta_con_indicaciones_v1***
+	- ruta_con_indicaciones_v1
 	  Contiene los html iniciales en los que se dibuja el mapa de españa y seleccionando dos puntos en el mapa te muestra la ruta por carretera con las indicaciones que se deben seguir. 
 
-	- ***flask_auth_app***
+	- flask_auth_app
 	  Contiene la aplicación web.
 
 		* Para ejecutarla: 
@@ -34,5 +34,5 @@ Se añaden dos carpetas:
 		- static: elementos estáticos como imágenes o ficheros .css para el estilo de los objetos.
 
 
-	- ***flask_auth_app_blanca***
+	- flask_auth_app_blanca
 	  Carpeta que contiene una copia de la app en la que Blanca hace pruebas (en un futuro se borrará)

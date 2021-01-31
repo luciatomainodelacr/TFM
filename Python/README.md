@@ -4,7 +4,7 @@ Esta carpeta contiene scripts y otro tipo de ficheros (.json para configuración
 A medida que se avance se pueden añadir distintas subcarpetas.
 
 Se añaden tres carpetas correspondientes a cada uno de los módulos:
-	- ***Input*** 
+	- Input 
 	  Contiene los scripts que obtienen los datos mediante csv y/o API, los filtran y analizan y luego los vuelcan a otros ficheros csv. 
 
 		- Gasolineras: carpeta con scripts referentes a los datos de Gasolineras_de_España.csv. 
@@ -27,7 +27,7 @@ Se añaden tres carpetas correspondientes a cada uno de los módulos:
 		Los scripts son:
 		1) API_Geocoding.py -> descarga de las coordenadas de las estaciones de tren y autobús de todas las capitales de provincia españolas mediante Geocoding API
 
-	- ***Modelo***
+	- Modelo
 	  Contiene los scripts que obtienen los datos mediante csv y/o API, los filtran y analizan y luego los vuelcan a otros ficheros csv. 
 	  
 		- Script matriz_distancias_api_google.py -> Importa el fichero con todo el conjunto de puntos y calcula, mediande la API Google Distance Matrix, las distancias entre todas los puntos y el tiempo que se tarda en recorrer esa distancia. Devuelve un fichero con la información del Origen, Destino, Distancia y Duración del trayecto.
@@ -54,4 +54,4 @@ Se añaden tres carpetas correspondientes a cada uno de los módulos:
 		4) Restricciones.py: funciones auxiliares para el cálculo de las restricciones 
 		5) Tiempos.py: funciones auxiliares para el cálculo de los tiempos y otros (como la autonomía real de los coches)
 
-	- ***Output***
+	- Output
