@@ -52,62 +52,6 @@ def calcular_tiempo_espera(numero_conectores_pc):
 # mayor de 'tanto' fijar un tiempo de espera medio y si no otro
 
 
-#Restricciones: autonomia real
-
-def restriccion_autonomia(distancias, autonomia_coche):
-    restriccion_autonomia = []
-    for index, distancia in distancias.iterrows():
-        if (float(distancia["Distance_km"]) - 0.9 * autonomia_coche) <= 0:
-            restriccion_autonomia.append((distancia["Origen"],distancia["Destino"],True))
-        else:
-            restriccion_autonomia.append((distancia["Origen"],distancia["Destino"],False))
-    column_names = ["Origen","Destino","Restr_aut"]
-    restriccion_autonomia_df = pd.DataFrame(data = restriccion_autonomia, columns = column_names)
-    return restriccion_autonomia_df
-
-
-def restriccion_tipo_conector(distancias, puntoscarga_reduced):
-    restriccion_tipo_conector = []
-    for index, distancia in distancias.iterrows():
-        if ("punto_recarga" in distancia["Origen"]) & ("punto_recarga" in distancia["Destino"]):
-            if (distancia["Origen"] in puntoscarga_reduced) & (distancia["Destino"] in puntoscarga_reduced):
-                restriccion_tipo_conector.append((distancia["Origen"],distancia["Destino"],True))
-            else:
-                restriccion_tipo_conector.append((distancia["Origen"],distancia["Destino"],False))
-        else:
-            if (distancia["Origen"] in puntoscarga_reduced) | (distancia["Destino"] in puntoscarga_reduced):
-                restriccion_tipo_conector.append((distancia["Origen"],distancia["Destino"],True))
-            else:
-                restriccion_tipo_conector.append((distancia["Origen"],distancia["Destino"],False))
-    column_names = ["Origen","Destino","Restr_con"]
-    restriccion_tipo_conector_df = pd.DataFrame(data = restriccion_tipo_conector, columns = column_names)
-    return restriccion_tipo_conector_df
-
-
-def restriccion_primera_parada(distancias_origen, carga_inicial, autonomia_coche):
-    restriccion_primera_parada = []
-    for index, distancia in distancias_origen.iterrows():
-        if (float(distancia["Distance_km"]) - 0.9 * autonomia_coche * carga_inicial / 100) <= 0:
-            restriccion_primera_parada.append((distancia["Origen"],distancia["Destino"],True))
-        else:
-            restriccion_primera_parada.append((distancia["Origen"],distancia["Destino"],False))
-    column_names = ["Origen","Destino","Restr_prim_par"]
-    restriccion_primera_parada_df = pd.DataFrame(data = restriccion_primera_parada, columns = column_names)
-    return restriccion_primera_parada_df
-
-
-def restriccion_ultima_parada(distancias_destino, carga_final, autonomia_coche):
-    restriccion_ultima_parada = []
-    for index, distancia in distancias_destino.iterrows():
-        if (float(distancia["Distance_km"]) - ((100 - carga_final) / 100 * 0.9 * autonomia_coche)) <= 0:
-            restriccion_ultima_parada.append((distancia["Origen"],distancia["Destino"],True))
-        else:
-            restriccion_ultima_parada.append((distancia["Origen"],distancia["Destino"],False))
-    column_names = ["Origen","Destino","Restr_ult_par"]
-    restriccion_ultima_parada_df = pd.DataFrame(data = restriccion_ultima_parada, columns = column_names)
-    return restriccion_ultima_parada_df
-
-
 # Funcion que devuelve la duracion completa del trayecto 
 def show_path(DG,path):
     try:
