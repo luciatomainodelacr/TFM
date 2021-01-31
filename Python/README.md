@@ -1,3 +1,5 @@
+# PYTHON
+
 Esta carpeta contiene scripts y otro tipo de ficheros (.json para configuración por ejemplo) relacionados con el desarrollo de la aplicación.
 A medida que se avance se pueden añadir distintas subcarpetas.
 
@@ -31,13 +33,13 @@ Se añaden tres carpetas correspondientes a cada uno de los módulos:
 
     - Script matriz_distancias_Haversine.py -> Importa el fichero con todo el conjunto de puntos y calcula, mediande la distancia de Haversine, las distancias entre todas los puntos. Devuelve un fichero con la información del Origen, Destino y Distancia entre todas las combinaciones posibles.
 
-    - Pruebas_Blanca: carpeta que contiene script y dataset que se estan utilizando para construir procesos pero todavi�a no estan finalizados.
+    - Pruebas_Blanca: carpeta que contiene script y dataset que se estan utilizando para construir procesos pero todavía no estan finalizados.
 
-    - BackEnd: carpeta con los scripts del BackEnd del Modelo de la aplicacion.
+    - BackEnd: carpeta con los scripts del BackEnd del Modelo de la aplicación.
       Los scripts son: 
-      1) Script calcular_caminos_entre_puntos.py -> Este es el main al que tiene que llamar el FE, y que llama al resto de modulos de la carpeta BackEnd
-      Dadas dos ciudades origen-destino calcula la ruta optima entre ellas, o bien por el numero de nodos minimos necesarios para llegar o bien por el target que se le indique, en este caso, minimizar la distancia total.
-      Para lanzar el script hay que pasarle 3 parametros obligatorios:
+      1) Script calcular_caminos_entre_puntos.py -> Este es el main al que tiene que llamar el FE, y que llama al resto de módulos de la carpeta BackEnd
+      Dadas dos ciudades origen-destino calcula la ruta óptima entre ellas, o bien por el numero de nodos mínimos necesarios para llegar o bien por el target que se le indique, en este caso, minimizar la distancia total.
+      Para lanzar el script hay que pasarle 3 parámetros obligatorios:
         1) ["PUNTO_RECARGA","GASOLINERA","ALL"]:Tipo de programa en base a los puntos que se quieren usar. Default: ALL
         2) marca_coche: Marca de coche (tiene que estar en la tabla ElectricCar)
         3) modelo_coche: Modelo de coche (tiene que estar en la tabla ElectricCar)
@@ -46,10 +48,10 @@ Se añaden tres carpetas correspondientes a cada uno de los módulos:
         6) carga_inicial: Porcentaje de carga inicial del coche en lugar de origen. Default: 90
         7) carga_final: Porcentaje de carga final del coche en lugar de destino. Default: 10
         8) tipo_conector: Tipo de conector que necesita el coche (tiene que estar en la tabla PuntosCarga)
-      2) BaseDatos.py: Clase al que gestiona la conexion y las queries a la base de datos
-      3) Network.py: funciones auxiliares basadas en el uso de la libreria network
-      4) Restricciones.py: funciones auxiliares para el calculo de las restricciones 
-      5) Tiempos.py: funciones auxiliares para el calculo de los tiempos y otros (como la autonomia real de los coches)
+      2) BaseDatos.py: Clase al que gestiona la conexión y las queries a la base de datos
+      3) Network.py: funciones auxiliares basadas en el uso de la librería network
+      4) Restricciones.py: funciones auxiliares para el cálculo de las restricciones 
+      5) Tiempos.py: funciones auxiliares para el cálculo de los tiempos y otros (como la autonomía real de los coches)
 
 
 - Output
