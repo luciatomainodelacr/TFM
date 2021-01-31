@@ -38,4 +38,4 @@ Se añaden dos carpetas:
 
 - __flask_auth_app_blanca__
 
-	  Carpeta que contiene una copia de la app en la que Blanca hace pruebas (en un futuro se borrará)
+	Carpeta que contiene una copia de la app en la que Blanca hace pruebas (en un futuro se borrará)
