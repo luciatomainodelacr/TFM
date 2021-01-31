@@ -17,7 +17,7 @@
                   <!-- Nested Row within Card Body -->
                     <div class="row">
                         <div class="col-lg-6 d-none d-lg-block">
-                            <img src="{{url_for('static', filename='img/profile.jpg')}}" class="img-fluid" alt="" style = "height: 100%;">     
+                            <img src="{{url_for('static', filename='img/profile.jpg')}}" class="img-fluid" alt="" size = "contain" width = "100%" style = "height: 100%;">     
                             
                         </div>
 
@@ -28,6 +28,7 @@
                                     <span>User Profile</span>
                                 </div>
                           <form class="user">
+                          </p>
                            <div class="card card-body" style= "margin-botton: 20%;">
                           <p>Name {{ slug_title }} </p>
                            <p>Last Name {{ slug_title }}</p>

@@ -39,17 +39,43 @@ class SignupForm(FlaskForm):
     submit   = SubmitField('Registrar')
 
 
+# Se carga la conexion a mySQL
+
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'root'
+app.config['MYSQL_DB'] = 'db'
+
+mysql = MySQL(app)
+
 # 2.- Página para logearse ----------------------------------------
 #------------------------------------------------------------------
 
-@main.route('/login', methods = ["GET", "POST"])
-def login():
-    form = SignupForm()
-    if form.validate_on_submit():
-        email = form.email.data
-        password = form.password.data
+##@main.route('/login', methods = ["GET", "POST"])
+##def login():
+##    form = SignupForm()
+##    if form.validate_on_submit():
+##        email = form.email.data
+##        password = form.password.data
+##
+##        next = request.args.get('next', None)
+##        if next:
+##            return redirect(next)
+##        return redirect(url_for('index'))
+##
+##    return render_template('login.html', form=form)
 
-        next = request.args.get('next', None)
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == "POST":
+        details = request.form
+        user_email = details['email']
+        user_password = details['password']
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO LOG_IN_USUARIOS(email, password) VALUES (%s, %s)", (user_email, user_password))
+        mysql.connection.commit()
+        cur.close()
+        return 'success'
         if next:
             return redirect(next)
         return redirect(url_for('index'))
@@ -61,9 +87,23 @@ def login():
 # 3.- Página register ---------------------------------------------
 #------------------------------------------------------------------
 
-@main.route('/register', methods = ["GET", "POST"])
+
+@app.route('/register', methods=['GET', 'POST'])
 def register():
+    if request.method == "POST":
+        details = request.form
+        firstName = details['NAME']
+        lastName = details['LAST_NAME']
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO LOG_IN_USUARIOS(NAME, LAST_NAME) VALUES (%s, %s)", (firstName, lastName))
+        mysql.connection.commit()
+        cur.close()
+        return 'success'
     return render_template('register.html')
+
+#@main.route('/register', methods = ["GET", "POST"])
+#def register():
+#    return render_template('register.html')
 
 
 # 4.- Página forgot-password --------------------------------------
@@ -114,7 +154,14 @@ def profile():
     return render_template('profile.html')
 
 
+# 8.- Password-----------------------------------------------
+#------------------------------------------------------------------
+@main.route('/password1', methods = ['POST', 'GET'])
+def password1():
+    return render_template('password1.html')
 
-
-
-
+# 9.- Settings-----------------------------------------------
+#------------------------------------------------------------------
+@main.route('/Settings', methods = ['POST', 'GET'])
+def Settings():
+    return render_template('Settings.html')
