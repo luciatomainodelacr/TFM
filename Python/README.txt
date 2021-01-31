@@ -31,24 +31,25 @@ Se añaden tres carpetas correspondientes a cada uno de los módulos:
 
     - Script matriz_distancias_Haversine.py -> Importa el fichero con todo el conjunto de puntos y calcula, mediande la distancia de Haversine, las distancias entre todas los puntos. Devuelve un fichero con la información del Origen, Destino y Distancia entre todas las combinaciones posibles.
 
-    - Script calcular_caminos_entre_puntos.py -> Dadas dos ciudades origen-destino calcula la ruta optima entre ellas, o bien por el numero de nodos minimos necesarios para llegar o bien por el target que se le indique, en este caso, minimizar la distancia total.
-                                                  Para lanzar el script hay que pasarle 3 parámetros obligatorios:
-                                                  1) "DB" o "CSV", dependiendo de si se quiero llamar a la base de datos o importarlos desde los ficheros csv
-                                                  2) Marca del Coche, que tiene que cumplir con lo que hay en el csv "electricCar_limpio.csv"
-                                                  3) Modelo del Coche, que tiene que cumplir con lo que hay en el csv "electricCar_limpio.csv"
-                                                  4) Origen, que tiene que cumplir con lo que hay en el csv "ciudades.csv"
-                                                  5) Destino, que tiene que cumplir con lo que hay en el csv "ciudades.csv"
-                                                  6) Carga Inicial, que tiene que darlo en porcentaje el usuario
-                                                  7) Carga Final, que tiene que darlo en porcentaje el usuario
+    - Pruebas_Blanca: carpeta que contiene script y dataset que se estan utilizando para construir procesos pero todavi�a no estan finalizados.
 
-    - _old:  carpeta que contiene script y dataset que se han utilizado como pruebas para construir procesos pero se han descartado por no ser óptimos.
-
-    - Pruebas_Blanca: contiene script y dataset que se están utilizando para construir procesos pero todavía no están finalizados.
-
-    - Modelo Avanzado: carpeta con scripts sobre la definición de la función objetivo y restricciones
+    - BackEnd: carpeta con los scripts del BackEnd del Modelo de la aplicacion.
       Los scripts son: 
-      1) funcion_aux.py: conjuntos de funciones auxiliares
-      2) main.py: prueba de uso de las funciones auxiliares de funcion_aux.py
+      1) Script calcular_caminos_entre_puntos.py -> Este es el main al que tiene que llamar el FE, y que llama al resto de modulos de la carpeta BackEnd
+      Dadas dos ciudades origen-destino calcula la ruta optima entre ellas, o bien por el numero de nodos minimos necesarios para llegar o bien por el target que se le indique, en este caso, minimizar la distancia total.
+      Para lanzar el script hay que pasarle 3 parametros obligatorios:
+        1) ["PUNTO_RECARGA","GASOLINERA","ALL"]:Tipo de programa en base a los puntos que se quieren usar. Default: ALL
+        2) marca_coche: Marca de coche (tiene que estar en la tabla ElectricCar)
+        3) modelo_coche: Modelo de coche (tiene que estar en la tabla ElectricCar)
+        4) origen: Lugar de Origen (tiene que estar en la tabla Ciudades)
+        5) destino: Lugar de Origen (tiene que estar en la tabla Ciudades)
+        6) carga_inicial: Porcentaje de carga inicial del coche en lugar de origen. Default: 90
+        7) carga_final: Porcentaje de carga final del coche en lugar de destino. Default: 10
+        8) tipo_conector: Tipo de conector que necesita el coche (tiene que estar en la tabla PuntosCarga)
+      2) BaseDatos.py: Clase al que gestiona la conexion y las queries a la base de datos
+      3) Network.py: funciones auxiliares basadas en el uso de la libreria network
+      4) Restricciones.py: funciones auxiliares para el calculo de las restricciones 
+      5) Tiempos.py: funciones auxiliares para el calculo de los tiempos y otros (como la autonomia real de los coches)
 
 
 - Output

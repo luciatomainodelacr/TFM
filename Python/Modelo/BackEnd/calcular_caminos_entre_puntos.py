@@ -55,7 +55,7 @@ import logging
 import datetime
 
 # Se establece el diretorio base
-os.chdir('/home/tfm/Documentos/TFM/Python/Modelo/')
+os.chdir('/home/tfm/Documentos/TFM/Python/Modelo/BackEnd/')
 import BaseDatos
 import Restricciones
 import Tiempos
