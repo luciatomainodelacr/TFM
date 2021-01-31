@@ -65,7 +65,7 @@ if __name__ == "__main__":
 
         # 1.- Carga de inputs ---------------------------------------------
         #------------------------------------------------------------------
-
+        #
         # Crear conexion a la base de datos 
         con = mysql.connector.connect(host="localhost",
                                     port=3306,            
