@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 def calcular_tiempo_recorrido(distancias, velocidad):
      """
     Definicion de la funcion calcular_tiempo_recorrido:
@@ -61,7 +62,7 @@ def calcular_tiempo_parada(capacidad_bateria, potencia_pc, numero_conectores_pc)
 
 
 def calcular_tiempo_recarga(potencia_pc,capacidad_bateria):
-    #TODO
+    #TODO: Implementar calculo mas complejo de tiempo de recarga
     tiempo_recarga = capacidad_bateria / potencia_pc
     return tiempo_recarga
 
