@@ -22,10 +22,20 @@ from flask_login import login_required, current_user
 
 
 main = Blueprint('main', __name__)
+# bp = Blueprint('errors', __name__)
+
 
 
 # 2.- Páginas de error ----------------------------------------
 #-----------------------------------------------------------------
+
+@main.route('/page_not_found')
+def page_not_found():
+    return render_template('404.html')
+
+# @bp.app_errorhandler(404)
+# def handle_404(err):
+#    return render_template('404.html'), 404
 
 
 # 4.- Página index ------------------------------------------------
@@ -40,7 +50,7 @@ def index():
 # 5.- Página ruta (mapa) ------------------------------------------
 #------------------------------------------------------------------
 
-@main.route('/Route', methods = ["GET", "POST"])
+@main.route('/Route')
 def route():
     return render_template('route.html')
 
