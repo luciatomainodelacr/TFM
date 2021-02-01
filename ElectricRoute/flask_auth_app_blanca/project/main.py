@@ -16,58 +16,36 @@ Modelo de autenticación. Tres páginas:
 
 
 # Se cargan las librerias
-from flask import Blueprint, Flask, render_template, request, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
-from . import db
+from flask import Blueprint, render_template
+from flask_login import login_required, current_user
 
 
 
 main = Blueprint('main', __name__)
-auth = Blueprint('auth', __name__)
 
 
-
-
-# 2.- Página para logearse ----------------------------------------
-#------------------------------------------------------------------
-
-@main.route('/login', methods = ["GET", "POST"])
-def login():
-    if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
-
-        next = request.args.get('next', None)
-        if next:
-            return redirect(url_for('next'))
-        return redirect(url_for('index'))
-
-    return render_template('login.html')
-
-
-# 3.- Página register ---------------------------------------------
-#------------------------------------------------------------------
-
-@main.route('/register', methods = ["GET", "POST"])
-def register():
-    return render_template('register.html')
+# 2.- Páginas de error ----------------------------------------
+#-----------------------------------------------------------------
 
 
 # 4.- Página index ------------------------------------------------
 #------------------------------------------------------------------
 
-@main.route('/index', methods = ["GET", "POST"])
+@main.route('/index')
+@login_required
 def index():
-    return render_template('index.html')
+    return render_template('index.html', name=current_user.name)
 
 
-
-# 5.- Página ruta (mapa) ----------------------------------------
+# 5.- Página ruta (mapa) ------------------------------------------
 #------------------------------------------------------------------
 
 @main.route('/Route', methods = ["GET", "POST"])
 def route():
     return render_template('route.html')
+
+
+
 
 
 # 6.- Página Rutas Frecuentes -------------------------------------
