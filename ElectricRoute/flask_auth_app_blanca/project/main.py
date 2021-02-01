@@ -16,10 +16,9 @@ Modelo de autenticación. Tres páginas:
 
 
 # Se cargan las librerias
-from flask import Blueprint, Flask, render_template, request, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
+from flask import Blueprint, render_template
 from flask_login import login_required, current_user
-from . import db
+
 
 
 main = Blueprint('main', __name__)
@@ -32,11 +31,10 @@ main = Blueprint('main', __name__)
 # 4.- Página index ------------------------------------------------
 #------------------------------------------------------------------
 
-@main.route('/index', methods = ["GET", "POST"])
+@main.route('/index')
 @login_required
 def index():
     return render_template('index.html', name=current_user.name)
-
 
 
 # 5.- Página ruta (mapa) ------------------------------------------
@@ -45,6 +43,9 @@ def index():
 @main.route('/Route', methods = ["GET", "POST"])
 def route():
     return render_template('route.html')
+
+
+
 
 
 # 6.- Página Rutas Frecuentes -------------------------------------
