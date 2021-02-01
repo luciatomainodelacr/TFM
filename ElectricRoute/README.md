@@ -22,13 +22,8 @@ Se añaden dos carpetas:
 
 		2º) Abrir el navegador e ir a la ruta http://localhost:5000/login
 
-		3º) Insertar un mail y una contraseña (cualquiera)
-		Ejemplo: 
-			User: blanca@hotmail.com
-			Password: blanca
-		Debería llevarnos a la pestaña Home
+		3º) Si se tiene un usuario, logearse. En otro caso, crear una nueva cuenta "Create an Account!"
 
-		4º) Navegar por el menú superior. (La mayoría de las vistas están en construcción)
 
 	* Contiene:
 	- script de python: __init__.py (crea la app que iniciará la base de datos y registrará los molodelos) y main.py (se construyen los modelos que llaman a los ficheros .html)
