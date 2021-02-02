@@ -73,7 +73,8 @@ def main(tipo_programa,
          carga_final,
          tipo_conector,
          log_level = "INFO",
-         log_path = os.getcwd() + "/logs/"):
+         log_path = os.getcwd() + "/logs/",
+         user_id = 1):
 
     if not os.path.exists(log_path):
             os.makedirs(log_path)
@@ -100,6 +101,7 @@ def main(tipo_programa,
                  log_path)
 
     try:
+
         # 1.- Carga de inputs desde Base de Datos -------------------------
         #------------------------------------------------------------------
         logger.info("1.- Carga de inputs desde Base de Datos")
@@ -110,7 +112,6 @@ def main(tipo_programa,
                                  basedatos="tfm") 
         logger.info("Crear conexion a DB")
         con = bd.crear_conexion()
-
         # Query a PuntosCarga
         logger.info("Query a PuntosCarga")
         sql_query_pc = "SELECT * FROM PuntosCarga"
@@ -118,7 +119,6 @@ def main(tipo_programa,
         df_puntoscarga = bd.ejecutar_queries_select(con = con,
                                                     sql_query = sql_query_pc,
                                                     columnas = columnas_pc)
-
         #Query a Ciudades
         logger.info("Query a Ciudades")
         sql_query_ciudades = "SELECT * FROM Ciudades"
@@ -128,7 +128,6 @@ def main(tipo_programa,
                                                 columnas = columnas_ciudades)
         df_ciudades.set_index(["id"], inplace=True)
         df_ciudades.drop("status",axis="columns", inplace=True)
-
         #Query a ElectriCar
         logger.info("Query a ElectriCar")
         sql_query_coche = "SELECT * FROM ElectricCar WHERE BRAND = %s AND MODEL = %s"
@@ -140,7 +139,6 @@ def main(tipo_programa,
                                                     argumentos = argumentos_coche)
         autonomia_coche = 0.9*float(df_electricar["RANGE_KM"]) 
         # TODO: llamar a la funcion de autonomia real del coche (que deberia ir en el modulo Tiempos.py)
-
         #Query a Matriz_distancia_haversine
         logger.info("Query a Matriz_distancia_haversine")
         #La restriccion de autonomia se aplica directamente en la llamada a la query
@@ -173,7 +171,6 @@ def main(tipo_programa,
         # 2.- Aplicar las restricciones -----------------------------------
         #------------------------------------------------------------------
         logger.info("2.- Aplicar las restricciones")
-
         # a) Restriccion de tipo de conector
         logger.info("a) Restriccion de tipo de conector")
         puntoscarga_reduced = []
@@ -206,23 +203,18 @@ def main(tipo_programa,
         df_distancias_reduced = df_distancias_merged[(df_distancias_merged["Restr_con"] == True)&
                                                      (df_distancias_merged["Restr_prim_par"] == True)&
                                                      (df_distancias_merged["Restr_ult_par"] == True)]
-
         logger.info("df_distancias %s", df_distancias.shape)
         logger.info("df_distancias_reduced %s", df_distancias_reduced.shape)
-
         # 3.- Calcular tiempos (de recorrido y parada) --------------------
         #------------------------------------------------------------------
         logger.info("3.- Calcular tiempos (de recorrido y parada)")
-
         #a) Tiempo de recorrido
         logger.info("a) Tiempo de recorrido")
         velocidad_coche = 100 #km/h
         df_distancias_reduced["Time_h"] = Tiempos.calcular_tiempo_recorrido(df_distancias_reduced["Distance_km"],velocidad_coche) #h
-
         #a) Tiempo de parada
         logger.info("b) Tiempo de parada")
         tiempos_puntos_parada = []
-
         if tipo_programa != "GASOLINERA":
             #Para los puntos de recarga, hay datos disponibles para el cálculo
             logger.info("Calculo tiempo de parada para puntos de recarga")
@@ -244,27 +236,22 @@ def main(tipo_programa,
                         potencias_limpio.append(re.sub('[^A-Za-z0-9]+', '', elem))
                     potencia_pc = 0.9*float(potencias_limpio[indice])*1000 #W
                 tiempos_puntos_parada.append((punto_carga["id"],Tiempos.calcular_tiempo_parada(capacidad_coche,potencia_pc,numero_conectores_pc)))
-
             column_names = ["id","Parada_h"]
             df_tiempos_puntos_parada = pd.DataFrame(data = tiempos_puntos_parada, columns = column_names)
         else:
             #TODO: Para los gasolineras, hay que ver como se calculan los datos (nos lo inventamos?)
             column_names = ["id","Parada_h"]
             df_tiempos_puntos_parada = pd.DataFrame(data = tiempos_puntos_parada, columns = column_names)
-
         # Se genera el dataframe reducido con columna basada en Suma_time_parada_h
         logger.info("Se genera el dataframe reducido con columna basada en Suma_time_parada_h")
         df_distancias_reduced = df_distancias_reduced.merge(df_tiempos_puntos_parada, how = "left", left_on = "Origen", right_on = "id")
         df_distancias_reduced["Parada_h"]           = df_distancias_reduced["Parada_h"].fillna(value = 0)
         df_distancias_reduced["Suma_time_parada_h"] = df_distancias_reduced["Time_h"] + df_distancias_reduced["Parada_h"]
-
         # Backup 
         df = df_distancias_reduced
         df
-
         # 4.- Construir el grafo ------------------------------------------
         #------------------------------------------------------------------
-
         logger.info("4.- Construir el grafo")
         DG = nx.DiGraph()
         for row in df.iterrows():
@@ -273,7 +260,6 @@ def main(tipo_programa,
                         time = row[1]["Suma_time_parada_h"])
         # Ver los nodos
         DG.nodes(data = True)
-
         # 5.- Calculo rutas optimas ---------------------------------------
         #------------------------------------------------------------------
         logger.info("5.- Calculo rutas optimas")
@@ -282,7 +268,6 @@ def main(tipo_programa,
         weight = "distance" --> Busca el camino mas corto segun la distancia
         weight = "time" --> Busca el camino mas corto segun el tiempo
         """
-
         path = list(nx.astar_path(DG, source = origen, target = destino, weight = "time"))
         logger.info("La ruta optima es: %s", path)
         total_tiempo = 0
@@ -294,9 +279,7 @@ def main(tipo_programa,
                 logger.info("Tiempo total del tramo %s - %s es %s h",lugar_anterior,lugar,float(df_distancias_lugar["Suma_time_parada_h"]))
                 total_tiempo = total_tiempo + float(df_distancias_lugar["Suma_time_parada_h"])
         logger.info("El tiempo total tardado es: %s h", total_tiempo)
-
         Network.get_shortest_path(DG, origen = origen, destino = destino)
-
         # 6.- Carga de outputs a Base de Datos ----------------------------
         #------------------------------------------------------------------
         logger.info("6.- Carga de outputs a Base de Datos")
@@ -307,22 +290,28 @@ def main(tipo_programa,
                                         basedatos="tfm") 
         logger.info("Crear conexion a DB")
         con = bd_output.crear_conexion()
-        
-        """# Query a PuntosCarga
-        logger.info("Query a PuntosCarga")
-        sql_query_pc = "SELECT * FROM PuntosCarga"
-        columnas_pc = ["id","latitude","longitude","name","streetName","provincia","ccaa","postalCode","connectorType","ratedPowerKW","num_connectors","status"]
-        df_puntoscarga = bd.ejecutar_queries_select(con = con,
-                                                    sql_query = sql_query_pc,
-                                                    columnas = columnas_pc)
-        """
+
+        # Query a Output
+        logger.info("Query a Output")
+        sql_query_output = "INSERT INTO Output (user_id, timestamp, origin, destination, num_stops, path, total_time) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        path_string = '-'.join(path)
+        argumentos_output = (user_id,
+                             datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                             origen,
+                             destino,
+                             len(path)-1,
+                             path_string,
+                             total_tiempo)
+        rowcount = bd_output.ejecutar_queries_insert(con = con,
+                                                     sql_query = sql_query_output,
+                                                     argumentos = argumentos_output)
+        logger.info("%s registros insertados.",rowcount)
         logger.info("Cerrar conexion con DB")
         con.close()
-        
         logger.info("[OK] Final del script calcular_caminos_entre_puntos.py [OK]")
         return True
     except:
-        logger.error("El programa no ha podido obtener una ruta")
+        logger.error("[ERROR] El programa no ha podido obtener una ruta [ERROR]")
         return False
 
 if __name__ == "__main__":
@@ -378,6 +367,12 @@ if __name__ == "__main__":
                         type = str,
                         help = "Path del logging "
                                "Default: path actual")
+    parser.add_argument("--user_id",
+                        required = False,
+                        default = 1,
+                        type = int,
+                        help = "Id del usuario "
+                               "Default: 1")
     args = parser.parse_args()
 
     main(tipo_programa = args.tipo_programa,
@@ -389,5 +384,6 @@ if __name__ == "__main__":
          carga_final = args.carga_final,
          tipo_conector = args.tipo_conector,
          log_level = args.log_level,
-         log_path = args.log_path)
+         log_path = args.log_path,
+         user_id = args.user_id)
     

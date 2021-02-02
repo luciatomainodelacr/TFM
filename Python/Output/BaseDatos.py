@@ -191,3 +191,59 @@ class BaseDatos(object):
          cur.execute(sql_query, argumentos)
          df = pd.DataFrame(cur.fetchall(), columns = columnas)
          return df
+
+
+    def ejecutar_queries_insert(self, con, sql_query, argumentos = ()):
+         """
+        Definicion del metodo ejecutar_queries_insert:
+            
+            Funcion de ejecutar queries a la base de datos ya inicializada
+    
+        Parametros
+        ----------
+        self:                  BaseDatos
+            objeto instanciado de la clase
+        
+        con:                   Objeto de tipo mysql.connector.connect
+            Conexion a la base de datos con funcion crear_conexion()
+
+        sql_query:             string
+            SQL query a realizar
+        
+        columnas:               list[string]
+            Lista que contiene el nombre de las columnas del dataframe
+        
+        argumentos(opcional):   tuple()
+            Tupla que contiene los argumentos de las queries
+        
+        Returns
+        ------
+        df:                    Pandas Dataframe
+            Dataframe que contiene los resultados de la query
+        
+        Ejemplo
+        -------
+        >>> bd = BaseDatos(host = "localhost",
+                           puerto = 3306,
+                           usuario = "root",
+                           password = "root",
+                           basedatos = "tfm")
+        >>> print(bd)  
+    
+        BaseDatos: localhost, 3306, root, root, tfm
+        
+        >>> con = bd.crear_conexion()
+
+        >>> sql_query_coche = "SELECT * FROM ElectricCar WHERE BRAND = %s AND MODEL = %s"
+            columnas_coche = ["BRAND","MODEL","RANGE_KM","EFFICIENCY_WHKM","FASTCHARGE_KMH","RAPIDCHARGE","PLUGTYPE", "BATTERY_CAPACITY"]
+            argumentos_coche= (args.marca_coche, args.modelo_coche)
+            df_electricar =  bd.ejecutar_queries(con = con,
+                                                 sql_query = sql_query_coche,
+                                                 columnas = columnas_coche,
+                                                 argumentos = argumentos_coche)
+        """
+
+         cur = con.cursor()
+         cur.execute(sql_query, argumentos)
+         con.commit()
+         return cur.rowcount
