@@ -137,9 +137,9 @@ class BaseDatos(object):
                                        database = self.basedatos)
          return con
     
-    def ejecutar_queries(self, con, sql_query, columnas, argumentos = ()):
+    def ejecutar_queries_select(self, con, sql_query, columnas, argumentos = ()):
          """
-        Definicion del metodo crear_conexion:
+        Definicion del metodo ejecutar_queries_select:
             
             Funcion de ejecutar queries a la base de datos ya inicializada
     

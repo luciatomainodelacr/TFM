@@ -20,7 +20,7 @@ Se subdivide en cuatro carpetas, cada una con un tipo de dato:
 	- gasolineras_filt_Espana.csv: fichero con dataset tras limpieza de variables y registros (generado con script TFM/Python/Input/Gasolineras/analizar_gasolineras.py).
 	- gasolineras_reduced_Espana.csv: fichero con dataset tras limpieza y reducción de dimensión con clustering DBSCAN (generado con script TFM/Python/Input/Gasolineras/analizar_gasolineras.py) -> Este es el fichero que se tiene que utilizar para Gasolineras Propuestas con Puntos de Recarga (341 registros).
 
-- __Matriz_Distancias__
+- __MatrizDistancias__
 
 	Contiene:
 	- matriz_distancia_haversine.csv: matriz de distancias entre todo el conjunto de puntos considerados (ciudades, puntos de regarla y gasolineras), se calcula utilizando la distancia de Haversine.  -> Este es el fichero que se tiene que utilizar como matriz de distancias (598.303 registros)
