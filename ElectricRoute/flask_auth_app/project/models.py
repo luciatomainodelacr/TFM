@@ -4,7 +4,7 @@
 
 
 # Se cargan las librerias
-from flask_login import UserMixin
+from flask_login import UserMixin, login_user, logout_user, login_required
 from . import db
 
 

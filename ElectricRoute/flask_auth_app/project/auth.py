@@ -79,3 +79,21 @@ def signup_post():
 @auth.route('/logout')
 def logout():
     return 'Logout'
+
+
+# 3. Pagina profile  ------------------------------------------------
+#------------------------------------------------------------------
+@auth.route('/profile')
+def profile():
+    return render_template('profile.html')
+
+@auth.route('/profile', methods=['GET'])
+def profile_get():
+
+    email    = request.form.get('email')
+    name     = request.form.get('name')
+    last_name = request.form.get('last_name')
+
+    user = User.query.filter_by(email=email).first() # if this returns a user, then the email already exists in database
+
+    return redirect(url_for('profile'),name=current_user.name, email=current_user.email, last_name=current_user.last_name)
