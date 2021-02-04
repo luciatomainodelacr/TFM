@@ -86,7 +86,26 @@
                 </a>
             </li>
 
-        
+            <!-- Nav Item - Route -->
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-toggle="modal" data-target="#newRoute">
+                     <i class="fa fa-star fa-sm fa-fw mr-2 text-gray-400"></i>
+                    <span>Frequent Routes</span>
+                </a>
+            </li>
+
+
+            <!-- Nav Item - Save Route -->
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fa fa-download fa-sm fa-fw mr-2 text-gray-400"></i>
+                    <span>Save Route</span>
+                </a>
+            </li>
+
+            <!-- Línea divisora -->
+            <hr class="sidebar-divider">
+
             <!-- Nav Item - Settings -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -97,14 +116,14 @@
                 <div class="bg-white py-2 collapse-inner rounded">
 
                     <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">
+                        <a class="collapse-item" href="profile">
                             <i class="fa fa-user" aria-hidden="true"></i>
-                            <span>User??</span>
+                            <span>User Profile</span>
                         </a>
 
                         <a class="collapse-item" href="cards.html">
                             <i class="fa fa-car" aria-hidden="true"></i>
-                            <span>Cars??</span>
+                            <span>Cars Details</span>
                         </a>
                 </div>
                 </div>
@@ -116,8 +135,6 @@
             <i class="fas fa-fw fa-wrench"></i>
             <span>Utilities</span></a>
             </li>
-
-
 
             <!-- Línea divisora -->
             <hr class="sidebar-divider">
@@ -175,7 +192,7 @@
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">Blanca Alonso</span>
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small"> {{ name }} </span>
                         <img class="img-profile rounded-circle" src="{{url_for('static', filename='img/avatar_login.jpg')}}">
                     </a>
                     <!-- Dropdown - User Information -->
@@ -269,23 +286,27 @@
                 </button>
                 </div>
                 <div class="modal-body">
-                    <form class="user">
-                        <div class="form-group" style= "margin-botton: 20%;">
-                            <input type="Type Car" class="form-control form-control-user" id="type_Car" aria-describedby="emailHelp" placeholder="Select your car"> 
-                        </div>
+                    <form class="user"  method="POST" action="/Route">
+
                         <div class="form-group">
-                                <input type="From" class="form-control form-control-user" id="From" placeholder="From">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"> {{ OrigenName }} </span>
                         </div>
+
                         <div class="form-group">
-                            <input type="To" class="form-control form-control-user" id="To" placeholder="To">
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small"> {{ DestName }} </span>
                         </div>
-                        </a>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                            <input type="submit" class="btn btn-primary" id="newRoute" name="newRoute" value="Go!">
+                        </div>
+
+                 
+
+
                     </form>
                 </div>
-                <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="Route">Go!</a>
-                </div>
+                
             </div>
             </div>
         </div>

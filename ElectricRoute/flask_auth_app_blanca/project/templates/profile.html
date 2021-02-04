@@ -17,7 +17,7 @@
                   <!-- Nested Row within Card Body -->
                     <div class="row">
                         <div class="col-lg-6 d-none d-lg-block">
-                            <img src="{{url_for('static', filename='img/profile.jpg')}}" class="img-fluid" alt="" style = "height: 100%;">     
+                            <img src="{{url_for('static', filename='img/profile.jpg')}}" class="img-fluid" alt="" size = "contain" width = "100%" style = "height: 100%;">     
                             
                         </div>
 
@@ -27,6 +27,31 @@
                                     <i class="fas fa-user fa-sm fa-fw mr-2" style = "font-size: 30px; margin-right: 12%; color: #4e73df" ></i>
                                     <span>User Profile</span>
                                 </div>
+                          <form class="user">
+                          </p>
+                           <div class="card card-body" style= "margin-botton: 20%;">
+                          <p>Name {{ slug_title }} </p>
+                           <p>Last Name {{ slug_title }}</p>
+                           <p>E-mail {{ slug_title }}</p>
+                           </div>
+                           </p>
+                          <div class="form-group" style= "margin-botton: 20%;">
+                          <input type="Type Car" class="form-control form-control-user" id="type_Car" aria-describedby="emailHelp" placeholder="Select your car"> 
+                          </div>
+                          <div class="form-group">
+                            <input type="From" class="form-control form-control-user" id="From" placeholder="From">
+                          </div>
+                          <div class="form-group">
+                          <input type="To" class="form-control form-control-user" id="To" placeholder="To">
+                          </div>
+                          <div class="form-group">
+                          <input type="Stops" class="form-control form-control-user" id="Stops" placeholder="Number of stops">
+                          </div>
+                          <div class="form-group">
+                          <input type="Load" class="form-control form-control-user" id="Load" placeholder="Type of XXX">
+                          </div>
+                          </a>
+                        </form>
                             </div>
                         </div>
                     </div>

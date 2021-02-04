@@ -30,7 +30,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 
 
-# Se inicializa SQLAlchemy (se utilizará más adelante)
+# Se inicializa SQLAlchemy
 db = SQLAlchemy()
 
 # Se crea la app
@@ -39,7 +39,13 @@ def create_app():
 
     app.config['SECRET_KEY'] = '123456789'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@127.0.0.1:3306/tfm'
-    
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    app.config['MYSQL_HOST'] = 'localhost'
+    app.config['MYSQL_USER'] = 'root'
+    app.config['MYSQL_PASSWORD'] = 'root'
+    app.config['MYSQL_DB'] = 'tfm'
+    mysql = MySQL(app)
 
     db.init_app(app)
 

@@ -16,9 +16,11 @@ Modelo de autenticación. Tres páginas:
 
 
 # Se cargan las librerias
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_required, current_user
-
+from flask_mysqldb import MySQL
+from .models import User, Ruta
+from . import db
 
 
 main = Blueprint('main', __name__)
@@ -51,8 +53,23 @@ def index():
 #------------------------------------------------------------------
 
 @main.route('/Route')
+@login_required
 def route():
-    return render_template('route.html')
+    return render_template('route.html', name=current_user.name)
+
+
+
+@main.route('/Route', methods=['POST'])
+@login_required
+def route_post():
+    
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM contacts')
+    data = cur.fetchall()
+    cur.close()
+    return render_template('index.html', contacts = data)
+
+    return render_template('route.html', name=current_user.name)
 
 
 
@@ -77,3 +94,6 @@ def profile():
 
 
 
+@main.route('/login_test')
+def login_test():
+    return render_template('login_test.html')
