@@ -13,7 +13,7 @@
             "program": "${file}",
             "args": ["--tipo_programa","PUNTO_RECARGA","--marca_coche","VOLKSWAGEN","--modelo_coche","ID3 PURE",
                      "--origen","Alicante Tren","--destino","A Corunia Bus","--carga_inicial","65",
-                     "--carga_final","70","--tipo_conector","IEC62196Type2Outlet"],
+                     "--carga_final","70","--tipo_conector","IEC62196Type2Outlet","--user_id","2"],
             "console": "integratedTerminal"
     }
 
@@ -24,20 +24,20 @@
     >> python3 calcular_caminos_entre_puntos.py --tipo_programa 'PUNTO_RECARGA' --marca_coche 'VOLKSWAGEN' --modelo_coche 'ID3 PURE' --origen 'Alicante Tren' --destino 'A Corunia Bus' --carga_inicial 65 --carga_final 70 --tipo_conector 'IEC62196Type2Outlet'
 
     Output esperado en log:
-    [2021-01-31 21:25:19,833] [INFO    ]La ruta optima es: ['Alicante Tren', 'punto_recarga_241', 'punto_recarga_46', 'punto_recarga_262', 'punto_recarga_282', 'punto_recarga_293', 'A Corunia Bus']
-    [2021-01-31 21:25:19,847] [INFO    ]Tiempo de parada en Alicante Tren es 0.0 h
-    [2021-01-31 21:25:19,847] [INFO    ]Tiempo total del tramo Alicante Tren - punto_recarga_241 es 1.4135107859234253 h
-    [2021-01-31 21:25:19,858] [INFO    ]Tiempo de parada en punto_recarga_241 es 0.27490825688073395 h
-    [2021-01-31 21:25:19,858] [INFO    ]Tiempo total del tramo punto_recarga_241 - punto_recarga_46 es 1.9223443757129164 h
-    [2021-01-31 21:25:19,869] [INFO    ]Tiempo de parada en punto_recarga_46 es 0.3856756756756757 h
-    [2021-01-31 21:25:19,869] [INFO    ]Tiempo total del tramo punto_recarga_46 - punto_recarga_262 es 2.542525921501569 h
-    [2021-01-31 21:25:19,880] [INFO    ]Tiempo de parada en punto_recarga_262 es 0.6113513513513513 h
-    [2021-01-31 21:25:19,881] [INFO    ]Tiempo total del tramo punto_recarga_262 - punto_recarga_282 es 2.65368426054334 h
-    [2021-01-31 21:25:19,892] [INFO    ]Tiempo de parada en punto_recarga_282 es 0.3856756756756757 h
-    [2021-01-31 21:25:19,892] [INFO    ]Tiempo total del tramo punto_recarga_282 - punto_recarga_293 es 1.8773805206251493 h
-    [2021-01-31 21:25:19,903] [INFO    ]Tiempo de parada en punto_recarga_293 es 0.8370270270270269 h
-    [2021-01-31 21:25:19,904] [INFO    ]Tiempo total del tramo punto_recarga_293 - A Corunia Bus es 1.4841193792814318 h
-    [2021-01-31 21:25:19,904] [INFO    ]El tiempo total tardado es: 11.89356524358783 h
+[2021-02-04 22:43:03,447] [INFO    ]La ruta optima es: ['Alicante Tren', 'punto_recarga_241', 'punto_recarga_246', 'punto_recarga_263', 'punto
+[2021-02-04 22:43:03,460] [INFO    ]Tiempo de parada en Alicante Tren es 0.0 h
+[2021-02-04 22:43:03,461] [INFO    ]Tiempo total del tramo Alicante Tren - punto_recarga_241 es 1.4135107859234253 h
+[2021-02-04 22:43:03,471] [INFO    ]Tiempo de parada en punto_recarga_241 es 1.3090825688073393 h
+[2021-02-04 22:43:03,472] [INFO    ]Tiempo total del tramo punto_recarga_241 - punto_recarga_246 es 3.092301726368534 h
+[2021-02-04 22:43:03,482] [INFO    ]Tiempo de parada en punto_recarga_246 es 2.4167567567567567 h
+[2021-02-04 22:43:03,483] [INFO    ]Tiempo total del tramo punto_recarga_246 - punto_recarga_263 es 4.363408303110635 h
+[2021-02-04 22:43:03,494] [INFO    ]Tiempo de parada en punto_recarga_263 es 2.4167567567567567 h
+[2021-02-04 22:43:03,494] [INFO    ]Tiempo total del tramo punto_recarga_263 - punto_recarga_278 es 4.50142223671517 h
+[2021-02-04 22:43:03,506] [INFO    ]Tiempo de parada en punto_recarga_278 es 2.4167567567567567 h
+[2021-02-04 22:43:03,507] [INFO    ]Tiempo total del tramo punto_recarga_278 - punto_recarga_286 es 3.980899331229511 h
+[2021-02-04 22:43:03,518] [INFO    ]Tiempo de parada en punto_recarga_286 es 2.4167567567567567 h
+[2021-02-04 22:43:03,518] [INFO    ]Tiempo total del tramo punto_recarga_286 - A Corunia Bus es 2.4337595723944427 h
+[2021-02-04 22:43:03,519] [INFO    ]El tiempo total tardado es: 19.78530195574172 h
 
 """
 
@@ -69,9 +69,9 @@ def main(tipo_programa,
          modelo_coche,
          origen,
          destino,
-         carga_inicial,
-         carga_final,
-         tipo_conector,
+         carga_inicial = "90",
+         carga_final = "10",
+         tipo_conector = "",
          log_level = "INFO",
          log_path = os.getcwd() + "/logs/",
          user_id = 1):
@@ -171,16 +171,21 @@ def main(tipo_programa,
         # 2.- Aplicar las restricciones -----------------------------------
         #------------------------------------------------------------------
         logger.info("2.- Aplicar las restricciones")
-        # a) Restriccion de tipo de conector
-        logger.info("a) Restriccion de tipo de conector")
-        puntoscarga_reduced = []
-        for index, punto_carga in df_puntoscarga.iterrows():
-            if tipo_conector in punto_carga["connectorType"]:
-                puntoscarga_reduced.append(str(punto_carga["id"]))
-        df_puntoscarga_reduced = df_puntoscarga[df_puntoscarga["id"].isin(puntoscarga_reduced)]
-        df_distancias_pc = df_distancias[(df_distancias["Origen"].str.contains("punto_recarga"))|(df_distancias["Destino"].str.contains("punto_recarga"))]
-        restriccion_tipo_conector = Restricciones.restriccion_tipo_conector(distancias = df_distancias_pc,
-                                                                            puntoscarga_reduced = puntoscarga_reduced)
+        if tipo_conector != "":
+            # a) Restriccion de tipo de conector
+            logger.info("a) Restriccion de tipo de conector")
+            puntoscarga_reduced = []
+            for index, punto_carga in df_puntoscarga.iterrows():
+                if tipo_conector in punto_carga["connectorType"]:
+                    puntoscarga_reduced.append(str(punto_carga["id"]))
+            df_puntoscarga_reduced = df_puntoscarga[df_puntoscarga["id"].isin(puntoscarga_reduced)]
+            df_distancias_pc = df_distancias[(df_distancias["Origen"].str.contains("punto_recarga"))|(df_distancias["Destino"].str.contains("punto_recarga"))]
+            restriccion_tipo_conector = Restricciones.restriccion_tipo_conector(distancias = df_distancias_pc,
+                                                                                puntoscarga_reduced = puntoscarga_reduced)
+        else:
+            # a) Si no se especifica tipo de conector, no se aplica restriccion
+            logger.info("a) Si no se especifica tipo de conector, no se aplica restriccion")
+            df_puntoscarga_reduced = df_puntoscarga
         # b) Restriccion de primera parada
         logger.info("b) Restriccion de primera parada")
         df_distancias_origen = df_distancias[df_distancias["Origen"]==origen]
@@ -195,14 +200,21 @@ def main(tipo_programa,
                                                                         autonomia_coche = autonomia_coche)
         # Se genera el dataframe reducido que cumple con todas las restricciones
         logger.info("Se genera el dataframe reducido que cumple con todas las restricciones")
-        df_distancias_merged_1 = pd.merge(df_distancias, restriccion_tipo_conector, on=['Origen', 'Destino'], how='outer')
+        if tipo_conector != "":
+            df_distancias_merged_1 = pd.merge(df_distancias, restriccion_tipo_conector, on=['Origen', 'Destino'], how='outer')
+        else:
+            df_distancias_merged_1 = df_distancias
         df_distancias_merged_2 = pd.merge(df_distancias_merged_1, restricciones_prim_par, on=['Origen', 'Destino'], how='outer')
         df_distancias_merged = pd.merge(df_distancias_merged_2, restricciones_ult_par, on=['Origen', 'Destino'], how='outer')
         #TODO: Hacer esto de manera limpia y no con esta guarreria :)
         df_distancias_merged = df_distancias_merged.fillna(True)
-        df_distancias_reduced = df_distancias_merged[(df_distancias_merged["Restr_con"] == True)&
-                                                     (df_distancias_merged["Restr_prim_par"] == True)&
-                                                     (df_distancias_merged["Restr_ult_par"] == True)]
+        if tipo_conector != "":
+            df_distancias_reduced = df_distancias_merged[(df_distancias_merged["Restr_con"] == True)&
+                                                        (df_distancias_merged["Restr_prim_par"] == True)&
+                                                        (df_distancias_merged["Restr_ult_par"] == True)]
+        else: 
+            df_distancias_reduced = df_distancias_merged[(df_distancias_merged["Restr_prim_par"] == True)&
+                                                        (df_distancias_merged["Restr_ult_par"] == True)]
         logger.info("df_distancias %s", df_distancias.shape)
         logger.info("df_distancias_reduced %s", df_distancias_reduced.shape)
         # 3.- Calcular tiempos (de recorrido y parada) --------------------
@@ -219,7 +231,6 @@ def main(tipo_programa,
             #Para los puntos de recarga, hay datos disponibles para el cálculo
             logger.info("Calculo tiempo de parada para puntos de recarga")
             capacidad_coche = float(df_electricar["BATTERY_CAPACITY"])*1000 #Wh
-            df_puntoscarga_reduced[df_puntoscarga_reduced["ratedPowerKW"]== ''] = 10 #KW
             for index, punto_carga in df_puntoscarga_reduced.iterrows():
                 numero_conectores_pc = int(punto_carga["num_connectors"])
                 if numero_conectores_pc == 1:
@@ -229,11 +240,15 @@ def main(tipo_programa,
                     conectores_limpio = []
                     for elem in conectores:
                         conectores_limpio.append(re.sub('[^A-Za-z0-9]+', '', elem))
-                    indice = conectores_limpio.index(tipo_conector)
                     potencias = punto_carga["ratedPowerKW"].split(",")
                     potencias_limpio = []
                     for elem in potencias:
-                        potencias_limpio.append(re.sub('[^A-Za-z0-9]+', '', elem))
+                        potencias_limpio.append(float(re.sub('[^0-9a-zA-Z.]+', '', elem)))
+                    if tipo_conector != "":
+                        indice = conectores_limpio.index(tipo_conector)
+                    else:
+                        maximo = max(potencias_limpio)
+                        indice = potencias_limpio.index(max(potencias_limpio))
                     potencia_pc = 0.9*float(potencias_limpio[indice])*1000 #W
                 tiempos_puntos_parada.append((punto_carga["id"],Tiempos.calcular_tiempo_parada(capacidad_coche,potencia_pc,numero_conectores_pc)))
             column_names = ["id","Parada_h"]
@@ -293,15 +308,22 @@ def main(tipo_programa,
 
         # Query a Output
         logger.info("Query a Output")
-        sql_query_output = "INSERT INTO Output (user_id, timestamp, origin, destination, num_stops, path, total_time) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        sql_query_output = "INSERT INTO Output (user_id, timestamp, origen, destino, num_paradas, path, tiempo_total, tipo_programa, marca_coche, modelo_coche, carga_inicial, carga_final, tipo_conector) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
         path_string = '-'.join(path)
         argumentos_output = (user_id,
                              datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
                              origen,
                              destino,
-                             len(path)-1,
+                             len(path)-2,
                              path_string,
-                             total_tiempo)
+                             total_tiempo,
+                             tipo_programa,
+                             marca_coche,
+                             modelo_coche,
+                             carga_inicial,
+                             carga_final,
+                             tipo_conector)
+
         rowcount = bd_output.ejecutar_queries_insert(con = con,
                                                      sql_query = sql_query_output,
                                                      argumentos = argumentos_output)
@@ -352,8 +374,9 @@ if __name__ == "__main__":
                         help = "Porcentaje de carga final del coche en lugar de destino "
                                "Default: 10")
     parser.add_argument("--tipo_conector",
-                        required = True,
+                        required = False,
                         type = str,
+                        default = "",
                         help = "Tipo de conector que necesita el coche (tiene que estar en la tabla PuntosCarga)")
     parser.add_argument("--log_level",
                         required = False,
