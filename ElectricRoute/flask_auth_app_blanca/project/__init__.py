@@ -28,6 +28,8 @@ Ejemplo:
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from sqlalchemy import create_engine
+
 
 
 # Se inicializa SQLAlchemy
@@ -41,13 +43,14 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@127.0.0.1:3306/tfm'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-    app.config['MYSQL_HOST'] = 'localhost'
-    app.config['MYSQL_USER'] = 'root'
-    app.config['MYSQL_PASSWORD'] = 'root'
-    app.config['MYSQL_DB'] = 'tfm'
-    mysql = MySQL(app)
 
     db.init_app(app)
+
+    engine = create_engine('mysql+pymysql://root:root@127.0.0.1:3306/tfm')
+    connection = engine.raw_connection()
+    cursor = connection.cursor()
+
+
 
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'

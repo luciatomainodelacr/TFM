@@ -55,6 +55,7 @@ def index():
 @main.route('/Route')
 @login_required
 def route():
+
     return render_template('route.html', name=current_user.name)
 
 
@@ -63,13 +64,9 @@ def route():
 @login_required
 def route_post():
     
-    cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM contacts')
-    data = cur.fetchall()
-    cur.close()
-    return render_template('index.html', contacts = data)
 
-    return render_template('route.html', name=current_user.name)
+
+    return render_template('route.html', contacts = current_user.name)
 
 
 
@@ -87,9 +84,10 @@ def rutasFrecuentes():
 # 7.- Página profile -----------------------------------------------
 #------------------------------------------------------------------
 
-@main.route('/profile', methods = ['POST', 'GET'])
-def profile():
-    return render_template('profile.html')
+@main.route('/profile2')
+@login_required
+def profile2():
+    return render_template('profile2.html', email=current_user.email, name=current_user.name, lastName=current_user.lastName, typeCar=current_user.typeCar)
 
 
 

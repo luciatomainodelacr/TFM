@@ -14,6 +14,7 @@
 
 # Se cargan las librerias
 from flask_login import UserMixin
+import pandas as pd
 from . import db
 
 
@@ -25,8 +26,9 @@ class User(UserMixin, db.Model):
     email    = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
     name     = db.Column(db.String(1000))
-
-
+    lastName = db.Column(db.String(100))
+    typeCar  = db.Column(db.String(100))
+    
 
 
 class Ruta(UserMixin, db.Model):
@@ -38,7 +40,7 @@ class Ruta(UserMixin, db.Model):
     OrigenName    = db.Column(db.String(100))
     DestName      = db.Column(db.String(100))
 
-
+   
     def __repr__(self):
         return f'<User {self.email}>'
 
@@ -57,4 +59,11 @@ class Ruta(UserMixin, db.Model):
         db.session.commit()
 
     
-
+''' 
+    brand            =  db.Column(db.Integer, primary_key=True)
+    model           = db.Column(db.String(100))
+    range_km        = db.Column(db.String(100))
+    efficiency_whkm = db.Column(db.String(100))
+    fastcharge_kmh  = db.Column(db.String(100))
+    rapidcharge     = db.Column(db.String(100))
+    plugtype = battery_capacity = db.Column(db.String(100)) '''

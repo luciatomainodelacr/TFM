@@ -16,26 +16,28 @@ Modelo de autenticación. Tres páginas:
 
 
 # Se cargan las librerias
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_required, current_user
-
+from flask_mysqldb import MySQL
+from .models import User, Ruta
+from . import db
 
 
 main = Blueprint('main', __name__)
-
-
-# 3.- Página forgot-password --------------------------------------
-#------------------------------------------------------------------
-
-@main.route('/password', methods = ["GET", "POST"])
-def password():
-    return render_template('password.html')
+# bp = Blueprint('errors', __name__)
 
 
 
-@main.route('/password1', methods = ["GET", "POST"])
-def password1():
-    return render_template('password1.html')
+# 2.- Páginas de error ----------------------------------------
+#-----------------------------------------------------------------
+
+@main.route('/page_not_found')
+def page_not_found():
+    return render_template('404.html')
+
+# @bp.app_errorhandler(404)
+# def handle_404(err):
+#    return render_template('404.html'), 404
 
 
 # 4.- Página index ------------------------------------------------
@@ -50,10 +52,22 @@ def index():
 # 5.- Página ruta (mapa) ------------------------------------------
 #------------------------------------------------------------------
 
-@main.route('/Route', methods = ["GET", "POST"])
+@main.route('/Route')
 @login_required
 def route():
-    return render_template('route.html')
+
+    return render_template('route.html', name=current_user.name)
+
+
+
+@main.route('/Route', methods=['POST'])
+@login_required
+def route_post():
+    
+
+    return render_template('route.html', name=current_user.name)
+
+
 
 
 
@@ -69,10 +83,9 @@ def rutasFrecuentes():
 # 7.- Página profile -----------------------------------------------
 #------------------------------------------------------------------
 
-@main.route('/profile', methods = ['POST', 'GET'])
-def profile():
-    return render_template('profile.html')
-
-
+@main.route('/profile2')
+@login_required
+def profile2():
+    return render_template('profile2.html', email=current_user.email, name=current_user.name, lastName=current_user.lastName, typeCar=current_user.typeCar)
 
 
