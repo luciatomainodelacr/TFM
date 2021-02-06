@@ -31,39 +31,32 @@ class User(UserMixin, db.Model):
     
 
 
-class Ruta(UserMixin, db.Model):
+class ciudades(UserMixin, db.Model):
 
-    __tablename__ = 'ruta'
+    __tablename__ = 'ciudades'
 
-    id            = db.Column(db.Integer, primary_key=True)
-    email         = db.Column(db.String(100))
-    OrigenName    = db.Column(db.String(100))
-    DestName      = db.Column(db.String(100))
+    id            = db.Column(db.String(100), primary_key=True, nullable=False, unique=True)
+    provincia     = db.Column(db.String(100))
+    Direccion     = db.Column(db.String(100))
+    Latitud       = db.Column(db.String(100))
+    Longitud      = db.Column(db.String(100))
+    Coordenadas   = db.Column(db.String(100))
 
    
     def __repr__(self):
-        return f'<User {self.email}>'
+        return '<Ciudad {}>'.format(self.username)
 
 
-    @staticmethod
-    def get_by_origen(email):
-        return Ruta.query.get(OrigenName)
 
-    @staticmethod
-    def get_by_destino(DestName):
-        return Ruta.query.get(DestName)
-        
-    def save(self):
-        if not self.id:
-            db.session.add(self)
-        db.session.commit()
-
+class ElectricCar(UserMixin, db.Model):
     
-''' 
-    brand            =  db.Column(db.Integer, primary_key=True)
+    __tablename__ = 'ElectricCar'
+
+    brand           =  db.Column(db.Integer, primary_key=True)
     model           = db.Column(db.String(100))
     range_km        = db.Column(db.String(100))
     efficiency_whkm = db.Column(db.String(100))
     fastcharge_kmh  = db.Column(db.String(100))
     rapidcharge     = db.Column(db.String(100))
-    plugtype = battery_capacity = db.Column(db.String(100)) '''
+    plugtype = battery_capacity = db.Column(db.String(100))
+

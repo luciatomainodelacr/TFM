@@ -19,7 +19,7 @@ Modelo de autenticación. Tres páginas:
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_required, current_user
 from flask_mysqldb import MySQL
-from .models import User, Ruta
+from .models import User, ciudades, ElectricCar
 from . import db
 
 
@@ -40,6 +40,9 @@ def page_not_found():
 #    return render_template('404.html'), 404
 
 
+
+
+
 # 4.- Página index ------------------------------------------------
 #------------------------------------------------------------------
 
@@ -56,19 +59,37 @@ def index():
 @login_required
 def route():
 
-    return render_template('route.html', name=current_user.name)
+    ciudades_list = ciudades.query.all()
+    lista_destino = []
+
+    for ciudad in ciudades_list:
+        lista_destino.append(ciudad.id)
+
+    return render_template('route.html', name = current_user.name, ciudades = lista_destino)
 
 
 
 @main.route('/Route', methods=['POST'])
 @login_required
 def route_post():
+
+    ciudades_list = ciudades.query.all()
+    ciudades_dict = {}
+
+    for ciudad in ciudades_dict:
+
+        ciudades_dict = {
+
+            "provincia"   : ciudad.provincia,
+            "Direccion"   : ciudad.Direccion,
+            "Latitud"     : ciudad.Latitud,
+            "Longitud"    : ciudad.Longitud,
+            "Coordenadas" : ciudad.Coordenadas
+        }       
+
+    return render_template('route.html', name=current_user.name, ciudades_dict = ciudades_dict)
+
     
-
-
-    return render_template('route.html', contacts = current_user.name)
-
-
 
 
 
@@ -77,7 +98,7 @@ def route_post():
 
 @main.route('/rutasFrecuentes')
 def rutasFrecuentes():
-    return 'Rutas Frecuentes'
+    return ('Rutas Frecuentes')
 
 
 
@@ -87,8 +108,17 @@ def rutasFrecuentes():
 @main.route('/profile2')
 @login_required
 def profile2():
-    return render_template('profile2.html', email=current_user.email, name=current_user.name, lastName=current_user.lastName, typeCar=current_user.typeCar)
 
+    car_list = ElectricCar.query.all()
+    list_typeCar = []
+    list_model = []
+
+    for car in car_list:
+        list_typeCar.append(car.brand)
+        list_model.append(car.model)
+
+
+    return render_template('profile2.html', email = current_user.email, name = current_user.name, lastName = current_user.lastName, typeCar = list_typeCar, typeModel = list_model)
 
 
 

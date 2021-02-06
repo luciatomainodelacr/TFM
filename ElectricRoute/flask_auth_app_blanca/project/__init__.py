@@ -35,6 +35,8 @@ from sqlalchemy import create_engine
 # Se inicializa SQLAlchemy
 db = SQLAlchemy()
 
+
+
 # Se crea la app
 def create_app():
     app = Flask(__name__)
@@ -46,9 +48,6 @@ def create_app():
 
     db.init_app(app)
 
-    engine = create_engine('mysql+pymysql://root:root@127.0.0.1:3306/tfm')
-    connection = engine.raw_connection()
-    cursor = connection.cursor()
 
 
 
