@@ -14,4 +14,12 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(100))
     name = db.Column(db.String(1000))
 
+class Route(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy
+    email = db.Column(db.String(100), unique=True)
+    from_car = db.Column(db.String(100))
+    to = db.Column(db.String(1000)) 
+    type_car = db.Column(db.String(1000))  
+    load = db.Column(db.String(1000))   
+
 

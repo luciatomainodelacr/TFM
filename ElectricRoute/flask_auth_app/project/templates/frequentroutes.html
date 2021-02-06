@@ -1,0 +1,55 @@
+{% extends "base_login.html" %}
+
+{% block body %}
+
+<body class="bg-img-cover" style="background-image: url('static/img/electric_car.jpg'); background-size: 1850px; height: 30px;">
+
+        <div class="container">
+
+          <!-- Outer Row -->
+          <div class="row justify-content-center" >
+            <div class="col-xl-10">
+              <div class="card o-hidden border-0 shadow-lg my-5">
+
+                <div class="card-body p-0">
+                  <!-- Nested Row within Card Body -->
+                  <div class="row justify-content-center" >
+                      <div class="col-lg-5">
+                          <div class="p-10">
+                  <!-- Nested Row within Card Body -->
+                               <div class="col-lg-10">
+                                <div class="p-10">
+                                  <div class="text-center" style = "font-size: 30px; color:#4e73df; margin-botton: 50%;">
+                                     <span>Here are your most frequent routes</span>
+                                  </div>
+                                     <form class="user" method="POST" action="/profile">
+                                      </p>
+                                      <table class="default">
+                                         <tr>
+                                         <th><strong>From</strong></th>
+                                        <th><strong>To</strong></th>
+                                         <th><strong>Type Car</strong></th>
+                                         <th><strong>Load of the car</strong></th>
+                                        </tr>
+                                        <tr>
+                                        <td>{{From}}</td>
+                                        <td>{{To}}</td>
+                                        <td>{{type_car}}</td>
+                                        <td>{{load}}</td>
+                                        </tr>
+                          </a>
+                        </form>
+                            </div>
+                        </div>
+                    
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+    </body>
+{% endblock %}

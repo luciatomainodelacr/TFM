@@ -97,3 +97,22 @@ def profile_get():
     user = User.query.filter_by(email=email).first() # if this returns a user, then the email already exists in database
 
     return redirect(url_for('profile'),name=current_user.name, email=current_user.email, last_name=current_user.last_name)
+
+
+# 3. Pagina Rutas Frecuentes  ------------------------------------------------
+#------------------------------------------------------------------
+@auth.route('/frequentroutes')
+def frequentroutes():
+    return render_template('frequentroutes.html')
+
+@auth.route('/frequentroutes', methods=['GET'])
+def frequentroutes_get():
+
+    from_car    = request.form.get('from_car')
+    to     = request.form.get('to')
+    typecar = request.form.get('typecar')
+    load = request.form.get('load')
+
+    user = Route.query.filter_by(email=email).first() # if this returns a user, then the email already exists in database
+
+    return redirect(url_for('profile'),from_car=current_user.from_car, to=current_user.to, typecar=current_user.typecar, load=current_user.load)

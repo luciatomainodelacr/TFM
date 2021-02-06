@@ -60,9 +60,9 @@ def route():
 # 6.- Página Rutas Frecuentes -------------------------------------
 #------------------------------------------------------------------
 
-@main.route('/rutasFrecuentes')
-def rutasFrecuentes():
-    return 'Rutas Frecuentes'
+@main.route('/frequentroutes')
+def frequentroutes():
+    return render_template('frequentroutes.html')
 
 
 
