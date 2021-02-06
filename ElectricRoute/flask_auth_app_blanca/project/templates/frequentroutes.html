@@ -42,7 +42,12 @@
                                           {% for value2 in value.values() %}
                                           <td> {{ value2 }} </td>
                                         {% endfor %}
-                                        <td> <a class = "btn btn-secondary" style >Load</a> </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck1" checked>
+                                                <label class="custom-control-label" for="customCheck1"></label>
+                                            </div>
+                                        </td>
                                       </tr>
                                       {% endfor %}                                   
 

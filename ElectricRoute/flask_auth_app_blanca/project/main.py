@@ -18,7 +18,6 @@ Modelo de autenticación. Tres páginas:
 # Se cargan las librerias
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_required, current_user
-from flask_mysqldb import MySQL
 from .models import User, Route, ciudades, ElectricCar
 from . import db
 
@@ -105,10 +104,10 @@ def frequentroutes():
 
     var_email = current_user.email
 
-    rutas_list = Route.query.filter_by(email=current_user.email).order_by("dateSearch")[::-1] 
+    rutas_list = Route.query.filter_by(email=current_user.email).order_by("dateSearch")[::-1][0:3]
 
     dict_rutas = []
-    list_rutas = ["From", "To", "Type Car", "Load of the car"]
+    list_rutas = ["From", "To", "Type Car", "Load of the car", "Load"]
 
     for ruta in rutas_list:
         
