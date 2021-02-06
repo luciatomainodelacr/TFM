@@ -18,13 +18,13 @@ Modelo de autenticación. Tres páginas:
 # Se cargan las librerias
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_required, current_user
-from flask_mysqldb import MySQL
 from .models import User, Route, ciudades, ElectricCar
 from . import db
 
 
 main = Blueprint('main', __name__)
 # bp = Blueprint('errors', __name__)
+
 
 
 
@@ -64,6 +64,10 @@ def route():
     for ciudad in ciudades_list:
         lista_destino.append(ciudad.id)
 
+
+    
+
+
     return render_template('route.html', name = current_user.name, ciudades = lista_destino)
 
 
@@ -76,6 +80,7 @@ def route_post():
     ciudades_dict = {}
 
     for ciudad in ciudades_dict:
+    
 
         ciudades_dict = {
 
@@ -88,7 +93,7 @@ def route_post():
 
     return render_template('route.html', name=current_user.name, ciudades_dict = ciudades_dict)
 
-
+    
 
 # 4.- Página Rutas Frecuentes -------------------------------------
 #------------------------------------------------------------------
@@ -96,29 +101,51 @@ def route_post():
 @main.route('/frequentroutes')
 @login_required
 def frequentroutes():
-    rutas_list = Route.query.filter_by(email=current_user.email).order_by("dateSearch")[::-1] 
-    dict_rutas= {}
+
+    var_email = current_user.email
+
+    rutas_list = Route.query.filter_by(email=current_user.email).order_by("dateSearch")[::-1][0:3]
+
+    dict_rutas = []
+    list_rutas = ["From", "To", "Type Car", "Load of the car", "Load"]
 
     for ruta in rutas_list:
         
-        dict_rutas = {
+        dict_rutas.append({
             "From" : ruta.from_ub,
             "To" : ruta.to_ub,
             "Type Car" : ruta.typeCar,
             "Load of the car" : ruta.typeLoad
-        }   
+        })   
 
-    return render_template('frequentroutes.html', email=current_user.email, dict_rutas=dict_rutas)
+    return render_template('frequentroutes.html', email=current_user.email, dict_rutas=dict_rutas, list_rutas=list_rutas)
+
+
+@main.route('/delete')
+@login_required
+def delete():
+    return render_template('delete.html', name=current_user.name)
 
 
 
-# 5.- Página profile -----------------------------------------------
+
+# 6- Página profile -----------------------------------------------
 #------------------------------------------------------------------
 
 @main.route('/profile2')
 @login_required
 def profile2():
-    return render_template('profile2.html', email=current_user.email, name=current_user.name, lastName=current_user.lastName, typeCar=current_user.typeCar)
+
+    car_list = ElectricCar.query.all()
+    list_typeCar = []
+    list_model = []
+
+    for car in car_list:
+        list_typeCar.append(car.brand)
+        list_model.append(car.model)
+
+
+    return render_template('profile2.html', email = current_user.email, name = current_user.name, lastName = current_user.lastName, typeCar = list_typeCar, typeModel = list_model)
 
 
 

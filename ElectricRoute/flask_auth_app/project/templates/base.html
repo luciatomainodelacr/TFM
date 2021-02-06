@@ -185,34 +185,30 @@
                         </form>
                     </div>
                     </li>
-
-                    
-                    <div class="topbar-divider d-none d-sm-block"></div>
-
+  
+    
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
-                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                    <a class="nav-link" href="profile2" id="userDropdown">
                         <span class="mr-2 d-none d-lg-inline text-gray-600 small"> {{ name }} </span>
                         <img class="img-profile rounded-circle" src="{{url_for('static', filename='img/avatar_login.jpg')}}">
-                    </a>
-                    
-                    <!-- Dropdown - User Information -->
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="profile">
-                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Profile
-                        </a>
-                        <a class="dropdown-item" href="#">
-                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Settings
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="login" data-toggle="modal" data-target="#logoutModal">
-                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Logout
-                        </a>
-                    </div>
+                    </a>                  
                     </li>
+
+                     <!-- Línea Dividora -->
+                     <div class="topbar-divider d-none d-sm-block"></div>   
+
+                     <!-- Nav Item - Logout -->
+                    <li class="nav-item dropdown no-arrow">
+                   
+                        <a class="nav-link dropdown-toggle" href="login"  data-toggle="modal" data-target="#logoutModal">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Logout
+                        </a>
+                    </li>
+
+
                 </ul>
 
                 </nav>
@@ -275,7 +271,8 @@
             </div>
         </div>
 
-
+        {% block body_content %}
+        {% endblock %}
         <!-- New Route Modal-->
         <div class="modal fade" id="newRoute" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -287,16 +284,13 @@
                     <span aria-hidden="true" style="color: rgb(255, 255, 255);">×</span>
                 </button>
                 </div>
-                <div class="modal-body">
 
+                <div class="modal-body">
                     <!-- Select Origin -->
                     <div class="container"> 
-                    
                         <span> From... </span>
-                        
                         <select class = 'form-select form-select-sm' id='mySelectOrigin'  aria-label="Default select example" style= "margin-left: 10% !important"> 
                             <option selected>Choose one of the following...</option>
-                            
                             {% for ciudad in ciudades %}                            
                                 <option value={{ciudad}}> {{ciudad}} </option>
                             {% endfor %}

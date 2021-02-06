@@ -26,37 +26,40 @@
 
                                 <table class="table table-bodered" id="table" width="100%" cellspacing="0">
                                 
-                                    <thead>
-                                    <tr>
-                                      {% for ruta in dict_rutas %}
-                                      <th> {{ ruta }} </th>  
-                                      {% endfor %}
-                                    </tr>
+                                    <thead> 
+                                        <tr>
+                                          {% for columna in list_rutas %}                                        
+                                          <th> {{ columna }} </th>                                            
+                                          {% endfor %}
+                                          </tr>
+                                    
                                     </thead>
 
                                     <tbody>
-                                      <tr>    
-                                      {% for ruta in dict_rutas %}
-                                        <td> {{ dict_rutas[ruta] }} </td>
-                                      {% endfor %}
+                                         
+                                      {% for value in dict_rutas %}  
+                                      <tr> 
+                                          {% for value2 in value.values() %}
+                                          <td> {{ value2 }} </td>
+                                        {% endfor %}
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck1" checked>
+                                                <label class="custom-control-label" for="customCheck1"></label>
+                                            </div>
+                                        </td>
                                       </tr>
+                                      {% endfor %}                                   
 
                                        </tbody>                                                                                           
                                 </table> 
-
-
+   
                                   <a class="collapse-item" href="Route"> 
                                     <div class="modal-footer">
                                       <input type="submit" autofocus class="btn btn-primary" id="FrequentRoute" name="FrequentRoute" value="Go!">
                                    </div>
-                                     </a> 
-
-                                 
-
-
-                                            
-                            
-                                                                    
+                                  </a> 
+                                   
                                 </div>
 
 

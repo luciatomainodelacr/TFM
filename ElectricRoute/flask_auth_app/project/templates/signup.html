@@ -34,11 +34,6 @@
                     
               <form class="user" method="POST" action="/signup">
 
-                  <!-- Enter Email Address -->
-                  <div class="form-group">
-                      <input type="email" class="form-control form-control-user" id="email" name="email" placeholder="Enter Email Address...">
-                  </div>
-
                   <!-- Name -->
                   <div class="form-group">
                       <input type="text" class="form-control form-control-user" id="name" name="name" placeholder="Enter Name...">
@@ -54,44 +49,42 @@
                       <input type="text" class="form-control form-control-user" id="typeCar" name="typeCar" placeholder="Enter Type Car...">
                   </div>
 
+                  <!-- Enter Email Address -->
+                  <div class="form-group">
+                      <input type="email" class="form-control form-control-user" id="email" name="email" placeholder="Enter Email Address...">
+                  </div>
+
                   <!-- Password -->
                   <div class="form-group">
                       <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Password">
                   </div>
 
-                  <!-- Login -->
+                 
+                  <!-- PasType Car Brand -->
+                  <div class="form-group">                                           
+                      <select class = 'form-select form-select-sm' id='mySelect'  aria-label="Default select example" style= "margin-left: 10% !important"> 
+                        <option selected> Type Car Brand </option>
+                            {% for brand in typeCar %}                            
+                            <option value={{brand}}> {{brand}} </option>
+                            {% endfor %}
+                      </select>
+                  </div>
+
+                  <!-- Type Car Model  -->
+                  <div class="form-group">
+                      <select class = 'form-select form-select-sm' id='mySelect'  aria-label="Default select example" style= "margin-left: 10% !important"> 
+                          <option selected>Type Car Model </option>
+                            {% for model in typeModel %}                            
+                          <option value={{model}}> {{model}} </option>
+                            {% endfor %}
+                      </select>
+                  </div>
+
+                   <!-- Login -->
                   <div class="form-group">
                       <input type="submit" class="btn btn-primary btn-user btn-block" id="send-signup" name="signup" value="Register Account">
                   </div>
-                          
-
-
-                  <!-- <div class="form-group row">
-                      <div class="col-sm-6 mb-3 mb-sm-0">
-                          <input type="text" class="form-control form-control-user" id="name" placeholder="First Name">
-                      </div>
-
-                      <div class="col-sm-6">
-                          <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Last Name">
-                      </div>
-                  </div>
-
-                  <div class="form-group">
-                      <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email Address">
-                  </div>
-
-                  <div class="form-group row">
-                      <div class="col-sm-6 mb-3 mb-sm-0">
-                          <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
-                      </div>
-                      <div class="col-sm-6">
-                          <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Repeat Password">
-                      </div>
-                  </div>
-
-                  <a href="login" class="btn btn-primary btn-user btn-block">
-                    Register Account
-                  </a>-->
+                        
                   
               </form>
 
