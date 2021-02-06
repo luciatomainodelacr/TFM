@@ -39,8 +39,30 @@ pd.options.mode.chained_assignment = None
 
 # Función para extraer la provincia
 def extraer_provincia(lugares, formatted_address):
-    x = ''
-    for j in lugares:
+     """
+    Definicion de la funcion extraer_provincia:
+        
+        Funcion para extraer la provincia de la dirección
+
+    Parametros
+    ----------
+    lugares:                     string
+        String que contiene la palabra que tiene que limpiarse
+    
+    formatted_address:                     string
+        String que contiene la palabra que tiene que limpiarse
+    Returns
+    ------
+    unidecode.unidecode(a):   string
+        String que contiene la palabra sin acentos
+    
+    Ejemplo
+    -------
+    >>> df["province"] = df.apply(lambda a: extraer_provincia(lugares,
+                                       a['formatted_address']), axis = 1)
+    """
+     x = ''
+     for j in lugares:
         if j in formatted_address:
             x  = j 
 
@@ -110,7 +132,7 @@ def extraer_provincia(lugares, formatted_address):
         if x in ('Gasteiz', 'Araba'):
             x = 'Álava'
 
-    return x
+     return x
 
 
 # Función get_centermost_point

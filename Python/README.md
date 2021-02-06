@@ -5,24 +5,24 @@ Esta carpeta contiene scripts y otro tipo de ficheros (.json para configuración
 El script principal, que contiene la función que se llamará desde el FE de Flask es: 
 
 calcular_caminos_entre_puntos.py -> Este es el main al que tiene que llamar el FE, y que llama al resto de módulos de las distintas subcarpetas.
-	Dadas dos ciudades origen-destino calcula la ruta óptima entre ellas, o bien por el numero de nodos mínimos necesarios para llegar o bien por el target que se le indique, en este caso, minimizar la distancia total.
-		Para lanzar el script hay que pasarle 3 parámetros obligatorios:
+Dadas dos ciudades origen-destino calcula la ruta óptima entre ellas, o bien por el numero de nodos mínimos necesarios para llegar o bien por el target que se le indique, en este caso, minimizar la distancia total.
+Para lanzar el script hay que pasarle 3 parámetros obligatorios:
 
-		1) ["PUNTO_RECARGA","GASOLINERA","ALL"]:Tipo de programa en base a los puntos que se quieren usar. Default: ALL
+1) ["PUNTO_RECARGA","GASOLINERA","ALL"]:Tipo de programa en base a los puntos que se quieren usar. Default: ALL
 
-		2) marca_coche: Marca de coche (tiene que estar en la tabla ElectricCar)
+2) marca_coche: Marca de coche (tiene que estar en la tabla ElectricCar)
 
-		3) modelo_coche: Modelo de coche (tiene que estar en la tabla ElectricCar)
+3) modelo_coche: Modelo de coche (tiene que estar en la tabla ElectricCar)
 
-		4) origen: Lugar de Origen (tiene que estar en la tabla Ciudades)
+4) origen: Lugar de Origen (tiene que estar en la tabla Ciudades)
 
-		5) destino: Lugar de Origen (tiene que estar en la tabla Ciudades)
+5) destino: Lugar de Origen (tiene que estar en la tabla Ciudades)
 
-		6) carga_inicial: Porcentaje de carga inicial del coche en lugar de origen. Default: 90
+6) carga_inicial: Porcentaje de carga inicial del coche en lugar de origen. Default: 90
 
-		7) carga_final: Porcentaje de carga final del coche en lugar de destino. Default: 10
+7) carga_final: Porcentaje de carga final del coche en lugar de destino. Default: 10
 		
-		8) tipo_conector: Tipo de conector que necesita el coche (tiene que estar en la tabla PuntosCarga)
+8) tipo_conector: Tipo de conector que necesita el coche (tiene que estar en la tabla PuntosCarga)
 
 Se añaden tres carpetas correspondientes a cada uno de los módulos:
 
