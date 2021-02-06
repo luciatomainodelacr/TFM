@@ -15,8 +15,6 @@
                 <div class="card-body p-0">
                   <!-- Nested Row within Card Body -->
                     <div class="row">
-
-
                         <div class="col-lg-6 d-none d-lg-block">
                             <img src="{{url_for('static', filename='img/profile.jpg')}}" class="img-fluid" alt="" size = "contain" width = "100%" style = "height: 100%;">     
                             
@@ -24,20 +22,17 @@
 
                         <div class="col-lg-6">
                                 <div class="p-5">
-
                                   <div class="text-center" style = "font-size: 30px; color:#4e73df; margin-botton: 20%;">
                                     <i class="fas fa-user fa-sm fa-fw mr-2" style = "font-size: 30px; margin-right: 12%; color: #4e73df" ></i>
                                     <span>User Profile</span>
                                   </div>
-
-                                  <form class="user">
-                                    
-                                    <div class="card card-body" style= "margin-botton: 20%;">
-                                      
-                                      <p>Name:   {{name}} </p>
-                                          <p>Last Name: {{lastName}} </p>
-                                          <p>E-mail:  {{email}} </p>
-                                          <p>Type car:{{typeCar}}  </p>
+                                     <form class="user">
+                                      </p>
+                                      <div class="card card-body" style= "margin-botton: 20%;">
+                                          <p> Name:       {{name}}     </p>
+                                          <p> Last Name:  {{lastName}} </p>
+                                          <p> E-mail:     {{email}}    </p>
+                                          <p> Type car:   {{typeCar}}  </p>
                            </div>
                           </a>
                         </form>
