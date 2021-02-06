@@ -1,0 +1,80 @@
+[2021-02-06 22:25:44,594] [INFO    ][OK] Llamada al script calcular_caminos_entre_puntos.py [OK]
+[2021-02-06 22:25:44,594] [INFO    ]El programa lanzado es: ALL VOLKSWAGEN ID3 PURE Alicante Tren A Corunia Bus 90 10  INFO /home/tfm/Documentos/TFM/ElectricRoute/flask_auth_app_blanca_sql/logs/
+[2021-02-06 22:25:44,594] [INFO    ]1.- Carga de inputs desde Base de Datos
+[2021-02-06 22:25:44,594] [ERROR   ][ERROR] El programa no ha podido obtener una ruta [ERROR]
+[2021-02-06 22:25:44,611] [INFO    ]127.0.0.1 - - [06/Feb/2021 22:25:44] "[37mGET /ruta_test HTTP/1.1[0m" 200 -
+[2021-02-06 22:25:44,662] [INFO    ]127.0.0.1 - - [06/Feb/2021 22:25:44] "[37mGET /static/vendor/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1[0m" 200 -
+[2021-02-06 22:25:44,665] [INFO    ]127.0.0.1 - - [06/Feb/2021 22:25:44] "[37mGET /static/vendor/jquery-easing/jquery.easing.min.js HTTP/1.1[0m" 200 -
+[2021-02-06 22:25:44,688] [INFO    ]127.0.0.1 - - [06/Feb/2021 22:25:44] "[37mGET /static/js/sb-admin-2.min.js HTTP/1.1[0m" 200 -
+[2021-02-06 22:25:44,690] [INFO    ]127.0.0.1 - - [06/Feb/2021 22:25:44] "[37mGET /static/vendor/jquery/jquery.min.js HTTP/1.1[0m" 200 -
+[2021-02-06 22:25:44,691] [INFO    ]127.0.0.1 - - [06/Feb/2021 22:25:44] "[37mGET /static/dist/leaflet-routing-machine.js HTTP/1.1[0m" 200 -
+[2021-02-06 22:25:46,442] [INFO    ][OK] Llamada al script calcular_caminos_entre_puntos.py [OK]
+[2021-02-06 22:25:46,442] [INFO    ]El programa lanzado es: ALL VOLKSWAGEN ID3 PURE Alicante Tren A Corunia Bus 90 10  INFO /home/tfm/Documentos/TFM/ElectricRoute/flask_auth_app_blanca_sql/logs/
+[2021-02-06 22:25:46,442] [INFO    ]1.- Carga de inputs desde Base de Datos
+[2021-02-06 22:25:46,442] [ERROR   ][ERROR] El programa no ha podido obtener una ruta [ERROR]
+[2021-02-06 22:25:46,443] [INFO    ]127.0.0.1 - - [06/Feb/2021 22:25:46] "[37mGET /ruta_test HTTP/1.1[0m" 200 -
+[2021-02-06 22:25:46,529] [INFO    ]127.0.0.1 - - [06/Feb/2021 22:25:46] "[36mGET /static/dist/leaflet-routing-machine.js HTTP/1.1[0m" 304 -
+[2021-02-06 22:25:46,532] [INFO    ]127.0.0.1 - - [06/Feb/2021 22:25:46] "[36mGET /static/js/sb-admin-2.min.js HTTP/1.1[0m" 304 -
+[2021-02-06 22:25:46,537] [INFO    ]127.0.0.1 - - [06/Feb/2021 22:25:46] "[36mGET /static/vendor/jquery-easing/jquery.easing.min.js HTTP/1.1[0m" 304 -
+[2021-02-06 22:25:46,547] [INFO    ]127.0.0.1 - - [06/Feb/2021 22:25:46] "[36mGET /static/vendor/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1[0m" 304 -
+[2021-02-06 22:25:46,548] [INFO    ]127.0.0.1 - - [06/Feb/2021 22:25:46] "[36mGET /static/vendor/jquery/jquery.min.js HTTP/1.1[0m" 304 -
+[2021-02-06 22:27:26,460] [INFO    ] * Detected change in '/home/tfm/Documentos/TFM/ElectricRoute/flask_auth_app_blanca_sql/project/Modelo/calcular_caminos_entre_puntos.py', reloading
+[2021-02-06 22:31:38,134] [INFO    ][OK] Llamada al script calcular_caminos_entre_puntos.py [OK]
+[2021-02-06 22:31:38,134] [INFO    ]El programa lanzado es: ALL VOLKSWAGEN ID3 PURE Alicante Tren A Corunia Bus 90 10  INFO /home/tfm/Documentos/TFM/ElectricRoute/flask_auth_app_blanca_sql/logs/
+[2021-02-06 22:31:38,134] [INFO    ]1.- Carga de inputs desde Base de Datos
+[2021-02-06 22:31:38,146] [INFO    ]127.0.0.1 - - [06/Feb/2021 22:31:38] "[35m[1mGET /ruta_test HTTP/1.1[0m" 500 -
+[2021-02-06 22:31:38,200] [INFO    ]127.0.0.1 - - [06/Feb/2021 22:31:38] "[37mGET /ruta_test?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 200 -
+[2021-02-06 22:31:38,200] [INFO    ]127.0.0.1 - - [06/Feb/2021 22:31:38] "[37mGET /ruta_test?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 200 -
+[2021-02-06 22:31:38,203] [INFO    ]127.0.0.1 - - [06/Feb/2021 22:31:38] "[37mGET /ruta_test?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1[0m" 200 -
+[2021-02-06 22:31:38,312] [INFO    ]127.0.0.1 - - [06/Feb/2021 22:31:38] "[37mGET /ruta_test?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 200 -
+[2021-02-06 22:32:10,964] [INFO    ] * Detected change in '/home/tfm/Documentos/TFM/ElectricRoute/flask_auth_app_blanca_sql/project/Modelo/calcular_caminos_entre_puntos.py', reloading
+[2021-02-06 22:33:39,563] [INFO    ][OK] Llamada al script calcular_caminos_entre_puntos.py [OK]
+[2021-02-06 22:33:39,563] [INFO    ]El programa lanzado es: ALL VOLKSWAGEN ID3 PURE Alicante Tren A Corunia Bus 90 10  INFO /home/tfm/Documentos/TFM/ElectricRoute/flask_auth_app_blanca_sql/logs/
+[2021-02-06 22:33:39,563] [INFO    ]1.- Carga de inputs desde Base de Datos
+[2021-02-06 22:33:39,563] [INFO    ]Crear conexion a DB
+[2021-02-06 22:33:39,735] [INFO    ]Query a PuntosCarga
+[2021-02-06 22:33:39,779] [INFO    ]Query a GasolinerasPropuesta
+[2021-02-06 22:33:39,811] [INFO    ]Query a Ciudades
+[2021-02-06 22:33:39,823] [INFO    ]Query a ElectriCar
+[2021-02-06 22:33:39,829] [INFO    ]Query a Matriz_distancia_haversine
+[2021-02-06 22:33:43,015] [INFO    ]Query a Matriz_distancia_haversine completo
+[2021-02-06 22:34:01,612] [INFO    ]Cerrar conexion con DB
+[2021-02-06 22:34:01,613] [INFO    ]2.- Aplicar las restricciones
+[2021-02-06 22:34:01,613] [INFO    ]a) Si no se especifica tipo de conector, no se aplica restriccion
+[2021-02-06 22:34:01,613] [INFO    ]b) Restriccion de primera parada
+[2021-02-06 22:34:01,654] [INFO    ]c) Restriccion de ultima parada
+[2021-02-06 22:34:01,693] [INFO    ]Se genera el dataframe reducido que cumple con todas las restricciones
+[2021-02-06 22:34:01,987] [INFO    ]df_distancias (105952, 3)
+[2021-02-06 22:34:01,988] [INFO    ]df_distancias_reduced (105918, 5)
+[2021-02-06 22:34:01,989] [INFO    ]3.- Calcular tiempos (de recorrido y parada)
+[2021-02-06 22:34:01,989] [INFO    ]a) Tiempo de recorrido
+[2021-02-06 22:34:01,991] [INFO    ]b) Tiempo de parada
+[2021-02-06 22:34:01,991] [INFO    ]Filtro las distancias menores o iguales de 50 km entre las CIUDADES IMPORTANTES y el resto de coordenadas
+[2021-02-06 22:34:04,749] [INFO    ]Calculo tiempo de parada para puntos de recarga
+[2021-02-06 22:34:04,859] [INFO    ]Se genera el dataframe reducido con columna basada en Suma_time_parada_h
+[2021-02-06 22:34:04,910] [INFO    ]4.- Construir el grafo
+[2021-02-06 22:34:23,667] [INFO    ]5.- Calculo rutas optimas
+[2021-02-06 22:34:23,871] [INFO    ]La ruta optima es: ['Alicante Tren', 'punto_recarga_241', 'punto_recarga_322', 'punto_recarga_264', 'punto_recarga_296', 'A Corunia Bus']
+[2021-02-06 22:34:23,943] [INFO    ]Tiempo de parada en Alicante Tren es 0.0 h
+[2021-02-06 22:34:23,943] [INFO    ]Tiempo total del tramo Alicante Tren - punto_recarga_241 es 1.2850098053849321 h
+[2021-02-06 22:34:23,985] [INFO    ]Tiempo de parada en punto_recarga_241 es 1.011090909090909 h
+[2021-02-06 22:34:23,985] [INFO    ]Tiempo total del tramo punto_recarga_241 - punto_recarga_322 es 3.0380581526102346 h
+[2021-02-06 22:34:24,029] [INFO    ]Tiempo de parada en punto_recarga_322 es 0.4904449054863993 h
+[2021-02-06 22:34:24,029] [INFO    ]Tiempo total del tramo punto_recarga_322 - punto_recarga_264 es 2.3117024700730227 h
+[2021-02-06 22:34:24,072] [INFO    ]Tiempo de parada en punto_recarga_264 es 1.28 h
+[2021-02-06 22:34:24,072] [INFO    ]Tiempo total del tramo punto_recarga_264 - punto_recarga_296 es 3.219303660391611 h
+[2021-02-06 22:34:24,114] [INFO    ]Tiempo de parada en punto_recarga_296 es 0.472979797979798 h
+[2021-02-06 22:34:24,115] [INFO    ]Tiempo total del tramo punto_recarga_296 - A Corunia Bus es 2.09434111354885 h
+[2021-02-06 22:34:24,115] [INFO    ]El tiempo total tardado es: 11.94841520200865 h
+[2021-02-06 22:34:24,332] [INFO    ]6.- Carga de outputs a Base de Datos
+[2021-02-06 22:34:24,332] [INFO    ]Crear conexion a DB
+[2021-02-06 22:34:24,447] [INFO    ]Query a Output
+[2021-02-06 22:34:24,503] [INFO    ]1 registros insertados.
+[2021-02-06 22:34:24,504] [INFO    ]Cerrar conexion con DB
+[2021-02-06 22:34:24,504] [INFO    ][OK] Final del script calcular_caminos_entre_puntos.py [OK]
+[2021-02-06 22:34:24,578] [INFO    ]127.0.0.1 - - [06/Feb/2021 22:34:24] "[37mGET /ruta_test HTTP/1.1[0m" 200 -
+[2021-02-06 22:34:24,646] [INFO    ]127.0.0.1 - - [06/Feb/2021 22:34:24] "[36mGET /static/vendor/jquery-easing/jquery.easing.min.js HTTP/1.1[0m" 304 -
+[2021-02-06 22:34:24,677] [INFO    ]127.0.0.1 - - [06/Feb/2021 22:34:24] "[36mGET /static/dist/leaflet-routing-machine.js HTTP/1.1[0m" 304 -
+[2021-02-06 22:34:24,678] [INFO    ]127.0.0.1 - - [06/Feb/2021 22:34:24] "[36mGET /static/vendor/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1[0m" 304 -
+[2021-02-06 22:34:24,685] [INFO    ]127.0.0.1 - - [06/Feb/2021 22:34:24] "[36mGET /static/vendor/jquery/jquery.min.js HTTP/1.1[0m" 304 -
+[2021-02-06 22:34:24,685] [INFO    ]127.0.0.1 - - [06/Feb/2021 22:34:24] "[36mGET /static/js/sb-admin-2.min.js HTTP/1.1[0m" 304 -
