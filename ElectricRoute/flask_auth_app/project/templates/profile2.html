@@ -8,40 +8,66 @@
 
           <!-- Outer Row -->
           <div class="row justify-content-center" >
-            <div class="col-xl-10">
-              <div class="card o-hidden border-0 shadow-lg my-5">
+
+             <div class="col-xl-7 col-lg-12 col-md-7">
+
+              <div class="card o-hidden border-0 shadow-lg my-5 ">
+
                 <div class="card-body p-0">
-                  <!-- Nested Row within Card Body -->
-                    <div class="row justify-content-center">
-                        <div class="col-lg-5">
+
+
+                <!-- Nested Row within Card Body -->
+                  <div class="row justify-content-center" >
+                      <div class="col-lg-12">
                           <div class="p-5">
-                                  <div class="text-center" style = "font-size: 30px; color:#4e73df; margin-botton: 20%;">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2" style = "font-size: 30px; margin-right: 20%; color: #4e73df" ></i>
-                                    <span>User Profile</span>
-                                    
-                                  </div>
-                                     <form class="user">
-                                      
-                                      <div class="card card-body" style= "margin-botton: 20%;">
-                                          <p> Name:       {{name}}     </p>
-                                          <p> Last Name:  {{lastName}} </p>
-                                          <p> E-mail:     {{email}}    </p>
-                                          <p> Type car:   {{typeCar}}  </p>
-                                      </div>
-                          
-                                    </form>
-                                  
-                                 </div>
-                            </div>
-                         </div>
+
+                              <!-- Título --> 
+                              <div class="text-center" style = "font-size: 40px; color:#4e73df; margin-botton: 20%;">
+                                  <i class="fas fa-user fa-sm fa-fw mr-2" style = "font-size: 30px; margin-right: 12%; color: #4e73df" ></i>
+                                  <span>User Profile</span>
+                              </div>
+   
+                              <form class="user" style = "margin-top: 10%">
+
+                                  <p> Name:       {{name}}     </p>
+                                  <p> Last Name:  {{lastName}} </p>
+                                  <p> E-mail:     {{email}}    </p>
+
+                                  <p> Type Car Brand                                              
+                                      <select class = 'form-select form-select-sm' id='mySelect'  aria-label="Default select example" style= "margin-left: 10% !important"> 
+                                        <option selected>Choose one...</option>                                                  
+                                        
+                                        {% for brand in typeCar %}                            
+                                        <option value={{brand}}> {{brand}} </option>
+                                        {% endfor %}
+                                      </select>
+                                  </p>
+
+                                  <p> Type Car Model                                              
+                                      <select class = 'form-select form-select-sm' id='mySelect'  aria-label="Default select example" style= "margin-left: 10% !important"> 
+                                        <option selected>Choose one...</option>  
+
+                                        {% for model in typeModel %}                            
+                                        <option value={{model}}> {{model}} </option>
+                                        {% endfor %}
+                                      </select>
+                                  </p>
+
+                              </form>
+
+                          </div>
                       </div>
                   </div>
 
+
+                </div>
               </div>
+
+            </div>
 
           </div>
 
-        </div>
+      </div>
 
     </body>
 {% endblock %}

@@ -34,12 +34,14 @@ from flask_login import LoginManager
 # Se inicializa SQLAlchemy
 db = SQLAlchemy()
 
+
 # Se crea la app
 def create_app():
     app = Flask(__name__)
 
     app.config['SECRET_KEY'] = '123456789'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@127.0.0.1:3306/tfm'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
     db.init_app(app)
@@ -48,12 +50,12 @@ def create_app():
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
 
-    from project.models import User_2
+    from project.models import User
 
     @login_manager.user_loader
     def load_user(user_id):
         # since the user_id is just the primary key of our user table, use it in the query for the user
-        return User_2.query.get(int(user_id))
+        return User.query.get(int(user_id))
 
 
     # blueprint for auth routes in our app
@@ -65,5 +67,4 @@ def create_app():
     app.register_blueprint(main_blueprint)
 
     return app
-
 

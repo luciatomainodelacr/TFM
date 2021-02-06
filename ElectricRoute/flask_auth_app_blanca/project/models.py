@@ -14,12 +14,12 @@
 
 # Se cargan las librerias
 from flask_login import UserMixin
-import pandas as pd
+from datetime import datetime
 from . import db
 
 
-
-# Se define la clase
+# 1. Clase User ---------------------------------------------------
+#------------------------------------------------------------------
 class User(UserMixin, db.Model):
 
     id       = db.Column(db.Integer, primary_key=True, nullable=False, unique=True)
@@ -31,39 +31,53 @@ class User(UserMixin, db.Model):
     
 
 
-class Ruta(UserMixin, db.Model):
+# 2. Clase Route --------------------------------------------------
+#------------------------------------------------------------------
 
-    __tablename__ = 'ruta'
+class Route(UserMixin, db.Model):
+    
+    __tablename__ = 'Route'
+    
+    id          = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy
+    email       = db.Column(db.String(100), unique=True)
+    from_ub     = db.Column(db.String(1000))
+    to_ub       = db.Column(db.String(1000)) 
+    typeCar     = db.Column(db.String(1000))  
+    typeLoad    = db.Column(db.String(1000))
+    dateSearch  = db.Column(db.DateTime(6)) 
 
-    id            = db.Column(db.Integer, primary_key=True)
-    email         = db.Column(db.String(100))
-    OrigenName    = db.Column(db.String(100))
-    DestName      = db.Column(db.String(100))
+
+
+# 3. Clase ciudades -----------------------------------------------
+#------------------------------------------------------------------
+class ciudades(UserMixin, db.Model):
+
+    __tablename__ = 'ciudades'
+
+    id            = db.Column(db.String(100), primary_key=True, nullable=False, unique=True)
+    provincia     = db.Column(db.String(100))
+    Direccion     = db.Column(db.String(100))
+    Latitud       = db.Column(db.String(100))
+    Longitud      = db.Column(db.String(100))
+    Coordenadas   = db.Column(db.String(100))
 
    
     def __repr__(self):
-        return f'<User {self.email}>'
+        return '<Ciudad {}>'.format(self.username)
 
 
-    @staticmethod
-    def get_by_origen(email):
-        return Ruta.query.get(OrigenName)
+# 4. Clase ElectricCar --------------------------------------------
+#------------------------------------------------------------------
 
-    @staticmethod
-    def get_by_destino(DestName):
-        return Ruta.query.get(DestName)
-        
-    def save(self):
-        if not self.id:
-            db.session.add(self)
-        db.session.commit()
-
+class ElectricCar(UserMixin, db.Model):
     
-''' 
-    brand            =  db.Column(db.Integer, primary_key=True)
+    __tablename__ = 'ElectricCar'
+
+    brand           =  db.Column(db.Integer, primary_key=True)
     model           = db.Column(db.String(100))
     range_km        = db.Column(db.String(100))
     efficiency_whkm = db.Column(db.String(100))
     fastcharge_kmh  = db.Column(db.String(100))
     rapidcharge     = db.Column(db.String(100))
-    plugtype = battery_capacity = db.Column(db.String(100)) '''
+    plugtype = battery_capacity = db.Column(db.String(100))
+
