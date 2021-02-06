@@ -28,6 +28,7 @@ main = Blueprint('main', __name__)
 
 
 
+
 # 1.- Páginas de error ----------------------------------------
 #-----------------------------------------------------------------
 
@@ -64,6 +65,10 @@ def route():
     for ciudad in ciudades_list:
         lista_destino.append(ciudad.id)
 
+
+    
+
+
     return render_template('route.html', name = current_user.name, ciudades = lista_destino)
 
 
@@ -76,6 +81,7 @@ def route_post():
     ciudades_dict = {}
 
     for ciudad in ciudades_dict:
+    
 
         ciudades_dict = {
 
@@ -99,21 +105,21 @@ def frequentroutes():
 
     var_email = current_user.email
 
-    rutas_list = Route.query.all()
-    #.query.filter_by(email=current_user.email).order_by("dateSearch")[::-1] 
+    rutas_list = Route.query.filter_by(email=current_user.email).order_by("dateSearch")[::-1] 
 
-    dict_rutas= {}
+    dict_rutas = []
+    list_rutas = ["From", "To", "Type Car", "Load of the car"]
 
     for ruta in rutas_list:
-
-        dict_rutas = {
+        
+        dict_rutas.append({
             "From" : ruta.from_ub,
             "To" : ruta.to_ub,
             "Type Car" : ruta.typeCar,
             "Load of the car" : ruta.typeLoad
-        }   
+        })   
 
-    return render_template('frequentroutes.html', email=current_user.email, dict_rutas=dict_rutas)
+    return render_template('frequentroutes.html', email=current_user.email, dict_rutas=dict_rutas, list_rutas=list_rutas)
 
 
 @main.route('/delete')
@@ -141,7 +147,6 @@ def profile2():
 
 
     return render_template('profile2.html', email = current_user.email, name = current_user.name, lastName = current_user.lastName, typeCar = list_typeCar, typeModel = list_model)
-
 
 
 
