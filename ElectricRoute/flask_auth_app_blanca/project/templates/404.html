@@ -1,7 +1,16 @@
 {% extends "base.html" %}
 
 {% block body %}
-<div class="page-header" style="text-align: center; color: rgb(16,31,66); width: 100%;">
-    <h1>Error 404 - Page Not Found</h1>
-</div>
+<!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- 404 Error Text -->
+          <div class="text-center">
+            <div class="error mx-auto" data-text="404">404</div>
+            <p class="lead text-gray-800 mb-5">Page Not Found</p>
+            <p class="text-gray-500 mb-0">It looks like you found a glitch in the matrix...</p>
+            <a href="index">&larr; Back to Index</a>
+          </div>
+
+        </div>
 {% endblock %}

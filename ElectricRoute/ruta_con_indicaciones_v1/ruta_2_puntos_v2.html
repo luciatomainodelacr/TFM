@@ -57,27 +57,15 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 
 // Se crea un evento que captura dos puntos seleccionados en el mapa
-map.on('click', function(e) {
-    if (!firstLatLng) {
-      firstLatLng = e.latlng;
-        L.marker(firstLatLng).addTo(map).bindPopup('Punto de Origen<br/>' + e.latlng).openPopup();
-    } else {
-      secondLatLng = e.latlng;
-        L.marker(secondLatLng).addTo(map).bindPopup('Punto de Destino<br/>' + e.latlng).openPopup();
-    }
-
-    if (firstLatLng && secondLatLng) {
-
-      // Se dibuja la ruta entre los dos puntos
-      L.Routing.control({
-        waypoints: [firstLatLng, secondLatLng]
-      }).addTo(map);
-       
-
-    }
-  })
-
-
+      
+                L.Routing.control({
+                    waypoints: [
+                        L.latLng(43.3525485, -8.4099873),
+                        L.latLng(42.371197, -3.666308),
+                        L.latLng(40.6440624, -3.1821188)
+                        
+                    ]
+                }).addTo(map);
 </script>
 </body>
 </html>

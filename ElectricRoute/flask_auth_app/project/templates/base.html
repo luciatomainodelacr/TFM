@@ -23,24 +23,44 @@
         <!-- Custom styles for this template -->
         <link href="{{url_for("static", filename='css/sb-admin-2.min.css')}}" rel="stylesheet">
 
-
+        <!-- Mapa leaflet -->
+        <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+   
 
 
         {% block extra_css %}
         {% endblock %}
 
    
-
-
     </head>
     {% endblock %}
 
 
     {% block body %}
 
+    
+
     <!-- Cuerpo -->
     <body id="page-top" >
+
+
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+        integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+        crossorigin="">
+    </script>
+
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+
+    <script src="{{url_for('static', filename='dist/leaflet-routing-machine.js')}}"></script>
+    <link rel="stylesheet" href="{{url_for("static", filename='/dist/leaflet-routing-machine.css')}}" /> 
+                            
     
+
+
         <!-- Page Wrapper -->
         <div id="wrapper">
 
@@ -66,7 +86,26 @@
                 </a>
             </li>
 
-        
+            <!-- Nav Item - Frequent Routes -->
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-toggle="modal" data-target="#frequenteRoute">
+                     <i class="fa fa-star fa-sm fa-fw mr-2 text-gray-400"></i>
+                    <span>Frequent Routes</span>
+                </a>
+            </li>
+
+
+            <!-- Nav Item - Save Route -->
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fa fa-download fa-sm fa-fw mr-2 text-gray-400"></i>
+                    <span>Save Route</span>
+                </a>
+            </li>
+
+            <!-- Línea divisora -->
+            <hr class="sidebar-divider">
+
             <!-- Nav Item - Settings -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -77,14 +116,14 @@
                 <div class="bg-white py-2 collapse-inner rounded">
 
                     <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">
+                        <a class="collapse-item" href="profile2">
                             <i class="fa fa-user" aria-hidden="true"></i>
-                            <span>User??</span>
+                            <span>User Profile</span>
                         </a>
 
                         <a class="collapse-item" href="cards.html">
                             <i class="fa fa-car" aria-hidden="true"></i>
-                            <span>Cars??</span>
+                            <span>Cars Details</span>
                         </a>
                 </div>
                 </div>
@@ -96,8 +135,6 @@
             <i class="fas fa-fw fa-wrench"></i>
             <span>Utilities</span></a>
             </li>
-
-
 
             <!-- Línea divisora -->
             <hr class="sidebar-divider">
@@ -150,28 +187,12 @@
                     </li>
 
                     
-                    <!-- Nav Item - Messages -->
-                    <li class="nav-item dropdown no-arrow mx-1">
-                    <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-envelope fa-fw"></i>
-                        <!-- Counter - Messages -->
-                        <span class="badge badge-danger badge-counter">3</span>
-                    </a>
-                    <!-- Dropdown - Messages -->
-                    <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
-                        <h6 class="dropdown-header">
-                        Message Center
-                        </h6>                        
-                        <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-                    </div>
-                    </li>
-
                     <div class="topbar-divider d-none d-sm-block"></div>
 
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">Blanca Alonso</span>
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small"> {{ name }} </span>
                         <img class="img-profile rounded-circle" src="{{url_for('static', filename='img/avatar_login.jpg')}}">
                     </a>
                     <!-- Dropdown - User Information -->
@@ -180,7 +201,7 @@
                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                         Profile
                         </a>
-                        <a class="dropdown-item" href="Settings">
+                        <a class="dropdown-item" href="#">
                         <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                         Settings
                         </a>
@@ -215,7 +236,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Your Website 2021</span>
+                    <span>Copyright &copy; Electric Route 2021</span>
                 </div>
                 </div>
             </footer>
@@ -260,31 +281,73 @@
             <div class="modal-content">
                 <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">New Route</h5>
+                
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
                 </div>
                 <div class="modal-body">
-                    <form class="user">
-                        <div class="form-group" style= "margin-botton: 20%;">
-                            <input type="Type Car" class="form-control form-control-user" id="type_Car" aria-describedby="emailHelp" placeholder="Select your car"> 
-                        </div>
+                    <form class="user"  method="POST" action="/Route">
+                      
+                        <!-- Enter Email Address -->
                         <div class="form-group">
-                                <input type="From" class="form-control form-control-user" id="From" placeholder="From">
+                            <input type="text" class="form-control form-control-user" id="Origin" name="Origin" placeholder="Select Origin...">
                         </div>
+
+                        <!-- Password -->
                         <div class="form-group">
-                            <input type="To" class="form-control form-control-user" id="To" placeholder="To">
+                            <input type="text" class="form-control form-control-user" id="Dest" name="Dest" placeholder="Select Dest...">
                         </div>
-                        </a>
+                                               
                     </form>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                            <input type="submit" class="btn btn-primary" id="newRoute" name="newRoute" value="Go!">
+                        </div>
+
                 </div>
-                <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="Route">Go!</a>
-                </div>
+                
             </div>
             </div>
         </div>
+
+
+         <!-- Frequent Routes Modal-->
+        <div class="modal fade" id="frequenteRoute" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Frequent Routes</h5>
+                
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped table-hover table-bordered table-sm bg-white">
+                        <thead>
+                        <tr>
+                            <td>Origen</td>
+                            <td>Destiny</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        
+
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+            </div>
+        </div>
+
+
+
+
+
+
 
 
 

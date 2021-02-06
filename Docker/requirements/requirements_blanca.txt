@@ -35,6 +35,13 @@ pip3 install flask
 pip3 install flask_sqlalchemy
 pip3 install flask_login
 
+sudo apt install libmysqlclient-dev   
+sudo apt install libmariadb-dev-compat
+sudo apt install libmariadbclient-dev 
+
+pip3 install flask_mysqldb
+pip3 install mysqlcliente
+pip3 install flask-mail
 
 
 ---------------------------------------------------------------------------------------------
