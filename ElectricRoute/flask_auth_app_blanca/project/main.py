@@ -19,6 +19,7 @@ Modelo de autenticación. Tres páginas:
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_required, current_user
 from .models import User, Route, ciudades, ElectricCar
+from .Modelo.calcular_caminos_entre_puntos import main_route
 from . import db
 
 
@@ -143,9 +144,20 @@ def profile2():
     for car in car_list:
         list_typeCar.append(car.brand)
         list_model.append(car.model)
-
-
+        
     return render_template('profile2.html', email = current_user.email, name = current_user.name, lastName = current_user.lastName, typeCar = list_typeCar, typeModel = list_model)
 
 
+
+@main.route('/ruta_test')
+def ruta_test():
+
+    ruta = main_route(tipo_programa = "ALL",
+            marca_coche = "VOLKSWAGEN",
+            modelo_coche = "ID3 PURE",
+            origen = "Alicante Tren",
+            destino = "A Corunia Bus"
+    )
+
+    return render_template('ruta_test.html', ruta=ruta)
 
