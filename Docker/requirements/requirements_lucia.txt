@@ -122,6 +122,14 @@ sudo pip3 install -U Flask-SQLAlchemy
 supo pip3 install flask-login
 sudo pip3 install flask-mail
 
+sudo pip3 install --upgrade setuptools
+sudo apt install libmysqlclient-dev   
+sudo apt install libmariadb-dev-compat
+sudo apt install libmariadbclient-dev
+sudo pip3 install flask-mysqldb
+sudo pip3 install flask_wtf
+sudo pip3 install email_validator
+
 - Plotly 
 sudo pip3 install plotly
 
@@ -140,3 +148,4 @@ import pymysql
 - MySQL
 sudo pip3 install mysql
 sudo pip3 install mysql-connector-python
+
