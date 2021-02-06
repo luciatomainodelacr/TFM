@@ -28,13 +28,11 @@ Ejemplo:
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-from sqlalchemy import create_engine
 
 
 
 # Se inicializa SQLAlchemy
 db = SQLAlchemy()
-
 
 
 # Se crea la app
@@ -47,9 +45,6 @@ def create_app():
 
 
     db.init_app(app)
-
-
-
 
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'

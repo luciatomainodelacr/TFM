@@ -14,12 +14,12 @@
 
 # Se cargan las librerias
 from flask_login import UserMixin
-import pandas as pd
+from datetime import datetime
 from . import db
 
 
-
-# Se define la clase
+# 1. Clase User ---------------------------------------------------
+#------------------------------------------------------------------
 class User(UserMixin, db.Model):
 
     id       = db.Column(db.Integer, primary_key=True, nullable=False, unique=True)
@@ -31,6 +31,25 @@ class User(UserMixin, db.Model):
     
 
 
+# 2. Clase Route --------------------------------------------------
+#------------------------------------------------------------------
+
+class Route(UserMixin, db.Model):
+    
+    __tablename__ = 'Route'
+    
+    id          = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy
+    email       = db.Column(db.String(100), unique=True)
+    from_ub     = db.Column(db.String(1000))
+    to_ub       = db.Column(db.String(1000)) 
+    typeCar     = db.Column(db.String(1000))  
+    typeLoad    = db.Column(db.String(1000))
+    dateSearch  = db.Column(db.DateTime(6)) 
+
+
+
+# 3. Clase ciudades -----------------------------------------------
+#------------------------------------------------------------------
 class ciudades(UserMixin, db.Model):
 
     __tablename__ = 'ciudades'
@@ -47,6 +66,8 @@ class ciudades(UserMixin, db.Model):
         return '<Ciudad {}>'.format(self.username)
 
 
+# 4. Clase ElectricCar --------------------------------------------
+#------------------------------------------------------------------
 
 class ElectricCar(UserMixin, db.Model):
     

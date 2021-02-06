@@ -19,7 +19,7 @@ Modelo de autenticación. Tres páginas:
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_required, current_user
 from flask_mysqldb import MySQL
-from .models import User, ciudades, ElectricCar
+from .models import User, Route, ciudades, ElectricCar
 from . import db
 
 
@@ -28,7 +28,7 @@ main = Blueprint('main', __name__)
 
 
 
-# 2.- Páginas de error ----------------------------------------
+# 1.- Páginas de error ----------------------------------------
 #-----------------------------------------------------------------
 
 @main.route('/page_not_found')
@@ -41,9 +41,7 @@ def page_not_found():
 
 
 
-
-
-# 4.- Página index ------------------------------------------------
+# 2.- Página index ------------------------------------------------
 #------------------------------------------------------------------
 
 @main.route('/index')
@@ -52,7 +50,8 @@ def index():
     return render_template('index.html', name=current_user.name)
 
 
-# 5.- Página ruta (mapa) ------------------------------------------
+
+# 3.- Página ruta (mapa) ------------------------------------------
 #------------------------------------------------------------------
 
 @main.route('/Route')
@@ -91,18 +90,41 @@ def route_post():
 
     
 
-
-
-# 6.- Página Rutas Frecuentes -------------------------------------
+# 4.- Página Rutas Frecuentes -------------------------------------
 #------------------------------------------------------------------
 
-@main.route('/rutasFrecuentes')
-def rutasFrecuentes():
-    return ('Rutas Frecuentes')
+@main.route('/frequentroutes')
+@login_required
+def frequentroutes():
+
+    var_email = current_user.email
+
+    rutas_list = Route.query.all()
+    #.query.filter_by(email=current_user.email).order_by("dateSearch")[::-1] 
+
+    dict_rutas= {}
+
+    for ruta in rutas_list:
+
+        dict_rutas = {
+            "From" : ruta.from_ub,
+            "To" : ruta.to_ub,
+            "Type Car" : ruta.typeCar,
+            "Load of the car" : ruta.typeLoad
+        }   
+
+    return render_template('frequentroutes.html', email=current_user.email, dict_rutas=dict_rutas)
+
+
+@main.route('/delete')
+@login_required
+def delete():
+    return render_template('delete.html', name=current_user.name)
 
 
 
-# 7.- Página profile -----------------------------------------------
+
+# 6- Página profile -----------------------------------------------
 #------------------------------------------------------------------
 
 @main.route('/profile2')
@@ -122,6 +144,4 @@ def profile2():
 
 
 
-@main.route('/login_test')
-def login_test():
-    return render_template('login_test.html')
+

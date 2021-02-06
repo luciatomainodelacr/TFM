@@ -116,7 +116,7 @@
                 <div class="bg-white py-2 collapse-inner rounded">
 
                     <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="profile">
+                        <a class="collapse-item" href="profile2">
                             <i class="fa fa-user" aria-hidden="true"></i>
                             <span>User Profile</span>
                         </a>
@@ -195,6 +195,7 @@
                         <span class="mr-2 d-none d-lg-inline text-gray-600 small"> {{ name }} </span>
                         <img class="img-profile rounded-circle" src="{{url_for('static', filename='img/avatar_login.jpg')}}">
                     </a>
+                    
                     <!-- Dropdown - User Information -->
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="profile">
@@ -279,38 +280,59 @@
         <div class="modal fade" id="newRoute" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New Route</h5>
-                
+                <div class="modal-header" style="background-color: #4E73DF !important;">
+                <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(255, 255, 255);">New Route</h5>
+
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
+                    <span aria-hidden="true" style="color: rgb(255, 255, 255);">×</span>
                 </button>
                 </div>
                 <div class="modal-body">
-                    <form class="user"  method="POST" action="/Route">
-                      
-                        <!-- Enter Email Address -->
-                        <div class="form-group">
-                            <input type="text" class="form-control form-control-user" id="Origin" name="Origin" placeholder="Select Origin...">
-                        </div>
 
-                        <!-- Password -->
-                        <div class="form-group">
-                            <input type="text" class="form-control form-control-user" id="Dest" name="Dest" placeholder="Select Dest...">
-                        </div>
-                                               
-                    </form>
+                    <!-- Select Origin -->
+                    <div class="container"> 
+                    
+                        <span> From... </span>
+                        
+                        <select class = 'form-select form-select-sm' id='mySelectOrigin'  aria-label="Default select example" style= "margin-left: 10% !important"> 
+                            <option selected>Choose one of the following...</option>
+                            
+                            {% for ciudad in ciudades %}                            
+                                <option value={{ciudad}}> {{ciudad}} </option>
+                            {% endfor %}
+                        </select>
+                    </div>
 
-                        <div class="modal-footer">
+
+                    <!-- Select Destiny -->
+                    <div class="container"> 
+                    
+                        <span> To... </span>
+                        
+                        <select class = 'form-select form-select-sm' id='mySelectDest'  aria-label="Default select example" style= "margin-top: 10%; margin-left: 15% !important"> 
+                            <option selected>Choose one of the following...</option>
+                            
+                            {% for ciudad in ciudades %}                            
+                                <option value={{ciudad}}> {{ciudad}} </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <form class="user" method="POST" action="/Route">
+
+                        <div class="modal-footer" style="margin-top:5%">
                             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                             <input type="submit" class="btn btn-primary" id="newRoute" name="newRoute" value="Go!">
                         </div>
+                        
+                    </form>
 
                 </div>
                 
             </div>
             </div>
         </div>
+
 
 
 

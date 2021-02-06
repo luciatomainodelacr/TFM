@@ -26,7 +26,24 @@
                                           <p> Name:       {{name}}     </p>
                                           <p> Last Name:  {{lastName}} </p>
                                           <p> E-mail:     {{email}}    </p>
-                                          <p> Type car:   {{typeCar}}  </p>
+                                          
+                                          <p> Type Car Brand                                              
+                                                <select class = 'form-select form-select-sm' id='mySelect'  aria-label="Default select example" style= "margin-left: 10% !important"> 
+                                                    <option selected>Choose one...</option>                                                  
+                                                    {% for brand in typeCar %}                            
+                                                      <option value={{brand}}> {{brand}} </option>
+                                                    {% endfor %}
+                                              </select>
+                                            </p>
+
+                                            <p> Type Car Model                                              
+                                                <select class = 'form-select form-select-sm' id='mySelect'  aria-label="Default select example" style= "margin-left: 10% !important"> 
+                                                    <option selected>Choose one...</option>                                                  
+                                                    {% for model in typeModel %}                            
+                                                      <option value={{model}}> {{model}} </option>
+                                                    {% endfor %}
+                                              </select>
+                                            </p>
                                       </div>
                           
                                     </form>

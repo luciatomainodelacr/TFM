@@ -7,7 +7,7 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required
-from .models import User_2, Route
+from .models import User, Route
 from . import db
 
 auth = Blueprint('auth', __name__)
@@ -28,7 +28,7 @@ def login_post():
     password = request.form.get('password')
     remember = True if request.form.get('remember') else False
 
-    user = User_2.query.filter_by(email=email).first()
+    user = User.query.filter_by(email=email).first()
 
     # check if the user actually exists
     # take the user-supplied password, hash it, and compare it to the hashed password in the database
@@ -39,6 +39,7 @@ def login_post():
     # if the above check passes, then we know the user has the right credentials
     login_user(user, remember=remember) 
     return redirect(url_for('main.index'))
+
 
 
 # 2.- Página signup ------------------------------------------------
@@ -58,14 +59,14 @@ def signup_post():
     lastName = request.form.get('lastName')
     typeCar  = request.form.get('typeCar')
 
-    user = User_2.query.filter_by(email=email).first() # if this returns a user, then the email already exists in database
+    user = User.query.filter_by(email=email).first() # if this returns a user, then the email already exists in database
 
     if user: # if a user is found, we want to redirect back to signup page so user can try again
         flash('Email address already exists')
         return redirect(url_for('auth.signup'))
 
     # create a new user with the form data. Hash the password so the plaintext version isn't saved.
-    new_user = User_2(email=email, name=name, password=generate_password_hash(password, method='sha256'), lastName=lastName, typeCar=typeCar)
+    new_user = User(email=email, name=name, password=generate_password_hash(password, method='sha256'), lastName=lastName, typeCar=typeCar)
 
     # add the new user to the database
     db.session.add(new_user)
@@ -81,23 +82,4 @@ def signup_post():
 @auth.route('/logout')
 def logout():
     return 'Logout'
-
-
-# 3. Pagina profile  ------------------------------------------------
-#------------------------------------------------------------------
-@auth.route('/profile')
-def profile():
-    return render_template('profile.html')
-
-@auth.route('/profile', methods=['GET'])
-def profile_get():
-
-    email    = request.form.get('email')
-    name     = request.form.get('name')
-    last_name = request.form.get('last_name')
-
-    user = User_2.query.filter_by(email=email).first() # if this returns a user, then the email already exists in database
-
-    return redirect(url_for('profile'),name=current_user.name, email=current_user.email, last_name=current_user.last_name)
-
 
