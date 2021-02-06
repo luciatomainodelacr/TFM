@@ -212,7 +212,8 @@ svg {
 }
 
 table {
-  border-collapse: collapse;
+  width: 50%;
+	height: 300px;
 }
 
 caption {
