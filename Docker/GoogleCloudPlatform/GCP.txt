@@ -72,6 +72,12 @@ cd TFM/Docker/
 5) Copiar la carpeta de ElectricRoute dentro de la de Docker
 cp -r ../ElectricRoute/flask_auth_app/project app/.
 
+mkdir app/project/BE/
+cp -r ../Python/calcular_caminos_entre_puntos.py app/project/BE/.
+cp -r ../Python/Modelo app/project/BE/.
+cp -r ../Python/Output app/project/BE/.
+
+Modificar el script main.py y la llamada a la db
 6) Levantar los dockers con docker-compose
 docker network create monitoring
 docker volume create --name=grafana-data
