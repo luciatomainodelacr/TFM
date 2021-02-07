@@ -16,7 +16,7 @@ Modelo de autenticación. Tres páginas:
 
 
 # Se cargan las librerias
-from flask import Blueprint, render_template, redirect, url_for, request, flash
+from flask import Blueprint, render_template, redirect, url_for, request, flash, session, g
 from flask_login import login_required, current_user
 #from .models import User, Route, ciudades, ElectricCar
 from .BE.calcular_caminos_entre_puntos import main_route
@@ -27,6 +27,12 @@ from . import db
 main = Blueprint('main', __name__)
 # bp = Blueprint('errors', __name__)
 
+
+@main.before_request
+def before_request():
+   g.email = None
+   if 'email' in session:
+       g.email = session['email']
 
 # 1.- Páginas de error ----------------------------------------
 #-----------------------------------------------------------------
@@ -45,9 +51,12 @@ def page_not_found():
 #------------------------------------------------------------------
 
 @main.route('/index')
-@login_required
 def index():
-    return render_template('index.html', name="hola")
+    if g.email:
+        email = session['email']
+        return render_template('index.html', name=email)
+    else:
+        return render_template('login.html')
 
 
 
@@ -55,74 +64,96 @@ def index():
 #------------------------------------------------------------------
 
 @main.route('/Route')
-#@login_required
 def route():
 
-    cur = db.connection.cursor()
-    cur.execute('''SELECT * FROM Ciudades''')
-    ciudades_list = list(cur.fetchall())
-    lista_destino = []
+    email    = session['email']
+    name    = session['username']
 
-    for ciudad in ciudades_list:
-        lista_destino.append(ciudad[0])
+    if g.email:
+    
+        cur = db.connection.cursor()
+        cur.execute('''SELECT * FROM Ciudades''')
+        ciudades_list = cur.fetchall()
+        lista_destino = []
 
-    return render_template('route.html', name = "hola", ciudades = lista_destino)
+        for ciudad in ciudades_list:
+            lista_destino.append(ciudad[0])
+            
+        return render_template('route.html', name = name, ciudades = lista_destino)
+
+    else:
+        return render_template('login.html')
 
 
 
-@main.route('/Route', methods=['POST'])
-@login_required
+@main.route('/Route', methods=['GET', 'POST'])
 def route_post():
 
-    cur = db.connection.cursor()
-    cur.execute('''SELECT * FROM Ciudades''')
-    ciudades_list = list(cur.fetchall())
-    ciudades_dict = {}
+    email    = session['email']
+    name     = session['username']
+    brandCar = session['brandCar']
+    modelCar = session['modelCar']
 
-    for ciudad in ciudades_dict:
+    if g.email:
+
+        cur = db.connection.cursor()
+        cur.execute('''SELECT * FROM Ciudades''')
+        ciudades_list = cur.fetchall()
+        lista_destino = []
+
+        for ciudad in ciudades_list:
+            lista_destino.append(ciudad[0])
+            
+        ciudad_origen = request.form.get('mySelectOrigin')
+        ciudad_destino = request.form.get('mySelectDest')
+
+       
+
+        return render_template('route.html', name = name, ciudades = lista_destino)
+
+    else:
+        return render_template('login.html')
     
 
-        ciudades_dict = {
 
-            "provincia"   : ciudad(1),
-            "Direccion"   : ciudad(2),
-            "Latitud"     : ciudad(3),
-            "Longitud"    : ciudad(4),
-            "Coordenadas" : ciudad(5)
-        }       
 
-    return render_template('route.html', name=current_user.name, ciudades_dict = ciudades_dict)
 
-    
+
 
 # 4.- Página Rutas Frecuentes -------------------------------------
 #------------------------------------------------------------------
 
 @main.route('/frequentroutes')
-@login_required
 def frequentroutes():
 
-    var_email = current_user.email
-
-    rutas_list = Route.query.filter_by(email=current_user.email).order_by("dateSearch")[::-1][0:3]
-
-    dict_rutas = []
-    list_rutas = ["From", "To", "Type Car", "Load of the car", "Load"]
-
-    for ruta in rutas_list:
+    if g.email:
         
-        dict_rutas.append({
-            "From" : ruta.from_ub,
-            "To" : ruta.to_ub,
-            "Type Car" : ruta.typeCar,
-            "Load of the car" : ruta.typeLoad
-        })   
+        cur = db.connection.cursor()
+        cur.execute('''SELECT * FROM Routes where email: %s order by dateSearch desc limit 3''')
+        rutas_list = cur.fetchall()
+        
+        dict_rutas = []
+        ist_rutas = ["From", "To", "Type Car", "Load of the car", "Load"]
 
-    return render_template('frequentroutes.html', email=current_user.email, dict_rutas=dict_rutas, list_rutas=list_rutas)
+        for ruta in rutas_list:
+            
+            dict_rutas.append({
+                "From" : ruta.from_ub,
+                "To" : ruta.to_ub,
+                "Type Car" : ruta.typeCar,
+                "Load of the car" : ruta.typeLoad
+        })
+        
+        return render_template('frequentroutes.html', email=current_user.email, dict_rutas=dict_rutas, list_rutas=list_rutas)
+    
+    else:
+        return render_template('login.html')
+    
+
+    
 
 
 @main.route('/delete')
-@login_required
 def delete():
     return render_template('delete.html', name=current_user.name)
 
@@ -133,7 +164,6 @@ def delete():
 #------------------------------------------------------------------
 
 @main.route('/profile2')
-@login_required
 def profile2():
 
     car_list = ElectricCar.query.all()

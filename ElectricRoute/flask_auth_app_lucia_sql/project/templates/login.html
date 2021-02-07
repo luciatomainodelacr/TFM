@@ -24,7 +24,7 @@
                           <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                         </div>
 
-                        <!--Mensaje de error -->
+                        
                         {% with messages = get_flashed_messages() %}
                         {% if messages %}
                             <div class="notification is-danger"  style='color:red; margin-bottom: 2%'>
@@ -33,6 +33,7 @@
                         {% endif %}
                         {% endwith %}
                         
+
                         <form class="user" method="POST" action="/login">
                       
                             <!-- Enter Email Address -->
@@ -55,7 +56,7 @@
 
                             <!-- Login -->
                             <div class="form-group">
-                                <input type="submit" class="btn btn-primary btn-user btn-block" id="send-signup" name="signup" value="Login">
+                                <input type="submit" class="btn btn-primary btn-user btn-block" id="send-login" name="login" value="Login">
                             </div>
                           
                           
