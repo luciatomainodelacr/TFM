@@ -64,7 +64,6 @@ Se añaden tres carpetas correspondientes a cada uno de los módulos:
 	2) Restricciones.py: funciones auxiliares para el cálculo de las restricciones 
 	3) Tiempos.py: funciones auxiliares para el cálculo de los tiempos y otros (como la autonomía real de los coches)
 
-	- Pruebas_Blanca: carpeta que contiene script y dataset que se estan utilizando para construir procesos pero todavía no estan finalizados.
 
 - __Output__
 

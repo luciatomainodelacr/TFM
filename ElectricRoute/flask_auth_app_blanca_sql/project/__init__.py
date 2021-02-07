@@ -26,38 +26,43 @@ Ejemplo:
 
 # Se cargan las librerias
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_mysqldb import MySQL
+import mysql.connector
+import MySQLdb.cursors 
 
 
-# Se inicializa SQLAlchemy
-#db = SQLAlchemy()
+app = Flask(__name__)
 
+
+# Se inicializa la db
 db = MySQL()
-
 
 # Se crea la app
 def create_app():
-    
+
     app = Flask(__name__)
 
-    app.config['MYSQL_HOST'] = 'localhost' 
-    app.config['MYSQL_PORT'] = '3306'
+    app.config['MYSQL_HOST'] = '127.0.0.1'
     app.config['MYSQL_USER'] = 'root'
     app.config['MYSQL_PASSWORD'] = 'root'
     app.config['MYSQL_DB'] = 'tfm'
+    app.config['MYSQL_DATABASE_PORT'] = '3306'
 
+    
     app.secret_key = "123456789"
 
+    db.init_app(app)
 
-    db = MySQL(app)
+    login_manager = LoginManager()
+    login_manager.login_view = 'auth.login'
+    login_manager.init_app(app)
 
+
+    from .auth import auth as auth_blueprint
+    app.register_blueprint(auth_blueprint)
 
     # blueprint for non-auth parts of app
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
-
-    return app
-
-
+    
