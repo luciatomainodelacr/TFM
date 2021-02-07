@@ -1,0 +1,126 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 4,
+  "links": [],
+  "panels": [
+    {
+      "circleMaxSize": "1",
+      "circleMinSize": "0",
+      "colors": [
+        "rgba(245, 54, 54, 0.9)",
+        "#FADE2A",
+        "rgba(50, 172, 45, 0.97)",
+        "#5794F2"
+      ],
+      "datasource": "TFM",
+      "decimals": 0,
+      "description": "",
+      "esMetric": "Count",
+      "fieldConfig": {
+        "defaults": {
+          "color": {},
+          "custom": {},
+          "thresholds": {
+            "mode": "absolute",
+            "steps": []
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 17,
+        "w": 9,
+        "x": 0,
+        "y": 0
+      },
+      "hideEmpty": false,
+      "hideZero": false,
+      "id": 2,
+      "initialZoom": "6",
+      "locationData": "table",
+      "mapCenter": "custom",
+      "mapCenterLatitude": "40",
+      "mapCenterLongitude": "-4",
+      "maxDataPoints": 1,
+      "mouseWheelZoom": false,
+      "pluginVersion": "7.4.0",
+      "showLegend": true,
+      "stickyLabels": false,
+      "tableQueryOptions": {
+        "geohashField": "geohash",
+        "labelField": "id",
+        "latitudeField": "latitude",
+        "longitudeField": "longitude",
+        "metricField": "metric",
+        "queryType": "coordinates"
+      },
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "queryType": "randomWalk",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  id AS indice,\n  latitude AS latitude,\n  longitude AS longitude,\n  num_connectors AS metric\nFROM PuntosCarga",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "scenario_id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "Output",
+          "timeColumn": "timestamp",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": "1,2,3",
+      "title": "Número de conectores",
+      "type": "grafana-worldmap-panel",
+      "unitPlural": "",
+      "unitSingle": "",
+      "valueName": "current"
+    }
+  ],
+  "schemaVersion": 27,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Puntos de Recarga",
+  "uid": "2HzFXkEMk",
+  "version": 5
+}
