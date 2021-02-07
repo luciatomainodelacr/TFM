@@ -1,0 +1,142 @@
+[2021-02-07 14:08:14,860] [INFO    ][OK] Llamada al script calcular_caminos_entre_puntos.py [OK]
+[2021-02-07 14:08:14,860] [INFO    ]El programa lanzado es: ALL VOLKSWAGEN ID3 PURE Alicante Tren A Corunia Bus 90 10  INFO /home/tfm/Documentos/TFM/ElectricRoute/flask_auth_app_lucia_sql/logs/
+[2021-02-07 14:08:14,860] [INFO    ]1.- Carga de inputs desde Base de Datos
+[2021-02-07 14:08:14,861] [INFO    ]Crear conexion a DB
+[2021-02-07 14:08:14,868] [INFO    ]Query a PuntosCarga
+[2021-02-07 14:08:14,889] [INFO    ]Query a GasolinerasPropuesta
+[2021-02-07 14:08:14,919] [INFO    ]Query a Ciudades
+[2021-02-07 14:08:14,935] [INFO    ]Query a ElectriCar
+[2021-02-07 14:08:14,940] [INFO    ]Query a Matriz_distancia_haversine
+[2021-02-07 14:08:16,111] [INFO    ]Query a Matriz_distancia_haversine completo
+[2021-02-07 14:08:18,895] [INFO    ]Cerrar conexion con DB
+[2021-02-07 14:08:18,895] [INFO    ]2.- Aplicar las restricciones
+[2021-02-07 14:08:18,896] [INFO    ]a) Si no se especifica tipo de conector, no se aplica restriccion
+[2021-02-07 14:08:18,896] [INFO    ]b) Restriccion de primera parada
+[2021-02-07 14:08:18,942] [INFO    ]c) Restriccion de ultima parada
+[2021-02-07 14:08:18,980] [INFO    ]Se genera el dataframe reducido que cumple con todas las restricciones
+[2021-02-07 14:08:19,327] [INFO    ]df_distancias (105731, 3)
+[2021-02-07 14:08:19,329] [INFO    ]df_distancias_reduced (105697, 5)
+[2021-02-07 14:08:19,330] [INFO    ]3.- Calcular tiempos (de recorrido y parada)
+[2021-02-07 14:08:19,330] [INFO    ]a) Tiempo de recorrido
+[2021-02-07 14:08:19,335] [INFO    ]b) Tiempo de parada
+[2021-02-07 14:08:19,335] [INFO    ]Filtro las distancias menores o iguales de 50 km entre las CIUDADES IMPORTANTES y el resto de coordenadas
+[2021-02-07 14:08:21,841] [INFO    ]Calculo tiempo de parada para puntos de recarga
+[2021-02-07 14:08:21,980] [INFO    ]Se genera el dataframe reducido con columna basada en Suma_time_parada_h
+[2021-02-07 14:08:22,031] [INFO    ]4.- Construir el grafo
+[2021-02-07 14:08:39,606] [INFO    ]5.- Calculo rutas optimas
+[2021-02-07 14:08:39,805] [INFO    ]La ruta optima es: ['Alicante Tren', 'punto_recarga_241', 'punto_recarga_322', 'punto_recarga_264', 'punto_recarga_184', 'A Corunia Bus']
+[2021-02-07 14:08:39,849] [INFO    ]Tiempo de parada en Alicante Tren es 0.0 h
+[2021-02-07 14:08:39,849] [INFO    ]Tiempo total del tramo Alicante Tren - punto_recarga_241 es 1.2850098053849321 h
+[2021-02-07 14:08:39,890] [INFO    ]Tiempo de parada en punto_recarga_241 es 1.011090909090909 h
+[2021-02-07 14:08:39,891] [INFO    ]Tiempo total del tramo punto_recarga_241 - punto_recarga_322 es 3.0380581526102346 h
+[2021-02-07 14:08:39,934] [INFO    ]Tiempo de parada en punto_recarga_322 es 0.4904449054863993 h
+[2021-02-07 14:08:39,934] [INFO    ]Tiempo total del tramo punto_recarga_322 - punto_recarga_264 es 2.3117024700730227 h
+[2021-02-07 14:08:39,975] [INFO    ]Tiempo de parada en punto_recarga_264 es 1.1224242424242423 h
+[2021-02-07 14:08:39,975] [INFO    ]Tiempo total del tramo punto_recarga_264 - punto_recarga_184 es 3.1242250195541867 h
+[2021-02-07 14:08:40,015] [INFO    ]Tiempo de parada en punto_recarga_184 es 0.472979797979798 h
+[2021-02-07 14:08:40,015] [INFO    ]Tiempo total del tramo punto_recarga_184 - A Corunia Bus es 2.083683327993616 h
+[2021-02-07 14:08:40,015] [INFO    ]El tiempo total tardado es: 11.84267877561599 h
+[2021-02-07 14:08:40,219] [INFO    ]6.- Carga de outputs a Base de Datos
+[2021-02-07 14:08:40,219] [INFO    ]Crear conexion a DB
+[2021-02-07 14:08:40,227] [INFO    ]Query a Output
+[2021-02-07 14:08:40,258] [INFO    ]1 registros insertados.
+[2021-02-07 14:08:40,259] [INFO    ]Cerrar conexion con DB
+[2021-02-07 14:08:40,259] [INFO    ][OK] Final del script calcular_caminos_entre_puntos.py [OK]
+[2021-02-07 14:08:40,323] [INFO    ]127.0.0.1 - - [07/Feb/2021 14:08:40] "[37mGET /ruta_test HTTP/1.1[0m" 200 -
+[2021-02-07 14:08:40,448] [INFO    ]127.0.0.1 - - [07/Feb/2021 14:08:40] "[37mGET /static/dist/leaflet-routing-machine.css HTTP/1.1[0m" 200 -
+[2021-02-07 14:08:40,616] [INFO    ]127.0.0.1 - - [07/Feb/2021 14:08:40] "[33mGET /docs/images/favicon.ico HTTP/1.1[0m" 404 -
+[2021-02-07 14:08:45,689] [INFO    ]127.0.0.1 - - [07/Feb/2021 14:08:45] "[35m[1mGET /Route HTTP/1.1[0m" 500 -
+[2021-02-07 14:08:45,759] [INFO    ]127.0.0.1 - - [07/Feb/2021 14:08:45] "[37mGET /Route?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 200 -
+[2021-02-07 14:08:45,765] [INFO    ]127.0.0.1 - - [07/Feb/2021 14:08:45] "[37mGET /Route?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1[0m" 200 -
+[2021-02-07 14:08:45,767] [INFO    ]127.0.0.1 - - [07/Feb/2021 14:08:45] "[37mGET /Route?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 200 -
+[2021-02-07 14:08:45,880] [INFO    ]127.0.0.1 - - [07/Feb/2021 14:08:45] "[37mGET /Route?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 200 -
+[2021-02-07 14:51:34,599] [INFO    ][OK] Llamada al script calcular_caminos_entre_puntos.py [OK]
+[2021-02-07 14:51:34,600] [INFO    ]El programa lanzado es: ALL VOLKSWAGEN ID3 PURE Alicante Tren A Corunia Bus 90 10  INFO /home/tfm/Documentos/TFM/ElectricRoute/flask_auth_app_lucia_sql/logs/
+[2021-02-07 14:51:34,600] [INFO    ]1.- Carga de inputs desde Base de Datos
+[2021-02-07 14:51:34,600] [INFO    ]Crear conexion a DB
+[2021-02-07 14:51:34,648] [INFO    ]Query a PuntosCarga
+[2021-02-07 14:51:34,663] [INFO    ]Query a GasolinerasPropuesta
+[2021-02-07 14:51:34,672] [INFO    ]Query a Ciudades
+[2021-02-07 14:51:34,680] [INFO    ]Query a ElectriCar
+[2021-02-07 14:51:34,686] [INFO    ]Query a Matriz_distancia_haversine
+[2021-02-07 14:51:35,960] [INFO    ]Query a Matriz_distancia_haversine completo
+[2021-02-07 14:51:38,608] [INFO    ]Cerrar conexion con DB
+[2021-02-07 14:51:38,609] [INFO    ]2.- Aplicar las restricciones
+[2021-02-07 14:51:38,609] [INFO    ]a) Si no se especifica tipo de conector, no se aplica restriccion
+[2021-02-07 14:51:38,609] [INFO    ]b) Restriccion de primera parada
+[2021-02-07 14:51:38,648] [INFO    ]c) Restriccion de ultima parada
+[2021-02-07 14:51:38,686] [INFO    ]Se genera el dataframe reducido que cumple con todas las restricciones
+[2021-02-07 14:51:38,990] [INFO    ]df_distancias (105731, 3)
+[2021-02-07 14:51:38,992] [INFO    ]df_distancias_reduced (105697, 5)
+[2021-02-07 14:51:38,993] [INFO    ]3.- Calcular tiempos (de recorrido y parada)
+[2021-02-07 14:51:38,993] [INFO    ]a) Tiempo de recorrido
+[2021-02-07 14:51:38,996] [INFO    ]b) Tiempo de parada
+[2021-02-07 14:51:38,996] [INFO    ]Filtro las distancias menores o iguales de 50 km entre las CIUDADES IMPORTANTES y el resto de coordenadas
+[2021-02-07 14:51:41,462] [INFO    ]Calculo tiempo de parada para puntos de recarga
+[2021-02-07 14:51:41,573] [INFO    ]Se genera el dataframe reducido con columna basada en Suma_time_parada_h
+[2021-02-07 14:51:41,625] [INFO    ]4.- Construir el grafo
+[2021-02-07 14:51:59,108] [INFO    ]5.- Calculo rutas optimas
+[2021-02-07 14:51:59,309] [INFO    ]La ruta optima es: ['Alicante Tren', 'punto_recarga_241', 'punto_recarga_322', 'punto_recarga_264', 'punto_recarga_296', 'A Corunia Bus']
+[2021-02-07 14:51:59,351] [INFO    ]Tiempo de parada en Alicante Tren es 0.0 h
+[2021-02-07 14:51:59,351] [INFO    ]Tiempo total del tramo Alicante Tren - punto_recarga_241 es 1.2850098053849321 h
+[2021-02-07 14:51:59,389] [INFO    ]Tiempo de parada en punto_recarga_241 es 1.1686666666666667 h
+[2021-02-07 14:51:59,389] [INFO    ]Tiempo total del tramo punto_recarga_241 - punto_recarga_322 es 3.1956339101859923 h
+[2021-02-07 14:51:59,430] [INFO    ]Tiempo de parada en punto_recarga_322 es 0.4904449054863993 h
+[2021-02-07 14:51:59,430] [INFO    ]Tiempo total del tramo punto_recarga_322 - punto_recarga_264 es 2.3117024700730227 h
+[2021-02-07 14:51:59,471] [INFO    ]Tiempo de parada en punto_recarga_264 es 1.1224242424242423 h
+[2021-02-07 14:51:59,471] [INFO    ]Tiempo total del tramo punto_recarga_264 - punto_recarga_296 es 3.0617279028158535 h
+[2021-02-07 14:51:59,511] [INFO    ]Tiempo de parada en punto_recarga_296 es 0.472979797979798 h
+[2021-02-07 14:51:59,511] [INFO    ]Tiempo total del tramo punto_recarga_296 - A Corunia Bus es 2.09434111354885 h
+[2021-02-07 14:51:59,511] [INFO    ]El tiempo total tardado es: 11.94841520200865 h
+[2021-02-07 14:51:59,711] [INFO    ]6.- Carga de outputs a Base de Datos
+[2021-02-07 14:51:59,711] [INFO    ]Crear conexion a DB
+[2021-02-07 14:51:59,727] [INFO    ]Query a Output
+[2021-02-07 14:51:59,755] [INFO    ]1 registros insertados.
+[2021-02-07 14:51:59,756] [INFO    ]Cerrar conexion con DB
+[2021-02-07 14:51:59,756] [INFO    ][OK] Final del script calcular_caminos_entre_puntos.py [OK]
+[2021-02-07 14:51:59,810] [INFO    ]127.0.0.1 - - [07/Feb/2021 14:51:59] "[37mGET /ruta_test HTTP/1.1[0m" 200 -
+[2021-02-07 16:49:04,165] [INFO    ][OK] Llamada al script calcular_caminos_entre_puntos.py [OK]
+[2021-02-07 16:49:04,170] [INFO    ]El programa lanzado es: ALL VOLKSWAGEN ID3 PURE Alicante Tren A Corunia Bus 90 10  INFO /home/tfm/Documentos/TFM/ElectricRoute/flask_auth_app_lucia_sql/logs/
+[2021-02-07 16:49:04,171] [INFO    ]1.- Carga de inputs desde Base de Datos
+[2021-02-07 16:49:04,171] [INFO    ]Crear conexion a DB
+[2021-02-07 16:49:04,209] [INFO    ]Query a PuntosCarga
+[2021-02-07 16:49:04,234] [INFO    ]Query a GasolinerasPropuesta
+[2021-02-07 16:49:04,253] [INFO    ]Query a Ciudades
+[2021-02-07 16:49:04,262] [INFO    ]Query a ElectriCar
+[2021-02-07 16:49:04,267] [INFO    ]Query a Matriz_distancia_haversine
+[2021-02-07 16:49:05,515] [INFO    ]Query a Matriz_distancia_haversine completo
+[2021-02-07 16:49:08,140] [INFO    ]Cerrar conexion con DB
+[2021-02-07 16:49:08,141] [INFO    ]2.- Aplicar las restricciones
+[2021-02-07 16:49:08,141] [INFO    ]a) Si no se especifica tipo de conector, no se aplica restriccion
+[2021-02-07 16:49:08,141] [INFO    ]b) Restriccion de primera parada
+[2021-02-07 16:49:08,180] [INFO    ]c) Restriccion de ultima parada
+[2021-02-07 16:49:08,220] [INFO    ]Se genera el dataframe reducido que cumple con todas las restricciones
+[2021-02-07 16:49:08,553] [INFO    ]df_distancias (105731, 3)
+[2021-02-07 16:49:08,555] [INFO    ]df_distancias_reduced (105697, 5)
+[2021-02-07 16:49:08,555] [INFO    ]3.- Calcular tiempos (de recorrido y parada)
+[2021-02-07 16:49:08,555] [INFO    ]a) Tiempo de recorrido
+[2021-02-07 16:49:08,560] [INFO    ]b) Tiempo de parada
+[2021-02-07 16:49:08,560] [INFO    ]Filtro las distancias menores o iguales de 50 km entre las CIUDADES IMPORTANTES y el resto de coordenadas
+[2021-02-07 16:49:11,217] [INFO    ]Calculo tiempo de parada para puntos de recarga
+[2021-02-07 16:49:11,345] [INFO    ]Se genera el dataframe reducido con columna basada en Suma_time_parada_h
+[2021-02-07 16:49:11,403] [INFO    ]4.- Construir el grafo
+[2021-02-07 16:49:33,232] [INFO    ]5.- Calculo rutas optimas
+[2021-02-07 16:49:33,451] [INFO    ]La ruta optima es: ['Alicante Tren', 'punto_recarga_92', 'punto_recarga_68', 'punto_recarga_259', 'punto_recarga_282', 'A Corunia Bus']
+[2021-02-07 16:49:33,496] [INFO    ]Tiempo de parada en Alicante Tren es 0.0 h
+[2021-02-07 16:49:33,496] [INFO    ]Tiempo total del tramo Alicante Tren - punto_recarga_92 es 1.1940547344082093 h
+[2021-02-07 16:49:33,537] [INFO    ]Tiempo de parada en punto_recarga_92 es 0.472979797979798 h
+[2021-02-07 16:49:33,538] [INFO    ]Tiempo total del tramo punto_recarga_92 - punto_recarga_68 es 2.4953914981468013 h
+[2021-02-07 16:49:33,580] [INFO    ]Tiempo de parada en punto_recarga_68 es 0.472979797979798 h
+[2021-02-07 16:49:33,581] [INFO    ]Tiempo total del tramo punto_recarga_68 - punto_recarga_259 es 2.657647453631407 h
+[2021-02-07 16:49:33,624] [INFO    ]Tiempo de parada en punto_recarga_259 es 0.472979797979798 h
+[2021-02-07 16:49:33,624] [INFO    ]Tiempo total del tramo punto_recarga_259 - punto_recarga_282 es 2.6794833511800187 h
+[2021-02-07 16:49:33,670] [INFO    ]Tiempo de parada en punto_recarga_282 es 1.011090909090909 h
+[2021-02-07 16:49:33,670] [INFO    ]Tiempo total del tramo punto_recarga_282 - A Corunia Bus es 2.6242619351819103 h
+[2021-02-07 16:49:33,670] [INFO    ]El tiempo total tardado es: 11.650838972548346 h
+[2021-02-07 16:49:33,907] [INFO    ]6.- Carga de outputs a Base de Datos
+[2021-02-07 16:49:33,907] [INFO    ]Crear conexion a DB
+[2021-02-07 16:49:33,925] [INFO    ]Query a Output
+[2021-02-07 16:49:33,935] [INFO    ]1 registros insertados.
+[2021-02-07 16:49:33,937] [INFO    ]Cerrar conexion con DB
+[2021-02-07 16:49:33,940] [INFO    ][OK] Final del script calcular_caminos_entre_puntos.py [OK]
+[2021-02-07 16:49:34,033] [INFO    ]127.0.0.1 - - [07/Feb/2021 16:49:34] "[37mGET /ruta_test HTTP/1.1[0m" 200 -

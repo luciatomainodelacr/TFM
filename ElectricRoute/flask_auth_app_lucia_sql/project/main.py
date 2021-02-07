@@ -1,0 +1,162 @@
+# =============================================================================
+#  Modelo principal: main.py
+# =============================================================================
+
+"""
+Dos páginas:
+- index: página principal (/)
+- profile: página de perfil para cuando se inicie sesión (/Profile)
+
+Modelo de autenticación. Tres páginas:
+- login: página de inicio de sesión (/login)
+- sign-up: página de registro (/sign-up)
+- logout: ruta para cerrar la sesión de un usuario activo
+
+"""
+
+
+# Se cargan las librerias
+from flask import Blueprint, render_template, redirect, url_for, request, flash
+from flask_login import login_required, current_user
+#from .models import User, Route, ciudades, ElectricCar
+from .BE.calcular_caminos_entre_puntos import main_route
+from .BE.Output import BaseDatos
+from . import db
+
+
+main = Blueprint('main', __name__)
+# bp = Blueprint('errors', __name__)
+
+
+# 1.- Páginas de error ----------------------------------------
+#-----------------------------------------------------------------
+
+@main.route('/page_not_found')
+def page_not_found():
+    return render_template('404.html')
+
+# @bp.app_errorhandler(404)
+# def handle_404(err):
+#    return render_template('404.html'), 404
+
+
+
+# 2.- Página index ------------------------------------------------
+#------------------------------------------------------------------
+
+@main.route('/index')
+@login_required
+def index():
+    return render_template('index.html', name="hola")
+
+
+
+# 3.- Página ruta (mapa) ------------------------------------------
+#------------------------------------------------------------------
+
+@main.route('/Route')
+#@login_required
+def route():
+
+    cur = db.connection.cursor()
+    cur.execute('''SELECT * FROM Ciudades''')
+    ciudades_list = list(cur.fetchall())
+    lista_destino = []
+
+    for ciudad in ciudades_list:
+        lista_destino.append(ciudad[0])
+
+    return render_template('route.html', name = "hola", ciudades = lista_destino)
+
+
+
+@main.route('/Route', methods=['POST'])
+@login_required
+def route_post():
+
+    cur = db.connection.cursor()
+    cur.execute('''SELECT * FROM Ciudades''')
+    ciudades_list = list(cur.fetchall())
+    ciudades_dict = {}
+
+    for ciudad in ciudades_dict:
+    
+
+        ciudades_dict = {
+
+            "provincia"   : ciudad(1),
+            "Direccion"   : ciudad(2),
+            "Latitud"     : ciudad(3),
+            "Longitud"    : ciudad(4),
+            "Coordenadas" : ciudad(5)
+        }       
+
+    return render_template('route.html', name=current_user.name, ciudades_dict = ciudades_dict)
+
+    
+
+# 4.- Página Rutas Frecuentes -------------------------------------
+#------------------------------------------------------------------
+
+@main.route('/frequentroutes')
+@login_required
+def frequentroutes():
+
+    var_email = current_user.email
+
+    rutas_list = Route.query.filter_by(email=current_user.email).order_by("dateSearch")[::-1][0:3]
+
+    dict_rutas = []
+    list_rutas = ["From", "To", "Type Car", "Load of the car", "Load"]
+
+    for ruta in rutas_list:
+        
+        dict_rutas.append({
+            "From" : ruta.from_ub,
+            "To" : ruta.to_ub,
+            "Type Car" : ruta.typeCar,
+            "Load of the car" : ruta.typeLoad
+        })   
+
+    return render_template('frequentroutes.html', email=current_user.email, dict_rutas=dict_rutas, list_rutas=list_rutas)
+
+
+@main.route('/delete')
+@login_required
+def delete():
+    return render_template('delete.html', name=current_user.name)
+
+
+
+
+# 6- Página profile -----------------------------------------------
+#------------------------------------------------------------------
+
+@main.route('/profile2')
+@login_required
+def profile2():
+
+    car_list = ElectricCar.query.all()
+    list_typeCar = []
+    list_model = []
+
+    for car in car_list:
+        list_typeCar.append(car.brand)
+        list_model.append(car.model)
+        
+    return render_template('profile2.html', email = current_user.email, name = current_user.name, lastName = current_user.lastName, typeCar = list_typeCar, typeModel = list_model)
+
+
+
+@main.route('/ruta_test')
+def ruta_test():
+
+    ruta = main_route(tipo_programa = "ALL",
+            marca_coche = "VOLKSWAGEN",
+            modelo_coche = "ID3 PURE",
+            origen = "Alicante Tren",
+            destino = "A Corunia Bus"
+    )
+
+    return render_template('ruta_test.html', ruta=ruta)
+
