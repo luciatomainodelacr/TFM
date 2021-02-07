@@ -117,7 +117,7 @@ def main_route(tipo_programa,
         if use_docker:
             db_host = "db"
         else:
-            db_host = "localhost"
+            db_host = "0.0.0.0"
         bd = BaseDatos.BaseDatos(host=db_host,
                                  puerto=3306,            
                                  usuario="root",            
