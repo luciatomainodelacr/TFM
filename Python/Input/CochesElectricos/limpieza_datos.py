@@ -201,10 +201,30 @@ df["PLUGTYPE"] = df["PLUGTYPE"].replace({'TYPE 1 CHADEMO':'TYPE1,CHADEMO'})
 
 df.PLUGTYPE.values[0][1] # acceder a cada elemento de la lista
 
-# Funcion para convertir un string separado por comas en elementos de una lista
 def convertir(string):
-    li = list(string.split(","))
-    return li
+     """
+    Definicion de la funcion convertir:
+        
+        Funcion para convertir un string separado por comas
+        en elementos de una lista
+
+    Parametros
+    ----------
+    string:                   string
+        String que contiene la palabra que tiene que convertirse
+        en una lista
+    
+    Returns
+    ------
+    li:                       string
+        String que contiene la palabra separada por comas
+    
+    Ejemplo
+    -------
+    >>> df.PLUGTYPE = list(map(convertir, df.PLUGTYPE.values.tolist()))
+    """
+     li = list(string.split(","))
+     return li
 
 # Mapeamos cada elemento de la columna aplicando la funcion convertir
 df.PLUGTYPE = list(map(convertir, df.PLUGTYPE.values.tolist()))
