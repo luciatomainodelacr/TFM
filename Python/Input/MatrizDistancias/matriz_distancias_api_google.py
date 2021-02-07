@@ -106,13 +106,30 @@ df.drop_duplicates()
 
 # Funcion Pairwise
 def pairwise(iterable):
+     """
+    Definicion de la funcion pairwise:
+        
+        Funcion para construir iteraciones entre dos filas
+        consecutivas 
 
-    """"
-    Construye iteraciones entre dos filas consecutivas)
+    Parametros
+    ----------
+    iterable:                 iterable
+        Iterador que recorre las filas de un Dataframe
+    
+    Returns
+    ------
+    zip(a, b):                tuple
+        Tupla con clave, valor del Dataframe sobre el que 
+        se itera
+    
+    Ejemplo
+    -------
+    >>> for (i1, row1), (i2, row2) in pairwise(df.iterrows())
     """
-    a, b = tee(iterable)
-    next(b, None)
-    return zip(a, b)
+     a, b = tee(iterable)
+     next(b, None)
+     return zip(a, b)
 
 
 

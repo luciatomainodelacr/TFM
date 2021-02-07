@@ -58,23 +58,56 @@ df = df[["id", "latitude", "longitude"]]
 #------------------------------------------------------------------
 
 def tomtom_category_search_request(api_key, category, id_pto, lat_pto, long_pto):
+     """
+    Definicion de la funcion tomtom_category_search_request:
+        
+        Funcion para obtener los datos de los puntos de recarga
+        de la api de Tomtom
+
+    Parametros
+    ----------
+    api_key:                     string
+        String que contiene la clave de la API de Tomtom
+        
+    category:                    string
+        String que contiene la categoría a buscar en Tomtom
     
-    # Se define la url para cada par (lat, long)
-    url = """
+    id_pto:                      string
+        String que contiene el id del punto de recarga
+    
+    lat_pto:                     float
+        Float con la longitud del punto de recarga
+    
+    long_pto:                    float
+        Float con la longitud  del punto de recarga
+    
+    Returns
+    ------
+    poi_data:                 dictionary
+        Diccionario que contiene las datos de los puntos de recarga
+    
+    Ejemplo
+    -------
+    >>> df["poi_data"]  = df.apply(lambda a: tomtom_category_search_request
+    (api_key, category, a["id"], a["latitude"], a["longitude"]), axis = 1)
+    """
+    
+     # Se define la url para cada par (lat, long)
+     url = """
             https://api.tomtom.com/search/2/categorySearch/{category}.json?key={api_key}&countrySet=ES&lat={lat_pto}&lon={long_pto}
           """.format(category=category, api_key=api_key, lat_pto= lat_pto, long_pto= long_pto)
     
 
-    # Se extrae la información del fichero json
-    response = requests.get(url)
-    data = response.json()
+     # Se extrae la información del fichero json
+     response = requests.get(url)
+     data = response.json()
    
-    number_pois = len(data["results"])
-    poi_data = {}
+     number_pois = len(data["results"])
+     poi_data = {}
 
 
-    # Se extrae información necesaria
-    for result in data["results"]:
+     # Se extrae información necesaria
+     for result in data["results"]:
         name = result["poi"]["name"] if "name" in result["poi"] else None
 
         # Campos adress
@@ -101,8 +134,8 @@ def tomtom_category_search_request(api_key, category, id_pto, lat_pto, long_pto)
             ratedPowerKW   = 'no disponible'
             
             
-    # Se define el json resultado
-    poi_data = {
+     # Se define el json resultado
+     poi_data = {
         "name"          : name,
         "streetName"    : streetName,
         "provincia"     : provincia,
@@ -111,9 +144,9 @@ def tomtom_category_search_request(api_key, category, id_pto, lat_pto, long_pto)
         "connectorType" : connectorType,
         "ratedPowerKW"  : ratedPowerKW,
         "num_connectors": num_connectors
-    }
+     }
 
-    return poi_data
+     return poi_data
 
 
 
