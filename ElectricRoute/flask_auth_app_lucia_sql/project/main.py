@@ -53,8 +53,9 @@ def page_not_found():
 @main.route('/index')
 def index():
     if g.email:
-        email = session['email']
-        return render_template('index.html', name=email)
+        email    = session['email']
+        username = session['username']
+        return render_template('index.html', name=username)
     else:
         return render_template('login.html')
 
@@ -107,16 +108,11 @@ def route_post():
         ciudad_origen = request.form.get('mySelectOrigin')
         ciudad_destino = request.form.get('mySelectDest')
 
-       
-
         return render_template('route.html', name = name, ciudades = lista_destino)
 
     else:
         return render_template('login.html')
     
-
-
-
 
 
 
@@ -126,25 +122,34 @@ def route_post():
 @main.route('/frequentroutes')
 def frequentroutes():
 
-    if g.email:
-        
-        cur = db.connection.cursor()
-        cur.execute('''SELECT * FROM Routes where email: %s order by dateSearch desc limit 3''')
-        rutas_list = cur.fetchall()
-        
-        dict_rutas = []
-        ist_rutas = ["From", "To", "Type Car", "Load of the car", "Load"]
+    email    = session['email']
+    name     = session['username']
 
-        for ruta in rutas_list:
+    if g.email:
+
+        # ¡! Añadir en la consulta el filtro usuario
+        cur = db.connection.cursor()
+        cur.execute('SELECT * FROM Output limit 3')
+        rutas_list = cur.fetchall()
+        print(rutas_list[0][3])
+
+
+        dict_rutas = []
+        list_rutas = ["Origen", "Destino", "Número de Paradas", "Tiempo total", "Marca de coche", "Modelo de coche"]
+
+"""         for i in rutas_list:
             
-            dict_rutas.append({
-                "From" : ruta.from_ub,
-                "To" : ruta.to_ub,
-                "Type Car" : ruta.typeCar,
-                "Load of the car" : ruta.typeLoad
-        })
+            dict_rutas[i] =({
+                "Origen" : rutas_list[i][3],
+                "Destino" : rutas_list[i][4],
+                "Número de Paradas" : rutas_list[i][5],
+                "Tiempo total" : rutas_list[i][7],
+                "Marca de coche" : rutas_list[i][9],
+                "Modelo de coche" : rutas_list[i][10],
+        }) """
+
         
-        return render_template('frequentroutes.html', email=current_user.email, dict_rutas=dict_rutas, list_rutas=list_rutas)
+        return render_template('frequentroutes.html', email=email,  list_rutas=list_rutas)
     
     else:
         return render_template('login.html')

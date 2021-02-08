@@ -57,10 +57,11 @@ def login_post():
             session['brandCar'] = user['brandCar']
             session['modelCar'] = user['modelCar']
             session['connect']  = True
+            username =  user['username']
 
             flash('Logged in successfully !')
             
-            return render_template('index.html', email=email)
+            return render_template('index.html', email=email, name = username)
             
         else:
             flash('Incorrect email / password !')
