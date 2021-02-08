@@ -1,0 +1,280 @@
+{% extends "base.html" %}
+
+{% block extra_js %}        
+        
+    <script type="text/javascript">
+        
+        
+        $(document).ready(function() {
+
+
+            // Se crea la variable del mapa e indicamos las coordenadas q deseamos q se vea al principio
+            var map = L.map('my_map').setView([39.8046503, -2.9391801], 6);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+            var ruta = [38.3445234, -0.4949254, 42.623566499999995, -6.4531145999999975]
+
+            var waypoints_ruta = [];
+
+            for (var i = 0; i < ruta.length; i+2){
+
+                waypoints_ruta.push(L.latLng(ruta[i], ruta[i+1]));
+                
+            }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+     
+
+            myRouting = L.Routing.control({
+                waypoints: waypoints_ruta,
+                
+            }).addTo(map);
+
+
+
+
+        }) 
+
+
+    </script>
+
+{% endblock %}
+{% block body_content%}
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <!-- Barra Lateral -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <!-- Título -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index">
+            <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3">Electric Route</div>
+        </a>
+        <!-- Línea divisora -->
+        <hr class="sidebar-divider my-0">
+        <!-- Nav Item - New Route -->
+        <li class="nav-item">
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#newRoute">
+                 <i class="fa fa-map fa-sm fa-fw mr-2 text-gray-400"></i>
+                <span>New Route</span>
+            </a>
+        </li>
+        <!-- Nav Item - Frequent Routes -->
+        <li class="nav-item">
+            <a class="nav-link" href="frequentroutes">
+                 <i class="fa fa-star fa-sm fa-fw mr-2 text-gray-400"></i>
+                <span>Frequent Routes</span>
+            </a>
+        </li>
+        <!-- Nav Item - Save Route -->
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="fa fa-download fa-sm fa-fw mr-2 text-gray-400"></i>
+                <span>Save Route</span>
+            </a>
+        </li>
+        <!-- Línea divisora -->
+        <hr class="sidebar-divider">
+        <!-- Nav Item - Settings -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Settings</span>
+            </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Custom Components:</h6>
+                    <a class="collapse-item" href="profile2">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <span>User Profile</span>
+                    </a>
+                    <a class="collapse-item" href="cards.html">
+                        <i class="fa fa-car" aria-hidden="true"></i>
+                        <span>Cars Details</span>
+                    </a>
+            </div>
+            </div>
+        </li>
+        <!-- Nav Item - Utilities -->
+        <li class="nav-item">
+        <a class="nav-link" href="charts.html">
+        <i class="fas fa-fw fa-wrench"></i>
+        <span>Utilities</span></a>
+        </li>
+        <!-- Línea divisora -->
+        <hr class="sidebar-divider">
+            <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+        </ul>
+        <!-- Fin Barra Lateral -->
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+            <!-- Sidebar Toggle (Topbar) -->
+            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                <i class="fa fa-bars"></i>
+            </button>
+            <!-- Topbar Navbar -->
+            <ul class="navbar-nav ml-auto">
+                <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                <li class="nav-item dropdown no-arrow d-sm-none">
+               
+                <!-- Dropdown - Messages -->
+                <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                    <form class="form-inline mr-auto w-100 navbar-search">
+                    <div class="input-group">
+                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                        <button class="btn btn-primary" type="button">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                </li>
+
+
+                <!-- Nav Item - User Information -->
+                <li class="nav-item dropdown no-arrow">
+                <a class="nav-link" href="profile2" id="userDropdown">
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"> {{ name }} </span>
+                    <img class="img-profile rounded-circle" src="{{url_for('static', filename='img/avatar_login.jpg')}}">
+                </a>                  
+                </li>
+                 <!-- Línea Dividora -->
+                 <div class="topbar-divider d-none d-sm-block"></div>   
+                 <!-- Nav Item - Logout -->
+                <li class="nav-item dropdown no-arrow">
+               
+                    <a class="nav-link dropdown-toggle" href="logout"  data-toggle="modal" data-target="#logoutModal">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Logout
+                    </a>
+                </li>
+            </ul>
+            </nav>
+            <!-- End of Topbar -->
+            <!-- Map -->
+            
+            <div class='col-12 bg-white'>
+                <div class = 'row'>
+                    <div id="my_map" style= 'height: 699px; width: 2000px;'></div>
+                </div>
+            </div>   
+             
+                                     
+            <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+        <!-- Pie de página -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy; Electric Route 2021</span>
+            </div>
+            </div>
+        </footer>
+        <!-- Fin del pie de página -->
+        </div>
+        <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            </div>
+            <form action="{{url_for('auth.logout')}}">
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="login" >Logout</a>
+            </div>
+            </form>
+        </div>
+        </div>
+    </div>
+
+    <!-- New Route Modal-->
+    <div class="modal fade" id="newRoute" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #4E73DF !important;">
+            <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(255, 255, 255);">New Route</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" style="color: rgb(255, 255, 255);">×</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <!-- Select Origin -->
+                <div class="container"> 
+                   
+                    <form class="form-inline" method="POST" action="/Route">
+                        <div class="form-group">
+                         <div class="container"> 
+                            <span> From... </span>
+                            <input list="mySelectOrigin" name="mySelectOrigin" style= "margin-left: 25% !important">
+                            
+                                <datalist id="mySelectOrigin" > 
+                                    <option selected>Choose one of the following...</option>
+                                        {% for ciudad in ciudades %}                            
+                                            <option selected value= "{{ciudad}}"> {{ciudad}} </option>
+                                        {% endfor %}
+                                </datalist>
+                         </div>
+                        </div>
+                        <!-- Select Destiny -->
+                        <div class="form-group">
+                        <div class="container"> 
+                            <span> To... </span>
+                                <input list="mySelectDest" name="mySelectDest" style= "margin-left: 25% !important">
+                                <datalist id="mySelectDest"  > 
+                                    <option selected>Choose one of the following...</option>                                    
+                                    {% for ciudad in ciudades %}                            
+                                        <option value="{{ciudad}}"> {{ciudad}} </option>
+                                    {% endfor %}
+                                </datalist>
+                        </div>
+                        </div>
+                       
+                        <div class="form-group">
+                        <div class="container"> 
+                         
+                        <div class="modal-footer" >
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                            <input type="submit" class="btn btn-primary" id="newRoute" name="newRoute" value="Go!">
+                        </div>
+                        
+                        </form>
+                    
+                
+            </div>
+            
+        </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
