@@ -1,6 +1,10 @@
 FROM ubuntu:18.04
 RUN apt-get update -y && \
     apt-get install -y python3 python3-pip python3-dev
+RUN apt-get update -y && \
+    apt-get install -y libmysqlclient-dev && \ 
+    apt-get install -y libmariadb-dev-compat && \
+    apt-get install -y libmariadbclient-dev
 COPY ./app/requirements.txt /app/requirements.txt
 WORKDIR /app
 RUN pip3 install -r requirements.txt
