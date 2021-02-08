@@ -8,39 +8,41 @@
         $(document).ready(function() {
 
 
+
+            var ruta = JSON.parse('{{ lista_coordenadas | tojson }}');
+
+
             // Se crea la variable del mapa e indicamos las coordenadas q deseamos q se vea al principio
             var map = L.map('my_map').setView([39.8046503, -2.9391801], 6);
 
+            // Se grafica el mapa
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 }).addTo(map);
+            
 
-
-           
-
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-            var ruta = [[38.3445234, -0.4949254], [42.623566499999995, -6.4531145999999975]]
 
             var waypoints_ruta = [];
             
             console.log(ruta);
-            console.log(waypoints_ruta);
+            console.log('Hola Lucía');
+            
+            console.log(ruta[0][1]);
 
             for (var i = 0; i < ruta.length; i++){
                 
-                console.log(ruta[i][0])
-                waypoints_ruta.push(L.latLng(ruta[i][0],ruta[i][1] ));
-                
+                waypoints_ruta.push(L.latLng(ruta[i][0], ruta[i][1]));
                 
             }
 
+
+            console.log(waypoints_ruta);
+
+            // Se grafica la ruta
             myRouting = L.Routing.control({
                 waypoints: waypoints_ruta,
                 
             }).addTo(map);
-
-
 
 
         }) 

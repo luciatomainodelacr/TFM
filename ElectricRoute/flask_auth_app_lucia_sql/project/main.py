@@ -18,7 +18,6 @@ Modelo de autenticación. Tres páginas:
 # Se cargan las librerias
 from flask import Blueprint, render_template, redirect, url_for, request, flash, session, g
 from flask_login import login_required, current_user
-#from .models import User, Route, ciudades, ElectricCar
 from .BE.calcular_caminos_entre_puntos import main_route
 from .BE.Output import BaseDatos
 from . import db
@@ -76,11 +75,12 @@ def route():
         cur.execute('''SELECT * FROM Ciudades''')
         ciudades_list = cur.fetchall()
         lista_destino = []
+        lista_coordenadas = []
 
         for ciudad in ciudades_list:
             lista_destino.append(ciudad[0])
             
-        return render_template('route.html', name = name, ciudades = lista_destino)
+        return render_template('route.html', name = name, ciudades = lista_destino, lista_coordenadas=lista_coordenadas)
 
     else:
         return render_template('login.html')
@@ -108,11 +108,31 @@ def route_post():
         ciudad_origen = request.form.get('mySelectOrigin')
         ciudad_destino = request.form.get('mySelectDest')
 
-        return render_template('route.html', name = name, ciudades = lista_destino)
+        ruta = main_route(tipo_programa = "ALL",
+            marca_coche = brandCar,
+            modelo_coche = modelCar,
+            origen = ciudad_origen,
+            destino = ciudad_destino
+        )
+
+        lista_coordenadas = []
+        
+        
+        for i in range(0, len(ruta)):
+            punto_coord = []
+            latitud = ruta[i][0]
+            longitud = ruta[i][1]
+            punto_coord.append(latitud)
+            punto_coord.append(longitud)
+            lista_coordenadas.append(punto_coord)
+
+        return render_template('route.html', name = name, ciudades = lista_destino, lista_coordenadas=lista_coordenadas )
 
     else:
         return render_template('login.html')
     
+    
+
 
 
 
@@ -136,7 +156,7 @@ def frequentroutes():
 
         dict_rutas = []
         list_rutas = ["Origen", "Destino", "Número de Paradas", "Tiempo total", "Marca de coche", "Modelo de coche"]
-#
+
         #for i in rutas_list:
         #    
         #    dict_rutas[i] =({
@@ -147,8 +167,7 @@ def frequentroutes():
         #        "Marca de coche" : rutas_list[i][9],
         #        "Modelo de coche" : rutas_list[i][10],
         #})
-#
-        #
+
         return render_template('frequentroutes.html', email=email,  list_rutas=list_rutas)
     
     else:
@@ -183,15 +202,4 @@ def profile2():
 
 
 
-@main.route('/ruta_test')
-def ruta_test():
-
-    ruta = main_route(tipo_programa = "ALL",
-            marca_coche = "VOLKSWAGEN",
-            modelo_coche = "ID3 PURE",
-            origen = "Alicante Tren",
-            destino = "A Corunia Bus"
-    )
-
-    return render_template('ruta_test.html', ruta=ruta)
 
