@@ -56,11 +56,6 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 
 
-L.marker([40.436166, -3.716840]).addTo(map)
-    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-    .openPopup();
-
-
 // Se crea un evento que captura dos puntos seleccionados en el mapa
 map.on('click', function(e) {
     if (!firstLatLng) {
