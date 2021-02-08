@@ -136,19 +136,19 @@ def frequentroutes():
 
         dict_rutas = []
         list_rutas = ["Origen", "Destino", "Número de Paradas", "Tiempo total", "Marca de coche", "Modelo de coche"]
-
-"""         for i in rutas_list:
-            
-            dict_rutas[i] =({
-                "Origen" : rutas_list[i][3],
-                "Destino" : rutas_list[i][4],
-                "Número de Paradas" : rutas_list[i][5],
-                "Tiempo total" : rutas_list[i][7],
-                "Marca de coche" : rutas_list[i][9],
-                "Modelo de coche" : rutas_list[i][10],
-        }) """
-
-        
+#
+        #for i in rutas_list:
+        #    
+        #    dict_rutas[i] =({
+        #        "Origen" : rutas_list[i][3],
+        #        "Destino" : rutas_list[i][4],
+        #        "Número de Paradas" : rutas_list[i][5],
+        #        "Tiempo total" : rutas_list[i][7],
+        #        "Marca de coche" : rutas_list[i][9],
+        #        "Modelo de coche" : rutas_list[i][10],
+        #})
+#
+        #
         return render_template('frequentroutes.html', email=email,  list_rutas=list_rutas)
     
     else:

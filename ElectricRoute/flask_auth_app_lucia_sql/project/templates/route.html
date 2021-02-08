@@ -15,18 +15,25 @@
                     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 }).addTo(map);
 
+
+           
+
+
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
-            var ruta = [38.3445234, -0.4949254, 42.623566499999995, -6.4531145999999975]
+            var ruta = [[38.3445234, -0.4949254], [42.623566499999995, -6.4531145999999975]]
 
             var waypoints_ruta = [];
+            
+            console.log(ruta);
+            console.log(waypoints_ruta);
 
-            for (var i = 0; i < ruta.length; i+2){
-
-                waypoints_ruta.push(L.latLng(ruta[i], ruta[i+1]));
+            for (var i = 0; i < ruta.length; i++){
+                
+                console.log(ruta[i][0])
+                waypoints_ruta.push(L.latLng(ruta[i][0],ruta[i][1] ));
+                
                 
             }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-     
 
             myRouting = L.Routing.control({
                 waypoints: waypoints_ruta,
