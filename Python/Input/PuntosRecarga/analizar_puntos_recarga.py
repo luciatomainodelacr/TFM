@@ -37,10 +37,32 @@ pd.options.mode.chained_assignment = None
 # 1.- Definición de funciones -------------------------------------
 #------------------------------------------------------------------
 
-# Función para extraer la provincia
 def extraer_provincia(lugares, formatted_address):
-    x = ''
-    for j in lugares:
+     """
+    Definicion de la funcion extraer_provincia:
+        
+        Funcion para extraer la provincia de la dirección
+
+    Parametros
+    ----------
+    lugares:                     string
+        Strings que contienen los lugares de los que
+        extraer la provincia
+    
+    formatted_address:           string
+        String e con la direccion de los lugares 
+    Returns
+    ------
+    x:                           string
+        String que contiene la provincia del lugar
+    
+    Ejemplo
+    -------
+    >>> df["province"] = df.apply(lambda a: extraer_provincia(lugares,
+                                       a['formatted_address']), axis = 1)
+    """
+     x = ''
+     for j in lugares:
         if j in formatted_address:
             x  = j 
 
@@ -110,32 +132,74 @@ def extraer_provincia(lugares, formatted_address):
         if x in ('Gasteiz', 'Araba'):
             x = 'Álava'
 
-    return x
+     return x
 
 
-# Función get_centermost_point
 def get_centermost_point(cluster):
-    centroid = (MultiPoint(cluster).centroid.x, MultiPoint(cluster).centroid.y)
-    centermost_point = min(cluster, key=lambda point: great_circle(point, centroid).m)
-    return tuple(centermost_point)
+     """
+    Definicion de la funcion get_centermost_point:
+        
+        Funcion para que encontrar el punto más cercano al centro 
+        del cluster
+        
+    Parametros
+    ----------
+    cluster:                      Pandas Series
+        Series que contiene la información del cluster
+    
+    Returns
+    ------
+    tuple(centermost_point):      Pandas Dataframe
+        Tupla que contiene el id del cluster y el punto más
+        cercano al centro del cluster
+    
+    Ejemplo
+    -------
+    >>> centermost_points = clusters.map(get_centermost_point)
+    """
+     centroid = (MultiPoint(cluster).centroid.x, MultiPoint(cluster).centroid.y)
+     centermost_point = min(cluster, key=lambda point: great_circle(point, centroid).m)
+     return tuple(centermost_point)
 
 
-# Función clustering_dbscan
 def clustering_dbscan(df_filt):
-    coords = df_filt[["latitude", "longitude"]].values
-    kms_per_radian = 6371.0088
-    epsilon = 5 / kms_per_radian
-    db = DBSCAN(eps=epsilon, min_samples=2, algorithm="ball_tree", metric="haversine").fit(np.radians(coords))
-    cluster_labels = db.labels_
-    num_clusters = len(set(cluster_labels))
-    clusters = pd.Series([coords[cluster_labels == n] for n in range(num_clusters-1)])
-    print("Number of clusters: {}".format(num_clusters))
+     """
+    Definicion de la funcion clustering_dbscan:
+        
+        Funcion para realizar un clustering de tipo DBSCAN
+        que reduce la dimensión del Dataframe de entrada
+        de manera geográficamente uniforme
+        
+    Parametros
+    ----------
+    df:                     Pandas Dataframe
+        Dataframe que contiene el dataset sobre el que se
+        va a hacer el clustering
+    
+    Returns
+    ------
+    rs:                     Pandas Dataframe
+        Dataframe que contiene el dataset con dimensión 
+        reducida
+    
+    Ejemplo
+    -------
+    >>> rs = clustering_dbscan(df_filt)
+    """
+     coords = df_filt[["latitude", "longitude"]].values
+     kms_per_radian = 6371.0088
+     epsilon = 5 / kms_per_radian
+     db = DBSCAN(eps=epsilon, min_samples=2, algorithm="ball_tree", metric="haversine").fit(np.radians(coords))
+     cluster_labels = db.labels_
+     num_clusters = len(set(cluster_labels))
+     clusters = pd.Series([coords[cluster_labels == n] for n in range(num_clusters-1)])
+     print("Number of clusters: {}".format(num_clusters))
 
-    centermost_points = clusters.map(get_centermost_point)
-    lats, lons = zip(*centermost_points)
-    rep_points = pd.DataFrame({"longitude":lons, "latitude":lats})
-    rs = rep_points.apply(lambda row: df_filt[(df_filt["latitude"]==row["latitude"]) & (df_filt["longitude"]==row["longitude"])].iloc[0], axis=1)
-    return rs
+     centermost_points = clusters.map(get_centermost_point)
+     lats, lons = zip(*centermost_points)
+     rep_points = pd.DataFrame({"longitude":lons, "latitude":lats})
+     rs = rep_points.apply(lambda row: df_filt[(df_filt["latitude"]==row["latitude"]) & (df_filt["longitude"]==row["longitude"])].iloc[0], axis=1)
+     return rs
 
 
 

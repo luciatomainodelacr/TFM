@@ -33,29 +33,72 @@ os.chdir('/home/tfm/Documentos/TFM/Datasets/')
 
 # Distancia Haversine
 def haversine(lat1, lon1, lat2, lon2):
-    """
-        Calcula la distancia Haversine de dos puntos
-        dados
-    """
-    rad         = math.pi/180
-    dlat        = lat2 - lat1
-    dlon        = lon2 - lon1
-    R           = 6372.795477598
-    a           = (math.sin(rad*dlat/2))**2 + math.cos(rad*lat1)*math.cos(rad*lat2)*(math.sin(rad*dlon/2))**2
-    distancia   = 2*R*math.asin(math.sqrt(a))
+     """
+    Definicion de la funcion haversine:
+        
+        Funcion para calcular la distancia Haversine de dos
+        puntos dados
 
-    return distancia
+    Parametros
+    ----------
+    lat1:                     float
+        Float con la latitud del primer punto
+        
+    lon1:                     float
+        Float con la longitud del primer punto
+    
+    lat2:                     float
+        Float con la latitud del segundo punto
+    
+    lon2:                     float
+        Float con la longitud del segundo punto
+    
+    Returns
+    ------
+    distancia:                float
+        Float que contiene la distancia entre dos puntos
+        definidos
+    
+    Ejemplo
+    -------
+    >>> result_distance = haversine(LatOrigin, LongOrigin, LatDest, LongDest)
+    """
+     rad         = math.pi/180
+     dlat        = lat2 - lat1
+     dlon        = lon2 - lon1
+     R           = 6372.795477598
+     a           = (math.sin(rad*dlat/2))**2 + math.cos(rad*lat1)*math.cos(rad*lat2)*(math.sin(rad*dlon/2))**2
+     distancia   = 2*R*math.asin(math.sqrt(a))
+
+     return distancia
 
 
 # Funcion Pairwise
 def pairwise(iterable):
+     """
+    Definicion de la funcion pairwise:
+        
+        Funcion para construir iteraciones entre dos filas
+        consecutivas 
 
-    """"
-    Construye iteraciones entre dos filas consecutivas)
+    Parametros
+    ----------
+    iterable:                 iterable
+        Iterador que recorre las filas de un Dataframe
+    
+    Returns
+    ------
+    zip(a, b):                tuple
+        Tupla con clave, valor del Dataframe sobre el que 
+        se itera
+    
+    Ejemplo
+    -------
+    >>> for (i1, row1), (i2, row2) in pairwise(df.iterrows())
     """
-    a, b = tee(iterable)
-    next(b, None)
-    return zip(a, b)
+     a, b = tee(iterable)
+     next(b, None)
+     return zip(a, b)
 
 
 
