@@ -1,84 +1,82 @@
 {% extends "base_login.html" %}
 
-
 {% block body %}
 
-    <body class="bg-img-cover" style="background-image: url('static/img/img_login.jpg'); background-size: contain;   background-size: 1855px;">
+<body class="bg-img-cover" style="background-image: url('static/img/img_login.jpg'); background-size: 1855px;">
 
-        <div class="container">
+    <div class="container">
 
-          <!-- Outer Row -->
-          <div class="row justify-content-center" >
+      <!-- Se justifica el contenido en el centro de la página -->
+      <div class="row justify-content-center" >
 
-            <div class="col-xl-5 col-lg-12 col-md-7">
+        <!-- Tarjeta blanca para incluir la tabla -->
+        <div class="col-xl-5 col-lg-12 col-md-7">
+        <div class="card o-hidden border-0 shadow-lg my-5 ">
+      
+            <div class="col-lg-12">
+            <div class="p-5">
 
-              <div class="card o-hidden border-0 shadow-lg my-5 ">
-
-                  <!-- Nested Row within Card Body -->
-                  <div class="row">
-
-                  
-                    <div class="col-lg-12">
-                      <div class="p-5">
-                        <div class="text-center">
-                          <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
-                        </div>
-
-                        
-                        {% with messages = get_flashed_messages() %}
-                        {% if messages %}
-                            <div class="notification is-danger"  style='color:red; margin-bottom: 2%'>
-                                {{ messages[0] }}
-                            </div>
-                        {% endif %}
-                        {% endwith %}
-                        
-
-                        <form class="user" method="POST" action="/login">
-                      
-                            <!-- Enter Email Address -->
-                            <div class="form-group">
-                                <input type="email" class="form-control form-control-user" id="email" name="email" placeholder="Enter Email Address...">
-                            </div>
-
-                            <!-- Password -->
-                            <div class="form-group">
-                                <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Password">
-                            </div>
-
-                            <!-- Remember Me -->
-                            <div class="form-group">
-                                <div class="custom-control custom-checkbox small">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck">
-                                    <label class="custom-control-label" for="customCheck">Remember Me</label>
-                                </div>
-                            </div>
-
-                            <!-- Login -->
-                            <div class="form-group">
-                                <input type="submit" class="btn btn-primary btn-user btn-block" id="send-login" name="login" value="Login">
-                            </div>
-                          
-                          
-                        </form>
-                        <hr>
-                        <div class="text-center">
-                          <a class="small" href="forgot-password">Forgot Password?</a>
-                        </div>
-                        <div class="text-center">
-                          <a class="small" href="signup">Create an Account!</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <!-- Título --> 
+                <div class="text-center">
+                  <h1 class="h4 text-gray-900 mb-4"> Welcome Back! </h1>
                 </div>
-              </div>
+
+                <!-- Configuración mensajes para el login --> 
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="notification is-danger"  style='color:red; margin-bottom: 2%'>
+                        {{ messages[0] }}
+                    </div>
+                {% endif %}
+                {% endwith %}
+
+                <!-- Formulario información usuario --> 
+                <form class="user" method="POST" action="/login">
+                      
+                    <!-- Enter Email Address -->
+                    <div class="form-group">
+                        <input type="email" class="form-control form-control-user" id="email" name="email" placeholder="Enter Email Address...">
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group">
+                        <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Password">
+                    </div>
+
+                    <!-- Remember Me -->
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox small">
+                            <input type="checkbox" class="custom-control-input" id="customCheck">
+                            <label class="custom-control-label" for="customCheck">Remember Me</label>
+                        </div>
+                    </div>
+
+                    <!-- Login -->
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary btn-user btn-block" id="send-login" name="login" value="Login">
+                    </div>
+                          
+                </form>
+
+                <!-- Línea divisora --> 
+                <hr>
+
+                <!-- Botones Forgot Password y Create an Account --> 
+                <div class="text-center">
+                  <a class="small" href="forgot-password">Forgot Password?</a>
+                </div>
+                <div class="text-center">
+                  <a class="small" href="signup">Create an Account!</a>
+                </div>
 
             </div>
-
-          </div>
+            </div>
 
         </div>
+        </div>
 
-    </body>
+      </div>
+    </div>
+
+</body>
 {% endblock %}

@@ -41,19 +41,19 @@ def login_post():
 
         email    = request.form['email'] 
         password = request.form['password'] 
-        #remember = True if request.form('remember') else False
 
+        # Consulta a la bbdd
         cursor = db.connection.cursor(MySQLdb.cursors.DictCursor) 
         cursor.execute('SELECT * FROM users WHERE email = % s AND password = % s', (email, password, )) 
         user = cursor.fetchone()
 
-        #user['is_active'] = True
 
         if user: 
             session['loggedin'] = True
             session['id']       = user['id'] 
             session['email']    = user['email']
             session['username'] = user['username']
+            session['lastName'] = user['lastName']
             session['brandCar'] = user['brandCar']
             session['modelCar'] = user['modelCar']
             session['connect']  = True
@@ -77,27 +77,62 @@ def login_post():
 
 @auth.route('/signup')
 def signup():
-    return render_template('signup.html')
 
+    # Consulta a la bbdd ElectricCar
+    cur = db.connection.cursor()
+    cur.execute('''SELECT * FROM ElectricCar''')
+    electricCar_list = cur.fetchall()
+
+    # Se inicializan dos listas para las marcas y los modelos de coche
+    list_brand = []
+    list_model = []
+
+    for coche in electricCar_list:
+        list_brand.append(coche[0])
+        list_model.append(coche[1])
+            
+    return render_template('signup.html', list_brand = list_brand, list_model = list_model)
+
+
+
+
+# 2.- Página signup ------------------------------------------------
+#------------------------------------------------------------------
 
 @auth.route('/signup',methods =['GET', 'POST'])
 def signup_post():
 
-    if request.method == 'POST' and ('email' != '') and ('email' in request.form and 'username' in request.form and 'password' in request.form and 'lastName' in request.form and 'brandCar' in request.form and 'modelCar' in request.form): 
+    if request.method == 'POST' and ('email' != '') and ('email' in request.form and 'username' in request.form and 'password' in request.form and 'lastName' in request.form and 'mySelectBrand' in request.form and 'mySelectModel' in request.form): 
 
         email    = request.form['email']
         username = request.form['username']
         password = request.form['password']
         lastName = request.form['lastName']
-        brandCar = request.form['brandCar']
-        modelCar = request.form['modelCar']
-   
-        cursor = db.connection.cursor(MySQLdb.cursors.DictCursor) 
+        brandCar = request.form.get('mySelectBrand')
+        modelCar = request.form.get('mySelectModel')
+
+        print(brandCar)
+
+        # Consulta a la bbdd users 
+        cursor = db.connection.cursor(MySQLdb.cursors.DictCursor)
         cursor.execute('SELECT * FROM users WHERE email = % s', (email, )) 
         user = cursor.fetchone()
-        print(user)
-        print(email != '')
 
+        # Consulta a la bbdd ElectricCar
+        cur = db.connection.cursor()
+        cur.execute('''SELECT * FROM ElectricCar''')
+        electricCar_list = cur.fetchall()
+
+        # Se inicializan dos listas para las marcas y los modelos de coche
+        list_brand = []
+        list_model = []
+
+        for coche in electricCar_list:
+            list_brand.append(coche[0])
+            list_model.append(coche[1])
+
+            
+        # Comprobaciones registro de usuario
         if user: 
             flash('Account already exists !')
             return redirect(url_for('auth.login'))
@@ -118,6 +153,7 @@ def signup_post():
     
     elif request.method == 'POST' and ('email' != '' and 'username' != '' and 'password' != '' and 'lastName' != '' and 'brandCar' != '' and 'modelCar' != '') :
         flash('Please fill out the form!')
+
         return redirect(url_for('auth.signup'))
 
     return redirect(url_for('auth.signup'))
