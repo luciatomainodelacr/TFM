@@ -2,74 +2,68 @@
 
 {% block body %}
 
-<body class="bg-img-cover" style="background-image: url('static/img/electric_car.jpg'); background-size: 1850px; height: 30px;">
+<body class="bg-img-cover" style="background-image: url('static/img/img_frequentroutes.jpg'); background-size: 1850px; height: 30px;">
 
-        <div class="container">
+    <div class="container">
 
-          <!-- Outer Row -->
-          <div class="row justify-content-center" >
-            <div class="col-xl-10">
-              <div class="card o-hidden border-0 shadow-lg my-5">
+      <!-- Se justifica el contenido en el centro de la página -->
+      <div class="row justify-content-center" >
 
-                <div class="card-body p-0">
-                  <!-- Nested Row within Card Body -->
-                  <div class="row justify-content-center" >
-                      
-                      <div class="col-lg-10">
-                          <div class="p-5">
+        <!-- Tarjeta blanca para incluir la tabla -->
+        <div class="card o-hidden border-0 shadow-lg my-5">        
+            
+            <div class="card-body p-0">
+            <div class="p-5">
                               
-                              <div class="text-center" style = "font-size: 30px; color:#4e73df; margin-botton: 50%;">
-                                  <span>Here are your most frequent routes</span>
-                              </div>
-
-                              <div class="table-responsive" style = "margin-top:5%">
-
-                                <table class="table table-bodered" id="table" width="100%" cellspacing="0">
-                                
-                                    <thead> 
-                                        <tr>
-                                          {% for columna in list_rutas %}                                        
-                                          <th> {{ columna }} </th>                                            
-                                          {% endfor %}
-                                          </tr>
-                                    
-                                    </thead>
-
-                                    <tbody>
-                                         
-                                      {% for value in dict_rutas %}  
-                                      <tr> 
-                                          {% for value2 in value.values() %}
-                                          <td> {{ value2 }} </td>
-                                        {% endfor %}
-                                        <td>
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck1" checked>
-                                                <label class="custom-control-label" for="customCheck1"></label>
-                                            </div>
-                                        </td>
-                                      </tr>
-                                      {% endfor %}                                   
-
-                                       </tbody>                                                                                           
-                                </table> 
-   
-                                  <a class="collapse-item" href="Route"> 
-                                    <div class="modal-footer">
-                                      <input type="submit" autofocus class="btn btn-primary" id="FrequentRoute" name="FrequentRoute" value="Go!">
-                                   </div>
-                                  </a> 
-                                   
-                                </div>
-
-
-                          </div>
-                      </div>
-                  </div>
-
+                <!-- Título -->
+                <div class="text-center" style = "font-size: 35px; color:#4e73df; margin-botton: 50%;">
+                    <span> Here are your most frequent routes </span>
                 </div>
 
-        </div>
+                <!-- Tabla Rutas frecuentes -->
+                <div class="table-responsive " style = "margin-top:5%">
+                    <table class="table table-bodered" id="table" width="100%" cellspacing="0">     
 
-    </body>
+                      <!-- Nombres columnas -->            
+                      <thead> 
+                          <tr>
+                            {% for columna in list_rutas %}                                        
+                            <th> {{ columna }} </th>                                            
+                            {% endfor %}
+                            </tr>                                    
+                      </thead>
+
+                      <!-- Se recibe como parámetro cada una de las rutas de la tabla Outputs --> 
+                      <tbody>                                         
+                        {% for value in dict_rutas %}  
+                        <tr> 
+                          {% for value2 in value.values() %}
+                            <td> {{ value2 }} </td>
+                          {% endfor %}
+                          <td>
+                              <div class="custom-control custom-checkbox">
+                                  <input type="checkbox" class="custom-control-input" id="customCheck1" checked>
+                                  <label class="custom-control-label" for="customCheck1"></label>
+                              </div>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <!-- Botón cargar ruta -->   
+                    <a class="collapse-item" href="Route"> 
+                      <div class="modal-footer">
+                          <input type="submit" autofocus class="btn btn-primary" id="FrequentRoute" name="FrequentRoute" value="Load">
+                      </div>
+                    </a> 
+                                    
+                </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+</body>
 {% endblock %}

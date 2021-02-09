@@ -1,101 +1,102 @@
 {% extends "base_login.html" %}
 
-
 {% block body %}
 
-  <body class="bg-gradient-primary" >
+<body class="bg-img-cover" style="background-image: url('static/img/img_signup.jpg'); background-size: contain;   background-size: 1855px;">
 
- 
-  <div class="container">
+    <div class="container">
 
-    <div class="card o-hidden border-0 shadow-lg my-5">
-      <div class="card-body p-0">
+      <!-- Se justifica el contenido en el centro de la página -->
+      <div class="row justify-content-center" >
 
-        <!-- Nested Row within Card Body -->
-        <div class="row">
-            <div class="col-lg-6 d-none d-lg-block">
-                <img src="{{url_for('static', filename='img/contra.jpg')}}"  class="img-fluid" alt="" style = "height: 100%; ">
-            </div>
-          <div class="col-lg-6">
+        <!-- Tarjeta blanca para incluir la tabla -->
+        <div class="col-xl-6 col-lg-12 col-md-9">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+                
+            <div class="card-body p-0">
             <div class="p-5">
-              <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
-              </div>
 
-              <!--Mensaje de error en caso de que el mail ya exista -->
-              {% with messages = get_flashed_messages() %}
-              {% if messages %}
-                  <div class="notification is-danger" style='color:red; margin-bottom: 2%'>
-                      {{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}" >login page</a>.
-                  </div>
-              {% endif %}
-              {% endwith %}
+                <!-- Título -->
+                <div class="text-center" style = "font-size: 30px; color:#4e73df;">
+                  <span> Create an Account! </span>
+                </div>
 
-                    
-              <form class="user" method="POST" action="/signup">
+                <!-- Configuración mensajes para el login -->                   
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="notification is-danger"  style='color:red; margin-bottom: 2%'>
+                        {{ messages[0] }}
+                    </div>
+                {% endif %}
+                {% endwith %}
 
-                  <!-- Name -->
-                  <div class="form-group">
-                      <input type="text" class="form-control form-control-user" id="name" name="name" placeholder="Enter Name...">
-                  </div>
+                <!-- Formulario información usuario -->        
+                <form class = "user" method="POST" action="/signup" style = "margin-top:5%">
 
-                  <!-- Last Name -->
-                  <div class="form-group">
-                      <input type="text" class="form-control form-control-user" id="lastName" name="lastName" placeholder="Enter Last Name...">
-                  </div>
+                    <!-- Name y Last Name-->
+                    <div class="form-group row">
+                      <div class="col-sm-6 mb-3 mb-sm-0">
+                        <input type="text" class="form-control form-control-user" id="username" name = "username" placeholder="Enter Name...">
+                      </div>
+                      <div class="col-sm-6">
+                        <input type="text" class="form-control form-control-user" id="lastName" name = "lastName" placeholder="Enter Last Name...">
+                      </div>
+                    </div>
 
-                  <!-- Type Car -->
-                  <div class="form-group">
-                      <input type="text" class="form-control form-control-user" id="typeCar" name="typeCar" placeholder="Enter Type Car...">
-                  </div>
-
-                  <!-- Enter Email Address -->
-                  <div class="form-group">
+                    <!-- Enter Email Address -->
+                    <div class="form-group">
                       <input type="email" class="form-control form-control-user" id="email" name="email" placeholder="Enter Email Address...">
-                  </div>
+                    </div>
 
-                  <!-- Password -->
-                  <div class="form-group">
+                    <!-- Password -->
+                    <div class="form-group">
                       <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Password">
-                  </div>
+                    </div>
 
-                 
-                  <!-- PasType Car Brand -->
-                  <div class="form-group">                                           
-                      <select class = 'form-select form-select-sm' id='mySelect'  aria-label="Default select example" style= "margin-left: 10% !important"> 
-                        <option selected> Type Car Brand </option>
-                            {% for brand in typeCar %}                            
-                            <option value={{brand}}> {{brand}} </option>
-                            {% endfor %}
-                      </select>
-                  </div>
+                    <!-- Type Car Brand and Model-->
+                    <div class="form-group row">
+                      
+                      <!-- Brand  -->
+                      <div class="col-sm-6 mb-3 mb-sm-0">
+                        <input class="form-control form-control-user" list="mySelectBrand" name="mySelectBrand" style="border-radius: 10rem;  padding: 1.5rem 1rem;" placeholder="Type Car Brand...">                           
+                        <datalist id="mySelectBrand"> 
+                          {% for brand in list_brand %}                            
+                            <option selected value= "{{brand}}"> {{brand}} </option>
+                          {% endfor %}
+                        </datalist>
+                      </div>
 
-                  <!-- Type Car Model  -->
-                  <div class="form-group">
-                      <select class = 'form-select form-select-sm' id='mySelect'  aria-label="Default select example" style= "margin-left: 10% !important"> 
-                          <option selected>Type Car Model </option>
-                            {% for model in typeModel %}                            
-                          <option value={{model}}> {{model}} </option>
-                            {% endfor %}
-                      </select>
-                  </div>
+                      <!-- Model  -->
+                      <div class="col-sm-6">
+                        <input class="form-control form-control-user" list="mySelectModel" name="mySelectModel" style="border-radius: 10rem;  padding: 1.5rem 1rem;" placeholder="Type Car Model">                           
+                        <datalist id="mySelectModel"> 
+                          {% for model in list_model %}                            
+                            <option selected value= "{{model}}"> {{model}} </option>
+                          {% endfor %}
+                        </datalist>
+                      </div>
+                    </div>
 
-                   <!-- Login -->
-                  <div class="form-group">
-                      <input type="submit" class="btn btn-primary btn-user btn-block" id="send-signup" name="signup" value="Register Account">
-                  </div>
-                        
-                  
-              </form>
+                    <!-- Login -->
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary btn-user btn-block " id="send-signup" name="signup" value="Register Account">
+                    </div>
 
+                    <hr>
+                    <div class="text-center">
+                      <a class="small" href="login">Already have an account? Login!</a>
+                    </div>
+    
+                </form>
 
             </div>
-          </div>
+            </div>
+
         </div>
+        </div>
+
       </div>
     </div>
 
-  </div>
-
-    </body>
+</body>
 {% endblock %}

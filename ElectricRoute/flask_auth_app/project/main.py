@@ -100,7 +100,7 @@ def route():
         return render_template('login.html')
 
 
-# 3.- Página ruta (modelo) ----------------------------------------
+# 4.- Página ruta (modelo) ----------------------------------------
 #------------------------------------------------------------------
 
 @main.route('/Route', methods=['GET', 'POST'])
@@ -156,9 +156,7 @@ def route_post():
     
 
 
-
-
-# 4.- Página Rutas Frecuentes -------------------------------------
+# 5.- Página Rutas Frecuentes -------------------------------------
 #------------------------------------------------------------------
 
 @main.route('/frequentroutes')
@@ -206,7 +204,7 @@ def delete():
 # 6- Página profile -----------------------------------------------
 #------------------------------------------------------------------
 
-@main.route('/profile')
+@main.route('/profile', methods=['GET', 'POST'])
 def profile():
 
     # Se obtienen variables del usuario
@@ -225,5 +223,11 @@ def profile():
         return render_template('login.html')
 
 
+# 7- Forgot Password ----------------------------------------------
+#------------------------------------------------------------------
+
+@main.route('/forgotpassword')
+def forgotpassword():
+    return render_template('forgotpassword.html')
 
 
