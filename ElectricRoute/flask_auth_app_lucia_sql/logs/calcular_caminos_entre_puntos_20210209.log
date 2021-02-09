@@ -1,0 +1,47 @@
+[2021-02-09 10:26:34,359] [INFO    ][OK] Llamada al script calcular_caminos_entre_puntos.py [OK]
+[2021-02-09 10:26:34,360] [INFO    ]El programa lanzado es: ALL TESLA ROADSTER A Corunia Tren Guadalajara Bus 90 10  INFO /home/tfm/Documentos/TFM/ElectricRoute/flask_auth_app_lucia_sql/logs/
+[2021-02-09 10:26:34,360] [INFO    ]1.- Carga de inputs desde Base de Datos
+[2021-02-09 10:26:34,360] [INFO    ]Crear conexion a DB
+[2021-02-09 10:26:34,402] [INFO    ]Query a PuntosCarga
+[2021-02-09 10:26:34,498] [INFO    ]Query a GasolinerasPropuesta
+[2021-02-09 10:26:34,577] [INFO    ]Query a Ciudades
+[2021-02-09 10:26:34,682] [INFO    ]Query a ElectriCar
+[2021-02-09 10:26:34,702] [INFO    ]Query a Matriz_distancia_haversine
+[2021-02-09 10:26:54,913] [INFO    ]Query a Matriz_distancia_haversine completo
+[2021-02-09 10:27:26,524] [INFO    ]Cerrar conexion con DB
+[2021-02-09 10:27:26,525] [INFO    ]2.- Aplicar las restricciones
+[2021-02-09 10:27:26,526] [INFO    ]a) Si no se especifica tipo de conector, no se aplica restriccion
+[2021-02-09 10:27:26,526] [INFO    ]b) Restriccion de primera parada
+[2021-02-09 10:27:26,997] [INFO    ]c) Restriccion de ultima parada
+[2021-02-09 10:27:27,361] [INFO    ]Se genera el dataframe reducido que cumple con todas las restricciones
+[2021-02-09 10:27:29,514] [INFO    ]df_distancias (461204, 3)
+[2021-02-09 10:27:29,516] [INFO    ]df_distancias_reduced (461018, 5)
+[2021-02-09 10:27:29,516] [INFO    ]3.- Calcular tiempos (de recorrido y parada)
+[2021-02-09 10:27:29,516] [INFO    ]a) Tiempo de recorrido
+[2021-02-09 10:27:29,548] [INFO    ]b) Tiempo de parada
+[2021-02-09 10:27:29,549] [INFO    ]Filtro las distancias menores o iguales de 50 km entre las CIUDADES IMPORTANTES y el resto de coordenadas
+[2021-02-09 10:27:34,664] [INFO    ]Calculo tiempo de parada para puntos de recarga
+[2021-02-09 10:27:34,944] [INFO    ]Se genera el dataframe reducido con columna basada en Suma_time_parada_h
+[2021-02-09 10:27:35,297] [INFO    ]4.- Construir el grafo
+[2021-02-09 10:30:13,337] [INFO    ]5.- Calculo rutas optimas
+[2021-02-09 10:30:14,363] [INFO    ]La ruta optima es: ['A Corunia Tren', 'punto_recarga_194', 'Guadalajara Bus']
+[2021-02-09 10:30:14,713] [INFO    ]Tiempo de parada en A Corunia Tren es 0.0 h
+[2021-02-09 10:30:14,714] [INFO    ]Tiempo total del tramo A Corunia Tren - punto_recarga_194 es 0.718667261878035 h
+[2021-02-09 10:30:14,978] [INFO    ]Tiempo de parada en punto_recarga_194 es 2.064852225963337 h
+[2021-02-09 10:30:14,979] [INFO    ]Tiempo total del tramo punto_recarga_194 - Guadalajara Bus es 6.1469795641176015 h
+[2021-02-09 10:30:14,979] [INFO    ]El tiempo total tardado es: 6.865646825995636 h
+[2021-02-09 10:30:16,140] [INFO    ]6.- Carga de outputs a Base de Datos
+[2021-02-09 10:30:16,141] [INFO    ]Crear conexion a DB
+[2021-02-09 10:30:16,231] [INFO    ]Query a Output
+[2021-02-09 10:30:16,301] [INFO    ]1 registros insertados.
+[2021-02-09 10:30:16,301] [INFO    ]Cerrar conexion con DB
+[2021-02-09 10:30:16,302] [INFO    ][OK] Final del script calcular_caminos_entre_puntos.py [OK]
+[2021-02-09 10:30:16,613] [INFO    ]127.0.0.1 - - [09/Feb/2021 10:30:16] "[37mPOST /Route HTTP/1.1[0m" 200 -
+[2021-02-09 10:30:20,126] [INFO    ]127.0.0.1 - - [09/Feb/2021 10:30:20] "[37mGET /static/dist/leaflet.routing.icons.png HTTP/1.1[0m" 200 -
+[2021-02-09 10:31:09,177] [INFO    ]127.0.0.1 - - [09/Feb/2021 10:31:09] "[35m[1mGET /profile2 HTTP/1.1[0m" 500 -
+[2021-02-09 10:31:09,305] [INFO    ]127.0.0.1 - - [09/Feb/2021 10:31:09] "[37mGET /profile2?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 200 -
+[2021-02-09 10:31:09,336] [INFO    ]127.0.0.1 - - [09/Feb/2021 10:31:09] "[37mGET /profile2?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 200 -
+[2021-02-09 10:31:09,338] [INFO    ]127.0.0.1 - - [09/Feb/2021 10:31:09] "[37mGET /profile2?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1[0m" 200 -
+[2021-02-09 10:31:09,451] [INFO    ]127.0.0.1 - - [09/Feb/2021 10:31:09] "[37mGET /profile2?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 200 -
+[2021-02-09 10:31:09,995] [INFO    ]127.0.0.1 - - [09/Feb/2021 10:31:09] "[37mGET /profile2?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 200 -
+[2021-02-09 10:33:50,957] [INFO    ] * Detected change in '/home/tfm/Documentos/TFM/ElectricRoute/flask_auth_app_lucia_sql/project/main.py', reloading

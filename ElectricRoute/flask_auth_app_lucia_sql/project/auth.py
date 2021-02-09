@@ -54,6 +54,7 @@ def login_post():
             session['id']       = user['id'] 
             session['email']    = user['email']
             session['username'] = user['username']
+            session['lastName'] = user['lastName']
             session['brandCar'] = user['brandCar']
             session['modelCar'] = user['modelCar']
             session['connect']  = True
@@ -92,7 +93,7 @@ def signup_post():
         brandCar = request.form['brandCar']
         modelCar = request.form['modelCar']
    
-        cursor = db.connection.cursor(MySQLdb.cursors.DictCursor) 
+        cursor = db.connection.cursor(MySQLdb.cursors.DictCursor)
         cursor.execute('SELECT * FROM users WHERE email = % s', (email, )) 
         user = cursor.fetchone()
         print(user)

@@ -7,8 +7,7 @@
         
         $(document).ready(function() {
 
-
-
+            // Se obtiene la variable lista_coordenadas (lista de los ptos por los q pasa la ruta)
             var ruta = JSON.parse('{{ lista_coordenadas | tojson }}');
 
 
@@ -21,22 +20,14 @@
                 }).addTo(map);
             
 
-
+            // Se inicializa una lista vacía
             var waypoints_ruta = [];
             
-            console.log(ruta);
-            console.log('Hola Lucía');
-            
-            console.log(ruta[0][1]);
-
+            // Se transforma cada par de puntos en tipo L.latLng
             for (var i = 0; i < ruta.length; i++){
                 
                 waypoints_ruta.push(L.latLng(ruta[i][0], ruta[i][1]));
-                
             }
-
-
-            console.log(waypoints_ruta);
 
             // Se grafica la ruta
             myRouting = L.Routing.control({
@@ -44,14 +35,14 @@
                 
             }).addTo(map);
 
-
         }) 
-
 
     </script>
 
 {% endblock %}
+
 {% block body_content%}
+
     <!-- Page Wrapper -->
     <div id="wrapper">
         <!-- Barra Lateral -->
@@ -97,7 +88,7 @@
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Components:</h6>
-                    <a class="collapse-item" href="profile2">
+                    <a class="collapse-item" href="profile">
                         <i class="fa fa-user" aria-hidden="true"></i>
                         <span>User Profile</span>
                     </a>
@@ -155,9 +146,9 @@
 
                 <!-- Nav Item - User Information -->
                 <li class="nav-item dropdown no-arrow">
-                <a class="nav-link" href="profile2" id="userDropdown">
+                <a class="nav-link" href="profile" id="userDropdown">
                     <span class="mr-2 d-none d-lg-inline text-gray-600 small"> {{ name }} </span>
-                    <img class="img-profile rounded-circle" src="{{url_for('static', filename='img/avatar_login.jpg')}}">
+                    <img class="img-profile rounded-circle" src="{{url_for('static', filename='img/img_avatar.jpg')}}">
                 </a>                  
                 </li>
                  <!-- Línea Dividora -->
@@ -184,7 +175,7 @@
                                      
             <!-- /.container-fluid -->
         </div>
-        <!-- End of Main Content -->
+        
         <!-- Pie de página -->
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
@@ -193,7 +184,7 @@
             </div>
             </div>
         </footer>
-        <!-- Fin del pie de página -->
+        
         </div>
         <!-- End of Content Wrapper -->
     </div>
