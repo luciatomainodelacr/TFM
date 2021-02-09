@@ -56,26 +56,35 @@ import datetime
 import numpy as np
 
 # Se establece el diretorio base
-os.chdir('/home/tfm/Documentos/TFM/Python/')
-import Output.BaseDatos as BaseDatos
-import Modelo.Restricciones as Restricciones
-import Modelo.Tiempos as Tiempos
-import Modelo.Network as Network
+print(os.getcwd())
+if __package__ is None or __package__ == '':
+    # uses current directory visibility
+    import Output.BaseDatos as BaseDatos
+    import Modelo.Restricciones as Restricciones
+    import Modelo.Tiempos as Tiempos
+    import Modelo.Network as Network
+else:
+    # uses current package visibility
+    from .Output import BaseDatos as BaseDatos
+    from .Modelo import Restricciones as Restricciones
+    from .Modelo import Tiempos as Tiempos
+    from .Modelo import Network as Network
 
 
 # 2.- Funcion main ------------------------------------------------
 #------------------------------------------------------------------
-def main(tipo_programa,
-         marca_coche,
-         modelo_coche,
-         origen,
-         destino,
-         carga_inicial = "90",
-         carga_final = "10",
-         tipo_conector = "",
-         log_level = "INFO",
-         log_path = os.getcwd() + "/logs/",
-         user_id = 1):
+def main_route(tipo_programa,
+               marca_coche,
+               modelo_coche,
+               origen,
+               destino,
+               carga_inicial = "90",
+               carga_final = "10",
+               tipo_conector = "",
+               log_level = "INFO",
+               log_path = os.getcwd() + "/logs/",
+               user_id = 1,
+               use_docker = False):
 
     if not os.path.exists(log_path):
             os.makedirs(log_path)
@@ -102,11 +111,14 @@ def main(tipo_programa,
                  log_path)
 
     try:
-
         #------------------------------------------------------------------
         # 1.- Carga de inputs desde Base de Datos -------------------------
         logger.info("1.- Carga de inputs desde Base de Datos")
-        bd = BaseDatos.BaseDatos(host="localhost",
+        if use_docker:
+            db_host = "db"
+        else:
+            db_host = "0.0.0.0"
+        bd = BaseDatos.BaseDatos(host=db_host,
                                  puerto=3306,            
                                  usuario="root",            
                                  password="root",        
@@ -135,9 +147,7 @@ def main(tipo_programa,
                                                  sql_query = sql_query_ciudades,
                                                  columnas = columnas_ciudades)
         #df_ciudades.set_index(["id"], inplace=True)
-
         df_ciudades.drop("status",axis="columns", inplace=True)
-
         #Query a ElectriCar
         logger.info("Query a ElectriCar")
         sql_query_coche = "SELECT * FROM ElectricCar WHERE BRAND = %s AND MODEL = %s"
@@ -184,7 +194,6 @@ def main(tipo_programa,
                                                              columnas = columnas_distancia_completo)
         logger.info("Cerrar conexion con DB")
         con.close()
-
         # 2.- Aplicar las restricciones -----------------------------------
         #------------------------------------------------------------------
         logger.info("2.- Aplicar las restricciones")
@@ -366,11 +375,10 @@ def main(tipo_programa,
                 total_tiempo = total_tiempo + float(df_distancias_lugar["Suma_time_parada_h"])
         logger.info("El tiempo total tardado es: %s h", total_tiempo)
         Network.get_shortest_path(DG, origen = origen, destino = destino)
-
         # 6.- Carga de outputs a Base de Datos ----------------------------
         #------------------------------------------------------------------
         logger.info("6.- Carga de outputs a Base de Datos")
-        bd_output = BaseDatos.BaseDatos(host="localhost",
+        bd_output = BaseDatos.BaseDatos(host=db_host,
                                         puerto=3306,            
                                         usuario="root",            
                                         password="root",        
@@ -466,17 +474,24 @@ if __name__ == "__main__":
                         type = int,
                         help = "Id del usuario "
                                "Default: 1")
+    parser.add_argument("--use_docker",
+                        required = False,
+                        default = False,
+                        type = bool,
+                        help = "Usar Docker "
+                               "Default: False")
     args = parser.parse_args()
 
-    main(tipo_programa = args.tipo_programa,
-         marca_coche = args.marca_coche,
-         modelo_coche = args.modelo_coche,
-         origen = args.origen,
-         destino = args.destino,
-         carga_inicial = args.carga_inicial,
-         carga_final = args.carga_final,
-         tipo_conector = args.tipo_conector,
-         log_level = args.log_level,
-         log_path = args.log_path,
-         user_id = args.user_id)
+    main_route(tipo_programa = args.tipo_programa,
+               marca_coche = args.marca_coche,
+               modelo_coche = args.modelo_coche,
+               origen = args.origen,
+               destino = args.destino,
+               carga_inicial = args.carga_inicial,
+               carga_final = args.carga_final,
+               tipo_conector = args.tipo_conector,
+               log_level = args.log_level,
+               log_path = args.log_path,
+               user_id = args.user_id,
+               use_docker = args.use_docker)
     

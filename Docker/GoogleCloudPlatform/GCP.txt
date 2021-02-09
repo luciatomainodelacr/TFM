@@ -1,31 +1,4 @@
 #####Docker-Compose en GCP############
-Opción 1
-https://cloud.google.com/community/tutorials/docker-compose-on-container-optimized-os
-
-1) Crear instancia VM en Compute Engine
-
-Setting up the virtual machine
-
-Create a new Compute Engine instance using the Container-Optimized OS stable image.
-
-    Open the Cloud Console.
-    Create a new Compute Engine instance.
-    Select the desired Zone, such as "us-central1-f". -> eu-west1-b
-    Select the desired Machine type, such as "micro" (f1-micro).
-    Change the Boot disk to "Container-Optimized OS stable".
-    Check the box to allow HTTP traffic in the Firewall section.
-    Click the Create button to create the Compute Engine instance.
-
-
-2) Descargar el repositorio de git
-git clone https://github.com/luciatomainodelacr/TFM.git
-cd TFM/Docker/
-
-3) Correr Docker-Compose
-docker run docker/compose:1.24.0 version
-
-Opción 2) PREFERIDA
-
 1) Crear instancia VM en GCP Compute Engine con Ubuntu 18.04
 
 2) Crear reglas de firewall en GCP VPC Network/Firewall que permita el acceso desde fuera a
@@ -34,44 +7,17 @@ los puertos que necesitamos:
 - Mysql: 3306 desde 0.0.0.0/0
 - Flask-app: 5000 desde 0.0.0.0/0
 
-3) Instalar docker y docker-compose
-####DOCKER###
-https://docs.docker.com/engine/install/ubuntu/
-
-
-sudo apt-get remove docker docker-engine docker.io containerd runc
-sudo apt-get update
-sudo apt-get install \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg-agent \
-    software-properties-common
-
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo apt-key fingerprint 0EBFCD88
-
-sudo add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable"
-
-sudo apt  install docker.io
-sudo chmod 666 /var/run/docker.sock
-
-####DOCKER-COMPOSE####
-sudo apt-get update
-sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-docker-compose --version
-
-4) Descargar el repositorio de git
+3) Descargar el repositorio de git
 git clone https://github.com/luciatomainodelacr/TFM.git
 cd TFM/Docker/
 
-5) Copiar la carpeta de ElectricRoute dentro de la de Docker
-cp -r ../ElectricRoute/flask_auth_app/project app/.
+4) Instalar docker y docker-compose 
+./GoogleCloudPlatform/install_docker.sh
 
+5) Prepara el entorno (desde TFM/Docker)
+./GoogleCloudPlatform/prepare_app.sh
+
+Modificar el script main.py y la llamada a la db
 6) Levantar los dockers con docker-compose
 docker network create monitoring
 docker volume create --name=grafana-data
