@@ -33,7 +33,6 @@ from .BE.Output import BaseDatos
 
 
 # Se inicializa SQLAlchemy
-#db = SQLAlchemy()
 db = MySQL()
 
 # Se crea la app

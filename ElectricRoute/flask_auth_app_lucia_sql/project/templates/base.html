@@ -3,9 +3,9 @@
 {% block html %}
 <html lang="en">
 
-    {% block head %}
-
     <!-- Cabecera -->
+    {% block head %}
+   
     <head>
 
         <meta charset="utf-8">
@@ -29,52 +29,44 @@
         <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
    
 
-
         {% block extra_css %}
         {% endblock %}
-
    
     </head>
     {% endblock %}
 
 
-    {% block body %}
-
-    
-
     <!-- Cuerpo -->
+    {% block body %}
     <body id="page-top" >
 
-
-    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
-        integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
-        crossorigin="">
-    </script>
-
-
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
-
-    <script src="{{url_for('static', filename='dist/leaflet-routing-machine.js')}}"></script>
-    <link rel="stylesheet" href="{{url_for("static", filename='/dist/leaflet-routing-machine.css')}}" /> 
-                            
-        {% block body_content%}
-        {% endblock %}
+        <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+            integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+            crossorigin="">
+        </script>
 
 
-        <!-- Bootstrap core JavaScript-->
-        <script src="{{url_for("static", filename='vendor/jquery/jquery.min.js')}}"></script>
-        <script src="{{url_for("static", filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
 
-        <!-- Core plugin JavaScript-->
-        <script src="{{url_for("static", filename='vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+        <script src="{{url_for('static', filename='dist/leaflet-routing-machine.js')}}"></script>
+        <link rel="stylesheet" href="{{url_for("static", filename='/dist/leaflet-routing-machine.css')}}" /> 
+                                
+            {% block body_content%}
+            {% endblock %}
 
-        <!-- Custom scripts for all pages-->
-        <script src="{{url_for("static", filename='js/sb-admin-2.min.js')}}"></script>
+            <!-- Bootstrap core JavaScript-->
+            <script src="{{url_for("static", filename='vendor/jquery/jquery.min.js')}}"></script>
+            <script src="{{url_for("static", filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
-        {% block extra_js %}
-        {% endblock %}
+            <!-- Core plugin JavaScript-->
+            <script src="{{url_for("static", filename='vendor/jquery-easing/jquery.easing.min.js')}}"></script>
 
+            <!-- Custom scripts for all pages-->
+            <script src="{{url_for("static", filename='js/sb-admin-2.min.js')}}"></script>
+
+            {% block extra_js %}
+            {% endblock %}
 
     </body>
     {% endblock %}

@@ -1,231 +1,74 @@
-[2021-02-09 10:26:34,359] [INFO    ][OK] Llamada al script calcular_caminos_entre_puntos.py [OK]
-[2021-02-09 10:26:34,360] [INFO    ]El programa lanzado es: ALL TESLA ROADSTER A Corunia Tren Guadalajara Bus 90 10  INFO /home/tfm/Documentos/TFM/ElectricRoute/flask_auth_app_lucia_sql/logs/
-[2021-02-09 10:26:34,360] [INFO    ]1.- Carga de inputs desde Base de Datos
-[2021-02-09 10:26:34,360] [INFO    ]Crear conexion a DB
-[2021-02-09 10:26:34,402] [INFO    ]Query a PuntosCarga
-[2021-02-09 10:26:34,498] [INFO    ]Query a GasolinerasPropuesta
-[2021-02-09 10:26:34,577] [INFO    ]Query a Ciudades
-[2021-02-09 10:26:34,682] [INFO    ]Query a ElectriCar
-[2021-02-09 10:26:34,702] [INFO    ]Query a Matriz_distancia_haversine
-[2021-02-09 10:26:54,913] [INFO    ]Query a Matriz_distancia_haversine completo
-[2021-02-09 10:27:26,524] [INFO    ]Cerrar conexion con DB
-[2021-02-09 10:27:26,525] [INFO    ]2.- Aplicar las restricciones
-[2021-02-09 10:27:26,526] [INFO    ]a) Si no se especifica tipo de conector, no se aplica restriccion
-[2021-02-09 10:27:26,526] [INFO    ]b) Restriccion de primera parada
-[2021-02-09 10:27:26,997] [INFO    ]c) Restriccion de ultima parada
-[2021-02-09 10:27:27,361] [INFO    ]Se genera el dataframe reducido que cumple con todas las restricciones
-[2021-02-09 10:27:29,514] [INFO    ]df_distancias (461204, 3)
-[2021-02-09 10:27:29,516] [INFO    ]df_distancias_reduced (461018, 5)
-[2021-02-09 10:27:29,516] [INFO    ]3.- Calcular tiempos (de recorrido y parada)
-[2021-02-09 10:27:29,516] [INFO    ]a) Tiempo de recorrido
-[2021-02-09 10:27:29,548] [INFO    ]b) Tiempo de parada
-[2021-02-09 10:27:29,549] [INFO    ]Filtro las distancias menores o iguales de 50 km entre las CIUDADES IMPORTANTES y el resto de coordenadas
-[2021-02-09 10:27:34,664] [INFO    ]Calculo tiempo de parada para puntos de recarga
-[2021-02-09 10:27:34,944] [INFO    ]Se genera el dataframe reducido con columna basada en Suma_time_parada_h
-[2021-02-09 10:27:35,297] [INFO    ]4.- Construir el grafo
-[2021-02-09 10:30:13,337] [INFO    ]5.- Calculo rutas optimas
-[2021-02-09 10:30:14,363] [INFO    ]La ruta optima es: ['A Corunia Tren', 'punto_recarga_194', 'Guadalajara Bus']
-[2021-02-09 10:30:14,713] [INFO    ]Tiempo de parada en A Corunia Tren es 0.0 h
-[2021-02-09 10:30:14,714] [INFO    ]Tiempo total del tramo A Corunia Tren - punto_recarga_194 es 0.718667261878035 h
-[2021-02-09 10:30:14,978] [INFO    ]Tiempo de parada en punto_recarga_194 es 2.064852225963337 h
-[2021-02-09 10:30:14,979] [INFO    ]Tiempo total del tramo punto_recarga_194 - Guadalajara Bus es 6.1469795641176015 h
-[2021-02-09 10:30:14,979] [INFO    ]El tiempo total tardado es: 6.865646825995636 h
-[2021-02-09 10:30:16,140] [INFO    ]6.- Carga de outputs a Base de Datos
-[2021-02-09 10:30:16,141] [INFO    ]Crear conexion a DB
-[2021-02-09 10:30:16,231] [INFO    ]Query a Output
-[2021-02-09 10:30:16,301] [INFO    ]1 registros insertados.
-[2021-02-09 10:30:16,301] [INFO    ]Cerrar conexion con DB
-[2021-02-09 10:30:16,302] [INFO    ][OK] Final del script calcular_caminos_entre_puntos.py [OK]
-[2021-02-09 10:30:16,613] [INFO    ]127.0.0.1 - - [09/Feb/2021 10:30:16] "[37mPOST /Route HTTP/1.1[0m" 200 -
-[2021-02-09 10:30:20,126] [INFO    ]127.0.0.1 - - [09/Feb/2021 10:30:20] "[37mGET /static/dist/leaflet.routing.icons.png HTTP/1.1[0m" 200 -
-[2021-02-09 10:31:09,177] [INFO    ]127.0.0.1 - - [09/Feb/2021 10:31:09] "[35m[1mGET /profile2 HTTP/1.1[0m" 500 -
-[2021-02-09 10:31:09,305] [INFO    ]127.0.0.1 - - [09/Feb/2021 10:31:09] "[37mGET /profile2?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 200 -
-[2021-02-09 10:31:09,336] [INFO    ]127.0.0.1 - - [09/Feb/2021 10:31:09] "[37mGET /profile2?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 200 -
-[2021-02-09 10:31:09,338] [INFO    ]127.0.0.1 - - [09/Feb/2021 10:31:09] "[37mGET /profile2?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1[0m" 200 -
-[2021-02-09 10:31:09,451] [INFO    ]127.0.0.1 - - [09/Feb/2021 10:31:09] "[37mGET /profile2?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 200 -
-[2021-02-09 10:31:09,995] [INFO    ]127.0.0.1 - - [09/Feb/2021 10:31:09] "[37mGET /profile2?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 200 -
-[2021-02-09 10:33:50,957] [INFO    ] * Detected change in '/home/tfm/Documentos/TFM/ElectricRoute/flask_auth_app_lucia_sql/project/main.py', reloading
-[2021-02-09 17:24:06,502] [INFO    ][OK] Llamada al script calcular_caminos_entre_puntos.py [OK]
-[2021-02-09 17:24:06,504] [INFO    ]El programa lanzado es: ALL SKODA CITIGOE IV A Corunia Tren Zamora Tren 90 10  INFO /home/tfm/Documentos/TFM/ElectricRoute/flask_auth_app_lucia_sql/logs/
-[2021-02-09 17:24:06,505] [INFO    ]1.- Carga de inputs desde Base de Datos
-[2021-02-09 17:24:06,505] [INFO    ]Crear conexion a DB
-[2021-02-09 17:24:06,520] [INFO    ]Query a PuntosCarga
-[2021-02-09 17:24:06,621] [INFO    ]Query a GasolinerasPropuesta
-[2021-02-09 17:24:06,704] [INFO    ]Query a Ciudades
-[2021-02-09 17:24:06,735] [INFO    ]Query a ElectriCar
-[2021-02-09 17:24:06,746] [INFO    ]Query a Matriz_distancia_haversine
-[2021-02-09 17:24:10,432] [INFO    ]Query a Matriz_distancia_haversine completo
-[2021-02-09 17:24:36,715] [INFO    ]Cerrar conexion con DB
-[2021-02-09 17:24:36,717] [INFO    ]2.- Aplicar las restricciones
-[2021-02-09 17:24:36,717] [INFO    ]a) Si no se especifica tipo de conector, no se aplica restriccion
-[2021-02-09 17:24:36,717] [INFO    ]b) Restriccion de primera parada
-[2021-02-09 17:24:36,756] [INFO    ]c) Restriccion de ultima parada
-[2021-02-09 17:24:36,786] [INFO    ]Se genera el dataframe reducido que cumple con todas las restricciones
-[2021-02-09 17:24:37,008] [INFO    ]df_distancias (70383, 3)
-[2021-02-09 17:24:37,010] [INFO    ]df_distancias_reduced (70370, 5)
-[2021-02-09 17:24:37,011] [INFO    ]3.- Calcular tiempos (de recorrido y parada)
-[2021-02-09 17:24:37,011] [INFO    ]a) Tiempo de recorrido
-[2021-02-09 17:24:37,019] [INFO    ]b) Tiempo de parada
-[2021-02-09 17:24:37,019] [INFO    ]Filtro las distancias menores o iguales de 50 km entre las CIUDADES IMPORTANTES y el resto de coordenadas
-[2021-02-09 17:24:41,088] [INFO    ]Calculo tiempo de parada para puntos de recarga
-[2021-02-09 17:24:41,235] [INFO    ]Se genera el dataframe reducido con columna basada en Suma_time_parada_h
-[2021-02-09 17:24:41,281] [INFO    ]4.- Construir el grafo
-[2021-02-09 17:24:59,745] [INFO    ]5.- Calculo rutas optimas
-[2021-02-09 17:24:59,772] [INFO    ]La ruta optima es: ['A Corunia Tren', 'punto_recarga_194', 'punto_recarga_319', 'Zamora Tren']
-[2021-02-09 17:24:59,824] [INFO    ]Tiempo de parada en A Corunia Tren es 0.0 h
-[2021-02-09 17:24:59,825] [INFO    ]Tiempo total del tramo A Corunia Tren - punto_recarga_194 es 0.718667261878035 h
-[2021-02-09 17:24:59,870] [INFO    ]Tiempo de parada en punto_recarga_194 es 0.34211560044893374 h
-[2021-02-09 17:24:59,870] [INFO    ]Tiempo total del tramo punto_recarga_194 - punto_recarga_319 es 1.520903678959535 h
-[2021-02-09 17:24:59,918] [INFO    ]Tiempo de parada en punto_recarga_319 es 0.34211560044893374 h
-[2021-02-09 17:24:59,918] [INFO    ]Tiempo total del tramo punto_recarga_319 - Zamora Tren es 1.2205082054886067 h
-[2021-02-09 17:24:59,919] [INFO    ]El tiempo total tardado es: 3.460079146326177 h
-[2021-02-09 17:24:59,954] [INFO    ]6.- Carga de outputs a Base de Datos
-[2021-02-09 17:24:59,955] [INFO    ]Crear conexion a DB
-[2021-02-09 17:24:59,961] [INFO    ]Query a Output
-[2021-02-09 17:24:59,977] [INFO    ]1 registros insertados.
-[2021-02-09 17:24:59,978] [INFO    ]Cerrar conexion con DB
-[2021-02-09 17:24:59,978] [INFO    ][OK] Final del script calcular_caminos_entre_puntos.py [OK]
-[2021-02-09 17:25:00,057] [INFO    ]127.0.0.1 - - [09/Feb/2021 17:25:00] "[37mPOST /Route HTTP/1.1[0m" 200 -
-[2021-02-09 17:26:36,565] [INFO    ]127.0.0.1 - - [09/Feb/2021 17:26:36] "[37mGET /frequentroutes HTTP/1.1[0m" 200 -
-[2021-02-09 17:27:46,182] [INFO    ]127.0.0.1 - - [09/Feb/2021 17:27:46] "[37mGET /Route HTTP/1.1[0m" 200 -
-[2021-02-09 17:27:46,500] [INFO    ]127.0.0.1 - - [09/Feb/2021 17:27:46] "[33mGET /docs/images/favicon.ico HTTP/1.1[0m" 404 -
-[2021-02-09 17:28:05,913] [INFO    ]127.0.0.1 - - [09/Feb/2021 17:28:05] "[37mGET /Route HTTP/1.1[0m" 200 -
-[2021-02-09 17:28:06,038] [INFO    ]127.0.0.1 - - [09/Feb/2021 17:28:06] "[36mGET /static/dist/leaflet-routing-machine.js HTTP/1.1[0m" 304 -
-[2021-02-09 17:28:06,049] [INFO    ]127.0.0.1 - - [09/Feb/2021 17:28:06] "[36mGET /static/js/sb-admin-2.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 17:28:06,052] [INFO    ]127.0.0.1 - - [09/Feb/2021 17:28:06] "[36mGET /static/vendor/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 17:28:06,057] [INFO    ]127.0.0.1 - - [09/Feb/2021 17:28:06] "[36mGET /static/vendor/jquery-easing/jquery.easing.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 17:28:06,059] [INFO    ]127.0.0.1 - - [09/Feb/2021 17:28:06] "[36mGET /static/vendor/jquery/jquery.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 17:28:06,254] [INFO    ]127.0.0.1 - - [09/Feb/2021 17:28:06] "[36mGET /static/img/img_avatar.jpg HTTP/1.1[0m" 304 -
-[2021-02-09 17:28:13,615] [INFO    ]127.0.0.1 - - [09/Feb/2021 17:28:13] "[37mGET /Route HTTP/1.1[0m" 200 -
-[2021-02-09 17:28:13,766] [INFO    ]127.0.0.1 - - [09/Feb/2021 17:28:13] "[36mGET /static/vendor/jquery/jquery.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 17:28:13,771] [INFO    ]127.0.0.1 - - [09/Feb/2021 17:28:13] "[36mGET /static/vendor/jquery-easing/jquery.easing.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 17:28:13,774] [INFO    ]127.0.0.1 - - [09/Feb/2021 17:28:13] "[36mGET /static/vendor/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 17:28:13,775] [INFO    ]127.0.0.1 - - [09/Feb/2021 17:28:13] "[36mGET /static/dist/leaflet-routing-machine.js HTTP/1.1[0m" 304 -
-[2021-02-09 17:28:13,779] [INFO    ]127.0.0.1 - - [09/Feb/2021 17:28:13] "[36mGET /static/js/sb-admin-2.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 17:28:13,968] [INFO    ]127.0.0.1 - - [09/Feb/2021 17:28:13] "[36mGET /static/img/img_avatar.jpg HTTP/1.1[0m" 304 -
-[2021-02-09 18:38:22,374] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:38:22] "[37mGET /Route HTTP/1.1[0m" 200 -
-[2021-02-09 18:38:22,454] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:38:22] "[36mGET /static/vendor/jquery-easing/jquery.easing.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:38:22,460] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:38:22] "[36mGET /static/vendor/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:38:22,462] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:38:22] "[36mGET /static/js/sb-admin-2.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:38:22,465] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:38:22] "[36mGET /static/dist/leaflet-routing-machine.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:38:22,467] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:38:22] "[36mGET /static/vendor/jquery/jquery.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:38:22,615] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:38:22] "[36mGET /static/img/img_avatar.jpg HTTP/1.1[0m" 304 -
-[2021-02-09 18:38:23,933] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:38:23] "[37mGET /profile HTTP/1.1[0m" 200 -
-[2021-02-09 18:38:56,102] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:38:56] "[37mGET /Route HTTP/1.1[0m" 200 -
-[2021-02-09 18:38:56,133] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:38:56] "[36mGET /static/dist/leaflet-routing-machine.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:38:56,138] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:38:56] "[36mGET /static/vendor/jquery-easing/jquery.easing.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:38:56,157] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:38:56] "[36mGET /static/vendor/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:38:56,158] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:38:56] "[36mGET /static/vendor/jquery/jquery.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:38:56,161] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:38:56] "[36mGET /static/js/sb-admin-2.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:38:56,216] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:38:56] "[37mGET /static/img/img_avatar.jpg HTTP/1.1[0m" 200 -
-[2021-02-09 18:39:05,648] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:39:05] "[37mGET /profile HTTP/1.1[0m" 200 -
-[2021-02-09 18:39:20,616] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:39:20] "[37mGET /profile HTTP/1.1[0m" 200 -
-[2021-02-09 18:39:20,647] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:39:20] "[36mGET /static/img/img_profile.png HTTP/1.1[0m" 304 -
-[2021-02-09 18:39:22,897] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:39:22] "[37mGET /Route HTTP/1.1[0m" 200 -
-[2021-02-09 18:39:22,933] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:39:22] "[36mGET /static/dist/leaflet-routing-machine.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:39:22,936] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:39:22] "[36mGET /static/vendor/jquery/jquery.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:39:22,939] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:39:22] "[36mGET /static/js/sb-admin-2.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:39:22,941] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:39:22] "[36mGET /static/vendor/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:39:22,944] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:39:22] "[36mGET /static/vendor/jquery-easing/jquery.easing.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:39:23,014] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:39:23] "[36mGET /static/img/img_avatar.jpg HTTP/1.1[0m" 304 -
-[2021-02-09 18:40:04,050] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:40:04] "[37mGET /Route HTTP/1.1[0m" 200 -
-[2021-02-09 18:40:04,100] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:40:04] "[36mGET /static/vendor/jquery/jquery.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:40:04,108] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:40:04] "[36mGET /static/vendor/jquery-easing/jquery.easing.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:40:04,119] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:40:04] "[36mGET /static/js/sb-admin-2.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:40:04,120] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:40:04] "[36mGET /static/dist/leaflet-routing-machine.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:40:04,120] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:40:04] "[36mGET /static/vendor/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:40:04,217] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:40:04] "[37mGET /static/img/img_avatar.jpg HTTP/1.1[0m" 200 -
-[2021-02-09 18:40:20,385] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:40:20] "[37mGET /Route HTTP/1.1[0m" 200 -
-[2021-02-09 18:40:20,433] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:40:20] "[36mGET /static/dist/leaflet-routing-machine.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:40:20,436] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:40:20] "[36mGET /static/vendor/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:40:20,441] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:40:20] "[36mGET /static/vendor/jquery-easing/jquery.easing.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:40:20,443] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:40:20] "[36mGET /static/vendor/jquery/jquery.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:40:20,444] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:40:20] "[36mGET /static/js/sb-admin-2.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:40:20,547] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:40:20] "[36mGET /static/img/img_avatar.jpg HTTP/1.1[0m" 304 -
-[2021-02-09 18:41:34,001] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:41:34] "[37mGET /Route HTTP/1.1[0m" 200 -
-[2021-02-09 18:41:34,065] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:41:34] "[36mGET /static/dist/leaflet-routing-machine.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:41:34,079] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:41:34] "[36mGET /static/vendor/jquery/jquery.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:41:34,085] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:41:34] "[36mGET /static/vendor/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:41:34,087] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:41:34] "[36mGET /static/js/sb-admin-2.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:41:34,088] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:41:34] "[36mGET /static/vendor/jquery-easing/jquery.easing.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:41:34,191] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:41:34] "[37mGET /static/img/img_avatar.jpg HTTP/1.1[0m" 200 -
-[2021-02-09 18:41:34,235] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:41:34] "[33mGET /docs/images/favicon.ico HTTP/1.1[0m" 404 -
-[2021-02-09 18:41:40,934] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:41:40] "[37mGET /Route HTTP/1.1[0m" 200 -
-[2021-02-09 18:41:40,973] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:41:40] "[36mGET /static/dist/leaflet-routing-machine.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:41:40,976] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:41:40] "[36mGET /static/vendor/jquery/jquery.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:41:40,979] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:41:40] "[36mGET /static/vendor/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:41:40,981] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:41:40] "[36mGET /static/vendor/jquery-easing/jquery.easing.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:41:40,986] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:41:40] "[36mGET /static/js/sb-admin-2.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:41:41,044] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:41:41] "[36mGET /static/img/img_avatar.jpg HTTP/1.1[0m" 304 -
-[2021-02-09 18:42:04,899] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:42:04] "[37mGET /Route HTTP/1.1[0m" 200 -
-[2021-02-09 18:42:04,935] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:42:04] "[36mGET /static/dist/leaflet-routing-machine.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:42:04,938] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:42:04] "[36mGET /static/vendor/jquery/jquery.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:42:04,952] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:42:04] "[36mGET /static/js/sb-admin-2.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:42:04,954] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:42:04] "[36mGET /static/vendor/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:42:04,972] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:42:04] "[36mGET /static/vendor/jquery-easing/jquery.easing.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:42:05,013] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:42:05] "[36mGET /static/img/img_avatar.jpg HTTP/1.1[0m" 304 -
-[2021-02-09 18:42:10,199] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:42:10] "[37mGET /Route HTTP/1.1[0m" 200 -
-[2021-02-09 18:42:10,253] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:42:10] "[36mGET /static/vendor/jquery-easing/jquery.easing.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:42:10,256] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:42:10] "[36mGET /static/vendor/jquery/jquery.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:42:10,268] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:42:10] "[36mGET /static/js/sb-admin-2.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:42:10,269] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:42:10] "[36mGET /static/vendor/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:42:10,273] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:42:10] "[36mGET /static/dist/leaflet-routing-machine.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:42:10,367] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:42:10] "[36mGET /static/img/img_avatar.jpg HTTP/1.1[0m" 304 -
-[2021-02-09 18:42:39,144] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:42:39] "[37mGET /Route HTTP/1.1[0m" 200 -
-[2021-02-09 18:42:39,188] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:42:39] "[36mGET /static/dist/leaflet-routing-machine.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:42:39,196] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:42:39] "[36mGET /static/vendor/jquery-easing/jquery.easing.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:42:39,199] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:42:39] "[36mGET /static/vendor/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:42:39,200] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:42:39] "[36mGET /static/vendor/jquery/jquery.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:42:39,201] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:42:39] "[36mGET /static/js/sb-admin-2.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:42:39,379] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:42:39] "[36mGET /static/img/img_avatar.jpg HTTP/1.1[0m" 304 -
-[2021-02-09 18:42:58,985] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:42:58] "[37mGET /Route HTTP/1.1[0m" 200 -
-[2021-02-09 18:42:59,042] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:42:59] "[36mGET /static/dist/leaflet-routing-machine.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:42:59,045] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:42:59] "[36mGET /static/vendor/jquery/jquery.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:42:59,051] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:42:59] "[36mGET /static/js/sb-admin-2.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:42:59,052] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:42:59] "[36mGET /static/vendor/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:42:59,054] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:42:59] "[36mGET /static/vendor/jquery-easing/jquery.easing.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:42:59,149] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:42:59] "[37mGET /static/img/img_avatar.jpg HTTP/1.1[0m" 200 -
-[2021-02-09 18:43:33,687] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:43:33] "[37mGET /Route HTTP/1.1[0m" 200 -
-[2021-02-09 18:43:33,724] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:43:33] "[36mGET /static/dist/leaflet-routing-machine.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:43:33,727] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:43:33] "[36mGET /static/vendor/jquery/jquery.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:43:33,732] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:43:33] "[36mGET /static/vendor/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:43:33,738] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:43:33] "[36mGET /static/js/sb-admin-2.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:43:33,739] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:43:33] "[36mGET /static/vendor/jquery-easing/jquery.easing.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:43:33,801] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:43:33] "[37mGET /static/img/img_avatar.jpg HTTP/1.1[0m" 200 -
-[2021-02-09 18:47:08,236] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:47:08] "[37mGET /Route HTTP/1.1[0m" 200 -
-[2021-02-09 18:47:08,283] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:47:08] "[36mGET /static/vendor/jquery/jquery.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:47:08,285] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:47:08] "[36mGET /static/vendor/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:47:08,286] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:47:08] "[36mGET /static/dist/leaflet-routing-machine.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:47:08,290] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:47:08] "[36mGET /static/js/sb-admin-2.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:47:08,292] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:47:08] "[36mGET /static/vendor/jquery-easing/jquery.easing.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:47:08,404] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:47:08] "[37mGET /static/img/img_avatar.jpg HTTP/1.1[0m" 200 -
-[2021-02-09 18:47:23,969] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:47:23] "[37mGET /Route HTTP/1.1[0m" 200 -
-[2021-02-09 18:47:24,001] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:47:24] "[36mGET /static/dist/leaflet-routing-machine.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:47:24,005] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:47:24] "[36mGET /static/vendor/jquery/jquery.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:47:24,011] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:47:24] "[36mGET /static/vendor/jquery-easing/jquery.easing.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:47:24,012] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:47:24] "[36mGET /static/js/sb-admin-2.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:47:24,013] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:47:24] "[36mGET /static/vendor/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:47:24,073] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:47:24] "[36mGET /static/img/img_avatar.jpg HTTP/1.1[0m" 304 -
-[2021-02-09 18:47:33,038] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:47:33] "[37mGET /Route HTTP/1.1[0m" 200 -
-[2021-02-09 18:47:33,079] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:47:33] "[36mGET /static/vendor/jquery/jquery.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:47:33,083] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:47:33] "[36mGET /static/vendor/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:47:33,086] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:47:33] "[36mGET /static/vendor/jquery-easing/jquery.easing.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:47:33,089] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:47:33] "[36mGET /static/js/sb-admin-2.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:47:33,091] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:47:33] "[36mGET /static/dist/leaflet-routing-machine.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:47:33,216] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:47:33] "[36mGET /static/img/img_avatar.jpg HTTP/1.1[0m" 304 -
-[2021-02-09 18:47:48,755] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:47:48] "[37mGET /Route HTTP/1.1[0m" 200 -
-[2021-02-09 18:47:48,790] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:47:48] "[36mGET /static/dist/leaflet-routing-machine.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:47:48,791] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:47:48] "[36mGET /static/vendor/jquery-easing/jquery.easing.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:47:48,794] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:47:48] "[36mGET /static/vendor/jquery/jquery.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:47:48,799] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:47:48] "[36mGET /static/vendor/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:47:48,811] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:47:48] "[36mGET /static/js/sb-admin-2.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:47:48,852] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:47:48] "[36mGET /static/img/img_avatar.jpg HTTP/1.1[0m" 304 -
-[2021-02-09 18:54:23,023] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:54:23] "[37mGET /Route HTTP/1.1[0m" 200 -
-[2021-02-09 18:54:23,073] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:54:23] "[36mGET /static/dist/leaflet-routing-machine.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:54:23,078] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:54:23] "[36mGET /static/vendor/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:54:23,079] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:54:23] "[36mGET /static/js/sb-admin-2.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:54:23,082] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:54:23] "[36mGET /static/vendor/jquery/jquery.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:54:23,085] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:54:23] "[36mGET /static/vendor/jquery-easing/jquery.easing.min.js HTTP/1.1[0m" 304 -
-[2021-02-09 18:54:23,217] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:54:23] "[36mGET /static/img/img_avatar.jpg HTTP/1.1[0m" 304 -
-[2021-02-09 18:54:27,728] [INFO    ]127.0.0.1 - - [09/Feb/2021 18:54:27] "[37mGET /profile HTTP/1.1[0m" 200 -
-[2021-02-09 19:11:47,685] [INFO    ]127.0.0.1 - - [09/Feb/2021 19:11:47] "[37mGET /profile HTTP/1.1[0m" 200 -
+[2021-02-09 20:41:38,475] [INFO    ][OK] Llamada al script calcular_caminos_entre_puntos.py [OK]
+[2021-02-09 20:41:38,475] [INFO    ]El programa lanzado es: ALL SKODA CITIGOE IV Albacete Bus Cadiz Bus 90 10  INFO /home/tfm/Documentos/TFM/ElectricRoute/flask_auth_app_lucia_sql/logs/
+[2021-02-09 20:41:38,475] [INFO    ]1.- Carga de inputs desde Base de Datos
+[2021-02-09 20:41:38,475] [INFO    ]Crear conexion a DB
+[2021-02-09 20:41:38,480] [INFO    ]Query a PuntosCarga
+[2021-02-09 20:41:38,514] [INFO    ]Query a GasolinerasPropuesta
+[2021-02-09 20:41:38,542] [INFO    ]Query a Ciudades
+[2021-02-09 20:41:38,551] [INFO    ]Query a ElectriCar
+[2021-02-09 20:41:38,555] [INFO    ]Query a Matriz_distancia_haversine
+[2021-02-09 20:41:40,415] [INFO    ]Query a Matriz_distancia_haversine completo
+[2021-02-09 20:41:55,616] [INFO    ]Cerrar conexion con DB
+[2021-02-09 20:41:55,616] [INFO    ]2.- Aplicar las restricciones
+[2021-02-09 20:41:55,616] [INFO    ]a) Si no se especifica tipo de conector, no se aplica restriccion
+[2021-02-09 20:41:55,616] [INFO    ]b) Restriccion de primera parada
+[2021-02-09 20:41:55,644] [INFO    ]c) Restriccion de ultima parada
+[2021-02-09 20:41:55,670] [INFO    ]Se genera el dataframe reducido que cumple con todas las restricciones
+[2021-02-09 20:41:55,818] [INFO    ]df_distancias (70436, 3)
+[2021-02-09 20:41:55,819] [INFO    ]df_distancias_reduced (70373, 5)
+[2021-02-09 20:41:55,819] [INFO    ]3.- Calcular tiempos (de recorrido y parada)
+[2021-02-09 20:41:55,819] [INFO    ]a) Tiempo de recorrido
+[2021-02-09 20:41:55,821] [INFO    ]b) Tiempo de parada
+[2021-02-09 20:41:55,821] [INFO    ]Filtro las distancias menores o iguales de 50 km entre las CIUDADES IMPORTANTES y el resto de coordenadas
+[2021-02-09 20:41:58,194] [INFO    ]Calculo tiempo de parada para puntos de recarga
+[2021-02-09 20:41:58,291] [INFO    ]Se genera el dataframe reducido con columna basada en Suma_time_parada_h
+[2021-02-09 20:41:58,323] [INFO    ]4.- Construir el grafo
+[2021-02-09 20:42:09,052] [INFO    ]5.- Calculo rutas optimas
+[2021-02-09 20:42:09,129] [INFO    ]La ruta optima es: ['Albacete Bus', 'punto_recarga_241', 'punto_recarga_22', 'punto_recarga_11', 'punto_recarga_86', 'Cadiz Bus']
+[2021-02-09 20:42:09,157] [INFO    ]Tiempo de parada en Albacete Bus es 0.0 h
+[2021-02-09 20:42:09,158] [INFO    ]Tiempo total del tramo Albacete Bus - punto_recarga_241 es 0.029868692946823185 h
+[2021-02-09 20:42:09,186] [INFO    ]Tiempo de parada en punto_recarga_241 es 0.7284242424242423 h
+[2021-02-09 20:42:09,186] [INFO    ]Tiempo total del tramo punto_recarga_241 - punto_recarga_22 es 2.27848291920248 h
+[2021-02-09 20:42:09,213] [INFO    ]Tiempo de parada en punto_recarga_22 es 0.34211560044893374 h
+[2021-02-09 20:42:09,213] [INFO    ]Tiempo total del tramo punto_recarga_22 - punto_recarga_11 es 1.9177530781235417 h
+[2021-02-09 20:42:09,241] [INFO    ]Tiempo de parada en punto_recarga_11 es 0.34211560044893374 h
+[2021-02-09 20:42:09,241] [INFO    ]Tiempo total del tramo punto_recarga_11 - punto_recarga_86 es 1.7694697332906038 h
+[2021-02-09 20:42:09,270] [INFO    ]Tiempo de parada en punto_recarga_86 es 0.34211560044893374 h
+[2021-02-09 20:42:09,271] [INFO    ]Tiempo total del tramo punto_recarga_86 - Cadiz Bus es 0.42397184361771145 h
+[2021-02-09 20:42:09,271] [INFO    ]El tiempo total tardado es: 6.41954626718116 h
+[2021-02-09 20:42:09,350] [INFO    ]6.- Carga de outputs a Base de Datos
+[2021-02-09 20:42:09,350] [INFO    ]Crear conexion a DB
+[2021-02-09 20:42:09,354] [INFO    ]Query a Output
+[2021-02-09 20:42:09,358] [INFO    ]1 registros insertados.
+[2021-02-09 20:42:09,358] [INFO    ]Cerrar conexion con DB
+[2021-02-09 20:42:09,358] [INFO    ][OK] Final del script calcular_caminos_entre_puntos.py [OK]
+[2021-02-09 20:42:09,390] [INFO    ]127.0.0.1 - - [09/Feb/2021 20:42:09] "[37mPOST /Route HTTP/1.1[0m" 200 -
+[2021-02-09 20:48:39,930] [INFO    ] * Detected change in '/home/tfm/Documentos/TFM/ElectricRoute/flask_auth_app_lucia_sql/project/main.py', reloading
+[2021-02-09 20:48:43,182] [INFO    ][OK] Llamada al script calcular_caminos_entre_puntos.py [OK]
+[2021-02-09 20:48:43,182] [INFO    ]El programa lanzado es: ALL SKODA CITIGOE IV Albacete Bus Cadiz Bus 90 10  INFO /home/tfm/Documentos/TFM/ElectricRoute/flask_auth_app_lucia_sql/logs/
+[2021-02-09 20:48:43,183] [INFO    ]1.- Carga de inputs desde Base de Datos
+[2021-02-09 20:48:43,183] [INFO    ]Crear conexion a DB
+[2021-02-09 20:48:43,209] [INFO    ]Query a PuntosCarga
+[2021-02-09 20:48:43,260] [INFO    ]Query a GasolinerasPropuesta
+[2021-02-09 20:48:43,305] [INFO    ]Query a Ciudades
+[2021-02-09 20:48:43,316] [INFO    ]Query a ElectriCar
+[2021-02-09 20:48:43,326] [INFO    ]Query a Matriz_distancia_haversine
+[2021-02-09 20:48:45,795] [INFO    ]Query a Matriz_distancia_haversine completo
+[2021-02-09 20:48:47,757] [INFO    ]127.0.0.1 - - [09/Feb/2021 20:48:47] "[37mGET /Settings HTTP/1.1[0m" 200 -
+[2021-02-09 20:48:47,867] [INFO    ]127.0.0.1 - - [09/Feb/2021 20:48:47] "[33mGET /static/img/avatar_login.jpg HTTP/1.1[0m" 404 -
+[2021-02-09 20:49:01,034] [INFO    ]Cerrar conexion con DB
+[2021-02-09 20:49:01,034] [INFO    ]2.- Aplicar las restricciones
+[2021-02-09 20:49:01,034] [INFO    ]a) Si no se especifica tipo de conector, no se aplica restriccion
+[2021-02-09 20:49:01,034] [INFO    ]b) Restriccion de primera parada
+[2021-02-09 20:49:01,063] [INFO    ]c) Restriccion de ultima parada
+[2021-02-09 20:49:01,089] [INFO    ]Se genera el dataframe reducido que cumple con todas las restricciones
+[2021-02-09 20:49:01,258] [INFO    ]df_distancias (70436, 3)
+[2021-02-09 20:49:01,259] [INFO    ]df_distancias_reduced (70373, 5)
+[2021-02-09 20:49:01,260] [INFO    ]3.- Calcular tiempos (de recorrido y parada)
+[2021-02-09 20:49:01,260] [INFO    ]a) Tiempo de recorrido
+[2021-02-09 20:49:01,261] [INFO    ]b) Tiempo de parada
+[2021-02-09 20:49:01,261] [INFO    ]Filtro las distancias menores o iguales de 50 km entre las CIUDADES IMPORTANTES y el resto de coordenadas
+[2021-02-09 20:49:03,784] [INFO    ]Calculo tiempo de parada para puntos de recarga
+[2021-02-09 20:49:03,875] [INFO    ]Se genera el dataframe reducido con columna basada en Suma_time_parada_h
+[2021-02-09 20:49:03,907] [INFO    ]4.- Construir el grafo
+[2021-02-09 20:49:10,903] [INFO    ] * Detected change in '/home/tfm/Documentos/TFM/ElectricRoute/flask_auth_app_lucia_sql/project/main.py', reloading
