@@ -84,7 +84,7 @@ def main_route(tipo_programa,
                log_level = "INFO",
                log_path = os.getcwd() + "/logs/",
                user_id = 1,
-               use_docker = False):
+               db_host = "0.0.0.0"):
 
     if not os.path.exists(log_path):
             os.makedirs(log_path)
@@ -114,10 +114,7 @@ def main_route(tipo_programa,
         #------------------------------------------------------------------
         # 1.- Carga de inputs desde Base de Datos -------------------------
         logger.info("1.- Carga de inputs desde Base de Datos")
-        if use_docker:
-            db_host = "db"
-        else:
-            db_host = "0.0.0.0"
+
         bd = BaseDatos.BaseDatos(host=db_host,
                                  puerto=3306,            
                                  usuario="root",            
@@ -247,7 +244,7 @@ def main_route(tipo_programa,
         logger.info("3.- Calcular tiempos (de recorrido y parada)")
         #a) Tiempo de recorrido
         logger.info("a) Tiempo de recorrido")
-        velocidad_coche = 110 #km/h
+        velocidad_coche = 100 #km/h
         df_distancias_reduced["Time_h"] = Tiempos.calcular_tiempo_recorrido(df_distancias_reduced["Distance_km"],velocidad_coche) #h
         #b) Tiempo de parada
         logger.info("b) Tiempo de parada")
@@ -361,7 +358,7 @@ def main_route(tipo_programa,
             elif lugar in df_puntoscarga_reduced["id"].unique():
                 coord = (float(df_puntoscarga_reduced["latitude"][df_puntoscarga_reduced["id"]==lugar]),
                          float(df_puntoscarga_reduced["longitude"][df_puntoscarga_reduced["id"]==lugar]))
-            elif lugar in df_puntoscarga_reduced["id"].unique():
+            elif lugar in df_gasolineras["id"].unique():
                 coord = (float(df_gasolineras["latitud"][df_gasolineras["id"]==lugar]),
                          float(df_gasolineras["longitud"][df_gasolineras["id"]==lugar]))
             else:
@@ -474,12 +471,12 @@ if __name__ == "__main__":
                         type = int,
                         help = "Id del usuario "
                                "Default: 1")
-    parser.add_argument("--use_docker",
+    parser.add_argument("--db_host",
                         required = False,
-                        default = False,
-                        type = bool,
-                        help = "Usar Docker "
-                               "Default: False")
+                        default = "0.0.0.0",
+                        type = str,
+                        help = "Host DB "
+                               "Default: 0.0.0.0")
     args = parser.parse_args()
 
     main_route(tipo_programa = args.tipo_programa,
@@ -493,5 +490,5 @@ if __name__ == "__main__":
                log_level = args.log_level,
                log_path = args.log_path,
                user_id = args.user_id,
-               use_docker = args.use_docker)
+               db_host = args.db_host)
     
