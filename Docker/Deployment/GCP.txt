@@ -1,6 +1,6 @@
 #####Docker-Compose en GCP############
 1) Crear instancia VM en GCP Compute Engine con Ubuntu 18.04
-
+Documentos/
 2) Crear reglas de firewall en GCP VPC Network/Firewall que permita el acceso desde fuera a
 los puertos que necesitamos:
 - Grafana: 3000 desde 0.0.0.0/0
@@ -12,12 +12,11 @@ git clone https://github.com/luciatomainodelacr/TFM.git
 cd TFM/Docker/
 
 4) Instalar docker y docker-compose 
-./GoogleCloudPlatform/install_docker.sh
+./Deployment/install_docker.sh
 
 5) Prepara el entorno (desde TFM/Docker)
-./GoogleCloudPlatform/prepare_app.sh
+./Deployment/prepare_app.sh
 
-Modificar el script main.py y la llamada a la db
 6) Levantar los dockers con docker-compose
 docker network create monitoring
 docker volume create --name=grafana-data

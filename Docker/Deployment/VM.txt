@@ -1,0 +1,22 @@
+#####Docker-Compose en VM - Correr con db en docker y flask_app en local############
+1) Ir a la carpeta de Docker
+cd /home/tfm/Documentos/TFM/Docker/
+
+2)Levantar docker db con docker-compose
+docker-compose -f docker-compose.yml up -d db
+
+3) Prepara el entorno (desde TFM/Docker)
+./Deployment/prepare_app.sh
+
+4) Ir a la carpeta app
+cd /home/tfm/Documentos/TFM/Docker/app
+
+5) Lanzar flask desde local
+export FLASK_APP=project
+export FLASK_DEBUG=1
+export DB_HOST=0.0.0.0
+flask run
+
+6) Meterse en la url a través del navegador:
+http://localhost:5000/login
+
