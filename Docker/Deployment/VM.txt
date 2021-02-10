@@ -20,3 +20,18 @@ flask run
 6) Meterse en la url a través del navegador:
 http://localhost:5000/login
 
+7) Si se quiere hacer cambios sobre la parte de Python o de Flask, hay que hacerlo sobre las carpetas
+del repo correspondientes y luego volver a ejecutar los comndos que siguen:
+
+cd /home/tfm/Documentos/TFM/Docker/app
+rm -r project/
+cd ..
+./Deployment/prepare_app.sh
+cd /home/tfm/Documentos/TFM/Docker/app
+export FLASK_APP=project
+export FLASK_DEBUG=1
+export DB_HOST=0.0.0.0
+flask run
+
+8) Antes de subir cosas al repo, borrar la carpeta project de /home/tfm/Documentos/TFM/Docker/app
+rm -r /home/tfm/Documentos/TFM/Docker/app/project
