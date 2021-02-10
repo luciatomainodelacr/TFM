@@ -22,6 +22,6 @@ Esta carpeta contiene:
 
 	Contiene los distintos ficheros de requirements de cada una de las integrantes de equipo para facilitar la creación del Dockerfile de la aplicación en sí.
 	  
-- __GoogleCloudPlatform__
+- __Deployment__
 
-    Contiene información sobre cómo desplegar nuestro proyecto con docker en GCP.
+    Contiene información sobre cómo desplegar nuestro proyecto con docker en GCP y en la VM (con la app en local).

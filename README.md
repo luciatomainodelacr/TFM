@@ -7,7 +7,13 @@ Los colaboradores principales de este repositorio son:
 - Marta García Palomo
 - Lucía Tomaino de la Cruz
 
+El diseño funcional de app es:
+
 ![Diseño funcional de la app](Documentacion/PlanteamientoProblema/Disenofuncional.png)
+
+Las herramientas utilizadas son:
+
+![Herramientas utilizadas](Documentacion/PlanteamientoProblema/Herramientas.png)
 
 Existen varias carpetas:
 
