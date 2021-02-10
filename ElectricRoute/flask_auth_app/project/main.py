@@ -168,7 +168,7 @@ def route_post():
             lista_coordenadas.append(punto_coord)
 
         # Información sobre la ruta
-        # ¡¡¡!!!
+        # ¡¡¡ FALTA MODIFICAR EL OUTPUT AÑADIR MÁS INFORMACIÓN EN UN DICCIONARIO!!!
         
 
         return render_template('route.html', name = name, ciudades = lista_destino, lista_coordenadas=lista_coordenadas, ciudad_origen=ciudad_origen, ciudad_destino=ciudad_destino, rangeInitial = rangeInitial, rangeFinal = rangeFinal, programType= programType)
@@ -179,7 +179,6 @@ def route_post():
         return render_template('login.html')
     
     
-
 
 # 5.- Página Rutas Frecuentes -------------------------------------
 #------------------------------------------------------------------
@@ -196,7 +195,7 @@ def frequentroutes():
 
         # ¡! Añadir en la consulta el filtro usuario
         cur = db.connection.cursor()
-        cur.execute('SELECT * FROM Output limit 5')
+        cur.execute('SELECT DISTINCT * FROM Output limit 5')
         rutas_list = cur.fetchall()
 
         dict_rutas = []
@@ -286,7 +285,49 @@ def profile_post():
 
 
 
-# 7- Forgot Password ----------------------------------------------
+# 6- Página cars -----------------------------------------------
+#------------------------------------------------------------------
+
+@main.route('/cars', methods=['GET', 'POST'])
+def cars():
+
+    # Se comprueba si la sesión del usuario está iniciada
+    if g.email:
+
+        # Se obtienen variables del usuario
+        email    = session['email']
+        name     = session['username']
+        lastName = session['lastName']
+        brandCar = session['brandCar']
+        modelCar = session['modelCar']
+
+        # Consulta a la bbdd
+        cur = db.connection.cursor()
+        cur.execute('SELECT * FROM ElectricCar WHERE BRAND = % s and MODEL = % s', (brandCar, modelCar, ))
+        coches_list = cur.fetchall()
+
+        # Variables
+        rangeKm     = coches_list[0][2]
+        efficiency  = coches_list[0][3]
+        fastcharge  = coches_list[0][4]
+        plugtype    = coches_list[0][6]
+        battery     = coches_list[0][7]
+
+        # Se inicializan dos listas para las ciudades y para las coordenadas
+        lista_destino = []
+
+        return render_template('cars.html', email = email, name = name, lastName = lastName,\
+                                            brandCar = brandCar, modelCar = modelCar, rangeKm = rangeKm,\
+                                            efficiency = efficiency, fastcharge = fastcharge,\
+                                            plugtype = plugtype, battery = battery)
+
+    # Si la sesión no está iniciada se le dirige a la página de inicio
+    else:
+        flash('Please log in!')
+        return render_template('login.html')
+
+
+# 8- Forgot Password ----------------------------------------------
 #------------------------------------------------------------------
 
 @main.route('/forgotpassword')
@@ -294,7 +335,7 @@ def forgotpassword():
     return render_template('forgotpassword.html')
 
 
-# 7- Reset Password ----------------------------------------------
+# 9- Reset Password ----------------------------------------------
 #------------------------------------------------------------------
 
 @main.route('/resetpassword')
