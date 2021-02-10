@@ -63,6 +63,7 @@ def index():
 
     # Si la sesión no está iniciada se le dirige a la página de inicio
     else:
+        flash('Please log in!')
         return render_template('login.html')
 
 
@@ -73,12 +74,12 @@ def index():
 @main.route('/Route')
 def route():
 
-    # Se obtienen variables del usuario
-    email   = session['email']
-    name    = session['username']
-
     # Se comprueba si la sesión del usuario está iniciada
     if g.email:
+
+        # Se obtienen variables del usuario
+        email   = session['email']
+        name    = session['username']
 
         # Consulta a la bbdd
         cur = db.connection.cursor()
@@ -97,7 +98,9 @@ def route():
 
     # Si la sesión no está iniciada se le dirige a la página de inicio
     else:
+        flash('Please log in!')
         return render_template('login.html')
+
 
 
 # 4.- Página ruta (modelo) ----------------------------------------
@@ -106,14 +109,14 @@ def route():
 @main.route('/Route', methods=['GET', 'POST'])
 def route_post():
 
-    # Se obtienen variables del usuario
-    email    = session['email']
-    name     = session['username']
-    brandCar = session['brandCar']
-    modelCar = session['modelCar']
-
     # Se comprueba si la sesión del usuario está iniciada
     if g.email:
+
+        # Se obtienen variables del usuario
+        email    = session['email']
+        name     = session['username']
+        brandCar = session['brandCar']
+        modelCar = session['modelCar']
 
         # Consulta a la bbdd
         cur = db.connection.cursor()
@@ -156,6 +159,7 @@ def route_post():
 
     # Si la sesión no está iniciada se le dirige a la página de inicio
     else:
+        flash('Please log in!')
         return render_template('login.html')
     
     
@@ -167,11 +171,12 @@ def route_post():
 @main.route('/frequentroutes')
 def frequentroutes():
 
-    email    = session['email']
-    name     = session['username']
-
     # Se comprueba si la sesión del usuario está iniciada
     if g.email:
+
+        # Se obtienen variables del usuario
+        email    = session['email']
+        name     = session['username']
 
         # ¡! Añadir en la consulta el filtro usuario
         cur = db.connection.cursor()
@@ -212,20 +217,59 @@ def delete():
 @main.route('/profile', methods=['GET', 'POST'])
 def profile():
 
-    # Se obtienen variables del usuario
-    email    = session['email']
-    name     = session['username']
-    lastName = session['lastName']
-    brandCar = session['brandCar']
-    modelCar = session['modelCar']
-
     # Se comprueba si la sesión del usuario está iniciada
     if g.email:
+
+        # Se obtienen variables del usuario
+        email    = session['email']
+        name     = session['username']
+        lastName = session['lastName']
+        brandCar = session['brandCar']
+        modelCar = session['modelCar']
+
         return render_template('profile.html', email = email, name = name, lastName = lastName, brandCar = brandCar, modelCar = modelCar)
 
     # Si la sesión no está iniciada se le dirige a la página de inicio
     else:
+        flash('Please log in!')
         return render_template('login.html')
+
+
+
+# 7- Página profile edit ------------------------------------------
+#------------------------------------------------------------------
+
+@main.route('/profile', methods=['GET', 'POST'])
+def profile_post():
+
+    # Se comprueba si la sesión del usuario está iniciada
+    if g.email:
+
+        # Se obtienen variables del usuario
+        email    = session['email']
+        name     = session['username']
+        lastName = session['lastName']
+        brandCar = session['brandCar']
+        modelCar = session['modelCar']
+
+        if request.method == 'POST' and ('email' != '') and ('email' in request.form and 'username' in request.form and 'lastName' in request.form and 'mySelectBrand' in request.form and 'mySelectModel' in request.form):
+            
+            email    = request.form['email']
+            username = request.form['username']
+            lastName = request.form['lastName']
+            brandCar = request.form.get('mySelectBrand')
+            modelCar = request.form.get('mySelectModel')
+        
+
+
+
+        return render_template('profile.html', email = email, name = name, lastName = lastName, brandCar = brandCar, modelCar = modelCar)
+
+    # Si la sesión no está iniciada se le dirige a la página de inicio
+    else:
+        flash('Please log in!')
+        return render_template('login.html')
+
 
 
 # 7- Forgot Password ----------------------------------------------

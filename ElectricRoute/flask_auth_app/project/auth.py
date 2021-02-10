@@ -99,7 +99,7 @@ def signup():
 # 2.- Página signup ------------------------------------------------
 #------------------------------------------------------------------
 
-@auth.route('/signup',methods =['GET', 'POST'])
+@auth.route('/signup', methods =['GET', 'POST'])
 def signup_post():
 
     if request.method == 'POST' and ('email' != '') and ('email' in request.form and 'username' in request.form and 'password' in request.form and 'lastName' in request.form and 'mySelectBrand' in request.form and 'mySelectModel' in request.form): 
@@ -122,6 +122,7 @@ def signup_post():
         cur = db.connection.cursor()
         cur.execute('''SELECT * FROM ElectricCar''')
         electricCar_list = cur.fetchall()
+        print(brandCar)
 
         # Se inicializan dos listas para las marcas y los modelos de coche
         list_brand = []
@@ -130,7 +131,6 @@ def signup_post():
         for coche in electricCar_list:
             list_brand.append(coche[0])
             list_model.append(coche[1])
-
             
         # Comprobaciones registro de usuario
         if user: 
@@ -167,6 +167,7 @@ def signup_post():
 @auth.route('/logout')
 def logout():
     session.clear()
-    return 'Logout'
+    print(session)
+    return redirect(url_for('auth.login'))
 
     
