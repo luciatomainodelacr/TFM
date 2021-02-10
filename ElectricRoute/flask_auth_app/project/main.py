@@ -22,6 +22,7 @@ import datetime
 from .BE.calcular_caminos_entre_puntos import main_route
 from .BE.Output import BaseDatos
 from . import db
+from os import environ 
 
 
 main = Blueprint('main', __name__)
@@ -129,12 +130,14 @@ def route_post():
         ciudad_origen = request.form.get('mySelectOrigin')
         ciudad_destino = request.form.get('mySelectDest')
 
+
         # Se aplica el modelo para calcular la ruta
         ruta = main_route(tipo_programa = "ALL",
             marca_coche = brandCar,
             modelo_coche = modelCar,
             origen = ciudad_origen,
-            destino = ciudad_destino
+            destino = ciudad_destino,
+            db_host = environ.get('DB_HOST')
         )
         
         # Lista de coordenadas de la ruta para dibujar en el mapa
