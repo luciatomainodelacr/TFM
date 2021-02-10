@@ -1,0 +1,155 @@
+{% extends "base_login.html" %}
+
+{% block body_content%}
+
+<body class="bg-img-cover" style="background-image: url('static/img/img_profile.png'); background-size: 1850px;">
+
+    <div class="container">
+
+      <!-- Se justifica el contenido en el centro de la página -->
+      <div class="row justify-content-center" >
+
+        <!-- Tarjeta blanca para incluir la tabla -->
+        <div class="col-xl-7 col-lg-12 col-md-7">
+        <div class="card o-hidden border-0 shadow-lg my-5">  
+
+            <div class="card-body p-0">
+            <div class="p-5">
+
+                <!-- Título --> 
+                <div class="text-center" style = "font-size: 40px; color:#4e73df; margin-botton: 20%;">
+                    <span> User Profile </span>
+                </div>
+
+                <!-- Tabla Contenido --> 
+                <div class="table-responsive" style = "margin-top:5%">
+                    <table class="table table-bodered" id="table" width="100%" cellspacing="0">
+                        <tr>
+                          <td><b> Name </b></td>
+                          <td><b> {{name}} </b></td>
+                        </tr>
+                        <tr>
+                          <td><b> Last Name </b></td>
+                          <td><b> {{lastName}} </b></td>
+                        </tr>
+                        <tr>
+                          <td><b> Email </b></td>
+                          <td><b> {{email}} </b></td>
+                        </tr>
+                        <tr>
+                          <td><b> Type Car Brand </b></td>
+                          <td><b> {{brandCar}} </b></td>
+                        </tr>
+                        <tr>
+                          <td><b> Type Car Model </b></td>
+                          <td><b> {{modelCar}} </b></td>
+                        </tr>
+                        <tr><td><b> </b></td><td><b> </b></td></tr>
+                                                                                  
+                    </table>
+
+                    <!-- Botón  Back to Index --> 
+                    <a class="btn btn-light btn-icon-split" href="index">
+                      <span class="icon text-gray-600">
+                          <i class="fas fa-arrow-left"></i>
+                        </span>
+                        <span class="text"> Back to Index </span>  
+                    </a>
+
+
+                    <!-- Botón Actualizar información --> 
+                    <a href="#" class="nav-link btn btn-primary btn-icon-split" data-toggle="modal" data-target="#UpdateInfo" style="float: right !important;" >
+                      <span class="icon text-white-50">
+                        <i class="fas fa-user"></i>
+                      </span>
+                      <span class="text"> Update Information </span>
+                    </a>
+
+                </div>
+          
+            </div>
+            </div>
+
+        </div>
+        </div>
+
+      </div>
+    </div>
+
+<!-- ................................. Update info Modal ................................. -->
+
+    <!-- Update info Modal-->
+    <div class="modal fade" id="UpdateInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+
+          <!-- Cabecera: título y botón de cerrar-->
+          <div class="modal-header" style="background-color: #4E73DF !important;">
+            <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(255, 255, 255);"> Update Information </h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" style="color: rgb(255, 255, 255);">×</span>
+          </button>
+          </div>
+
+            <!-- Cuerpo: formulario para modificar los campos-->
+            <div class="modal-body">
+              <!-- Formulario información usuario -->        
+                <form class = "user" method="POST" action="/signup" style = "margin-top:5%">
+
+                    <!-- Name y Last Name-->
+                    <div class="form-group row">
+                      <div class="col-sm-6 mb-3 mb-sm-0">
+                        <input type="text" class="form-control form-control-user" id="username" name = "username" placeholder = {{name}} >
+                      </div>
+                      <div class="col-sm-6">
+                        <input type="text" class="form-control form-control-user" id="lastName" name = "lastName" placeholder = {{lastName}}>
+                      </div>
+                    </div>
+
+                    <!-- Enter Email Address -->
+                    <div class="form-group">
+                      <input type="email" class="form-control form-control-user" id="email" name="email" placeholder = {{email}}>
+                    </div>
+
+                    <!-- Type Car Brand and Model-->
+                    <div class="form-group row">
+                      
+                      <!-- Brand  -->
+                      <div class="col-sm-6 mb-3 mb-sm-0">
+                        <input class="form-control form-control-user" list="mySelectBrand" name="mySelectBrand" style="border-radius: 10rem;  padding: 1.5rem 1rem;" placeholder = {{modelCar}}>
+                        <datalist id="mySelectBrand"> 
+                          {% for brand in list_brand %}                            
+                            <option selected value= "{{brand}}"> {{brand}} </option>
+                          {% endfor %}
+                        </datalist>
+                      </div>
+
+                      <!-- Model  -->
+                      <div class="col-sm-6">
+                        <input class="form-control form-control-user" list="mySelectModel" name="mySelectModel" style="border-radius: 10rem;  padding: 1.5rem 1rem;" placeholder = {{brandCar}}>
+                        <datalist id="mySelectModel"> 
+                          {% for model in list_model %}                            
+                            <option selected value= "{{model}}"> {{model}} </option>
+                          {% endfor %}
+                        </datalist>
+                      </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Pie de página: botón para guardar los cambios -->
+            <div class="modal-footer">
+              <button class="btn btn-secondary btn-user" type="button" data-dismiss="modal">Cancel</button>
+              <input type="submit" class="btn btn-primary  btn-user" id="UpdateInfo" name="UpdateInfo" value="Save Changes">
+            </div>
+
+        </div>
+        </div>
+
+    </div>
+
+
+</body>
+{% endblock %}

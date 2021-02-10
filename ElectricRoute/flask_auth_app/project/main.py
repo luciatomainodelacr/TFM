@@ -1,4 +1,3 @@
-
 # =============================================================================
 #  Modelo principal: main.py
 # =============================================================================
@@ -17,29 +16,36 @@ Modelo de autenticación. Tres páginas:
 
 
 # Se cargan las librerias
-from flask import Blueprint, render_template, redirect, url_for, request, flash
+from flask import Blueprint, render_template, redirect, url_for, request, flash, session, g
 from flask_login import login_required, current_user
-from .models import User, Route, ciudades, ElectricCar
-from .Modelo.calcular_caminos_entre_puntos import main_route
+import datetime
+from .BE.calcular_caminos_entre_puntos import main_route
+from .BE.Output import BaseDatos
 from . import db
 
 
 main = Blueprint('main', __name__)
-# bp = Blueprint('errors', __name__)
+bp = Blueprint('errors', __name__)
 
+
+@main.before_request
+def before_request():
+   g.email = None
+   if 'email' in session:
+       g.email = session['email']
 
 
 
 # 1.- Páginas de error ----------------------------------------
 #-----------------------------------------------------------------
 
-@main.route('/page_not_found')
-def page_not_found():
-    return render_template('404.html')
+@main.app_errorhandler(404)
+def handle_404(err):
+    return render_template('404.html'), 404
 
-# @bp.app_errorhandler(404)
-# def handle_404(err):
-#    return render_template('404.html'), 404
+@main.app_errorhandler(500)
+def handle_500(err):
+    return render_template('500.html'), 500
 
 
 
@@ -47,84 +53,153 @@ def page_not_found():
 #------------------------------------------------------------------
 
 @main.route('/index')
-@login_required
 def index():
-    return render_template('index.html', name=current_user.name)
+
+    # Se comprueba si la sesión del usuario está iniciada
+    if g.email:
+        email    = session['email']
+        username = session['username']
+        return render_template('index.html', name=username)
+
+    # Si la sesión no está iniciada se le dirige a la página de inicio
+    else:
+        return render_template('login.html')
 
 
 
-# 3.- Página ruta (mapa) ------------------------------------------
+# 3.- Página ruta (inicial) ---------------------------------------
 #------------------------------------------------------------------
 
 @main.route('/Route')
-@login_required
 def route():
 
-    ciudades_list = ciudades.query.all()
-    lista_destino = []
+    # Se obtienen variables del usuario
+    email   = session['email']
+    name    = session['username']
 
-    for ciudad in ciudades_list:
-        lista_destino.append(ciudad.id)
+    # Se comprueba si la sesión del usuario está iniciada
+    if g.email:
+
+        # Consulta a la bbdd
+        cur = db.connection.cursor()
+        cur.execute('''SELECT * FROM Ciudades''')
+        ciudades_list = cur.fetchall()
+
+        # Se inicializan dos listas para las ciudades y para las coordenadas
+        lista_destino = []
+        lista_coordenadas = []
+
+        for ciudad in ciudades_list:
+            lista_destino.append(ciudad[0])
+
+        # Output página de ruta            
+        return render_template('route.html', name = name, ciudades = lista_destino, lista_coordenadas=lista_coordenadas)
+
+    # Si la sesión no está iniciada se le dirige a la página de inicio
+    else:
+        return render_template('login.html')
 
 
-    
+# 4.- Página ruta (modelo) ----------------------------------------
+#------------------------------------------------------------------
 
-
-    return render_template('route.html', name = current_user.name, ciudades = lista_destino)
-
-
-
-@main.route('/Route', methods=['POST'])
-@login_required
+@main.route('/Route', methods=['GET', 'POST'])
 def route_post():
 
-    ciudades_list = ciudades.query.all()
-    ciudades_dict = {}
+    # Se obtienen variables del usuario
+    email    = session['email']
+    name     = session['username']
+    brandCar = session['brandCar']
+    modelCar = session['modelCar']
 
-    for ciudad in ciudades_dict:
+    # Se comprueba si la sesión del usuario está iniciada
+    if g.email:
+
+        # Consulta a la bbdd
+        cur = db.connection.cursor()
+        cur.execute('''SELECT * FROM Ciudades''')
+        ciudades_list = cur.fetchall()
+
+        # Se inicializan dos listas para las ciudades y para las coordenadas
+        lista_destino = []
+
+        for ciudad in ciudades_list:
+            lista_destino.append(ciudad[0])
+            
+        ciudad_origen = request.form.get('mySelectOrigin')
+        ciudad_destino = request.form.get('mySelectDest')
+
+        # Se aplica el modelo para calcular la ruta
+        ruta = main_route(tipo_programa = "ALL",
+            marca_coche = brandCar,
+            modelo_coche = modelCar,
+            origen = ciudad_origen,
+            destino = ciudad_destino
+        )
+        
+        # Lista de coordenadas de la ruta para dibujar en el mapa
+        lista_coordenadas = []
+        
+        for i in range(0, len(ruta)):
+            punto_coord = []
+            latitud = ruta[i][0]
+            longitud = ruta[i][1]
+            punto_coord.append(latitud)
+            punto_coord.append(longitud)
+            lista_coordenadas.append(punto_coord)
+
+        # Información sobre la ruta
+        # ¡¡¡!!!
+        
+
+        return render_template('route.html', name = name, ciudades = lista_destino, lista_coordenadas=lista_coordenadas, ciudad_origen=ciudad_origen, ciudad_destino=ciudad_destino )
+
+    # Si la sesión no está iniciada se le dirige a la página de inicio
+    else:
+        return render_template('login.html')
+    
     
 
-        ciudades_dict = {
 
-            "provincia"   : ciudad.provincia,
-            "Direccion"   : ciudad.Direccion,
-            "Latitud"     : ciudad.Latitud,
-            "Longitud"    : ciudad.Longitud,
-            "Coordenadas" : ciudad.Coordenadas
-        }       
-
-    return render_template('route.html', name=current_user.name, ciudades_dict = ciudades_dict)
-
-    
-
-# 4.- Página Rutas Frecuentes -------------------------------------
+# 5.- Página Rutas Frecuentes -------------------------------------
 #------------------------------------------------------------------
 
 @main.route('/frequentroutes')
-@login_required
 def frequentroutes():
 
-    var_email = current_user.email
+    email    = session['email']
+    name     = session['username']
 
-    rutas_list = Route.query.filter_by(email=current_user.email).order_by("dateSearch")[::-1][0:3]
+    # Se comprueba si la sesión del usuario está iniciada
+    if g.email:
 
-    dict_rutas = []
-    list_rutas = ["From", "To", "Type Car", "Load of the car", "Load"]
+        # ¡! Añadir en la consulta el filtro usuario
+        cur = db.connection.cursor()
+        cur.execute('SELECT * FROM Output limit 5')
+        rutas_list = cur.fetchall()
 
-    for ruta in rutas_list:
-        
-        dict_rutas.append({
-            "From" : ruta.from_ub,
-            "To" : ruta.to_ub,
-            "Type Car" : ruta.typeCar,
-            "Load of the car" : ruta.typeLoad
-        })   
+        dict_rutas = []
+        list_rutas = ["From", "To", "Number of stops", "Time", "Load"]
 
-    return render_template('frequentroutes.html', email=current_user.email, dict_rutas=dict_rutas, list_rutas=list_rutas)
+        for i in range(0, len(rutas_list)):
+            
+            dict_rutas.append({
+                "Origen" : rutas_list[i][3],
+                "Destino" : rutas_list[i][4],
+                "Número de Paradas" : rutas_list[i][5],
+                "Tiempo total" : rutas_list[i][7],
+        })
 
+        print(dict_rutas)
+
+        return render_template('frequentroutes.html', email=email, list_rutas=list_rutas, dict_rutas=dict_rutas)
+    
+    # Si la sesión no está iniciada se le dirige a la página de inicio
+    else:
+        return render_template('login.html')
+    
 
 @main.route('/delete')
-@login_required
 def delete():
     return render_template('delete.html', name=current_user.name)
 
@@ -134,32 +209,36 @@ def delete():
 # 6- Página profile -----------------------------------------------
 #------------------------------------------------------------------
 
-@main.route('/profile2')
-@login_required
-def profile2():
+@main.route('/profile', methods=['GET', 'POST'])
+def profile():
 
-    car_list = ElectricCar.query.all()
-    list_typeCar = []
-    list_model = []
+    # Se obtienen variables del usuario
+    email    = session['email']
+    name     = session['username']
+    lastName = session['lastName']
+    brandCar = session['brandCar']
+    modelCar = session['modelCar']
 
-    for car in car_list:
-        list_typeCar.append(car.brand)
-        list_model.append(car.model)
-        
-    return render_template('profile2.html', email = current_user.email, name = current_user.name, lastName = current_user.lastName, typeCar = list_typeCar, typeModel = list_model)
+    # Se comprueba si la sesión del usuario está iniciada
+    if g.email:
+        return render_template('profile.html', email = email, name = name, lastName = lastName, brandCar = brandCar, modelCar = modelCar)
 
-
-
-@main.route('/ruta_test')
-def ruta_test():
-
-    ruta = main_route(tipo_programa = "ALL",
-            marca_coche = "VOLKSWAGEN",
-            modelo_coche = "ID3 PURE",
-            origen = "Alicante Tren",
-            destino = "A Corunia Bus"
-    )
-
-    return render_template('ruta_test.html', ruta=ruta)
+    # Si la sesión no está iniciada se le dirige a la página de inicio
+    else:
+        return render_template('login.html')
 
 
+# 7- Forgot Password ----------------------------------------------
+#------------------------------------------------------------------
+
+@main.route('/forgotpassword')
+def forgotpassword():
+    return render_template('forgotpassword.html')
+
+
+# 7- Reset Password ----------------------------------------------
+#------------------------------------------------------------------
+
+@main.route('/resetpassword')
+def resetpassword():
+    return render_template('resetpassword.html')
