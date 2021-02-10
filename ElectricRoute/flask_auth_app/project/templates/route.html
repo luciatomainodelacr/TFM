@@ -78,9 +78,9 @@
 
         <!-- Nav Item - Save Route -->
         <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fa fa-download fa-sm fa-fw mr-2 text-gray-400"></i>
-                <span>Save Route</span>
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#infoRoute">
+                <i class="fa fa-info-circle fa-sm fa-fw mr-2 text-gray-400"></i>
+                <span>Info Route</span>
             </a>
         </li>
 
@@ -117,10 +117,10 @@
 
     <!-- ................................ Contenido principal ............................. -->
 
-    <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content-wrapper" class="d-flex flex-column" style = "background-color: #ffffff !important">
 
         <!-- Main Content -->
-        <div id="content">
+        <div id="content" style = "background-color: #ffffff !important">
         
             <!-- .................................. Barra Superior ................................. -->
             
@@ -131,7 +131,7 @@
 
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
-                        <a class="nav-link" href="profile" id="userDropdown">
+                        <a class="nav-link" href="profile" >
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small"> {{ name }} </span>
                             <img class="img-profile rounded-circle" src="{{url_for('static', filename='img/img_avatar.jpg')}}">
                         </a>                  
@@ -142,7 +142,7 @@
 
                     <!-- Nav Item - Logout -->
                     <li class="nav-item dropdown no-arrow">
-                        <a class="nav-link dropdown-toggle" href="logout"  data-toggle="modal" data-target="#logoutModal">
+                        <a class="nav-link" href="logout"  data-toggle="modal" data-target="#logoutModal">
                             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                             Logout
                         </a>
@@ -154,12 +154,14 @@
 
 
             <!-- ...................................... Mapa ....................................... -->
-                
+
             <div class='col-15 bg-white'>
                 <div class = 'row'>
                     <div id="my_map" style= 'height: 699px; width: 2000px;'></div>
                 </div>
-            </div>   
+            </div>  
+
+             
 
             <!-- .................................... Fin Mapa ..................................... -->
 
@@ -189,7 +191,9 @@
 <!-- ..................................... Modales ..................................... -->
 
 
-<!-- Logout Modal-->
+
+<!-- ................................... Logout Modal ................................... -->
+
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
 
@@ -212,7 +216,9 @@
     </div>
 </div>
 
-<!-- New Route Modal-->
+
+<!-- ................................. New Route Modal ................................. -->
+
 <div class="modal fade" id="newRoute" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
 
@@ -262,6 +268,61 @@
                     </div>
                             
                 </form>  
+        </div>
+
+    </div>
+    </div>
+    
+</div>
+
+
+<!-- ................................. Info Route Modal ................................. -->
+
+<div class="modal fade" id="infoRoute" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+
+    <div class="modal-content">
+
+        <div class="modal-header" style="background-color: #4E73DF !important;">
+            <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(255, 255, 255);">Info Route</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" style="color: rgb(255, 255, 255);">×</span>
+            </button>
+        </div>
+
+        <div class="modal-body">
+
+            <!-- Select Origin -->
+            <div class="container"> 
+                <div class="table-responsive" style = "margin-top:5%">
+                    <table class="table table-bodered" id="table" width="100%" cellspacing="0">
+                        <tr>
+                          <td><b> From </b></td>
+                          <td><b> {{ciudad_origen}} </b></td>
+                        </tr>
+                        <tr>
+                          <td><b> To </b></td>
+                          <td><b> {{ciudad_destino}} </b></td>
+                        </tr>
+                        <tr>
+                          <td><b> Number of stops </b></td>
+                          <td><b> {{number_stops}} </b></td>
+                        </tr>
+                        <tr>
+                          <td><b> Time </b></td>
+                          <td><b> {{brandCar}} </b></td>
+                        </tr>
+                        <tr><td><b> </b></td><td><b> </b></td></tr>
+                                                                                  
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pie de página: botón para guardar los cambios -->
+        <div class="modal-footer">
+          <button class="btn btn-secondary btn-user" type="button" data-dismiss="modal"> Cancel </button>
+          <button class="btn btn-primary btn-user" type="button" data-dismiss="modal"> Back to map </button>
         </div>
 
     </div>

@@ -1,0 +1,127 @@
+[2021-02-10 00:46:29,854] [INFO    ][OK] Llamada al script calcular_caminos_entre_puntos.py [OK]
+[2021-02-10 00:46:29,854] [INFO    ]El programa lanzado es: ALL TESLA ROADSTER A Corunia Tren Burgos Bus 90 10  INFO /home/tfm/Documentos/TFM/ElectricRoute/flask_auth_app/logs/
+[2021-02-10 00:46:29,855] [INFO    ]1.- Carga de inputs desde Base de Datos
+[2021-02-10 00:46:29,855] [INFO    ]Crear conexion a DB
+[2021-02-10 00:46:29,874] [INFO    ]Query a PuntosCarga
+[2021-02-10 00:46:30,019] [INFO    ]Query a GasolinerasPropuesta
+[2021-02-10 00:46:30,071] [INFO    ]Query a Ciudades
+[2021-02-10 00:46:30,110] [INFO    ]Query a ElectriCar
+[2021-02-10 00:46:30,117] [INFO    ]Query a Matriz_distancia_haversine
+[2021-02-10 00:46:42,123] [INFO    ]Query a Matriz_distancia_haversine completo
+[2021-02-10 00:46:56,877] [INFO    ]Cerrar conexion con DB
+[2021-02-10 00:46:56,878] [INFO    ]2.- Aplicar las restricciones
+[2021-02-10 00:46:56,878] [INFO    ]a) Si no se especifica tipo de conector, no se aplica restriccion
+[2021-02-10 00:46:56,878] [INFO    ]b) Restriccion de primera parada
+[2021-02-10 00:46:57,050] [INFO    ]c) Restriccion de ultima parada
+[2021-02-10 00:46:57,225] [INFO    ]Se genera el dataframe reducido que cumple con todas las restricciones
+[2021-02-10 00:46:58,159] [INFO    ]df_distancias (461204, 3)
+[2021-02-10 00:46:58,160] [INFO    ]df_distancias_reduced (461017, 5)
+[2021-02-10 00:46:58,160] [INFO    ]3.- Calcular tiempos (de recorrido y parada)
+[2021-02-10 00:46:58,160] [INFO    ]a) Tiempo de recorrido
+[2021-02-10 00:46:58,163] [INFO    ]b) Tiempo de parada
+[2021-02-10 00:46:58,163] [INFO    ]Filtro las distancias menores o iguales de 50 km entre las CIUDADES IMPORTANTES y el resto de coordenadas
+[2021-02-10 00:47:00,485] [INFO    ]Calculo tiempo de parada para puntos de recarga
+[2021-02-10 00:47:00,581] [INFO    ]Se genera el dataframe reducido con columna basada en Suma_time_parada_h
+[2021-02-10 00:47:00,756] [INFO    ]4.- Construir el grafo
+[2021-02-10 00:48:08,115] [INFO    ]5.- Calculo rutas optimas
+[2021-02-10 00:48:08,570] [INFO    ]La ruta optima es: ['A Corunia Tren', 'punto_recarga_199', 'Burgos Bus']
+[2021-02-10 00:48:08,731] [INFO    ]Tiempo de parada en A Corunia Tren es 0.0 h
+[2021-02-10 00:48:08,731] [INFO    ]Tiempo total del tramo A Corunia Tren - punto_recarga_199 es 0.6907237233061004 h
+[2021-02-10 00:48:08,888] [INFO    ]Tiempo de parada en punto_recarga_199 es 2.064852225963337 h
+[2021-02-10 00:48:08,888] [INFO    ]Tiempo total del tramo punto_recarga_199 - Burgos Bus es 5.028928069220836 h
+[2021-02-10 00:48:08,888] [INFO    ]El tiempo total tardado es: 5.719651792526936 h
+[2021-02-10 00:48:09,321] [INFO    ]6.- Carga de outputs a Base de Datos
+[2021-02-10 00:48:09,321] [INFO    ]Crear conexion a DB
+[2021-02-10 00:48:09,377] [INFO    ]Query a Output
+[2021-02-10 00:48:09,547] [INFO    ]1 registros insertados.
+[2021-02-10 00:48:09,547] [INFO    ]Cerrar conexion con DB
+[2021-02-10 00:48:09,547] [INFO    ][OK] Final del script calcular_caminos_entre_puntos.py [OK]
+[2021-02-10 00:48:09,729] [INFO    ]127.0.0.1 - - [10/Feb/2021 00:48:09] "[37mPOST /Route HTTP/1.1[0m" 200 -
+[2021-02-10 00:50:33,465] [INFO    ] * Detected change in '/home/tfm/Documentos/TFM/ElectricRoute/flask_auth_app/project/main.py', reloading
+[2021-02-10 00:55:31,220] [INFO    ][OK] Llamada al script calcular_caminos_entre_puntos.py [OK]
+[2021-02-10 00:55:31,220] [INFO    ]El programa lanzado es: ALL TESLA ROADSTER A Corunia Tren A Corunia Bus 90 10  INFO /home/tfm/Documentos/TFM/ElectricRoute/flask_auth_app/logs/
+[2021-02-10 00:55:31,220] [INFO    ]1.- Carga de inputs desde Base de Datos
+[2021-02-10 00:55:31,220] [INFO    ]Crear conexion a DB
+[2021-02-10 00:55:31,249] [INFO    ]Query a PuntosCarga
+[2021-02-10 00:55:31,322] [INFO    ]Query a GasolinerasPropuesta
+[2021-02-10 00:55:31,351] [INFO    ]Query a Ciudades
+[2021-02-10 00:55:31,360] [INFO    ]Query a ElectriCar
+[2021-02-10 00:55:31,365] [INFO    ]Query a Matriz_distancia_haversine
+[2021-02-10 00:55:43,645] [INFO    ]Query a Matriz_distancia_haversine completo
+[2021-02-10 00:55:59,221] [INFO    ]Cerrar conexion con DB
+[2021-02-10 00:55:59,222] [INFO    ]2.- Aplicar las restricciones
+[2021-02-10 00:55:59,222] [INFO    ]a) Si no se especifica tipo de conector, no se aplica restriccion
+[2021-02-10 00:55:59,222] [INFO    ]b) Restriccion de primera parada
+[2021-02-10 00:55:59,396] [INFO    ]c) Restriccion de ultima parada
+[2021-02-10 00:55:59,570] [INFO    ]Se genera el dataframe reducido que cumple con todas las restricciones
+[2021-02-10 00:56:00,500] [INFO    ]df_distancias (461176, 3)
+[2021-02-10 00:56:00,501] [INFO    ]df_distancias_reduced (460804, 5)
+[2021-02-10 00:56:00,501] [INFO    ]3.- Calcular tiempos (de recorrido y parada)
+[2021-02-10 00:56:00,501] [INFO    ]a) Tiempo de recorrido
+[2021-02-10 00:56:00,503] [INFO    ]b) Tiempo de parada
+[2021-02-10 00:56:00,504] [INFO    ]Filtro las distancias menores o iguales de 50 km entre las CIUDADES IMPORTANTES y el resto de coordenadas
+[2021-02-10 00:56:02,808] [INFO    ]Calculo tiempo de parada para puntos de recarga
+[2021-02-10 00:56:02,901] [INFO    ]Se genera el dataframe reducido con columna basada en Suma_time_parada_h
+[2021-02-10 00:56:03,075] [INFO    ]4.- Construir el grafo
+[2021-02-10 00:57:13,820] [INFO    ]5.- Calculo rutas optimas
+[2021-02-10 00:57:13,944] [INFO    ]La ruta optima es: ['A Corunia Tren', 'punto_recarga_294', 'A Corunia Bus']
+[2021-02-10 00:57:14,110] [INFO    ]Tiempo de parada en A Corunia Tren es 0.0 h
+[2021-02-10 00:57:14,110] [INFO    ]Tiempo total del tramo A Corunia Tren - punto_recarga_294 es 0.4506574799029138 h
+[2021-02-10 00:57:14,271] [INFO    ]Tiempo de parada en punto_recarga_294 es 2.064852225963337 h
+[2021-02-10 00:57:14,271] [INFO    ]Tiempo total del tramo punto_recarga_294 - A Corunia Bus es 2.5168064395980436 h
+[2021-02-10 00:57:14,272] [INFO    ]El tiempo total tardado es: 2.9674639195009576 h
+[2021-02-10 00:57:14,398] [INFO    ]6.- Carga de outputs a Base de Datos
+[2021-02-10 00:57:14,398] [INFO    ]Crear conexion a DB
+[2021-02-10 00:57:15,287] [INFO    ]Query a Output
+[2021-02-10 00:57:15,802] [INFO    ]1 registros insertados.
+[2021-02-10 00:57:15,802] [INFO    ]Cerrar conexion con DB
+[2021-02-10 00:57:15,802] [INFO    ][OK] Final del script calcular_caminos_entre_puntos.py [OK]
+[2021-02-10 00:57:15,986] [INFO    ]127.0.0.1 - - [10/Feb/2021 00:57:15] "[37mPOST /Route HTTP/1.1[0m" 200 -
+[2021-02-10 00:57:19,507] [INFO    ]127.0.0.1 - - [10/Feb/2021 00:57:19] "[37mGET /frequentroutes HTTP/1.1[0m" 200 -
+[2021-02-10 00:57:42,599] [INFO    ][OK] Llamada al script calcular_caminos_entre_puntos.py [OK]
+[2021-02-10 00:57:42,599] [INFO    ]El programa lanzado es: ALL TESLA ROADSTER A Corunia Tren A Corunia Bus 90 10  INFO /home/tfm/Documentos/TFM/ElectricRoute/flask_auth_app/logs/
+[2021-02-10 00:57:42,599] [INFO    ]1.- Carga de inputs desde Base de Datos
+[2021-02-10 00:57:42,599] [INFO    ]Crear conexion a DB
+[2021-02-10 00:57:42,638] [INFO    ]Query a PuntosCarga
+[2021-02-10 00:57:42,693] [INFO    ]Query a GasolinerasPropuesta
+[2021-02-10 00:57:42,796] [INFO    ]Query a Ciudades
+[2021-02-10 00:57:42,803] [INFO    ]Query a ElectriCar
+[2021-02-10 00:57:42,807] [INFO    ]Query a Matriz_distancia_haversine
+[2021-02-10 00:57:52,357] [INFO    ]127.0.0.1 - - [10/Feb/2021 00:57:52] "[37mGET /Route HTTP/1.1[0m" 200 -
+[2021-02-10 00:57:52,436] [INFO    ]127.0.0.1 - - [10/Feb/2021 00:57:52] "[36mGET /static/dist/leaflet-routing-machine.js HTTP/1.1[0m" 304 -
+[2021-02-10 00:57:52,450] [INFO    ]127.0.0.1 - - [10/Feb/2021 00:57:52] "[36mGET /static/vendor/jquery-easing/jquery.easing.min.js HTTP/1.1[0m" 304 -
+[2021-02-10 00:57:52,459] [INFO    ]127.0.0.1 - - [10/Feb/2021 00:57:52] "[36mGET /static/js/sb-admin-2.min.js HTTP/1.1[0m" 304 -
+[2021-02-10 00:57:52,479] [INFO    ]127.0.0.1 - - [10/Feb/2021 00:57:52] "[36mGET /static/vendor/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1[0m" 304 -
+[2021-02-10 00:57:52,523] [INFO    ]127.0.0.1 - - [10/Feb/2021 00:57:52] "[36mGET /static/vendor/jquery/jquery.min.js HTTP/1.1[0m" 304 -
+[2021-02-10 00:57:52,544] [INFO    ]127.0.0.1 - - [10/Feb/2021 00:57:52] "[36mGET /static/img/img_avatar.jpg HTTP/1.1[0m" 304 -
+[2021-02-10 00:57:55,422] [INFO    ]Query a Matriz_distancia_haversine completo
+[2021-02-10 00:58:10,473] [INFO    ]Cerrar conexion con DB
+[2021-02-10 00:58:10,473] [INFO    ]2.- Aplicar las restricciones
+[2021-02-10 00:58:10,474] [INFO    ]a) Si no se especifica tipo de conector, no se aplica restriccion
+[2021-02-10 00:58:10,474] [INFO    ]b) Restriccion de primera parada
+[2021-02-10 00:58:10,714] [INFO    ]c) Restriccion de ultima parada
+[2021-02-10 00:58:10,910] [INFO    ]Se genera el dataframe reducido que cumple con todas las restricciones
+[2021-02-10 00:58:11,821] [INFO    ]df_distancias (461176, 3)
+[2021-02-10 00:58:11,821] [INFO    ]df_distancias_reduced (460804, 5)
+[2021-02-10 00:58:11,821] [INFO    ]3.- Calcular tiempos (de recorrido y parada)
+[2021-02-10 00:58:11,821] [INFO    ]a) Tiempo de recorrido
+[2021-02-10 00:58:11,824] [INFO    ]b) Tiempo de parada
+[2021-02-10 00:58:11,824] [INFO    ]Filtro las distancias menores o iguales de 50 km entre las CIUDADES IMPORTANTES y el resto de coordenadas
+[2021-02-10 00:58:14,143] [INFO    ]Calculo tiempo de parada para puntos de recarga
+[2021-02-10 00:58:14,233] [INFO    ]Se genera el dataframe reducido con columna basada en Suma_time_parada_h
+[2021-02-10 00:58:14,409] [INFO    ]4.- Construir el grafo
+[2021-02-10 00:59:26,569] [INFO    ]5.- Calculo rutas optimas
+[2021-02-10 00:59:26,689] [INFO    ]La ruta optima es: ['A Corunia Tren', 'gasolinera_108', 'A Corunia Bus']
+[2021-02-10 00:59:26,849] [INFO    ]Tiempo de parada en A Corunia Tren es 0.0 h
+[2021-02-10 00:59:26,850] [INFO    ]Tiempo total del tramo A Corunia Tren - gasolinera_108 es 0.20615391687233456 h
+[2021-02-10 00:59:27,007] [INFO    ]Tiempo de parada en gasolinera_108 es 2.4470285289526 h
+[2021-02-10 00:59:27,007] [INFO    ]Tiempo total del tramo gasolinera_108 - A Corunia Bus es 2.6508635455738796 h
+[2021-02-10 00:59:27,007] [INFO    ]El tiempo total tardado es: 2.857017462446214 h
+[2021-02-10 00:59:27,131] [INFO    ]6.- Carga de outputs a Base de Datos
+[2021-02-10 00:59:27,131] [INFO    ]Crear conexion a DB
+[2021-02-10 00:59:27,233] [INFO    ]Query a Output
+[2021-02-10 00:59:27,260] [INFO    ]1 registros insertados.
+[2021-02-10 00:59:27,260] [INFO    ]Cerrar conexion con DB
+[2021-02-10 00:59:27,260] [INFO    ][OK] Final del script calcular_caminos_entre_puntos.py [OK]
+[2021-02-10 00:59:27,449] [INFO    ]127.0.0.1 - - [10/Feb/2021 00:59:27] "[37mPOST /Route HTTP/1.1[0m" 200 -
+[2021-02-10 00:59:37,371] [INFO    ] * Detected change in '/home/tfm/Documentos/TFM/ElectricRoute/flask_auth_app/project/main.py', reloading

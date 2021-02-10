@@ -25,7 +25,7 @@ from . import db
 
 
 main = Blueprint('main', __name__)
-# bp = Blueprint('errors', __name__)
+bp = Blueprint('errors', __name__)
 
 
 @main.before_request
@@ -39,13 +39,13 @@ def before_request():
 # 1.- Páginas de error ----------------------------------------
 #-----------------------------------------------------------------
 
-@main.route('/page_not_found')
-def page_not_found():
-    return render_template('404.html')
+@main.app_errorhandler(404)
+def handle_404(err):
+    return render_template('404.html'), 404
 
-# @bp.app_errorhandler(404)
-# def handle_404(err):
-#    return render_template('404.html'), 404
+@main.app_errorhandler(500)
+def handle_500(err):
+    return render_template('500.html'), 500
 
 
 
@@ -129,15 +129,16 @@ def route_post():
         ciudad_origen = request.form.get('mySelectOrigin')
         ciudad_destino = request.form.get('mySelectDest')
 
+        # Se aplica el modelo para calcular la ruta
         ruta = main_route(tipo_programa = "ALL",
             marca_coche = brandCar,
             modelo_coche = modelCar,
             origen = ciudad_origen,
             destino = ciudad_destino
         )
-
-        lista_coordenadas = []
         
+        # Lista de coordenadas de la ruta para dibujar en el mapa
+        lista_coordenadas = []
         
         for i in range(0, len(ruta)):
             punto_coord = []
@@ -147,7 +148,11 @@ def route_post():
             punto_coord.append(longitud)
             lista_coordenadas.append(punto_coord)
 
-        return render_template('route.html', name = name, ciudades = lista_destino, lista_coordenadas=lista_coordenadas )
+        # Información sobre la ruta
+        # ¡¡¡!!!
+        
+
+        return render_template('route.html', name = name, ciudades = lista_destino, lista_coordenadas=lista_coordenadas, ciudad_origen=ciudad_origen, ciudad_destino=ciudad_destino )
 
     # Si la sesión no está iniciada se le dirige a la página de inicio
     else:
@@ -174,7 +179,7 @@ def frequentroutes():
         rutas_list = cur.fetchall()
 
         dict_rutas = []
-        list_rutas = ["Origen", "Destino", "Número de Paradas", "Tiempo total", "Load"]
+        list_rutas = ["From", "To", "Number of stops", "Time", "Load"]
 
         for i in range(0, len(rutas_list)):
             
@@ -231,3 +236,9 @@ def forgotpassword():
     return render_template('forgotpassword.html')
 
 
+# 7- Reset Password ----------------------------------------------
+#------------------------------------------------------------------
+
+@main.route('/resetpassword')
+def resetpassword():
+    return render_template('resetpassword.html')
