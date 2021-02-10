@@ -80,7 +80,7 @@ def main_route(tipo_programa,
                destino,
                carga_inicial = "90",
                carga_final = "10",
-               tipo_conector = "",
+               use_conector = True,
                log_level = "INFO",
                log_path = os.getcwd() + "/logs/",
                user_id = 1,
@@ -106,7 +106,7 @@ def main_route(tipo_programa,
                  destino,
                  carga_inicial,
                  carga_final,
-                 tipo_conector,
+                 use_conector,
                  log_level,
                  log_path)
 
@@ -114,7 +114,6 @@ def main_route(tipo_programa,
         #------------------------------------------------------------------
         # 1.- Carga de inputs desde Base de Datos -------------------------
         logger.info("1.- Carga de inputs desde Base de Datos")
-
         bd = BaseDatos.BaseDatos(host=db_host,
                                  puerto=3306,            
                                  usuario="root",            
@@ -155,6 +154,13 @@ def main_route(tipo_programa,
                                                     columnas = columnas_coche,
                                                     argumentos = argumentos_coche)
         autonomia_coche = 0.9*float(df_electricar["RANGE_KM"]) 
+        #Query a TipoConector
+        logger.info("Query a TipoConector")
+        sql_query_conector = "SELECT * FROM TipoConector"
+        columnas_conector = ["tipo_pc","tipo_coche"]
+        df_conector =  bd.ejecutar_queries_select(con = con,
+                                                  sql_query = sql_query_conector,
+                                                  columnas = columnas_conector)
         # TODO: llamar a la funcion de autonomia real del coche (que deberia ir en el modulo Tiempos.py)
         #Query a Matriz_distancia_haversine
         logger.info("Query a Matriz_distancia_haversine")
@@ -194,9 +200,19 @@ def main_route(tipo_programa,
         # 2.- Aplicar las restricciones -----------------------------------
         #------------------------------------------------------------------
         logger.info("2.- Aplicar las restricciones")
-        if tipo_conector != "":
-            # a) Restriccion de tipo de conector
-            logger.info("a) Restriccion de tipo de conector")
+        # a) Restriccion de tipo de conector
+        logger.info("a) Restriccion de tipo de conector")
+        
+        # Encontrar el tipo de conector correspondiente entre punto de carga y coche
+        if marca_coche == "TESLA":
+            tipo_conector = "Tesla"
+        elif df_electricar["PLUGTYPE"].to_string(index=False).strip() in df_conector["tipo_coche"].unique():
+            tipo_conector = df_conector["tipo_pc"][df_conector["tipo_coche"]==
+            df_electricar["PLUGTYPE"].to_string(index=False).strip()].to_string(index=False).strip()
+        else:
+            tipo_conector = ""
+            use_conector = False
+        if use_conector:
             puntoscarga_reduced = []
             for index, punto_carga in df_puntoscarga.iterrows():
                 if tipo_conector in punto_carga["connectorType"]:
@@ -207,7 +223,7 @@ def main_route(tipo_programa,
                                                                                 puntoscarga_reduced = puntoscarga_reduced)
         else:
             # a) Si no se especifica tipo de conector, no se aplica restriccion
-            logger.info("a) Si no se especifica tipo de conector, no se aplica restriccion")
+            logger.info("Si no se especifica tipo de conector, no se aplica restriccion")
             df_puntoscarga_reduced = df_puntoscarga
         # b) Restriccion de primera parada
         logger.info("b) Restriccion de primera parada")
@@ -223,14 +239,14 @@ def main_route(tipo_programa,
                                                                         autonomia_coche = autonomia_coche)
         # Se genera el dataframe reducido que cumple con todas las restricciones
         logger.info("Se genera el dataframe reducido que cumple con todas las restricciones")
-        if tipo_conector != "":
+        if use_conector:
             df_distancias_merged_1 = pd.merge(df_distancias, restriccion_tipo_conector, on=['Origen', 'Destino'], how='outer')
         else:
             df_distancias_merged_1 = df_distancias
         df_distancias_merged_2 = pd.merge(df_distancias_merged_1, restricciones_prim_par, on=['Origen', 'Destino'], how='outer')
         df_distancias_merged = pd.merge(df_distancias_merged_2, restricciones_ult_par, on=['Origen', 'Destino'], how='outer')
         df_distancias_merged = df_distancias_merged.fillna(True)
-        if tipo_conector != "":
+        if use_conector:
             df_distancias_reduced = df_distancias_merged[(df_distancias_merged["Restr_con"] == True)&
                                                         (df_distancias_merged["Restr_prim_par"] == True)&
                                                         (df_distancias_merged["Restr_ult_par"] == True)]
@@ -266,7 +282,7 @@ def main_route(tipo_programa,
         df_puntoscarga_reduced["num_electricPump"][df_puntoscarga_reduced['id'].isin(lista_definitiva)] = 3
         rendimiento_carga = 0.9
         if tipo_programa != "GASOLINERA":
-            #Para los puntos de recarga, hay datos disponibles para el cálculo
+            #Para los puntos de recarga, hay datos disponibles para el calculo
             logger.info("Calculo tiempo de parada para puntos de recarga")
             tiempos_puntos_parada_pc = []
             tiempos_puntos_espera_pc = []
@@ -409,7 +425,7 @@ def main_route(tipo_programa,
         return path_coordinates
     except:
         logger.error("[ERROR] El programa no ha podido obtener una ruta [ERROR]")
-        return False
+        return []
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Calcular caminos entre puntos")
@@ -448,11 +464,12 @@ if __name__ == "__main__":
                         default = "10",
                         help = "Porcentaje de carga final del coche en lugar de destino "
                                "Default: 10")
-    parser.add_argument("--tipo_conector",
+    parser.add_argument("--use_conector",
                         required = False,
-                        type = str,
-                        default = "",
-                        help = "Tipo de conector que necesita el coche (tiene que estar en la tabla PuntosCarga)")
+                        type = bool,
+                        default = True,
+                        help = "Usar o no restriccion de tipo de conector "
+                               "Default: True")
     parser.add_argument("--log_level",
                         required = False,
                         default = "INFO",
@@ -486,7 +503,7 @@ if __name__ == "__main__":
                destino = args.destino,
                carga_inicial = args.carga_inicial,
                carga_final = args.carga_final,
-               tipo_conector = args.tipo_conector,
+               use_conector = args.use_conector,
                log_level = args.log_level,
                log_path = args.log_path,
                user_id = args.user_id,
