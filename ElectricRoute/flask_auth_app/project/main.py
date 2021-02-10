@@ -94,8 +94,12 @@ def route():
         for ciudad in ciudades_list:
             lista_destino.append(ciudad[0])
 
+        # Carga inicial y final
+        rangeInitial = request.form.get('rangeInitial')
+        rangeFinal   = request.form.get('rangeFinal')
+
         # Output página de ruta            
-        return render_template('route.html', name = name, ciudades = lista_destino, lista_coordenadas=lista_coordenadas)
+        return render_template('route.html', name = name, ciudades = lista_destino, lista_coordenadas=lista_coordenadas, rangeInitial=rangeInitial, rangeFinal=rangeFinal)
 
     # Si la sesión no está iniciada se le dirige a la página de inicio
     else:
@@ -133,6 +137,10 @@ def route_post():
         ciudad_origen = request.form.get('mySelectOrigin')
         ciudad_destino = request.form.get('mySelectDest')
 
+        # Carga inicial y final
+        rangeInitial = request.form.get('rangeInitial')
+        rangeFinal   = request.form.get('rangeFinal')
+
 
         # Se aplica el modelo para calcular la ruta
         ruta = main_route(tipo_programa = "ALL",
@@ -140,6 +148,8 @@ def route_post():
             modelo_coche = modelCar,
             origen = ciudad_origen,
             destino = ciudad_destino,
+            carga_inicial = rangeInitial,
+            carga_final = rangeFinal,
             db_host = environ.get('DB_HOST')
         )
         
@@ -158,7 +168,7 @@ def route_post():
         # ¡¡¡!!!
         
 
-        return render_template('route.html', name = name, ciudades = lista_destino, lista_coordenadas=lista_coordenadas, ciudad_origen=ciudad_origen, ciudad_destino=ciudad_destino )
+        return render_template('route.html', name = name, ciudades = lista_destino, lista_coordenadas=lista_coordenadas, ciudad_origen=ciudad_origen, ciudad_destino=ciudad_destino, rangeInitial = rangeInitial, rangeFinal = rangeFinal )
 
     # Si la sesión no está iniciada se le dirige a la página de inicio
     else:

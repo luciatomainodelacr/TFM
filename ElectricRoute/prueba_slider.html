@@ -1,0 +1,16 @@
+<html>
+<body>
+
+<p>This example demonstrates how to dynamically update a slider value with oninput.</p>
+
+<input type="range" oninput="myFunction(this.value)">                             
+<p id="demo"></p>
+
+<script>
+function myFunction(val) {
+  document.getElementById("demo").innerHTML = val; 
+}
+</script>
+
+</body>
+</html>

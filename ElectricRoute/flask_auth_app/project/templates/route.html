@@ -4,7 +4,30 @@
         
     <script type="text/javascript">        
         
+        // Se obtiene el valor de carga inicial
+        function myChargeInitial(val) {
+            document.getElementById("rangeInitial").innerHTML = val;
+            val  = document.getElementById("rangeInitial").value;
+        }
+
+        // Se obtiene el valor de carga final
+        function myChargeFinal(val) {
+            document.getElementById("rangeFinal").innerHTML = val;
+            val  = document.getElementById("rangeFinal").value;
+        }
+
+        // Se obtiene el valor de carga inicial y final para el modelo
+        function myCharge() {
+            var x  = document.getElementById("rangeInitial").value;
+            var y  = document.getElementById("rangeFinal").value;
+            document.getElementById("rangeInitial").innerHTML = x;            
+            document.getElementById("rangeFinal").innerHTML = y;
+
+        }
+
+        // Dibujar mapa
         $(document).ready(function() {
+
 
             // Se obtiene la variable lista_coordenadas (lista de los ptos por los q pasa la ruta)
             var ruta = JSON.parse('{{ lista_coordenadas | tojson }}');
@@ -257,13 +280,36 @@
                             {% endfor %}
                         </datalist>
                     </div>
+
+                   <!-- Select Initial and Final charge -->
+                    <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <p> Initial charge </p>
+                            <div style='display: inline-block; font-size: 11px;'> 0% </div>
+                            <div style='display: inline-block; width: 66%; padding-left: 2%;'>
+                                <p id="rangeInitial"></p>
+                                <input type="range" class="custom-range" id="rangeInitial"  name='rangeInitial' min=0 max=100 oninput="myChargeInitial(this.value)">
+                            </div>
+                            <div style='display: inline-block; font-size: 11px;'> 100% </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <p> Final charge </p>
+                            <div style='display: inline-block; font-size: 11px;'> 0% </div>
+                            <div style='display: inline-block; width: 66%; padding-left: 2%;'>
+                                <p id="rangeFinal"></p>
+                                <input type="range" class="custom-range" id="rangeFinal"  name='rangeFinal'  min=0 max=100 oninput="myChargeFinal(this.value)">
+                            </div>
+                            <div style='display: inline-block; font-size: 11px;'> 100% </div>
+                        </div>
+                    </div>     
+
             </div>
                        
                     <!-- Pie de página del modal -->
                     <div class="form-group">
                         <div class="modal-footer" style= "margin-top:5%" >
                             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                            <input type="submit" class="btn btn-primary" id="newRoute" name="newRoute" value="Go!">
+                            <input type="submit" class="btn btn-primary" id="newRoute" name="newRoute" onclick="myCharge()" value="Go!">
                         </div>
                     </div>
                             
@@ -311,6 +357,14 @@
                         <tr>
                           <td><b> Time </b></td>
                           <td><b> {{brandCar}} </b></td>
+                        </tr>
+                        <tr>
+                          <td><b> Initial charge </b></td>
+                          <td><b> {{rangeInitial}} </b></td>
+                        </tr>
+                        <tr>
+                          <td><b> Final charge </b></td>
+                          <td><b> {{rangeFinal}} </b></td>
                         </tr>
                         <tr><td><b> </b></td><td><b> </b></td></tr>
                                                                                   
