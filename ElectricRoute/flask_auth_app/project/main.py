@@ -141,9 +141,12 @@ def route_post():
         rangeInitial = request.form.get('rangeInitial')
         rangeFinal   = request.form.get('rangeFinal')
 
+        # Tipo de programa
+        programType = request.form.get('programType')
+
 
         # Se aplica el modelo para calcular la ruta
-        ruta = main_route(tipo_programa = "ALL",
+        ruta = main_route(tipo_programa = programType,
             marca_coche = brandCar,
             modelo_coche = modelCar,
             origen = ciudad_origen,
@@ -168,7 +171,7 @@ def route_post():
         # ¡¡¡!!!
         
 
-        return render_template('route.html', name = name, ciudades = lista_destino, lista_coordenadas=lista_coordenadas, ciudad_origen=ciudad_origen, ciudad_destino=ciudad_destino, rangeInitial = rangeInitial, rangeFinal = rangeFinal )
+        return render_template('route.html', name = name, ciudades = lista_destino, lista_coordenadas=lista_coordenadas, ciudad_origen=ciudad_origen, ciudad_destino=ciudad_destino, rangeInitial = rangeInitial, rangeFinal = rangeFinal, programType= programType)
 
     # Si la sesión no está iniciada se le dirige a la página de inicio
     else:
@@ -273,8 +276,6 @@ def profile_post():
             brandCar = request.form.get('mySelectBrand')
             modelCar = request.form.get('mySelectModel')
         
-
-
 
         return render_template('profile.html', email = email, name = name, lastName = lastName, brandCar = brandCar, modelCar = modelCar)
 
