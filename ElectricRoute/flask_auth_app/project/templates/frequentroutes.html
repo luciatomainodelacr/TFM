@@ -41,10 +41,19 @@
                             <td> {{ value2 }} </td>
                           {% endfor %}
                           <td>
-                              <div class="custom-control custom-checkbox">
-                                  <input type="checkbox" class="custom-control-input" id="customCheck1" checked>
-                                  <label class="custom-control-label" for="customCheck1"></label>
-                              </div>
+
+                            <form class="form-group">
+                                <div class="row">
+                                <div class="col-sm-10">
+                                    <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                                    </div>
+                                    <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                                    </div>
+                                </div>
+                                </div>
+                            </form>
                           </td>
                         </tr>
                         {% endfor %}
@@ -52,6 +61,7 @@
                         </tbody>
                     </table>
                   </div>
+                  
 
                    <!-- Botón  Back to Index --> 
                     <a class="btn btn-light btn-icon-split" href="index">

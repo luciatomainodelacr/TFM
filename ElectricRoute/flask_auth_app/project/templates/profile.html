@@ -62,6 +62,8 @@
                       <span class="icon text-white-50">
                         <i class="fas fa-user"></i>
                       </span>
+
+                      
                       <span class="text"> Update Information </span>
                     </a>
 
@@ -96,21 +98,21 @@
             <!-- Cuerpo: formulario para modificar los campos-->
             <div class="modal-body">
               <!-- Formulario información usuario -->        
-                <form class = "user" method="POST" action="/signup" style = "margin-top:5%">
+                <form class = "user" method="POST" action="/profile" style = "margin-top:5%">
 
                     <!-- Name y Last Name-->
                     <div class="form-group row">
                       <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="username" name = "username" placeholder = {{name}} >
+                        <input type="text" class="form-control form-control-user" id="usernameEdit" name = "usernameEdit" placeholder = {{name}} >
                       </div>
                       <div class="col-sm-6">
-                        <input type="text" class="form-control form-control-user" id="lastName" name = "lastName" placeholder = {{lastName}}>
+                        <input type="text" class="form-control form-control-user" id="lastNameEdit" name = "lastNameEdit" placeholder = {{lastName}}>
                       </div>
                     </div>
 
                     <!-- Enter Email Address -->
                     <div class="form-group">
-                      <input type="email" class="form-control form-control-user" id="email" name="email" placeholder = {{email}}>
+                      <input type="email" class="form-control form-control-user" id="emailEdit" name="emailEdit" placeholder = {{email}}>
                     </div>
 
                     <!-- Type Car Brand and Model-->
@@ -118,8 +120,8 @@
                       
                       <!-- Brand  -->
                       <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input class="form-control form-control-user" list="mySelectBrand" name="mySelectBrand" style="border-radius: 10rem;  padding: 1.5rem 1rem;" placeholder = {{modelCar}}>
-                        <datalist id="mySelectBrand"> 
+                        <input class="form-control form-control-user" list="mySelectBrandEdit" name="mySelectBrandEdit" style="border-radius: 10rem;  padding: 1.5rem 1rem;" placeholder = {{modelCar}}>
+                        <datalist id="mySelectBrandEdit"> 
                           {% for brand in list_brand %}                            
                             <option selected value= "{{brand}}"> {{brand}} </option>
                           {% endfor %}
@@ -128,22 +130,26 @@
 
                       <!-- Model  -->
                       <div class="col-sm-6">
-                        <input class="form-control form-control-user" list="mySelectModel" name="mySelectModel" style="border-radius: 10rem;  padding: 1.5rem 1rem;" placeholder = {{brandCar}}>
-                        <datalist id="mySelectModel"> 
+                        <input class="form-control form-control-user" list="mySelectModelEdit" name="mySelectModelEdit" style="border-radius: 10rem;  padding: 1.5rem 1rem;" placeholder = {{brandCar}}>
+                        <datalist id="mySelectModelEdit"> 
                           {% for model in list_model %}                            
                             <option selected value= "{{model}}"> {{model}} </option>
                           {% endfor %}
                         </datalist>
                       </div>
                     </div>
-                </form>
+          
             </div>
 
             <!-- Pie de página: botón para guardar los cambios -->
+            <div class="form-group">
             <div class="modal-footer">
               <button class="btn btn-secondary btn-user" type="button" data-dismiss="modal">Cancel</button>
               <input type="submit" class="btn btn-primary  btn-user" id="UpdateInfo" name="UpdateInfo" value="Save Changes">
             </div>
+            </div>
+           </form>
+
 
         </div>
         </div>

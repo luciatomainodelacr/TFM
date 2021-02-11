@@ -19,10 +19,13 @@ Modelo de autenticación. Tres páginas:
 from flask import Blueprint, render_template, redirect, url_for, request, flash, session, g
 from flask_login import login_required, current_user
 import datetime
+from flask_mysqldb import MySQL
+import MySQLdb.cursors 
+import mysql.connector
+from os import environ 
 from .BE.calcular_caminos_entre_puntos import main_route
 from .BE.Output import BaseDatos
 from . import db
-from os import environ 
 
 
 main = Blueprint('main', __name__)
@@ -229,7 +232,7 @@ def delete():
 # 6- Página profile -----------------------------------------------
 #------------------------------------------------------------------
 
-@main.route('/profile', methods=['GET', 'POST'])
+@main.route('/profile')
 def profile():
 
     # Se comprueba si la sesión del usuario está iniciada
@@ -242,7 +245,20 @@ def profile():
         brandCar = session['brandCar']
         modelCar = session['modelCar']
 
-        return render_template('profile.html', email = email, name = name, lastName = lastName, brandCar = brandCar, modelCar = modelCar)
+        # Consulta a la bbdd ElectricCar
+        cur = db.connection.cursor()
+        cur.execute('''SELECT * FROM ElectricCar''')
+        electricCar_list = cur.fetchall()
+
+        # Se inicializan dos listas para las marcas y los modelos de coche
+        list_brand = []
+        list_model = []
+
+        for coche in electricCar_list:
+            list_brand.append(coche[0])
+            list_model.append(coche[1])
+
+        return render_template('profile.html', email = email, name = name, lastName = lastName, brandCar = brandCar, modelCar = modelCar, list_brand = list_brand, list_model = list_model)
 
     # Si la sesión no está iniciada se le dirige a la página de inicio
     else:
@@ -261,22 +277,55 @@ def profile_post():
     if g.email:
 
         # Se obtienen variables del usuario
+        id       = session['id']
         email    = session['email']
         name     = session['username']
         lastName = session['lastName']
         brandCar = session['brandCar']
         modelCar = session['modelCar']
 
-        if request.method == 'POST' and ('email' != '') and ('email' in request.form and 'username' in request.form and 'lastName' in request.form and 'mySelectBrand' in request.form and 'mySelectModel' in request.form):
+        # Consulta a la bbdd ElectricCar
+        cur = db.connection.cursor()
+        cur.execute('''SELECT * FROM ElectricCar''')
+        electricCar_list = cur.fetchall()
+
+        # Se inicializan dos listas para las marcas y los modelos de coche
+        list_brand = []
+        list_model = []
+
+        for coche in electricCar_list:
+            list_brand.append(coche[0])
+            list_model.append(coche[1])
+
+        print(request.form)
+
+        print(request.method == 'POST')
+        print(email)
+
+        if request.method == 'POST' and ('email' != '') and ('usernameEdit' in request.form and 'lastNameEdit' in request.form and 'mySelectBrandEdit' in request.form and 'mySelectModelEdit' in request.form):
             
-            email    = request.form['email']
-            username = request.form['username']
-            lastName = request.form['lastName']
+            email     = request.form['emailEdit']
+            name     = request.form['usernameEdit']
+            lastName = request.form['lastNameEdit']
             brandCar = request.form.get('mySelectBrand')
             modelCar = request.form.get('mySelectModel')
+            
+            print(id)
+            print(lastName)
+            print(brandCar)
+            print(modelCar)
+            
+            # Consulta a la bbdd users 
+            sql_query = "UPDATE users SET username = %s, lastName = %s, brandCar = %s, modelCar = %s  WHERE id = %s AND email = %s"
+            argumentos = (name, lastName, brandCar, modelCar, id, email)
+
+            curProfile = db.connection.cursor(MySQLdb.cursors.DictCursor)
+            curProfile.execute(sql_query, argumentos)
+            db.connection.commit() 
         
 
-        return render_template('profile.html', email = email, name = name, lastName = lastName, brandCar = brandCar, modelCar = modelCar)
+
+        return render_template('profile.html', email = email, name = name, lastName = lastName, brandCar = brandCar, modelCar = modelCar, list_brand = list_brand, list_model = list_model)
 
     # Si la sesión no está iniciada se le dirige a la página de inicio
     else:
@@ -341,12 +390,3 @@ def forgotpassword():
 @main.route('/resetpassword')
 def resetpassword():
     return render_template('resetpassword.html')
-
-
-
-# 8- Forgot Password ----------------------------------------------
-#------------------------------------------------------------------
-
-@main.route('/grafana_test')
-def grafana_test():
-    return render_template('grafana_test.html')
