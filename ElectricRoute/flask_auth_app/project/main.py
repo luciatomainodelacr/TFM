@@ -341,3 +341,12 @@ def forgotpassword():
 @main.route('/resetpassword')
 def resetpassword():
     return render_template('resetpassword.html')
+
+
+
+# 8- Forgot Password ----------------------------------------------
+#------------------------------------------------------------------
+
+@main.route('/grafana_test')
+def grafana_test():
+    return render_template('grafana_test.html')
