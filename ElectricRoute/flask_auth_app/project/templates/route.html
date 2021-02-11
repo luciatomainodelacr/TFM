@@ -16,12 +16,21 @@
             val  = document.getElementById("rangeFinal").value;
         }
 
+        // Se obtiene el valor de carga final
+        function myProgramType(val) {
+            document.getElementById("programType").innerHTML = val;
+            val  = document.getElementById("programType").value;
+        }
+
         // Se obtiene el valor de carga inicial y final para el modelo
         function myCharge() {
             var x  = document.getElementById("rangeInitial").value;
             var y  = document.getElementById("rangeFinal").value;
-            document.getElementById("rangeInitial").innerHTML = x;            
-            document.getElementById("rangeFinal").innerHTML = y;
+            var z  = document.getElementById("programType").value;
+
+            document.getElementById("rangeInitial").innerHTML   = x;            
+            document.getElementById("rangeFinal").innerHTML     = y;
+            document.getElementById("programType").innerHTML    = z;            
 
         }
 
@@ -99,7 +108,7 @@
             </a>
         </li>
 
-        <!-- Nav Item - Save Route -->
+        <!-- Nav Item - Info Route -->
         <li class="nav-item">
             <a class="nav-link" href="#" data-toggle="modal" data-target="#infoRoute">
                 <i class="fa fa-info-circle fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -119,13 +128,33 @@
 
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
+
                 <a class="collapse-item" href="profile">
                     <i class="fa fa-user" aria-hidden="true"></i>
                     <span>User Profile</span>
                 </a>
+
+                <a class="collapse-item" href="cars">
+                    <i class="fa fa-car" aria-hidden="true"></i>
+                    <span>Cars Details</span>
+                </a>
             </div>
             </div>
+
         </li>
+
+        <!-- Línea divisora -->
+        <hr class="sidebar-divider">
+
+
+        <!-- Nav Item - Grafana-->
+        <li class="nav-item">
+            <a class="nav-link" href="https://grafana.com/">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Grafana</span>
+            </a>
+        </li>
+
 
         <!-- Línea divisora -->
         <hr class="sidebar-divider">
@@ -221,10 +250,11 @@
     <div class="modal-dialog" role="document">
 
     <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+
+        <div class="modal-header" style="background-color: #4E73DF !important;">
+            <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(255, 255, 255); font-size:3vh">Ready to Leave?</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
+                <span aria-hidden="true" style="color: rgb(255, 255, 255);">×</span>
             </button>
         </div>
 
@@ -248,7 +278,7 @@
     <div class="modal-content">
 
         <div class="modal-header" style="background-color: #4E73DF !important;">
-            <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(255, 255, 255);">New Route</h5>
+            <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(255, 255, 255); font-size:3vh">New Route</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true" style="color: rgb(255, 255, 255);">×</span>
             </button>
@@ -259,9 +289,23 @@
             <!-- Select Origin -->
             <div class="container"> 
                 <form class="form-group" method="POST" action="/Route">
+
+                    <!-- Select type of process -->
+                    <label class="form-label" style="color: #4E73DF !important; font-weight: bold;"> Select one of the following: </label>
+                    <div class="form-group row" style = "margin-top:2%">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="programType" id="chargeStation" value="PUNTO_RECARGA">
+                            <label class="form-check-label" for="chargeStation">Charging stations</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="programType" id="chageAll" value="ALL">
+                            <label class="form-check-label" for="chageAll">Charging and Gas stations</label>
+                        </div>
+                    </div>  
+
                     <!-- Select Origin -->
                     <div class="form-group"> 
-                        <label for="mySelectOrigin" class="form-label">From... </label>
+                        <label for="mySelectOrigin" class="form-label" style="color: #4E73DF !important; font-weight: bold;">From... </label>
                         <input class="form-control form-control-user" list="mySelectOrigin" name="mySelectOrigin" style="border-radius: 10rem;  padding: 1.5rem 1rem;" placeholder="Choose one of the following...">                           
                             <datalist id="mySelectOrigin"> 
                                 {% for ciudad in ciudades %}                            
@@ -272,7 +316,7 @@
 
                     <!-- Select Destiny -->
                     <div class="form-group">
-                        <label for="mySelectOrigin" class="form-label">To... </label>
+                        <label for="mySelectOrigin" class="form-label" style="color: #4E73DF !important; font-weight: bold;">To... </label>
                         <input class="form-control" list="mySelectDest" name="mySelectDest" style="border-radius: 10rem;  padding: 1.5rem 1rem;" placeholder="Choose one of the following..." >
                         <datalist id="mySelectDest" >                                  
                             {% for ciudad in ciudades %}                            
@@ -284,20 +328,20 @@
                    <!-- Select Initial and Final charge -->
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <p> Initial charge </p>
+                            <p><label class="form-label" style="color: #4E73DF !important; font-weight: bold;"> Initial charge </label></p>
                             <div style='display: inline-block; font-size: 11px;'> 0% </div>
                             <div style='display: inline-block; width: 66%; padding-left: 2%;'>
                                 <p id="rangeInitial"></p>
-                                <input type="range" class="custom-range" id="rangeInitial"  name='rangeInitial' min=0 max=100 oninput="myChargeInitial(this.value)">
+                                <input type="range" class="custom-range" id="rangeInitial"  name='rangeInitial' min=0 max=100 oninput="myChargeInitial(this.value.concat(' %'))")>
                             </div>
                             <div style='display: inline-block; font-size: 11px;'> 100% </div>
                         </div>
                         <div class="col-sm-6">
-                            <p> Final charge </p>
+                            <p><label class="form-label" style="color: #4E73DF !important; font-weight: bold;"> Final charge </label></p>
                             <div style='display: inline-block; font-size: 11px;'> 0% </div>
                             <div style='display: inline-block; width: 66%; padding-left: 2%;'>
                                 <p id="rangeFinal"></p>
-                                <input type="range" class="custom-range" id="rangeFinal"  name='rangeFinal'  min=0 max=100 oninput="myChargeFinal(this.value)">
+                                <input type="range" class="custom-range" id="rangeFinal"  name='rangeFinal' min=0 max=100 oninput="myChargeFinal(this.value.concat(' %'))">
                             </div>
                             <div style='display: inline-block; font-size: 11px;'> 100% </div>
                         </div>
@@ -330,7 +374,7 @@
     <div class="modal-content">
 
         <div class="modal-header" style="background-color: #4E73DF !important;">
-            <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(255, 255, 255);">Info Route</h5>
+            <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(255, 255, 255); font-size:3vh">Info Route</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true" style="color: rgb(255, 255, 255);">×</span>
             </button>
@@ -349,6 +393,10 @@
                         <tr>
                           <td><b> To </b></td>
                           <td><b> {{ciudad_destino}} </b></td>
+                        </tr>
+                        <tr>
+                          <td><b> Type of program </b></td>
+                          <td><b> {{programType}} </b></td>
                         </tr>
                         <tr>
                           <td><b> Number of stops </b></td>
