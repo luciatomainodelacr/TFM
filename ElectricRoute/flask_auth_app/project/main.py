@@ -99,7 +99,8 @@ def route():
         rangeFinal   = request.form.get('rangeFinal')
 
         # Output página de ruta            
-        return render_template('route.html', name = name, ciudades = lista_destino, lista_coordenadas=lista_coordenadas, rangeInitial=rangeInitial, rangeFinal=rangeFinal)
+        grafana_url = "http://" + environ.get('GRAFANA_HOST') + ":3000/d/k5-wBv-Mz/mapas?orgId=1&from=1613049827616&to=1613071427616"
+        return render_template('route.html', name = name, ciudades = lista_destino, lista_coordenadas=lista_coordenadas, rangeInitial=rangeInitial, rangeFinal=rangeFinal, grafana_url=grafana_url)
 
     # Si la sesión no está iniciada se le dirige a la página de inicio
     else:
@@ -170,7 +171,6 @@ def route_post():
         # Información sobre la ruta
         # ¡¡¡ FALTA MODIFICAR EL OUTPUT AÑADIR MÁS INFORMACIÓN EN UN DICCIONARIO!!!
         
-
         return render_template('route.html', name = name, ciudades = lista_destino, lista_coordenadas=lista_coordenadas, ciudad_origen=ciudad_origen, ciudad_destino=ciudad_destino, rangeInitial = rangeInitial, rangeFinal = rangeFinal, programType= programType)
 
     # Si la sesión no está iniciada se le dirige a la página de inicio
