@@ -83,8 +83,8 @@
         
         <!-- Título Electric Route -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index">
-            <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
+            <div class="sidebar-brand-icon">
+                <img  src="{{url_for('static', filename='img/ElectricRoute_coche.png')}}" width="55" height="55">
             </div>
             <div class="sidebar-brand-text mx-3"> Electric Route </div>
         </a>
@@ -163,6 +163,7 @@
         <div class="text-center d-none d-md-inline" style = "margin-top: 50%">
             <button class="rounded-circle border-0" id="sidebarToggle"></button>
         </div>
+
     </ul>
 
     <!-- ................................ Fin Barra Lateral ............................... -->
@@ -387,31 +388,31 @@
                 <div class="table-responsive" style = "margin-top:5%">
                     <table class="table table-bodered" id="table" width="100%" cellspacing="0">
                         <tr>
-                          <td><b> From </b></td>
+                          <td style="color: #4E73DF !important;"><b> From </b></td>
                           <td><b> {{ciudad_origen}} </b></td>
                         </tr>
                         <tr>
-                          <td><b> To </b></td>
+                          <td style="color: #4E73DF !important;"><b> To </b></td>
                           <td><b> {{ciudad_destino}} </b></td>
                         </tr>
                         <tr>
-                          <td><b> Type of program </b></td>
+                          <td style="color: #4E73DF !important;"><b> Type of program </b></td>
                           <td><b> {{programType}} </b></td>
                         </tr>
                         <tr>
-                          <td><b> Number of stops </b></td>
+                          <td style="color: #4E73DF !important;"><b> Number of stops </b></td>
                           <td><b> {{number_stops}} </b></td>
                         </tr>
                         <tr>
-                          <td><b> Time </b></td>
+                          <td style="color: #4E73DF !important;"><b> Time </b></td>
                           <td><b> {{brandCar}} </b></td>
                         </tr>
                         <tr>
-                          <td><b> Initial charge </b></td>
+                          <td style="color: #4E73DF !important;"><b> Initial charge </b></td>
                           <td><b> {{rangeInitial}} </b></td>
                         </tr>
                         <tr>
-                          <td><b> Final charge </b></td>
+                          <td style="color: #4E73DF !important;"><b> Final charge </b></td>
                           <td><b> {{rangeFinal}} </b></td>
                         </tr>
                         <tr><td><b> </b></td><td><b> </b></td></tr>

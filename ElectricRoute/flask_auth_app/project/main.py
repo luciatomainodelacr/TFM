@@ -200,7 +200,7 @@ def frequentroutes():
         name     = session['username']
 
         #  Consulta a la bbdd
-        sql_query = "SELECT DISTINCT * FROM Output WHERE user_id = % s"
+        sql_query = "SELECT DISTINCT * FROM Output WHERE user_id = % s limit 5"
         argumentos = str(user_id)
         
         curFrequent = db.connection.cursor(MySQLdb.cursors.DictCursor)
@@ -307,10 +307,6 @@ def profile_post():
             list_brand.append(coche[0])
             list_model.append(coche[1])
 
-        print(request.form)
-
-        print(brandCar)
-        print(modelCar)
 
         if request.method == 'POST' and ('email' != '') and ('usernameEdit' in request.form and 'lastNameEdit' in request.form and 'mySelectBrandEdit' in request.form and 'mySelectModelEdit' in request.form):
             
@@ -336,7 +332,6 @@ def profile_post():
                 modelCar            = request.form['mySelectModelEdit']
                 session['modelCar'] = request.form['mySelectModelEdit']
 
-            
             
             # Consulta a la bbdd users 
             sql_query = "UPDATE users SET username = %s, lastName = %s, brandCar = %s, modelCar = %s  WHERE id = %s AND email = %s"
