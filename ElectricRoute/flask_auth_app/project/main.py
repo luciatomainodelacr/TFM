@@ -186,21 +186,15 @@ def route_post():
         curDetalleRuta.execute("SELECT * FROM Output WHERE scenario_id LIKE % s ", [scenario_id])
         rutas_info = curDetalleRuta.fetchall()
 
-        lista_Puntos_aux = rutas_info[0]["path"]
+        rutas_info_aux = rutas_info[0]["path"]
 
-
-        print('Hola')
-        print(lista_Puntos_aux)
-        print(type(lista_Puntos_aux))
-
-
-        
+        lista_Puntos_aux = rutas_info_aux.split('-')
 
 
         # ¡¡¡ FALTA MODIFICAR EL OUTPUT AÑADIR MÁS INFORMACIÓN EN UN DICCIONARIO!!!
         
 
-        return render_template('route.html', name = name, ciudades = lista_destino, lista_coordenadas=lista_coordenadas, ciudad_origen=ciudad_origen, ciudad_destino=ciudad_destino, rangeInitial = rangeInitial, rangeFinal = rangeFinal, programType= programType)
+        return render_template('route.html', name = name, ciudades = lista_destino, lista_coordenadas=lista_coordenadas, ciudad_origen=ciudad_origen, ciudad_destino=ciudad_destino, rangeInitial = rangeInitial, rangeFinal = rangeFinal, programType= programType, lista_Puntos_aux=lista_Puntos_aux)
 
     # Si la sesión no está iniciada se le dirige a la página de inicio
     else:
