@@ -121,6 +121,7 @@ def route_post():
     if g.email:
 
         # Se obtienen variables del usuario
+        user_id  = session['id']
         email    = session['email']
         name     = session['username']
         brandCar = session['brandCar']
@@ -156,6 +157,7 @@ def route_post():
             destino = ciudad_destino,
             carga_inicial = rangeInitial,
             carga_final = rangeFinal,
+            user_id = user_id,
             db_host = environ.get('DB_HOST')
         )
         
@@ -193,25 +195,55 @@ def frequentroutes():
     if g.email:
 
         # Se obtienen variables del usuario
+        user_id  = session['id']
         email    = session['email']
         name     = session['username']
 
-        # ¡! Añadir en la consulta el filtro usuario
-        cur = db.connection.cursor()
-        cur.execute('SELECT DISTINCT * FROM Output limit 5')
-        rutas_list = cur.fetchall()
+        print(type(user_id))
+        print(email)
+        
+
+        #  Consulta a la bbdd
+        sql_query = "SELECT DISTINCT * FROM Output WHERE user_id = % s"
+        argumentos = str(user_id)
+        
+        curFrequent = db.connection.cursor(MySQLdb.cursors.DictCursor)
+        curFrequent.execute(sql_query, argumentos)
+        rutas_list = curFrequent.fetchall()
+
+        print(id)
+        print(email)
+        print(rutas_list)
 
         dict_rutas = []
-        list_rutas = ["From", "To", "Number of stops", "Time", "Load"]
+        list_rutas = ["From", "To", "Number of stops", "Time"]
 
-        for i in range(0, len(rutas_list)):
-            
+        print("Hola")
+        print(range(0, len(rutas_list)))
+        print(rutas_list[0])
+       
+
+
+        if (len(rutas_list) == 1):
+            print("Hola")
             dict_rutas.append({
-                "Origen" : rutas_list[i][3],
-                "Destino" : rutas_list[i][4],
-                "Número de Paradas" : rutas_list[i][5],
-                "Tiempo total" : rutas_list[i][7],
-        })
+                "Origen"            : rutas_list[0]["origen"],
+                "Destino"           : rutas_list[0]["destino"],
+                "Número de Paradas" : rutas_list[0]["num_paradas"],
+                "Tiempo total"      : rutas_list[0]["tiempo_total"]
+            })
+        
+        else:
+            
+            for i in range(0, len(rutas_list)):
+                
+                print("Hola_buvle")
+                dict_rutas.append({
+                    "Origen"            : rutas_list[i]["origen"],
+                    "Destino"           : rutas_list[i]["destino"],
+                    "Número de Paradas" : rutas_list[i]["num_paradas"],
+                    "Tiempo total"      : rutas_list[i]["tiempo_total"]
+                })
 
         print(dict_rutas)
 
@@ -221,10 +253,6 @@ def frequentroutes():
     else:
         return render_template('login.html')
     
-
-@main.route('/delete')
-def delete():
-    return render_template('delete.html', name=current_user.name)
 
 
 
