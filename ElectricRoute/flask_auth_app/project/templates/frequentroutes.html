@@ -28,7 +28,7 @@
                       <thead> 
                           <tr>
                             {% for columna in list_rutas %}                                        
-                            <th> {{ columna }} </th>                                            
+                            <th style="color: #4E73DF !important;"> {{ columna }} </th>                                            
                             {% endfor %}
                             </tr>                                    
                       </thead>
@@ -40,18 +40,13 @@
                           {% for value2 in value.values() %}
                             <td> {{ value2 }} </td>
                           {% endfor %}
-                          <td>
-                              <div class="custom-control custom-checkbox">
-                                  <input type="checkbox" class="custom-control-input" id="customCheck1" checked>
-                                  <label class="custom-control-label" for="customCheck1"></label>
-                              </div>
-                          </td>
                         </tr>
                         {% endfor %}
                         <tr><td><b> </b></td><td><b> </b></td><td><b> </b></td><td><b> </b></td><td><b> </b></td></tr>
                         </tbody>
                     </table>
                   </div>
+                  
 
                    <!-- Botón  Back to Index --> 
                     <a class="btn btn-light btn-icon-split" href="index">
@@ -67,13 +62,8 @@
                       <span class="icon text-white-50">
                         <i class="fas fa-map"></i>
                       </span>
-                      <span class="text"> Load Route </span>
+                      <span class="text"> Back to Map </span>
                     </a>
-
-                    
-
-
-                   
                                     
                 </div>
 

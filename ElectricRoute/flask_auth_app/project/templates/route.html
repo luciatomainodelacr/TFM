@@ -83,8 +83,8 @@
         
         <!-- Título Electric Route -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index">
-            <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
+            <div class="sidebar-brand-icon">
+                <img  src="{{url_for('static', filename='img/ElectricRoute_coche.png')}}" width="55" height="55">
             </div>
             <div class="sidebar-brand-text mx-3"> Electric Route </div>
         </a>
@@ -163,6 +163,7 @@
         <div class="text-center d-none d-md-inline" style = "margin-top: 50%">
             <button class="rounded-circle border-0" id="sidebarToggle"></button>
         </div>
+
     </ul>
 
     <!-- ................................ Fin Barra Lateral ............................... -->
@@ -386,32 +387,90 @@
             <div class="container"> 
                 <div class="table-responsive" style = "margin-top:5%">
                     <table class="table table-bodered" id="table" width="100%" cellspacing="0">
+
+                        <!-- Nombres columnas -->            
+                        <thead> 
+                            <tr>
+                                {% for columna in list_rutas %}                                        
+                                <th style="color: #4E73DF !important;"> {{ columna }} </th>                                            
+                                {% endfor %}
+                                </tr>                                    
+                        </thead>
+
+                      <!-- Se recibe como parámetro cada una de las paradas--> 
+                        <tbody>                                         
+                        {% for value in dict_rutas %}  
+                        <tr> 
+                          {% for value2 in value.values() %}
+                            <td> {{ value2 }} </td>
+                          {% endfor %}
+                        </tr>
+                        {% endfor %}
+                        <tr><td><b> </b></td><td><b> </b></td><td><b> </b></td><td><b> </b></td><td><b> </b></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pie de página: botón para guardar los cambios -->
+        <div class="modal-footer">
+          <button class="btn btn-secondary btn-user" type="button" data-dismiss="modal"> Cancel </button>
+          <button class="btn btn-primary btn-user" type="button" data-dismiss="modal"> Back to map </button>
+        </div>
+
+    </div>
+    </div>
+    
+</div>
+
+
+<!-- ................................... Detalla Paradas Modal ................................... -->
+
+<div class="modal fade" id="infoParadas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+
+    <div class="modal-content">
+
+        <div class="modal-header" style="background-color: #4E73DF !important;">
+            <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(255, 255, 255); font-size:3vh">Stop Details</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" style="color: rgb(255, 255, 255);">×</span>
+            </button>
+        </div>
+
+        <div class="modal-body">
+
+            <!-- Select Origin -->
+            <div class="container"> 
+                <div class="table-responsive" style = "margin-top:5%">
+                    <table class="table table-bodered" id="table" width="100%" cellspacing="0">
                         <tr>
-                          <td><b> From </b></td>
+                          <td style="color: #4E73DF !important;"><b> From </b></td>
                           <td><b> {{ciudad_origen}} </b></td>
                         </tr>
                         <tr>
-                          <td><b> To </b></td>
+                          <td style="color: #4E73DF !important;"><b> To </b></td>
                           <td><b> {{ciudad_destino}} </b></td>
                         </tr>
                         <tr>
-                          <td><b> Type of program </b></td>
+                          <td style="color: #4E73DF !important;"><b> Type of program </b></td>
                           <td><b> {{programType}} </b></td>
                         </tr>
                         <tr>
-                          <td><b> Number of stops </b></td>
-                          <td><b> {{number_stops}} </b></td>
+                          <td style="color: #4E73DF !important;"><b> Number of stops </b></td>
+                          <td><b> </b></td>
                         </tr>
                         <tr>
-                          <td><b> Time </b></td>
+                          <td style="color: #4E73DF !important;"><b> Time </b></td>
                           <td><b> {{brandCar}} </b></td>
                         </tr>
                         <tr>
-                          <td><b> Initial charge </b></td>
+                          <td style="color: #4E73DF !important;"><b> Initial charge </b></td>
                           <td><b> {{rangeInitial}} </b></td>
                         </tr>
                         <tr>
-                          <td><b> Final charge </b></td>
+                          <td style="color: #4E73DF !important;"><b> Final charge </b></td>
                           <td><b> {{rangeFinal}} </b></td>
                         </tr>
                         <tr><td><b> </b></td><td><b> </b></td></tr>

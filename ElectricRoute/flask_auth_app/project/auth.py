@@ -111,8 +111,6 @@ def signup_post():
         brandCar = request.form.get('mySelectBrand')
         modelCar = request.form.get('mySelectModel')
 
-        print(brandCar)
-
         # Consulta a la bbdd users 
         cursor = db.connection.cursor(MySQLdb.cursors.DictCursor)
         cursor.execute('SELECT * FROM users WHERE email = % s', (email, )) 
@@ -122,8 +120,7 @@ def signup_post():
         cur = db.connection.cursor()
         cur.execute('''SELECT * FROM ElectricCar''')
         electricCar_list = cur.fetchall()
-        print(brandCar)
-
+        
         # Se inicializan dos listas para las marcas y los modelos de coche
         list_brand = []
         list_model = []
@@ -167,7 +164,6 @@ def signup_post():
 @auth.route('/logout')
 def logout():
     session.clear()
-    print(session)
     return redirect(url_for('auth.login'))
 
     
