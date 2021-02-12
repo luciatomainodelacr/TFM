@@ -161,6 +161,7 @@ def route_post():
             db_host = environ.get('DB_HOST')
         )
         
+
         # Lista de coordenadas de la ruta para dibujar en el mapa
         lista_coordenadas = []
         
@@ -173,6 +174,29 @@ def route_post():
             lista_coordenadas.append(punto_coord)
 
         # Información sobre la ruta
+        #  Consulta a la bbdd para obtener el scenario
+        curScenario = db.connection.cursor(MySQLdb.cursors.DictCursor)
+        curScenario.execute("""SELECT scenario_id FROM Output ORDER BY scenario_id DESC LIMIT 1""")
+        dict_scenario_id = curScenario.fetchall()
+        
+        scenario_id = dict_scenario_id[0]["scenario_id"]
+
+        #  Consulta a la bbdd
+        curDetalleRuta = db.connection.cursor(MySQLdb.cursors.DictCursor)
+        curDetalleRuta.execute("SELECT * FROM Output WHERE scenario_id LIKE % s ", [scenario_id])
+        rutas_info = curDetalleRuta.fetchall()
+
+        lista_Puntos_aux = rutas_info[0]["path"]
+
+
+        print('Hola')
+        print(lista_Puntos_aux)
+        print(type(lista_Puntos_aux))
+
+
+        
+
+
         # ¡¡¡ FALTA MODIFICAR EL OUTPUT AÑADIR MÁS INFORMACIÓN EN UN DICCIONARIO!!!
         
 

@@ -387,6 +387,64 @@
             <div class="container"> 
                 <div class="table-responsive" style = "margin-top:5%">
                     <table class="table table-bodered" id="table" width="100%" cellspacing="0">
+
+                        <!-- Nombres columnas -->            
+                        <thead> 
+                            <tr>
+                                {% for columna in list_rutas %}                                        
+                                <th style="color: #4E73DF !important;"> {{ columna }} </th>                                            
+                                {% endfor %}
+                                </tr>                                    
+                        </thead>
+
+                      <!-- Se recibe como parámetro cada una de las paradas--> 
+                        <tbody>                                         
+                        {% for value in dict_rutas %}  
+                        <tr> 
+                          {% for value2 in value.values() %}
+                            <td> {{ value2 }} </td>
+                          {% endfor %}
+                        </tr>
+                        {% endfor %}
+                        <tr><td><b> </b></td><td><b> </b></td><td><b> </b></td><td><b> </b></td><td><b> </b></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pie de página: botón para guardar los cambios -->
+        <div class="modal-footer">
+          <button class="btn btn-secondary btn-user" type="button" data-dismiss="modal"> Cancel </button>
+          <button class="btn btn-primary btn-user" type="button" data-dismiss="modal"> Back to map </button>
+        </div>
+
+    </div>
+    </div>
+    
+</div>
+
+
+<!-- ................................... Detalla Paradas Modal ................................... -->
+
+<div class="modal fade" id="infoParadas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+
+    <div class="modal-content">
+
+        <div class="modal-header" style="background-color: #4E73DF !important;">
+            <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(255, 255, 255); font-size:3vh">Stop Details</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" style="color: rgb(255, 255, 255);">×</span>
+            </button>
+        </div>
+
+        <div class="modal-body">
+
+            <!-- Select Origin -->
+            <div class="container"> 
+                <div class="table-responsive" style = "margin-top:5%">
+                    <table class="table table-bodered" id="table" width="100%" cellspacing="0">
                         <tr>
                           <td style="color: #4E73DF !important;"><b> From </b></td>
                           <td><b> {{ciudad_origen}} </b></td>
@@ -401,7 +459,7 @@
                         </tr>
                         <tr>
                           <td style="color: #4E73DF !important;"><b> Number of stops </b></td>
-                          <td><b> {{number_stops}} </b></td>
+                          <td><b> </b></td>
                         </tr>
                         <tr>
                           <td style="color: #4E73DF !important;"><b> Time </b></td>
