@@ -31,6 +31,7 @@ cd /home/tfm/Documentos/TFM/Docker/app
 export FLASK_APP=project
 export FLASK_DEBUG=1
 export DB_HOST=0.0.0.0
+export GRAFANA_HOST=0.0.0.0
 flask run
 
 8) Antes de subir cosas al repo, borrar la carpeta project de /home/tfm/Documentos/TFM/Docker/app
