@@ -199,10 +199,6 @@ def frequentroutes():
         email    = session['email']
         name     = session['username']
 
-        print(type(user_id))
-        print(email)
-        
-
         #  Consulta a la bbdd
         sql_query = "SELECT DISTINCT * FROM Output WHERE user_id = % s"
         argumentos = str(user_id)
@@ -211,21 +207,11 @@ def frequentroutes():
         curFrequent.execute(sql_query, argumentos)
         rutas_list = curFrequent.fetchall()
 
-        print(id)
-        print(email)
-        print(rutas_list)
 
         dict_rutas = []
         list_rutas = ["From", "To", "Number of stops", "Time"]
 
-        print("Hola")
-        print(range(0, len(rutas_list)))
-        print(rutas_list[0])
-       
-
-
         if (len(rutas_list) == 1):
-            print("Hola")
             dict_rutas.append({
                 "Origen"            : rutas_list[0]["origen"],
                 "Destino"           : rutas_list[0]["destino"],
@@ -236,16 +222,12 @@ def frequentroutes():
         else:
             
             for i in range(0, len(rutas_list)):
-                
-                print("Hola_buvle")
                 dict_rutas.append({
                     "Origen"            : rutas_list[i]["origen"],
                     "Destino"           : rutas_list[i]["destino"],
                     "Número de Paradas" : rutas_list[i]["num_paradas"],
                     "Tiempo total"      : rutas_list[i]["tiempo_total"]
                 })
-
-        print(dict_rutas)
 
         return render_template('frequentroutes.html', email=email, list_rutas=list_rutas, dict_rutas=dict_rutas)
     
@@ -327,21 +309,34 @@ def profile_post():
 
         print(request.form)
 
-        print(request.method == 'POST')
-        print(email)
+        print(brandCar)
+        print(modelCar)
 
         if request.method == 'POST' and ('email' != '') and ('usernameEdit' in request.form and 'lastNameEdit' in request.form and 'mySelectBrandEdit' in request.form and 'mySelectModelEdit' in request.form):
             
-            email     = request.form['emailEdit']
-            name     = request.form['usernameEdit']
-            lastName = request.form['lastNameEdit']
-            brandCar = request.form.get('mySelectBrand')
-            modelCar = request.form.get('mySelectModel')
+            id       = session['id']
+
+            if (request.form['emailEdit'] != ''):
+                email              = request.form['emailEdit']
+                session['email']   = request.form['emailEdit']
             
-            print(id)
-            print(lastName)
-            print(brandCar)
-            print(modelCar)
+            if (request.form['usernameEdit'] != ''):
+                name                = request.form['usernameEdit']
+                session['username'] = request.form['usernameEdit']
+            
+            if (request.form['lastNameEdit'] != ''):
+                lastName            = request.form['lastNameEdit']
+                session['lastName'] = request.form['lastNameEdit']
+
+            if (request.form['mySelectBrandEdit'] != ''):
+                brandCar            = request.form['mySelectBrandEdit']
+                session['brandCar'] = request.form['mySelectBrandEdit']
+           
+            if (request.form['mySelectModelEdit'] != ''):
+                modelCar            = request.form['mySelectModelEdit']
+                session['modelCar'] = request.form['mySelectModelEdit']
+
+            
             
             # Consulta a la bbdd users 
             sql_query = "UPDATE users SET username = %s, lastName = %s, brandCar = %s, modelCar = %s  WHERE id = %s AND email = %s"
