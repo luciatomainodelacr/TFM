@@ -14,6 +14,7 @@ Para ejecutar:
 >> export FLASK_APP=project
 >> export FLASK_DEBUG=1
 >> Si se va a lanzar flask_app en local: export DB_HOST=0.0.0.0
+>> Si se va a lanzar flask_app en local: export GRAFANA_HOST=0.0.0.0
 >> flask run
 
 2º) Abrir el navegador e ir a la ruta http://localhost:5000/login
