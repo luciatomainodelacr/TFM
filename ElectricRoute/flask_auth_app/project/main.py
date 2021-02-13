@@ -412,17 +412,50 @@ def cars():
         return render_template('login.html')
 
 
-# 8- Forgot Password ----------------------------------------------
-#------------------------------------------------------------------
-
-@main.route('/forgotpassword')
-def forgotpassword():
-    return render_template('forgotpassword.html')
-
-
-# 9- Reset Password ----------------------------------------------
+# 8- Reset Password ----------------------------------------------
 #------------------------------------------------------------------
 
 @main.route('/resetpassword')
 def resetpassword():
     return render_template('resetpassword.html')
+
+
+@main.route('/resetpassword')
+def resetpassword_post():
+
+    print(request.method)
+
+    if request.method == 'POST' and ('emailPassword' != ''):
+
+        # Consulta a la bbdd users 
+        emailPassword = request.form['emailPassword']
+        idpassword    = request.form['idpassword']
+
+        # Consulta a la bbdd users 
+        cursorPassword = db.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursorPassword.execute('SELECT * FROM users WHERE email = % s', (emailPassword)) 
+        user = cursorPassword.fetchone()
+
+        if user:
+
+            idpassword = session['idpassword']
+
+            # Consulta a la bbdd users 
+            sql_query = "UPDATE users SET password = %s  WHERE email = %s AND ID = %s"
+            argumentos = (idpassword, emailPassword, id)
+
+            #falta comprobar que sea el mismo!!
+
+            curProfile = db.connection.cursor(MySQLdb.cursors.DictCursor)
+            curProfile.execute(sql_query, argumentos)
+            db.connection.commit()
+            
+            flash('Now you have a new password ! Start your Log In!')  
+            return render_template('login.html')
+
+        else:
+            flash('This account does not exist !')
+            return redirect(url_for('main.resetpassword'))
+    
+    else:
+        flash('Please fill out the email !')
