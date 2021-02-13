@@ -93,6 +93,7 @@ def route():
         # Se inicializan dos listas para las ciudades y para las coordenadas
         lista_destino = []
         lista_coordenadas = []
+        dict_infoRoute = {}
 
         for ciudad in ciudades_list:
             lista_destino.append(ciudad[0])
@@ -110,7 +111,7 @@ def route():
         # URL Grafana Puntos de carga
         grafana_cars     = "http://" + environ.get('GRAFANA_HOST') + ":3000/d/Jj9wbzEGk/coches?orgId=1&from=1613186505109&to=1613208105110&var-Modelo=ARIYA%2063KWH&var-Modelo=ARIYA%20E_4ORCE%2063KWH&var-Modelo=CYBERTRUCK%20TRI%20MOTOR"
 
-        return render_template('route.html', name = name, ciudades = lista_destino, lista_coordenadas=lista_coordenadas, rangeInitial=rangeInitial, rangeFinal=rangeFinal, grafana_maps=grafana_maps, grafana_url_ptos=grafana_url_ptos, grafana_cars=grafana_cars)
+        return render_template('route.html', name = name, ciudades = lista_destino, lista_coordenadas=lista_coordenadas, rangeInitial=rangeInitial, rangeFinal=rangeFinal, grafana_maps=grafana_maps, grafana_url_ptos=grafana_url_ptos, grafana_cars=grafana_cars, dict_infoRoute=dict_infoRoute)
 
     # Si la sesión no está iniciada se le dirige a la página de inicio
     else:
@@ -181,33 +182,60 @@ def route_post():
             punto_coord.append(longitud)
             lista_coordenadas.append(punto_coord)
 
-        # Información sobre la ruta
-        #  Consulta a la bbdd para obtener el scenario
+
+        # Reiniciar la conexión de la base de datos
+        db.connection.commit()           
+            
+        # Consulta a la bbdd para obtener la información sober las paradas
         curScenario = db.connection.cursor(MySQLdb.cursors.DictCursor)
-        curScenario.execute("""SELECT scenario_id FROM Output ORDER BY scenario_id DESC LIMIT 1""")
+        curScenario.execute('''SELECT scenario_id FROM Output ORDER BY scenario_id DESC LIMIT 1''')
         dict_scenario_id = curScenario.fetchall()
-
-        print(dict_scenario_id)
-
-        if (len(dict_scenario_id) == 1):
+        
+        if (dict_scenario_id == ()):
             scenario_id = dict_scenario_id["scenario_id"]
         else:
             scenario_id = dict_scenario_id[0]["scenario_id"]
 
-        #  Consulta a la bbdd
+
+        # Consulta a la bbdd
         curDetalleRuta = db.connection.cursor(MySQLdb.cursors.DictCursor)
         curDetalleRuta.execute("SELECT * FROM Output WHERE scenario_id LIKE % s ", [scenario_id])
         rutas_info = curDetalleRuta.fetchall()
 
-        rutas_info_aux = rutas_info[0]["path"]
+        numberStops         = rutas_info[0]["num_paradas"]
+        timeTotal           = rutas_info[0]["tiempo_total"]
+        rutas_info_aux      = rutas_info[0]["path"]
+        rutas_info_tiempo   = rutas_info[0]["path_tiempo"]
+        
+        lista_Puntos_aux    = rutas_info_aux.split('-')
+        lista_Puntos_tiempo = rutas_info_tiempo.split('-')
+        lista_Puntos_tiempo2 = []
 
-        lista_Puntos_aux = rutas_info_aux.split('-')
+        for elem in lista_Puntos_tiempo:
+            lista_Puntos_tiempo2.append(elem)
+        
+        lista_Puntos_tiempo2.append('0.0')
+
+
+        print(lista_Puntos_aux)
+        print(lista_Puntos_tiempo2)
+
+        print(len(lista_Puntos_aux))
+        print(len(lista_Puntos_tiempo2))
+
+        dict_infoRoute = {}
+
+        for i in range(0, len(lista_Puntos_aux)):  
+
+            dict_infoRoute[lista_Puntos_aux[i]] = str(round(float(lista_Puntos_tiempo2[i]), 2)) + (' h')
+
+        print(dict_infoRoute)
 
 
         # ¡¡¡ FALTA MODIFICAR EL OUTPUT AÑADIR MÁS INFORMACIÓN EN UN DICCIONARIO!!!
         
 
-        return render_template('route.html', name = name, ciudades = lista_destino, lista_coordenadas=lista_coordenadas, ciudad_origen=ciudad_origen, ciudad_destino=ciudad_destino, rangeInitial = rangeInitial, rangeFinal = rangeFinal, programType= programType, lista_Puntos_aux=lista_Puntos_aux)
+        return render_template('route.html', name = name, ciudades = lista_destino, lista_coordenadas=lista_coordenadas, ciudad_origen=ciudad_origen, ciudad_destino=ciudad_destino, rangeInitial = rangeInitial, rangeFinal = rangeFinal, programType= programType, numberStops=numberStops, timeTotal=timeTotal, dict_infoRoute=dict_infoRoute)
 
     # Si la sesión no está iniciada se le dirige a la página de inicio
     else:
@@ -285,29 +313,30 @@ def profile():
         lastName = session['lastName']
         brandCar = session['brandCar']
         modelCar = session['modelCar']
-
-        # Consulta a la bbdd ElectricCar
+        
+        
+        # Consulta a la bbdd ElectricCar        
         cur = db.connection.cursor()
         cur.execute('''SELECT * FROM ElectricCar''')
         electricCar_list = cur.fetchall()
-
+        
         # Se inicializan dos listas para las marcas y los modelos de coche
+         
         list_brand = []
         list_model = []
-
+        
         for coche in electricCar_list:
             list_brand.append(coche[0])
             list_model.append(coche[1])
-
+            
         return render_template('profile.html', email = email, name = name, lastName = lastName, brandCar = brandCar, modelCar = modelCar, list_brand = list_brand, list_model = list_model)
-
-    # Si la sesión no está iniciada se le dirige a la página de inicio
+        
+        # Si la sesión no está iniciada se le dirige a la página de inicio
     else:
+        
         flash('Please log in!')
         return render_template('login.html')
-
-
-
+        
 # 7- Página profile edit ------------------------------------------
 #------------------------------------------------------------------
 
@@ -324,7 +353,7 @@ def profile_post():
         lastName = session['lastName']
         brandCar = session['brandCar']
         modelCar = session['modelCar']
-
+        
         # Consulta a la bbdd ElectricCar
         cur = db.connection.cursor()
         cur.execute('''SELECT * FROM ElectricCar''')

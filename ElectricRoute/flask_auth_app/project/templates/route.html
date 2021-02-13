@@ -423,16 +423,14 @@
                         <tr>                       
                           <td style="color: #4E73DF !important;"><b> Number of stops </b></td>
                           <td><b>
-                             <a class="nav-link" href="#" data-toggle="modal" data-target="#infoStops">
-                                <span>(Stops detail)</span>
+                             <a class="nav-link" style = "color: #858796 !important; text-align: left; !important" href="#" data-toggle="modal" data-target="#infoStops">
+                                {{numberStops}} (Stops detail)
                             </a>
-                          
-                          
                           </b></td>
                         </tr>
                         <tr>
                           <td style="color: #4E73DF !important;"><b> Time </b></td>
-                          <td><b> {{brandCar}} </b></td>
+                          <td><b> {{timeTotal}} </b></td>
                         </tr>
                         <tr>
                           <td style="color: #4E73DF !important;"><b> Initial charge </b></td>
@@ -481,12 +479,24 @@
             <div class="container"> 
                 <div class="table-responsive" style = "margin-top:5%">
                     <table class="table table-bodered" id="table" width="100%" cellspacing="0">
-                                                
-                            {% for columna in lista_Puntos_aux %}      
-                            <tr>                                  
-                                <td style="color: #4E73DF !important;"><b>{{columna}}</b></td>
-                                </tr>
+
+                        <!-- Nombres columnas -->            
+                        <thead> 
+                            <tr>                                      
+                                <th style="color: #4E73DF !important;"> Stops </th>                                            
+                                <th style="color: #4E73DF !important;"> Time of stops </th>       
+                                </tr>                                    
+                        </thead>
+
+                        <tbody>                                         
+                            {% for key, value in dict_infoRoute.items() %}  
+                            <tr> 
+                                <td> {{ key }} </td>
+                                <td> {{ value }} </td>
                             {% endfor %}
+                            </tr>
+                            <tr><td><b> </b></td><td><b> </b></td></tr>
+                        </tbody>
 
                     </table>
 
