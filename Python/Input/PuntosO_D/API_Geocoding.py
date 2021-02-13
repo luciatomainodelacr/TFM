@@ -50,19 +50,6 @@ direccion
 
 base_url = 'https://maps.googleapis.com/maps/api/geocode/json?'
 
-
-# coordenadas = []
-# for i in direccion:
-#     response = requests.get(base_url, params=i).json()
-#     #response.keys()
-
-#     if response['status'] == 'OK':
-#         geometry = response['results'][0]['geometry']
-#         lat = geometry['location']['lat']
-#         lon = geometry['location']['lng']
-#         coordenadas.extend((lat,lon))
-# print(coordenadas)
-
 coordenadas_lat = []
 coordenadas_long = []
 for i in direccion:

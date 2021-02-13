@@ -13,4 +13,9 @@ Esta carpeta contiene ficheros con información relevante tanto para el planteam
 - __PlanteamientoProblema__
 	
   	Esta carpeta contiene documentación variada sobre el problema y las fuentes de datos
+
+- __Documentacion_Proyecto__
+	
+  	Este fichero contiene la memoria del TFM
+
 	
