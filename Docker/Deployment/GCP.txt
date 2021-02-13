@@ -10,6 +10,8 @@ los puertos que necesitamos:
 3) Descargar el repositorio de git
 git clone https://github.com/luciatomainodelacr/TFM.git
 cd TFM/Docker/
+vim app/Dockerfile
+en GRAFANA_HOST poner la IP externa de la instancia VM de GCP
 
 4) Instalar docker y docker-compose 
 ./Deployment/install_docker.sh
