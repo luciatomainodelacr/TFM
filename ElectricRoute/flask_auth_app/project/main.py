@@ -188,9 +188,11 @@ def route_post():
         dict_scenario_id = curScenario.fetchall()
 
         print(dict_scenario_id)
-        
-        
-        scenario_id = dict_scenario_id[0]["scenario_id"]
+
+        if (len(dict_scenario_id) == 1):
+            scenario_id = dict_scenario_id["scenario_id"]
+        else:
+            scenario_id = dict_scenario_id[0]["scenario_id"]
 
         #  Consulta a la bbdd
         curDetalleRuta = db.connection.cursor(MySQLdb.cursors.DictCursor)
