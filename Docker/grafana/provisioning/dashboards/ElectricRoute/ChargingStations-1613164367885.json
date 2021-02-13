@@ -76,7 +76,7 @@
           "metricColumn": "none",
           "queryType": "randomWalk",
           "rawQuery": true,
-          "rawSql": "SELECT\n  NOW() as \"time\",\n  provincia as metric,\n  COUNT(*) as value\nFROM PuntosCarga\nWHERE provincia IN ($Provincia)\nGROUP BY provincia",
+          "rawSql": "SELECT\n  NOW() as \"time\",\n  provincia as metric,\n  COUNT(*) as value\nFROM PuntosCarga\nWHERE provincia IN ($Province)\nGROUP BY provincia",
           "refId": "A",
           "select": [
             [
@@ -102,7 +102,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Número Puntos Recarga por Provincia",
+      "title": "Number of Charging Stations per Province",
       "type": "stat"
     },
     {
@@ -151,7 +151,7 @@
           "metricColumn": "none",
           "queryType": "randomWalk",
           "rawQuery": true,
-          "rawSql": "SELECT\n  id,\n  provincia as Provincia,\n  ccaa as \"Comunidad Autonoma\",\n  connectorType as \"Tipo conector\",\n  ratedPowerKW as Potencia\nFROM PuntosCarga\nWHERE provincia IN ($Provincia)",
+        "rawSql": "SELECT\n  id,\n  provincia as Province,\n  ccaa as \"CCAA\",\n  connectorType as \"Connector Type\",\n  ratedPowerKW as Power\nFROM PuntosCarga\nWHERE provincia IN ($Province)",
           "refId": "A",
           "select": [
             [
@@ -175,7 +175,7 @@
           ]
         }
       ],
-      "title": "Informacion Puntos de Recarga",
+      "title": "Information Charging Stations",
       "type": "table"
     },
     {
@@ -261,7 +261,7 @@
         }
       ],
       "thresholds": "1,2,3",
-      "title": "Número de conectores",
+      "title": "Number of connectors",
       "type": "grafana-worldmap-panel",
       "unitPlural": "",
       "unitSingle": "",
@@ -326,7 +326,7 @@
           "metricColumn": "none",
           "queryType": "randomWalk",
           "rawQuery": true,
-          "rawSql": "SELECT\n  id AS id,\n  latitude AS latitude,\n  longitude AS longitude,\n  ratedPowerKW AS metric\nFROM PuntosCarga\nWHERE connectorType LIKE ($Conector)",
+          "rawSql": "SELECT\n  id AS id,\n  latitude AS latitude,\n  longitude AS longitude,\n  ratedPowerKW AS metric\nFROM PuntosCarga\nWHERE connectorType LIKE ($Connector)",
           "refId": "A",
           "select": [
             [
@@ -351,7 +351,7 @@
         }
       ],
       "thresholds": "10,50,100,200",
-      "title": "Potencia para conector $Conector [kW]",
+      "title": "Power per $Connector [kW]",
       "type": "grafana-worldmap-panel",
       "unitPlural": "",
       "unitSingle": "",
@@ -467,7 +467,7 @@
         "includeAll": false,
         "label": null,
         "multi": true,
-        "name": "Provincia",
+        "name": "Province",
         "options": [],
         "query": "SELECT DISTINCT provincia FROM PuntosCarga",
         "refresh": 1,
@@ -495,7 +495,7 @@
         "includeAll": true,
         "label": null,
         "multi": false,
-        "name": "Conector",
+        "name": "Connector",
         "options": [],
         "query": "SELECT DISTINCT REPLACE(SUBSTRING_INDEX(SUBSTRING(REPLACE(connectorType, '[', ''), 1, length(connectorType)),',',character_length(',')) ,'''','')\nFROM PuntosCarga;",
         "refresh": 1,
@@ -516,7 +516,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Puntos de Recarga",
+  "title": "Charging Stations",
   "uid": "2HzFXkEMk",
   "version": 12
 }

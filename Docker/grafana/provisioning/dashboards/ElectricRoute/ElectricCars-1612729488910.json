@@ -30,7 +30,7 @@
       },
       "id": 15,
       "panels": [],
-      "title": "Autonomía",
+      "title": "Autonomy",
       "type": "row"
     },
     {
@@ -87,7 +87,7 @@
           "metricColumn": "none",
           "queryType": "randomWalk",
           "rawQuery": true,
-          "rawSql": "SELECT \n  NOW() AS \"time\", \n  CONCAT(BRAND, \" \", MODEL) AS metric,\n  RANGE_KM AS value \nFROM ElectricCar \nWHERE MODEL IN ($Modelo)\nORDER BY value",
+          "rawSql": "SELECT \n  NOW() AS \"time\", \n  CONCAT(BRAND, \" \", MODEL) AS metric,\n  RANGE_KM AS value \nFROM ElectricCar \nWHERE MODEL IN ($Model)\nORDER BY value",
           "refId": "A",
           "select": [
             [
@@ -113,7 +113,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Autonomía en h",
+      "title": "Autonomy [h]",
       "type": "bargauge"
     },
     {
@@ -196,7 +196,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Autonomía en h (top 10)",
+      "title": "Autonomy [h](top 10)",
       "type": "gauge"
     },
     {
@@ -210,7 +210,7 @@
       },
       "id": 13,
       "panels": [],
-      "title": "Eficiencia",
+      "title": "Efficiency",
       "type": "row"
     },
     {
@@ -267,7 +267,7 @@
           "metricColumn": "none",
           "queryType": "randomWalk",
           "rawQuery": true,
-          "rawSql": "SELECT \n  NOW() AS \"time\", \n  CONCAT(BRAND, \" \", MODEL) AS metric, \n  EFFICIENCY_WHKM as value \nFROM ElectricCar \nWHERE MODEL IN ($Modelo)\n",
+          "rawSql": "SELECT \n  NOW() AS \"time\", \n  CONCAT(BRAND, \" \", MODEL) AS metric, \n  EFFICIENCY_WHKM as value \nFROM ElectricCar \nWHERE MODEL IN ($Model)\n",
           "refId": "A",
           "select": [
             [
@@ -293,7 +293,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Eficiencia del coche en Wh/km ",
+      "title": "Efficiency [Wh/km]",
       "type": "bargauge"
     },
     {
@@ -376,7 +376,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Eficiencia del coche en Wh/km (top 10)",
+      "title": "Efficiency [Wh/km](top 10)",
       "type": "bargauge"
     },
     {
@@ -390,7 +390,7 @@
       },
       "id": 11,
       "panels": [],
-      "title": "Capacidad ",
+      "title": "Capacity",
       "type": "row"
     },
     {
@@ -447,7 +447,7 @@
           "metricColumn": "none",
           "queryType": "randomWalk",
           "rawQuery": true,
-          "rawSql": "SELECT \n  NOW() AS \"time\", \n  CONCAT(BRAND, \" \", MODEL) AS metric,\n  BATTERY_CAPACITY AS value \nFROM ElectricCar \nWHERE MODEL IN ($Modelo)\nORDER BY value",
+          "rawSql": "SELECT \n  NOW() AS \"time\", \n  CONCAT(BRAND, \" \", MODEL) AS metric,\n  BATTERY_CAPACITY AS value \nFROM ElectricCar \nWHERE MODEL IN ($Model)\nORDER BY value",
           "refId": "A",
           "select": [
             [
@@ -473,7 +473,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Capacidad de la batería en KWh ",
+      "title": "Battery Capacity [KWh]",
       "type": "bargauge"
     },
     {
@@ -556,7 +556,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Capacidad de la batería en KWh (top 10)",
+      "title": "Battery Capacity [KWh] (top 10)",
       "type": "bargauge"
     },
     {
@@ -639,7 +639,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Tiempo de recarga en h con potencia de punto de recarga de 40 KW",
+      "title": "Charging time [h] with charging station power of 40 KW",
       "type": "bargauge"
     }
   ],
@@ -671,7 +671,7 @@
         "includeAll": false,
         "label": null,
         "multi": true,
-        "name": "Modelo",
+        "name": "Model",
         "options": [],
         "query": "SELECT DISTINCT MODEL FROM ElectricCar",
         "refresh": 1,
@@ -692,7 +692,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Coches",
+  "title": "Electric Cars",
   "uid": "Jj9wbzEGk",
   "version": 8
 }
