@@ -131,12 +131,12 @@
 
                 <a class="collapse-item" href="profile">
                     <i class="fa fa-user" aria-hidden="true"></i>
-                    <span>User Profile</span>
+                    <span  style = "margin-left: 5%">User Profile</span>
                 </a>
 
                 <a class="collapse-item" href="cars">
-                    <i class="fa fa-car" aria-hidden="true"></i>
-                    <span>Cars Details</span>
+                    <i class="fa fa-car" aria-hidden="true" ></i>
+                    <span  style = "margin-left: 5%">Cars Details</span>
                 </a>
             </div>
             </div>
@@ -149,12 +149,33 @@
 
         <!-- Nav Item - Grafana-->
         <li class="nav-item">
-            <a class="nav-link" href={{grafana_url}}>
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Grafana</span>
             </a>
-        </li>
 
+            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+
+                <a class="collapse-item" href={{grafana_maps}}>
+                    <i class="fa fa-map" aria-hidden="true"></i>
+                    <span  style = "margin-left: 5%">Maps</span>
+                </a>
+
+                <a class="collapse-item" href={{grafana_url_ptos}}>
+                    <i class="fa fa-fa fa-battery-three-quarters" aria-hidden="true"></i>
+                    <span  style = "margin-left: 5%">Charging stations</span>
+                </a>
+
+                <a class="collapse-item" href={{grafana_cars}}>
+                    <i class="fa fa-car" aria-hidden="true"></i>
+                    <span  style = "margin-left: 5%"> Electric cars</span>
+                </a>
+
+            </div>
+            </div>
+        </li>
+        
 
         <!-- Línea divisora -->
         <hr class="sidebar-divider">
@@ -387,27 +408,42 @@
             <div class="container"> 
                 <div class="table-responsive" style = "margin-top:5%">
                     <table class="table table-bodered" id="table" width="100%" cellspacing="0">
-
-                        <!-- Nombres columnas -->            
-                        <thead> 
-                            <tr>
-                                {% for columna in list_rutas %}                                        
-                                <th style="color: #4E73DF !important;"> {{ columna }} </th>                                            
-                                {% endfor %}
-                                </tr>                                    
-                        </thead>
-
-                      <!-- Se recibe como parámetro cada una de las paradas--> 
-                        <tbody>                                         
-                        {% for value in dict_rutas %}  
-                        <tr> 
-                          {% for value2 in value.values() %}
-                            <td> {{ value2 }} </td>
-                          {% endfor %}
+                        <tr>
+                          <td style="color: #4E73DF !important;"><b> From </b></td>
+                          <td><b> {{ciudad_origen}} </b></td>
                         </tr>
-                        {% endfor %}
-                        <tr><td><b> </b></td><td><b> </b></td><td><b> </b></td><td><b> </b></td><td><b> </b></td></tr>
-                        </tbody>
+                        <tr>
+                          <td style="color: #4E73DF !important;"><b> To </b></td>
+                          <td><b> {{ciudad_destino}} </b></td>
+                        </tr>
+                        <tr>
+                          <td style="color: #4E73DF !important;"><b> Type of program </b></td>
+                          <td><b> {{programType}} </b></td>
+                        </tr>
+                        <tr>                       
+                          <td style="color: #4E73DF !important;"><b> Number of stops </b></td>
+                          <td><b>
+                             <a class="nav-link" href="#" data-toggle="modal" data-target="#infoStops">
+                                <span>(Stops detail)</span>
+                            </a>
+                          
+                          
+                          </b></td>
+                        </tr>
+                        <tr>
+                          <td style="color: #4E73DF !important;"><b> Time </b></td>
+                          <td><b> {{brandCar}} </b></td>
+                        </tr>
+                        <tr>
+                          <td style="color: #4E73DF !important;"><b> Initial charge </b></td>
+                          <td><b> {{rangeInitial}} </b></td>
+                        </tr>
+                        <tr>
+                          <td style="color: #4E73DF !important;"><b> Final charge </b></td>
+                          <td><b> {{rangeFinal}} </b></td>
+                        </tr>
+                        <tr><td><b> </b></td><td><b> </b></td></tr>
+                                                                                  
                     </table>
                 </div>
             </div>
@@ -427,13 +463,13 @@
 
 <!-- ................................... Detalla Paradas Modal ................................... -->
 
-<div class="modal fade" id="infoParadas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="infoStops" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
 
     <div class="modal-content">
 
         <div class="modal-header" style="background-color: #4E73DF !important;">
-            <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(255, 255, 255); font-size:3vh">Stop Details</h5>
+            <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(255, 255, 255); font-size:3vh">Info Stops</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true" style="color: rgb(255, 255, 255);">×</span>
             </button>
@@ -445,37 +481,15 @@
             <div class="container"> 
                 <div class="table-responsive" style = "margin-top:5%">
                     <table class="table table-bodered" id="table" width="100%" cellspacing="0">
-                        <tr>
-                          <td style="color: #4E73DF !important;"><b> From </b></td>
-                          <td><b> {{ciudad_origen}} </b></td>
-                        </tr>
-                        <tr>
-                          <td style="color: #4E73DF !important;"><b> To </b></td>
-                          <td><b> {{ciudad_destino}} </b></td>
-                        </tr>
-                        <tr>
-                          <td style="color: #4E73DF !important;"><b> Type of program </b></td>
-                          <td><b> {{programType}} </b></td>
-                        </tr>
-                        <tr>
-                          <td style="color: #4E73DF !important;"><b> Number of stops </b></td>
-                          <td><b> </b></td>
-                        </tr>
-                        <tr>
-                          <td style="color: #4E73DF !important;"><b> Time </b></td>
-                          <td><b> {{brandCar}} </b></td>
-                        </tr>
-                        <tr>
-                          <td style="color: #4E73DF !important;"><b> Initial charge </b></td>
-                          <td><b> {{rangeInitial}} </b></td>
-                        </tr>
-                        <tr>
-                          <td style="color: #4E73DF !important;"><b> Final charge </b></td>
-                          <td><b> {{rangeFinal}} </b></td>
-                        </tr>
-                        <tr><td><b> </b></td><td><b> </b></td></tr>
-                                                                                  
+                                                
+                            {% for columna in lista_Puntos_aux %}      
+                            <tr>                                  
+                                <td style="color: #4E73DF !important;"><b>{{columna}}</b></td>
+                                </tr>
+                            {% endfor %}
+
                     </table>
+
                 </div>
             </div>
         </div>

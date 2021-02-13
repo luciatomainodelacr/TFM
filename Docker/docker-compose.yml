@@ -23,6 +23,7 @@ services:
       - monitoring
     environment:
       - GF_INSTALL_PLUGINS=grafana-worldmap-panel
+      - GF_AUTH_ANONYMOUS_ENABLED=true
     restart: always
   db:
     image: mysql:latest
