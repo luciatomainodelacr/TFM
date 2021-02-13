@@ -1,0 +1,522 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "iteration": 1613164349434,
+  "links": [],
+  "panels": [
+    {
+      "datasource": "TFM",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-RdYlGr"
+          },
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 10,
+        "x": 0,
+        "y": 0
+      },
+      "id": 5,
+      "maxDataPoints": 1,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.4.1",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "queryType": "randomWalk",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  NOW() as \"time\",\n  provincia as metric,\n  COUNT(*) as value\nFROM PuntosCarga\nWHERE provincia IN ($Province)\nGROUP BY provincia",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "scenario_id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "Output",
+          "timeColumn": "timestamp",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Number of Charging Stations per Province",
+      "type": "stat"
+    },
+    {
+      "datasource": "TFM",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "displayMode": "color-background",
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": []
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 10,
+        "x": 10,
+        "y": 0
+      },
+      "id": 4,
+      "maxDataPoints": 1,
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "ratedPowerKW"
+          }
+        ]
+      },
+      "pluginVersion": "7.4.1",
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "queryType": "randomWalk",
+          "rawQuery": true,
+        "rawSql": "SELECT\n  id,\n  provincia as Province,\n  ccaa as \"CCAA\",\n  connectorType as \"Connector Type\",\n  ratedPowerKW as Power\nFROM PuntosCarga\nWHERE provincia IN ($Province)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "scenario_id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "Output",
+          "timeColumn": "timestamp",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Information Charging Stations",
+      "type": "table"
+    },
+    {
+      "circleMaxSize": "3",
+      "circleMinSize": "3",
+      "colors": [
+        "rgba(245, 54, 54, 0.9)",
+        "#FADE2A",
+        "rgba(50, 172, 45, 0.97)",
+        "#5794F2"
+      ],
+      "datasource": "TFM",
+      "decimals": 0,
+      "description": "",
+      "esMetric": "Count",
+      "fieldConfig": {
+        "defaults": {
+          "color": {},
+          "custom": {},
+          "thresholds": {
+            "mode": "absolute",
+            "steps": []
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 18,
+        "w": 10,
+        "x": 0,
+        "y": 11
+      },
+      "hideEmpty": false,
+      "hideZero": false,
+      "id": 2,
+      "initialZoom": "6",
+      "locationData": "table",
+      "mapCenter": "custom",
+      "mapCenterLatitude": "40",
+      "mapCenterLongitude": "-4",
+      "maxDataPoints": 1,
+      "mouseWheelZoom": false,
+      "pluginVersion": "7.4.0",
+      "showLegend": true,
+      "stickyLabels": false,
+      "tableQueryOptions": {
+        "geohashField": "geohash",
+        "labelField": "id",
+        "latitudeField": "latitude",
+        "longitudeField": "longitude",
+        "metricField": "metric",
+        "queryType": "coordinates"
+      },
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "queryType": "randomWalk",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  id AS id,\n  latitude AS latitude,\n  longitude AS longitude,\n  num_connectors AS metric\nFROM PuntosCarga",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "scenario_id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "Output",
+          "timeColumn": "timestamp",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": "1,2,3",
+      "title": "Number of connectors",
+      "type": "grafana-worldmap-panel",
+      "unitPlural": "",
+      "unitSingle": "",
+      "valueName": "current"
+    },
+    {
+      "circleMaxSize": "3",
+      "circleMinSize": "3",
+      "colors": [
+        "rgba(245, 54, 54, 0.9)",
+        "#FADE2A",
+        "rgba(50, 172, 45, 0.97)",
+        "#5794F2",
+        "#B877D9"
+      ],
+      "datasource": "TFM",
+      "decimals": 1,
+      "description": "",
+      "esMetric": "Count",
+      "fieldConfig": {
+        "defaults": {
+          "color": {},
+          "custom": {},
+          "thresholds": {
+            "mode": "absolute",
+            "steps": []
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 18,
+        "w": 10,
+        "x": 10,
+        "y": 11
+      },
+      "hideEmpty": false,
+      "hideZero": false,
+      "id": 6,
+      "initialZoom": "6",
+      "locationData": "table",
+      "mapCenter": "custom",
+      "mapCenterLatitude": "40",
+      "mapCenterLongitude": "-4",
+      "maxDataPoints": 1,
+      "mouseWheelZoom": false,
+      "pluginVersion": "7.4.1",
+      "showLegend": true,
+      "stickyLabels": false,
+      "tableQueryOptions": {
+        "geohashField": "geohash",
+        "labelField": "id",
+        "latitudeField": "latitude",
+        "longitudeField": "longitude",
+        "metricField": "metric",
+        "queryType": "coordinates"
+      },
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "queryType": "randomWalk",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  id AS id,\n  latitude AS latitude,\n  longitude AS longitude,\n  ratedPowerKW AS metric\nFROM PuntosCarga\nWHERE connectorType LIKE ($Connector)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "scenario_id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "Output",
+          "timeColumn": "timestamp",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": "10,50,100,200",
+      "title": "Power per $Connector [kW]",
+      "type": "grafana-worldmap-panel",
+      "unitPlural": "",
+      "unitSingle": "",
+      "valueName": "current"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 27,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": [
+            "A Coruña",
+            "Albacete",
+            "Alicante",
+            "Almería",
+            "Araba/Álava",
+            "Asturias",
+            "Badajoz",
+            "Barcelona",
+            "Biscay",
+            "Burgos",
+            "Caceres",
+            "Cadiz",
+            "Cantabria",
+            "Ciudad Real",
+            "Cordova",
+            "Cuenca",
+            "Gerona",
+            "Gipuzkoa",
+            "Granada",
+            "Guadalajara",
+            "Huesca",
+            "Jaen",
+            "Leon",
+            "Lleida",
+            "Lugo",
+            "Madrid",
+            "Murcia",
+            "Málaga",
+            "Navarre",
+            "Ourense",
+            "Palencia",
+            "Pontevedra",
+            "Rioja",
+            "Salamanca",
+            "Saragossa",
+            "Seville",
+            "Tarragona",
+            "Teruel",
+            "Toledo",
+            "Valencia",
+            "Valladolid",
+            "Zamora",
+            "Ávila"
+          ],
+          "value": [
+            "A Coruña",
+            "Albacete",
+            "Alicante",
+            "Almería",
+            "Araba/Álava",
+            "Asturias",
+            "Badajoz",
+            "Barcelona",
+            "Biscay",
+            "Burgos",
+            "Caceres",
+            "Cadiz",
+            "Cantabria",
+            "Ciudad Real",
+            "Cordova",
+            "Cuenca",
+            "Gerona",
+            "Gipuzkoa",
+            "Granada",
+            "Guadalajara",
+            "Huesca",
+            "Jaen",
+            "Leon",
+            "Lleida",
+            "Lugo",
+            "Madrid",
+            "Murcia",
+            "Málaga",
+            "Navarre",
+            "Ourense",
+            "Palencia",
+            "Pontevedra",
+            "Rioja",
+            "Salamanca",
+            "Saragossa",
+            "Seville",
+            "Tarragona",
+            "Teruel",
+            "Toledo",
+            "Valencia",
+            "Valladolid",
+            "Zamora",
+            "Ávila"
+          ]
+        },
+        "datasource": "TFM",
+        "definition": "SELECT DISTINCT provincia FROM PuntosCarga",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": true,
+        "name": "Province",
+        "options": [],
+        "query": "SELECT DISTINCT provincia FROM PuntosCarga",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "IEC62196Type2Outlet",
+          "value": "IEC62196Type2Outlet"
+        },
+        "datasource": "TFM",
+        "definition": "SELECT DISTINCT REPLACE(SUBSTRING_INDEX(SUBSTRING(REPLACE(connectorType, '[', ''), 1, length(connectorType)),',',character_length(',')) ,'''','')\nFROM PuntosCarga;",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": null,
+        "multi": false,
+        "name": "Connector",
+        "options": [],
+        "query": "SELECT DISTINCT REPLACE(SUBSTRING_INDEX(SUBSTRING(REPLACE(connectorType, '[', ''), 1, length(connectorType)),',',character_length(',')) ,'''','')\nFROM PuntosCarga;",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "2021-02-08T16:13:18.795Z",
+    "to": "2021-02-16T16:13:18.795Z"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Charging Stations",
+  "uid": "2HzFXkEMk",
+  "version": 12
+}

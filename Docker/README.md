@@ -1,4 +1,7 @@
 # DOCKER
+La estructura de productivización de la app es:
+
+![Productivizar](../Documentacion/PlanteamientoProblema/productivizacion.png)
 
 Esta carpeta contiene:
 
@@ -8,20 +11,16 @@ Esta carpeta contiene:
 	  
 - __grafana__
 
-	Contiene la información provisionada del grafana.
+	Contiene la información provisionada del grafana en provisioning: datasources y dashboards
 	  
 - __db__
 
-   	Contiene el dump de la base de datos que queremos representar.
+   	Contiene el dump de la base de datos que queremos representar (tfm.sql)
 	  
 - __app__
 
-    Contiene DockerFile para la aplicación de Flask/Python y el requirements.txt de la app.
-	  
-- __requirements__
-
-	Contiene los distintos ficheros de requirements de cada una de las integrantes de equipo para facilitar la creación del Dockerfile de la aplicación en sí.
+    Contiene DockerFile para la aplicación de Flask/Python y el requirements.txt de las librerías de Python de la app.
 	  
 - __Deployment__
 
-    Contiene información sobre cómo desplegar nuestro proyecto con docker en GCP y en la VM (con la app en local).
+    Contiene información sobre cómo desplegar nuestro proyecto con docker en GCP y en la VM (con la app en local), además de los scripts de bash de despliegue (install_docker.sh y prepare_app.sh).

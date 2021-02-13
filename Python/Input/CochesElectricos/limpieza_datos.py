@@ -108,50 +108,6 @@ pero que corresponden a distintas variables
 Sin embargo, nos sirve para comparar de una manera inmediata los rasgos de los 5 coches que
 presentan la variable FastCharge ausente'''
 
-# for i in list(range(103)):
-#     fila1=set(list(df.iloc[57]))
-#     fila2=set(list(df.iloc[i]))
-#     final= fila1 & fila2
-#     if len(final) > 3 :
-#         print(f"Fila {i}")
-#         print("hay {} elementos coincidentes".format(len(final)))
-#         print(f" Los valores son: {final} \n")
-# print()
-
-# Filtrar todos los coches entre 130 y 200 de autonomia porque parece que van a ser los mas
-# parecidos al Renault y los Smart (comprobar)
-# filtroAutonomia= df[(df.Range_Km >=130) & (df.Range_Km<=200)] 
-# filtroAutonomia
-# type(filtroAutonomia) # se trata de un dataframe
-
-# # Dentro de "filtroAutonomia" aparecen los 2 Renault con NA. ELiminamos aquellas filas donde
-# # la marca sea Renault.
-# subfiltroAutonomia= filtroAutonomia[filtroAutonomia.Brand.str.contains("Renault")].index
-# filtroAutonomia= filtroAutonomia.drop(subfiltroAutonomia)
-# filtroAutonomia
-
-# filtroAutonomia['FastCharge_KmH']= pd.to_numeric(filtroAutonomia['FastCharge_KmH'])
-# filtroAutonomia['FastCharge_KmH']= filtroAutonomia['FastCharge_KmH'].astype('Int64') # Convertimos la serie de float a enteros
-# filtroAutonomia['FastCharge_KmH'].dtype
-
-# # 2) elegir de manera aleatoria el FastCharge de entre esas filas similares
-# import random
-
-# # FORMA 1
-# x = float("nan")
-# df['FastCharge_KmH'] = df['FastCharge_KmH'].apply(lambda x: random.choice(filtroAutonomia["FastCharge_KmH"].tolist()) if pd.isna(x) == True else x)
-
-# # Comprobamos que se han rellenado aleatoriamente los 5 missing presentes en el dataframe 'df'
-
-# for i in [57,68,77,82,91]:
-#     a= df.iloc[i]
-#     print(a)
-# print()
-
-# # En resumen, imputar aleatoriamente el FastCharge ausente tomando como muestra los coches
-# # con caracteristicas similares.
-
-
 
 ''' ASIGNAR EL VALOR '0' A LOS 5 VALORES AUSENTES PUESTO QUE QUIERE DECIR QUE ESOS 5 COCHES NO 
 PRESENTAN OPCION A FASTCHARGE'''

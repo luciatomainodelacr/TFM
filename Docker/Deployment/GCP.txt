@@ -1,6 +1,6 @@
 #####Docker-Compose en GCP############
 1) Crear instancia VM en GCP Compute Engine con Ubuntu 18.04
-Documentos/
+
 2) Crear reglas de firewall en GCP VPC Network/Firewall que permita el acceso desde fuera a
 los puertos que necesitamos:
 - Grafana: 3000 desde 0.0.0.0/0

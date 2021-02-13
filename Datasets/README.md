@@ -6,7 +6,7 @@ Se subdivide en cuatro carpetas, cada una con un tipo de dato:
 - __CochesElectricos__
 
 	Contiene:
-	- coches electricos.zip: fichero comprimido con la información original
+	- coches electricos: carpeta que contiene dos ficheros csv, electricCar_limpio y ElectriCarData_Clean
 	- Creacion_nuevas_variables: fichero txt donde aparecerán (posibles)variables nuevas interesantes para nuestro objetivo
 	- Datos_usuario: fichero txt donde se establecen los datos solicitados al usuario de la aplicación
 	- Info_var_coches: fichero txt que contiene una lista de páginas web con información útil acerca de las variables input y de los coches eléctricos en general
@@ -24,21 +24,18 @@ Se subdivide en cuatro carpetas, cada una con un tipo de dato:
 
 	Contiene:
 	- matriz_distancia_haversine.csv: matriz de distancias entre todo el conjunto de puntos considerados (ciudades, puntos de regarla y gasolineras), se calcula utilizando la distancia de Haversine.  -> Este es el fichero que se tiene que utilizar como matriz de distancias (598.303 registros)
-	- pruebas_google_api: carpeta que contiene distintos dataset obtenidos con la API de Google, Distance Matrix [Pruebas Blanca, se borrará a futuro]
-		* ciudades_distancia.csv: matriz de distancias entre todas las ciudades. (Origen, Destino, Distancia en m)
-		* matriz_distancias_input.csv: fichero con la información input (id, provincia, lat, long) de todo el conjunto de puntos.
+	- pruebas_google_api: carpeta que contiene distintos dataset obtenidos con la API de Google, Distance Matrix
 		* matriz_distancia_v1.csv: fichero que contiene el primer output de la API de Google, contiene la distancia y el tiempo de las 23 primeras ciudades con todo el conjunto.
 		* matriz_distancia_v2.csv: fichero que contiene el segundo output de la API de Google, contiene la distancia y el tiempo de las 33 siguientes ciudades con todo el conjunto.
-		* puntos_kk: fichero que contiene aquellos puntos filtrados que se van a utilizar para hacer las llamadas a la API. Es necesario dividir el dataframe original para evitar lanzar muchas llamadas y que el coste sea elevado.
 	
 - __PuntosO_D__
 
 	Contiene:
-	- GeocodingAPI: carpeta con el fichero csv de los puntos de origen y destino (expresados en coordenadas geográficas). Se trata de las coordendas de las estaciones de tren y autobús de todas las capitales de provincia españolas.
+	- direcciones_ciudades.csv: fichero csv con los puntos de origen y destino que se han seleccionado para obtener las coordenadas en ciudades.csv
+	- GeocodingAPI: carpeta con el fichero csv de los puntos de origen y destino (expresados en coordenadas geográficas). Se trata de las coordenadas de las estaciones de tren y autobús de todas las capitales de provincia españolas.
 	  Contiene ciudades.csv: fichero original con los puntos de cada una de las ciudades. Se corrige algunos detalles:
 		* Ciudades mal geolocalizadas: Guadalajara, Córdoba, Alicante tren, Murcia tren. --> Se corrige
 		* Ciudades dónde la estación de bus y tren tienen las mismas coordenadas: Almería, San Sebastián --> Se elimina uno de los puntos
-	
 	
 - __PuntosRecarga__
 
