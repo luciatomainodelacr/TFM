@@ -131,7 +131,7 @@ def main_route(tipo_programa,
         #Query a Gasolineras
         logger.info("Query a GasolinerasPropuesta")
         sql_query_gasolineras = "SELECT * FROM GasolinerasPropuesta"
-        columnas_gasolineras = ["id","provincia","municipio","localidad","codigo_po","direccion","margen","longitud","latitud","rotulo","tipo_venta","rem_","horario","status"]
+        columnas_gasolineras = ["id","provincia","municipio","localidad","codigo_po","direccion","longitud","latitud","status"]
         df_gasolineras = bd.ejecutar_queries_select(con = con,
                                                     sql_query = sql_query_gasolineras,
                                                     columnas = columnas_gasolineras)
