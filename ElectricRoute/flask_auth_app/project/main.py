@@ -267,7 +267,7 @@ def frequentroutes():
                 "Origen"            : rutas_list[0]["origen"],
                 "Destino"           : rutas_list[0]["destino"],
                 "Número de Paradas" : rutas_list[0]["num_paradas"],
-                "Tiempo total"      : rutas_list[0]["tiempo_total"]
+                "Tiempo total"      : str(round(float(rutas_list[0]["tiempo_total"]), 2)) + (' h')
             })
         
         else:
@@ -277,7 +277,7 @@ def frequentroutes():
                     "Origen"            : rutas_list[i]["origen"],
                     "Destino"           : rutas_list[i]["destino"],
                     "Número de Paradas" : rutas_list[i]["num_paradas"],
-                    "Tiempo total"      : rutas_list[i]["tiempo_total"]
+                    "Tiempo total"      : str(round(float(rutas_list[i]["tiempo_total"]), 2)) + (' h')
                 })
 
         return render_template('frequentroutes.html', email=email, list_rutas=list_rutas, dict_rutas=dict_rutas)
