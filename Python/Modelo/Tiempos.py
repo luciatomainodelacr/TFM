@@ -24,7 +24,7 @@ def calcular_tiempo_recorrido(distancias, velocidad):
     -------
     >>> df_distancias_reduced["Time_h"] = Tiempos.calcular_tiempo_recorrido(df_distancias_reduced["Distance_km"],velocidad_coche)
     """
-     tiempos_recorrido = distancias/velocidad
+     tiempos_recorrido = (1.2*distancias)/velocidad
      return tiempos_recorrido
 
 

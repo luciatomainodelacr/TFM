@@ -202,7 +202,7 @@ def main_route(tipo_programa,
         logger.info("2.- Aplicar las restricciones")
         # a) Restriccion de tipo de conector
         logger.info("a) Restriccion de tipo de conector")
-        
+
         # Encontrar el tipo de conector correspondiente entre punto de carga y coche
         if marca_coche == "TESLA":
             tipo_conector = "Tesla"
@@ -366,6 +366,7 @@ def main_route(tipo_programa,
         path = list(nx.astar_path(DG, source = origen, target = destino, weight = "time"))
         logger.info("La ruta optima es: %s", path)
         path_coordinates = []
+        tiempo = []
         total_tiempo = 0
         for index, lugar  in enumerate(path):
             if lugar in df_ciudades["id"].unique():
@@ -386,6 +387,7 @@ def main_route(tipo_programa,
                 logger.info("Tiempo de parada en %s es %s h",lugar_anterior,float(df_distancias_lugar["Parada_h"]))
                 logger.info("Tiempo total del tramo %s - %s es %s h",lugar_anterior,lugar,float(df_distancias_lugar["Suma_time_parada_h"]))
                 total_tiempo = total_tiempo + float(df_distancias_lugar["Suma_time_parada_h"])
+                tiempo.append(str(float(df_distancias_lugar["Parada_h"])))
         logger.info("El tiempo total tardado es: %s h", total_tiempo)
         Network.get_shortest_path(DG, origen = origen, destino = destino)
         # 6.- Carga de outputs a Base de Datos ----------------------------
@@ -400,14 +402,16 @@ def main_route(tipo_programa,
         con = bd_output.crear_conexion()
         # Query a Output
         logger.info("Query a Output")
-        sql_query_output = "INSERT INTO Output (user_id, timestamp, origen, destino, num_paradas, path, tiempo_total, tipo_programa, marca_coche, modelo_coche, carga_inicial, carga_final, tipo_conector) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        sql_query_output = "INSERT INTO Output (user_id, timestamp, origen, destino, num_paradas, path, path_tiempo, tiempo_total, tipo_programa, marca_coche, modelo_coche, carga_inicial, carga_final, tipo_conector) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
         path_string = '-'.join(path)
+        path_tiempo = '-'.join(tiempo)
         argumentos_output = (user_id,
                              datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
                              origen,
                              destino,
                              len(path)-2,
                              path_string,
+                             path_tiempo,
                              total_tiempo,
                              tipo_programa,
                              marca_coche,
@@ -423,6 +427,7 @@ def main_route(tipo_programa,
         con.close()
         logger.info("[OK] Final del script calcular_caminos_entre_puntos.py [OK]")
         return path_coordinates
+
     except:
         logger.error("[ERROR] El programa no ha podido obtener una ruta [ERROR]")
         return []
