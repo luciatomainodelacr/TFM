@@ -216,24 +216,11 @@ def route_post():
         
         lista_Puntos_tiempo2.append('0.0')
 
-
-        print(lista_Puntos_aux)
-        print(lista_Puntos_tiempo2)
-
-        print(len(lista_Puntos_aux))
-        print(len(lista_Puntos_tiempo2))
-
         dict_infoRoute = {}
 
         for i in range(0, len(lista_Puntos_aux)):  
 
-            dict_infoRoute[lista_Puntos_aux[i]] = str(round(float(lista_Puntos_tiempo2[i]), 2)) + (' h')
-
-        print(dict_infoRoute)
-
-
-        # ¡¡¡ FALTA MODIFICAR EL OUTPUT AÑADIR MÁS INFORMACIÓN EN UN DICCIONARIO!!!
-        
+            dict_infoRoute[lista_Puntos_aux[i]] = str(round(float(lista_Puntos_tiempo2[i]), 2)) + (' h')        
 
         return render_template('route.html', name = name, ciudades = lista_destino, lista_coordenadas=lista_coordenadas, ciudad_origen=ciudad_origen, ciudad_destino=ciudad_destino, rangeInitial = rangeInitial, rangeFinal = rangeFinal, programType= programType, numberStops=numberStops, timeTotal=timeTotal, dict_infoRoute=dict_infoRoute)
 
@@ -462,43 +449,42 @@ def resetpassword():
     return render_template('resetpassword.html')
 
 
-@main.route('/resetpassword')
+@main.route('/resetpassword', methods=['GET', 'POST'])
 def resetpassword_post():
 
-    print(request.method)
-
-    if request.method == 'POST' and ('emailPassword' != ''):
+    if request.method == 'POST' and ('emailReset' != '') and ('emailReset' in request.form and 'password1' in request.form and 'password2' in request.form):
 
         # Consulta a la bbdd users 
-        emailPassword = request.form['emailPassword']
-        idpassword    = request.form['idpassword']
+        emailReset   = request.form['emailReset']
+        password1    = request.form['password1']
+        password2    = request.form['password2']
 
         # Consulta a la bbdd users 
         cursorPassword = db.connection.cursor(MySQLdb.cursors.DictCursor)
-        cursorPassword.execute('SELECT * FROM users WHERE email = % s', (emailPassword)) 
+        cursorPassword.execute('SELECT * FROM users WHERE email = % s', [emailReset])
         user = cursorPassword.fetchone()
 
-        if user:
-
-            idpassword = session['idpassword']
+        if (user and (password1 != password2)):
+            flash('Passwords dont match!')
+    
+        elif (user and (password1 == password2)):
 
             # Consulta a la bbdd users 
-            sql_query = "UPDATE users SET password = %s  WHERE email = %s AND ID = %s"
-            argumentos = (idpassword, emailPassword, id)
+            sql_query = "UPDATE users SET password = %s  WHERE email = %s"
+            argumentos = (password1, emailReset)
 
-            #falta comprobar que sea el mismo!!
-
-            curProfile = db.connection.cursor(MySQLdb.cursors.DictCursor)
-            curProfile.execute(sql_query, argumentos)
+            cursorPassword2 = db.connection.cursor(MySQLdb.cursors.DictCursor)
+            cursorPassword2.execute(sql_query, argumentos)
             db.connection.commit()
-            
+
             flash('Now you have a new password ! Start your Log In!')  
             return render_template('login.html')
 
         else:
+            
             flash('This account does not exist !')
-            return redirect(url_for('main.resetpassword'))
-    
-    else:
-        flash('Please fill out the email !')
+            return redirect(url_for('auth.signup'))
 
+    return redirect(url_for('main.resetpassword'))
+
+            
