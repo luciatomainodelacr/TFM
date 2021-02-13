@@ -47,7 +47,6 @@ def login_post():
         cursor.execute('SELECT * FROM users WHERE email = % s AND password = % s', (email, password, )) 
         user = cursor.fetchone()
 
-
         if user: 
             session['loggedin'] = True
             session['id']       = user['id'] 

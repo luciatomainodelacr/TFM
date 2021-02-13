@@ -4,43 +4,6 @@
 #  CALCULA RUTA OPTIMA ENTRE DOS PUNTOS
 # =============================================================================
 
-"""
-    Escenario de validacion:
-    {
-            "name": "Python: Camino entre 2 puntos",
-            "type": "python",
-            "request": "launch",
-            "program": "${file}",
-            "args": ["--tipo_programa","PUNTO_RECARGA","--marca_coche","VOLKSWAGEN","--modelo_coche","ID3 PURE",
-                     "--origen","Alicante Tren","--destino","A Corunia Bus","--carga_inicial","65",
-                     "--carga_final","70","--tipo_conector","IEC62196Type2Outlet","--user_id","2"],
-            "console": "integratedTerminal"
-    }
-
-    Ejecutar desde visual studio code: Debug
-
-    Ejecutar en terminal
-    >> cd /home/tfm/Documentos/TFM/Python/Modelo
-    >> python3 calcular_caminos_entre_puntos.py --tipo_programa 'PUNTO_RECARGA' --marca_coche 'VOLKSWAGEN' --modelo_coche 'ID3 PURE' --origen 'Alicante Tren' --destino 'A Corunia Bus' --carga_inicial 65 --carga_final 70 --tipo_conector 'IEC62196Type2Outlet'
-
-    Output esperado en log:
-[2021-02-04 22:43:03,447] [INFO    ]La ruta optima es: ['Alicante Tren', 'punto_recarga_241', 'punto_recarga_246', 'punto_recarga_263', 'punto
-[2021-02-04 22:43:03,460] [INFO    ]Tiempo de parada en Alicante Tren es 0.0 h
-[2021-02-04 22:43:03,461] [INFO    ]Tiempo total del tramo Alicante Tren - punto_recarga_241 es 1.4135107859234253 h
-[2021-02-04 22:43:03,471] [INFO    ]Tiempo de parada en punto_recarga_241 es 1.3090825688073393 h
-[2021-02-04 22:43:03,472] [INFO    ]Tiempo total del tramo punto_recarga_241 - punto_recarga_246 es 3.092301726368534 h
-[2021-02-04 22:43:03,482] [INFO    ]Tiempo de parada en punto_recarga_246 es 2.4167567567567567 h
-[2021-02-04 22:43:03,483] [INFO    ]Tiempo total del tramo punto_recarga_246 - punto_recarga_263 es 4.363408303110635 h
-[2021-02-04 22:43:03,494] [INFO    ]Tiempo de parada en punto_recarga_263 es 2.4167567567567567 h
-[2021-02-04 22:43:03,494] [INFO    ]Tiempo total del tramo punto_recarga_263 - punto_recarga_278 es 4.50142223671517 h
-[2021-02-04 22:43:03,506] [INFO    ]Tiempo de parada en punto_recarga_278 es 2.4167567567567567 h
-[2021-02-04 22:43:03,507] [INFO    ]Tiempo total del tramo punto_recarga_278 - punto_recarga_286 es 3.980899331229511 h
-[2021-02-04 22:43:03,518] [INFO    ]Tiempo de parada en punto_recarga_286 es 2.4167567567567567 h
-[2021-02-04 22:43:03,518] [INFO    ]Tiempo total del tramo punto_recarga_286 - A Corunia Bus es 2.4337595723944427 h
-[2021-02-04 22:43:03,519] [INFO    ]El tiempo total tardado es: 19.78530195574172 h
-
-"""
-
 
 # 1.- Se cargan las librerias -------------------------------------
 #------------------------------------------------------------------

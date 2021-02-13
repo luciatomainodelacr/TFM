@@ -169,65 +169,70 @@ def route_post():
             user_id = user_id,
             db_host = environ.get('DB_HOST')
         )
-        
 
-        # Lista de coordenadas de la ruta para dibujar en el mapa
-        lista_coordenadas = []
-        
-        for i in range(0, len(ruta)):
-            punto_coord = []
-            latitud = ruta[i][0]
-            longitud = ruta[i][1]
-            punto_coord.append(latitud)
-            punto_coord.append(longitud)
-            lista_coordenadas.append(punto_coord)
+        if ruta == []:
+            flash('Sorry, not route can be found with configured parameters')
+            return redirect(url_for('main.route'))
 
-
-        # Reiniciar la conexión de la base de datos
-        db.connection.commit()           
-            
-        # Consulta a la bbdd para obtener la información sober las paradas
-        curScenario = db.connection.cursor(MySQLdb.cursors.DictCursor)
-        curScenario.execute('''SELECT scenario_id FROM Output ORDER BY scenario_id DESC LIMIT 1''')
-        dict_scenario_id = curScenario.fetchall()
-        
-        if (dict_scenario_id == ()):
-            scenario_id = dict_scenario_id["scenario_id"]
         else:
-            scenario_id = dict_scenario_id[0]["scenario_id"]
-
-
-        # Consulta a la bbdd
-        curDetalleRuta = db.connection.cursor(MySQLdb.cursors.DictCursor)
-        curDetalleRuta.execute("SELECT * FROM Output WHERE scenario_id LIKE % s ", [scenario_id])
-        rutas_info = curDetalleRuta.fetchall()
-
-        numberStops         = rutas_info[0]["num_paradas"]
-        timeTotal           = rutas_info[0]["tiempo_total"]
-        rutas_info_aux      = rutas_info[0]["path"]
-        rutas_info_tiempo   = rutas_info[0]["path_tiempo"]
         
-        lista_Puntos_aux    = rutas_info_aux.split('-')
-        lista_Puntos_tiempo = rutas_info_tiempo.split('-')
-        lista_Puntos_tiempo2 = []
+            # Lista de coordenadas de la ruta para dibujar en el mapa
+            lista_coordenadas = []
+            
+            for i in range(0, len(ruta)):
+                punto_coord = []
+                latitud = ruta[i][0]
+                longitud = ruta[i][1]
+                punto_coord.append(latitud)
+                punto_coord.append(longitud)
+                lista_coordenadas.append(punto_coord)
 
-        for elem in lista_Puntos_tiempo:
-            lista_Puntos_tiempo2.append(elem)
-        
-        lista_Puntos_tiempo2.append('0.0')
 
-        dict_infoRoute = {}
+            # Reiniciar la conexión de la base de datos
+            db.connection.commit()           
+                
+            # Consulta a la bbdd para obtener la información sober las paradas
+            curScenario = db.connection.cursor(MySQLdb.cursors.DictCursor)
+            curScenario.execute('''SELECT scenario_id FROM Output ORDER BY scenario_id DESC LIMIT 1''')
+            dict_scenario_id = curScenario.fetchall()
+            
+            if (dict_scenario_id == ()):
+                scenario_id = dict_scenario_id["scenario_id"]
+            else:
+                scenario_id = dict_scenario_id[0]["scenario_id"]
 
-        for i in range(0, len(lista_Puntos_aux)):  
 
-            dict_infoRoute[lista_Puntos_aux[i]] = str(round(float(lista_Puntos_tiempo2[i]), 2)) + (' h')        
+            # Consulta a la bbdd
+            curDetalleRuta = db.connection.cursor(MySQLdb.cursors.DictCursor)
+            curDetalleRuta.execute("SELECT * FROM Output WHERE scenario_id LIKE % s ", [scenario_id])
+            rutas_info = curDetalleRuta.fetchall()
 
-        return render_template('route.html', name = name, ciudades = lista_destino, lista_coordenadas=lista_coordenadas, ciudad_origen=ciudad_origen, ciudad_destino=ciudad_destino, rangeInitial = rangeInitial, rangeFinal = rangeFinal, programType= programType, numberStops=numberStops, timeTotal=timeTotal, dict_infoRoute=dict_infoRoute)
+            numberStops         = rutas_info[0]["num_paradas"]
+
+            timeTotal           = str(round(float(rutas_info[0]["tiempo_total"]), 2)) + (' h') 
+            rutas_info_aux      = rutas_info[0]["path"]
+            rutas_info_tiempo   = rutas_info[0]["path_tiempo"]
+            
+            lista_Puntos_aux    = rutas_info_aux.split('-')
+            lista_Puntos_tiempo = rutas_info_tiempo.split('-')
+            lista_Puntos_tiempo2 = []
+
+            for elem in lista_Puntos_tiempo:
+                lista_Puntos_tiempo2.append(elem)
+            
+            lista_Puntos_tiempo2.append('0.0')
+
+            dict_infoRoute = {}
+
+            for i in range(0, len(lista_Puntos_aux)):  
+
+                dict_infoRoute[lista_Puntos_aux[i]] = str(round(float(lista_Puntos_tiempo2[i]), 2)) + (' h')        
+
+            return render_template('route.html', name = name, ciudades = lista_destino, lista_coordenadas=lista_coordenadas, ciudad_origen=ciudad_origen, ciudad_destino=ciudad_destino, rangeInitial = rangeInitial, rangeFinal = rangeFinal, programType= programType, numberStops=numberStops, timeTotal=timeTotal, dict_infoRoute=dict_infoRoute)
 
     # Si la sesión no está iniciada se le dirige a la página de inicio
-    else:
-        flash('Please log in!')
-        return render_template('login.html')
+    flash('Please log in!')
+    return render_template('login.html')
     
     
 
