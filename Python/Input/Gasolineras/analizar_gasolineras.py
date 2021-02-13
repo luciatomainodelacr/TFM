@@ -108,7 +108,7 @@ def plot_multiple_histograms(df, cols):
 
 
 def plot_multiple_countplots(df, cols):
- """
+     """
     Definicion del procedimiento plot_multiple_countplots:
         
         Procedimiento para plottear variable numéricas
@@ -239,6 +239,11 @@ def exploratory_data_analysis(df):
      df_filt.drop(df.filter(regex="f_").columns, axis="columns", inplace=True)
      df_filt.drop("objectid",axis="columns", inplace=True)
      df_filt.drop("FID",axis="columns", inplace=True)
+     df_filt.drop("margen",axis="columns", inplace=True)
+     df_filt.drop("rotulo",axis="columns", inplace=True)
+     df_filt.drop("tipo_venta",axis="columns", inplace=True)
+     df_filt.drop("rem_",axis="columns", inplace=True)
+     df_filt.drop("horario",axis="columns", inplace=True)
      df_filt.info()
      return df_filt
 
