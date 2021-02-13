@@ -308,6 +308,15 @@
 
         <div class="modal-body">
 
+            <!-- Configuración mensajes -->                   
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="notification is-danger"  style='color:red; margin-bottom: 2%'>
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+            {% endwith %}
+
             <!-- Select Origin -->
             <div class="container"> 
                 <form class="form-group" method="POST" action="/Route">
