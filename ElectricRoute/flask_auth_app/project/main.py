@@ -101,9 +101,16 @@ def route():
         rangeInitial = request.form.get('rangeInitial')
         rangeFinal   = request.form.get('rangeFinal')
 
-        # Output página de ruta           
-        grafana_url = "http://" + environ.get('GRAFANA_HOST') + ":3000/d/k5-wBv-Mz/mapas?orgId=1&from=1613134533143&to=1613156133143"
-        return render_template('route.html', name = name, ciudades = lista_destino, lista_coordenadas=lista_coordenadas, rangeInitial=rangeInitial, rangeFinal=rangeFinal, grafana_url=grafana_url)
+        # URL Grafana Mapas
+        grafana_maps     = "http://" + environ.get('GRAFANA_HOST') + ":3000/d/k5-wBv-Mz/mapas?orgId=1&from=1613186063756&to=1613207663757"
+
+        # URL Grafana Puntos de carga
+        grafana_url_ptos = "http://" + environ.get('GRAFANA_HOST') + ":3000/d/2HzFXkEMk/puntos-de-recarga?orgId=1&from=1612800798795&to=1613491998795&var-Provincia=A%20Coru%C3%B1a&var-Provincia=Albacete&var-Provincia=Alicante&var-Provincia=Almer%C3%ADa&var-Provincia=Araba%2F%C3%81lava&var-Provincia=Asturias&var-Provincia=Badajoz&var-Provincia=Barcelona&var-Provincia=Biscay&var-Provincia=Burgos&var-Provincia=Caceres&var-Provincia=Cadiz&var-Provincia=Cantabria&var-Provincia=Ciudad%20Real&var-Provincia=Cordova&var-Provincia=Cuenca&var-Provincia=Gerona&var-Provincia=Gipuzkoa&var-Provincia=Granada&var-Provincia=Guadalajara&var-Provincia=Huesca&var-Provincia=Jaen&var-Provincia=Leon&var-Provincia=Lleida&var-Provincia=Lugo&var-Provincia=Madrid&var-Provincia=Murcia&var-Provincia=M%C3%A1laga&var-Provincia=Navarre&var-Provincia=Ourense&var-Provincia=Palencia&var-Provincia=Pontevedra&var-Provincia=Rioja&var-Provincia=Salamanca&var-Provincia=Saragossa&var-Provincia=Seville&var-Provincia=Tarragona&var-Provincia=Teruel&var-Provincia=Toledo&var-Provincia=Valencia&var-Provincia=Valladolid&var-Provincia=Zamora&var-Provincia=%C3%81vila&var-Conector=IEC62196Type2Outlet"
+
+        # URL Grafana Puntos de carga
+        grafana_cars     = "http://" + environ.get('GRAFANA_HOST') + ":3000/d/Jj9wbzEGk/coches?orgId=1&from=1613186505109&to=1613208105110&var-Modelo=ARIYA%2063KWH&var-Modelo=ARIYA%20E_4ORCE%2063KWH&var-Modelo=CYBERTRUCK%20TRI%20MOTOR"
+
+        return render_template('route.html', name = name, ciudades = lista_destino, lista_coordenadas=lista_coordenadas, rangeInitial=rangeInitial, rangeFinal=rangeFinal, grafana_maps=grafana_maps, grafana_url_ptos=grafana_url_ptos, grafana_cars=grafana_cars)
 
     # Si la sesión no está iniciada se le dirige a la página de inicio
     else:
@@ -179,6 +186,9 @@ def route_post():
         curScenario = db.connection.cursor(MySQLdb.cursors.DictCursor)
         curScenario.execute("""SELECT scenario_id FROM Output ORDER BY scenario_id DESC LIMIT 1""")
         dict_scenario_id = curScenario.fetchall()
+
+        print(dict_scenario_id)
+        
         
         scenario_id = dict_scenario_id[0]["scenario_id"]
 
@@ -460,3 +470,4 @@ def resetpassword_post():
     
     else:
         flash('Please fill out the email !')
+
