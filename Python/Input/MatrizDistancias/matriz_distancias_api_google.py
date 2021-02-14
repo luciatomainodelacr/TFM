@@ -83,21 +83,7 @@ df_ciudades = df_ciudades.append(df_gasolineras)
 
 # Backup 
 df = df_ptos_recarga.append(df_gasolineras)
-# df_aux = df
-df
-
-
-"""
-    PRUEBAS
-"""
-
-
-df_aux = pd.read_csv(os.path.join(os.getcwd(),'puntos_kk.csv'), sep = ',', encoding = 'iso-8859-1', decimal = '.')
-
-# Elimamos duplicados (comprobación)
-df.drop_duplicates()
-
-
+df_aux = df
 
 
 
@@ -194,21 +180,4 @@ df_distancias["Duracion_min"] = df_distancias["Duracion_seg"]/60
 #------------------------------------------------------------------
 
 df_distancias.to_csv('/home/tfm/Documentos/TFM/Datasets/Matriz_Distancias/_bu/matriz_distancia_v2.csv', sep = ";", index = False)
-
-
-df.to_csv('/home/tfm/Documentos/TFM/Datasets/Matriz_Distancias/matriz_distancia_input.csv', sep = ";", index = False)
-
-
-"""
-    PRUEBAS
-"""
-
-df1 = pd.read_csv(os.path.join(os.getcwd(),'Matriz_Distancias/pruebas_google_api/_bu/matriz_distancia_v1.csv'), sep = ';', encoding = 'iso-8859-1', decimal = '.')
-df2 = pd.read_csv(os.path.join(os.getcwd(),'Matriz_Distancias/pruebas_google_api/_bu/matriz_distancia_v2.csv'), sep = ';', encoding = 'iso-8859-1', decimal = '.')
-
-df1 = df1.append(df2) 
-
-del(d2)
-
-len(df1)
 
