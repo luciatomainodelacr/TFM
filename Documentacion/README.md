@@ -16,6 +16,13 @@ Esta carpeta contiene ficheros con información relevante tanto para el planteam
 
 - __Documentacion_Proyecto__
 	
-  	Este fichero contiene la memoria del TFM
+  	Este fichero contiene la memoria del TFM en Word
 
+- __Trabajo_Fin_de_Master_Grupo_3__
+	
+  	Este fichero contiene la memoria del TFM en PDF
+	
+- __video_ElectricRoute__
+	
+  	Este fichero contiene el video promocional de ElectricRoute
 	
